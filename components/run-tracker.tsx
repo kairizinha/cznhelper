@@ -535,9 +535,9 @@ export function RunTracker() {
         <div role="alert" className="rounded-md border border-[#C41729]/30 bg-[#C41729]/10 p-3 text-sm text-[#C41729] flex items-start gap-2">
           <AlertTriangle className="h-4 w-4 mt-0.5" />
           <div className="leading-tight">
-            <strong className="font-semibold"></strong> There’s a bug making [Remove] card conversions cost 0 — i.e. converting a card to a Mutant Sample currently costs 0.
+            <strong className="font-semibold"></strong> There’s a bug making [Remove] card conversions cost 0 — i.e. converting a card to a Mutant Sample currently costs 0
             <br />
-            If you converted a base card into a [Remove], just don’t remove the base card — not removing the base card and converting it into a [Remove] card currently has the same cost: 0.
+            If you converted a base card into a [Remove], just don’t remove the base card — not removing the base card and converting it into a [Remove] card currently has the same cost: 0
           </div>
         </div>
 
