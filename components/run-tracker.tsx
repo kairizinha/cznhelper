@@ -29,98 +29,360 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 
-const CHARACTER_CARDS: Record<string, { starter: string[], unique: string[] }> = {
+/**
+ * Inline CHARACTER_CARDS with images (option 2).
+ * Keep images in /public/images/characters/<key>/
+ * e.g. /public/images/characters/amir/starter-0.png, unique-0.png, portrait.png
+ */
+
+// helper type for entries
+type CardEntry = { name: string; image?: string }
+
+const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[]; unique: CardEntry[] }> = {
   'rei': {
-    starter: ['Dark Blade', 'Dark Blade', 'Material Regeneration', 'Strike of Darkness'],
-    unique: ['Resonating Darkness', 'Snack Time', 'Dark Condensation', 'Predator\'s Blade']
+    portrait: '/images/characters/rei/portrait.png',
+    starter: [
+      { name: 'Dark Blade', image: '/images/characters/rei/starter-0.png' },
+      { name: 'Dark Blade', image: '/images/characters/rei/starter-1.png' },
+      { name: 'Material Regeneration', image: '/images/characters/rei/starter-2.png' },
+      { name: 'Strike of Darkness', image: '/images/characters/rei/starter-3.png' }
+    ],
+    unique: [
+      { name: 'Resonating Darkness', image: '/images/characters/rei/unique-0.png' },
+      { name: 'Snack Time', image: '/images/characters/rei/unique-1.png' },
+      { name: 'Dark Condensation', image: '/images/characters/rei/unique-2.png' },
+      { name: "Predator's Blade", image: '/images/characters/rei/unique-3.png' }
+    ]
   },
   'owen': {
-    starter: ['Downward Cut', 'Downward Cut', 'Weapon Block', 'Wind Charge'],
-    unique: ['Wind Slash', 'Break Armor', 'Wind Riding', 'Gale Strike']
+    portrait: '/images/characters/owen/portrait.png',
+    starter: [
+      { name: 'Downward Cut', image: '/images/characters/owen/starter-0.png' },
+      { name: 'Downward Cut', image: '/images/characters/owen/starter-1.png' },
+      { name: 'Weapon Block', image: '/images/characters/owen/starter-2.png' },
+      { name: 'Wind Charge', image: '/images/characters/owen/starter-3.png' }
+    ],
+    unique: [
+      { name: 'Wind Slash', image: '/images/characters/owen/unique-0.png' },
+      { name: 'Break Armor', image: '/images/characters/owen/unique-1.png' },
+      { name: 'Wind Riding', image: '/images/characters/owen/unique-2.png' },
+      { name: 'Gale Strike', image: '/images/characters/owen/unique-3.png' }
+    ]
   },
   'cassius': {
-    starter: ['Cards', 'Wild Card', 'Mana Field', 'Pop Eyed Popper'],
-    unique: ['Devil Dice', 'Shuffle', 'Dice Trick', 'Joker']
+    portrait: '/images/characters/cassius/portrait.png',
+    starter: [
+      { name: 'Cards', image: '/images/characters/cassius/starter-0.png' },
+      { name: 'Wild Card', image: '/images/characters/cassius/starter-1.png' },
+      { name: 'Mana Field', image: '/images/characters/cassius/starter-2.png' },
+      { name: 'Pop Eyed Popper', image: '/images/characters/cassius/starter-3.png' }
+    ],
+    unique: [
+      { name: 'Devil Dice', image: '/images/characters/cassius/unique-0.png' },
+      { name: 'Shuffle', image: '/images/characters/cassius/unique-1.png' },
+      { name: 'Dice Trick', image: '/images/characters/cassius/unique-2.png' },
+      { name: 'Joker', image: '/images/characters/cassius/unique-3.png' }
+    ]
   },
   'beryl': {
-    starter: ['Launcher', 'Charged Launcher', 'Barrier', 'Opening Found'],
-    unique: ['Charged Shot', 'Guilty Pleasure', 'Unlimited Firepower', 'Heavy Weapon Specialist']
+    portrait: '/images/characters/beryl/portrait.png',
+    starter: [
+      { name: 'Launcher', image: '/images/characters/beryl/starter-0.png' },
+      { name: 'Charged Launcher', image: '/images/characters/beryl/starter-1.png' },
+      { name: 'Barrier', image: '/images/characters/beryl/starter-2.png' },
+      { name: 'Opening Found', image: '/images/characters/beryl/starter-3.png' }
+    ],
+    unique: [
+      { name: 'Charged Shot', image: '/images/characters/beryl/unique-0.png' },
+      { name: 'Guilty Pleasure', image: '/images/characters/beryl/unique-1.png' },
+      { name: 'Unlimited Firepower', image: '/images/characters/beryl/unique-2.png' },
+      { name: 'Heavy Weapon Specialist', image: '/images/characters/beryl/unique-3.png' }
+    ]
   },
   'mika': {
-    starter: ['Water Arrow', 'Water Barrier', 'Water Barrier', 'Source of Water'],
-    unique: ['Blessing of Waves', 'Tactical Analysis', 'Whirpool', 'Deluge']
+    portrait: '/images/characters/mika/portrait.png',
+    starter: [
+      { name: 'Water Arrow', image: '/images/characters/mika/starter-0.png' },
+      { name: 'Water Barrier', image: '/images/characters/mika/starter-1.png' },
+      { name: 'Water Barrier', image: '/images/characters/mika/starter-2.png' },
+      { name: 'Source of Water', image: '/images/characters/mika/starter-3.png' }
+    ],
+    unique: [
+      { name: 'Blessing of Waves', image: '/images/characters/mika/unique-0.png' },
+      { name: 'Tactical Analysis', image: '/images/characters/mika/unique-1.png' },
+      { name: 'Whirpool', image: '/images/characters/mika/unique-2.png' },
+      { name: 'Deluge', image: '/images/characters/mika/unique-3.png' }
+    ]
   },
   'maribell': {
-    starter: ['Shelter Kick', 'Shelter Defense', 'Shelter Hold', 'Resolute Blitz'],
-    unique: ['Maribell Shelter MK.II', 'Wolve\'s Dome', 'Oh... I See.', 'Shelter Strike']
+    portrait: '/images/characters/maribell/portrait.png',
+    starter: [
+      { name: 'Shelter Kick', image: '/images/characters/maribell/starter-0.png' },
+      { name: 'Shelter Defense', image: '/images/characters/maribell/starter-1.png' },
+      { name: 'Shelter Hold', image: '/images/characters/maribell/starter-2.png' },
+      { name: 'Resolute Blitz', image: '/images/characters/maribell/starter-3.png' }
+    ],
+    unique: [
+      { name: 'Maribell Shelter MK.II', image: '/images/characters/maribell/unique-0.png' },
+      { name: "Wolve's Dome", image: '/images/characters/maribell/unique-1.png' },
+      { name: 'Oh... I See.', image: '/images/characters/maribell/unique-2.png' },
+      { name: 'Shelter Strike', image: '/images/characters/maribell/unique-3.png' }
+    ]
   },
   'lucas': {
-    starter: ['Machine Gun', 'Machine Gun', 'Shielding Incendiary Bomb', 'Extended Magazine'],
-    unique: ['S.S.S', 'Flame Thrower', 'Flashbang', 'R.P.G-7']
+    portrait: '/images/characters/lucas/portrait.png',
+    starter: [
+      { name: 'Machine Gun', image: '/images/characters/lucas/starter-0.png' },
+      { name: 'Machine Gun', image: '/images/characters/lucas/starter-1.png' },
+      { name: 'Shielding Incendiary Bomb', image: '/images/characters/lucas/starter-2.png' },
+      { name: 'Extended Magazine', image: '/images/characters/lucas/starter-3.png' }
+    ],
+    unique: [
+      { name: 'S.S.S', image: '/images/characters/lucas/unique-0.png' },
+      { name: 'Flame Thrower', image: '/images/characters/lucas/unique-1.png' },
+      { name: 'Flashbang', image: '/images/characters/lucas/unique-2.png' },
+      { name: 'R.P.G-7', image: '/images/characters/lucas/unique-3.png' }
+    ]
   },
   'amir': {
-    starter: ['Rapier', 'Rapier', 'Steel Barrier', 'Hovering Metal'],
-    unique: ['Metal Pierce', 'Metal Extraction', 'Full Metal Hurricane', 'Iron Skin']
+    portrait: '/images/characters/amir/portrait.png',
+    starter: [
+      { name: 'Rapier', image: '/images/characters/amir/starter1.png' },
+      { name: 'Rapier', image: '/images/characters/amir/starter1.png' },
+      { name: 'Steel Barrier', image: '/images/characters/amir/starter2.png' },
+      { name: 'Hovering Metal', image: '/images/characters/amir/starter3.png' }
+    ],
+    unique: [
+      { name: 'Metal Pierce', image: '/images/characters/amir/unique1.png' },
+      { name: 'Metal Extraction', image: '/images/characters/amir/unique2.png' },
+      { name: 'Full Metal Hurricane', image: '/images/characters/amir/unique3.png' },
+      { name: 'Iron Skin', image: '/images/characters/amir/unique4.png' }
+    ]
   },
   'tressa': {
-    starter: ['Dagger Throw', 'Dagger Throw', 'Touch of Darkness', 'Unseathe Dagger'],
-    unique: ['Curse', 'Shadow Reload', 'Vital Attack', 'Cursed Gouge']
+    portrait: '/images/characters/tressa/portrait.png',
+    starter: [
+      { name: 'Dagger Throw', image: '/images/characters/tressa/starter-0.png' },
+      { name: 'Dagger Throw', image: '/images/characters/tressa/starter-1.png' },
+      { name: 'Touch of Darkness', image: '/images/characters/tressa/starter-2.png' },
+      { name: 'Unseathe Dagger', image: '/images/characters/tressa/starter-3.png' }
+    ],
+    unique: [
+      { name: 'Curse', image: '/images/characters/tressa/unique-0.png' },
+      { name: 'Shadow Reload', image: '/images/characters/tressa/unique-1.png' },
+      { name: 'Vital Attack', image: '/images/characters/tressa/unique-2.png' },
+      { name: 'Cursed Gouge', image: '/images/characters/tressa/unique-3.png' }
+    ]
   },
   'selena': {
-    starter: ['Engagament Fire', 'Engagament Fire', 'Emergency Shielding', 'High-Power Scope'],
-    unique: ['Target Spotted', 'Drone Bombing', 'Tactical Maneuver', 'Sniper\'s Domain']
+    portrait: '/images/characters/selena/portrait.png',
+    starter: [
+      { name: 'Engagament Fire', image: '/images/characters/selena/starter-0.png' },
+      { name: 'Engagament Fire', image: '/images/characters/selena/starter-1.png' },
+      { name: 'Emergency Shielding', image: '/images/characters/selena/starter-2.png' },
+      { name: 'High-Power Scope', image: '/images/characters/selena/starter-3.png' }
+    ],
+    unique: [
+      { name: 'Target Spotted', image: '/images/characters/selena/unique-0.png' },
+      { name: 'Drone Bombing', image: '/images/characters/selena/unique-1.png' },
+      { name: 'Tactical Maneuver', image: '/images/characters/selena/unique-2.png' },
+      { name: "Sniper's Domain", image: '/images/characters/selena/unique-3.png' }
+    ]
   },
   'nia': {
-    starter: ['Stroke', 'AMP Therapy', 'AMP Therapy', 'G Chord'],
-    unique: ['Mute Accent', 'Soul Rip', 'Adagio', 'Nia\'s Curiosity']
+    portrait: '/images/characters/nia/portrait.png',
+    starter: [
+      { name: 'Stroke', image: '/images/characters/nia/starter-0.png' },
+      { name: 'AMP Therapy', image: '/images/characters/nia/starter-1.png' },
+      { name: 'AMP Therapy', image: '/images/characters/nia/starter-2.png' },
+      { name: 'G Chord', image: '/images/characters/nia/starter-3.png' }
+    ],
+    unique: [
+      { name: 'Mute Accent', image: '/images/characters/nia/unique-0.png' },
+      { name: 'Soul Rip', image: '/images/characters/nia/unique-1.png' },
+      { name: 'Adagio', image: '/images/characters/nia/unique-2.png' },
+      { name: "Nia's Curiosity", image: '/images/characters/nia/unique-3.png' }
+    ]
   },
   'kayron': {
-    starter: ['Elimination', 'Elimination', 'Sphere', 'Echo of Futility'],
-    unique: ['Brand of Annihilation', 'Black Hole', 'Oath of Vanity', 'Echoes of True Abyss']
+    portrait: '/images/characters/kayron/portrait.png',
+    starter: [
+      { name: 'Elimination', image: '/images/characters/kayron/starter-0.png' },
+      { name: 'Elimination', image: '/images/characters/kayron/starter-1.png' },
+      { name: 'Sphere', image: '/images/characters/kayron/starter-2.png' },
+      { name: 'Echo of Futility', image: '/images/characters/kayron/starter-3.png' }
+    ],
+    unique: [
+      { name: 'Brand of Annihilation', image: '/images/characters/kayron/unique-0.png' },
+      { name: 'Black Hole', image: '/images/characters/kayron/unique-1.png' },
+      { name: 'Oath of Vanity', image: '/images/characters/kayron/unique-2.png' },
+      { name: 'Echoes of True Abyss', image: '/images/characters/kayron/unique-3.png' }
+    ]
   },
   'haru': {
-    starter: ['Anchor', 'Power Anchor', 'Anchor Drop', 'Anchor Shot'],
-    unique: ['Anchor Pointer', 'Power Charge', 'Charged Energy', 'Lift Anchor']
+    portrait: '/images/characters/haru/portrait.png',
+    starter: [
+      { name: 'Anchor', image: '/images/characters/haru/starter-0.png' },
+      { name: 'Power Anchor', image: '/images/characters/haru/starter-1.png' },
+      { name: 'Anchor Drop', image: '/images/characters/haru/starter-2.png' },
+      { name: 'Anchor Shot', image: '/images/characters/haru/starter-3.png' }
+    ],
+    unique: [
+      { name: 'Anchor Pointer', image: '/images/characters/haru/unique-0.png' },
+      { name: 'Power Charge', image: '/images/characters/haru/unique-1.png' },
+      { name: 'Charged Energy', image: '/images/characters/haru/unique-2.png' },
+      { name: 'Lift Anchor', image: '/images/characters/haru/unique-3.png' }
+    ]
   },
   'yuki': {
-    starter: ['Longsword Slash', 'Rapid Slash', 'Flowing Parry', 'Prepare to Subdue'],
-    unique: ['Flash Slash', 'Trickery Strike', 'Freezing Blade', 'Iceberg Cleave']
+    portrait: '/images/characters/yuki/portrait.png',
+    starter: [
+      { name: 'Longsword Slash', image: '/images/characters/yuki/starter-0.png' },
+      { name: 'Rapid Slash', image: '/images/characters/yuki/starter-1.png' },
+      { name: 'Flowing Parry', image: '/images/characters/yuki/starter-2.png' },
+      { name: 'Prepare to Subdue', image: '/images/characters/yuki/starter-3.png' }
+    ],
+    unique: [
+      { name: 'Flash Slash', image: '/images/characters/yuki/unique-0.png' },
+      { name: 'Trickery Strike', image: '/images/characters/yuki/unique-1.png' },
+      { name: 'Freezing Blade', image: '/images/characters/yuki/unique-2.png' },
+      { name: 'Iceberg Cleave', image: '/images/characters/yuki/unique-3.png' }
+    ]
   },
   'hugo': {
-    starter: ['Throw Dagger', 'Throw Dagger', 'Defense System', 'Hunting Instincts'],
-    unique: ['Fan of Daggers', 'Quick Fix', 'Dingo Howling', 'Fixer\'s Approach']
+    portrait: '/images/characters/hugo/portrait.png',
+    starter: [
+      { name: 'Throw Dagger', image: '/images/characters/hugo/starter-0.png' },
+      { name: 'Throw Dagger', image: '/images/characters/hugo/starter-1.png' },
+      { name: 'Defense System', image: '/images/characters/hugo/starter-2.png' },
+      { name: 'Hunting Instincts', image: '/images/characters/hugo/starter-3.png' }
+    ],
+    unique: [
+      { name: 'Fan of Daggers', image: '/images/characters/hugo/unique-0.png' },
+      { name: 'Quick Fix', image: '/images/characters/hugo/unique-1.png' },
+      { name: 'Dingo Howling', image: '/images/characters/hugo/unique-2.png' },
+      { name: "Fixer's Approach", image: '/images/characters/hugo/unique-3.png' }
+    ]
   },
   'renoa': {
-    starter: ['Annihilation Shot', 'Annihilation Shot', 'Black Veil', 'Echo of Sorrow'],
-    unique: ['Instant Judgement', 'Ballad of Pitch Black', 'Flower of Devoured Fate', 'Last-Ditch Assault']
+    portrait: '/images/characters/renoa/portrait.png',
+    starter: [
+      { name: 'Annihilation Shot', image: '/images/characters/renoa/starter-0.png' },
+      { name: 'Annihilation Shot', image: '/images/characters/renoa/starter-1.png' },
+      { name: 'Black Veil', image: '/images/characters/renoa/starter-2.png' },
+      { name: 'Echo of Sorrow', image: '/images/characters/renoa/starter-3.png' }
+    ],
+    unique: [
+      { name: 'Instant Judgement', image: '/images/characters/renoa/unique-0.png' },
+      { name: 'Ballad of Pitch Black', image: '/images/characters/renoa/unique-1.png' },
+      { name: 'Flower of Devoured Fate', image: '/images/characters/renoa/unique-2.png' },
+      { name: 'Last-Ditch Assault', image: '/images/characters/renoa/unique-3.png' }
+    ]
   },
   'veronica': {
-    starter: ['Rapid Fire', 'Rapid Fire', 'Illusion of Golden Daffodils', 'Firing Preparation'],
-    unique: ['Repose', 'Pendant of Resolution', 'Sir Kowalski', 'Bombardment Prep']
+    portrait: '/images/characters/veronica/portrait.png',
+    starter: [
+      { name: 'Rapid Fire', image: '/images/characters/veronica/starter-0.png' },
+      { name: 'Rapid Fire', image: '/images/characters/veronica/starter-1.png' },
+      { name: 'Illusion of Golden Daffodils', image: '/images/characters/veronica/starter-2.png' },
+      { name: 'Firing Preparation', image: '/images/characters/veronica/starter-3.png' }
+    ],
+    unique: [
+      { name: 'Repose', image: '/images/characters/veronica/unique-0.png' },
+      { name: 'Pendant of Resolution', image: '/images/characters/veronica/unique-1.png' },
+      { name: 'Sir Kowalski', image: '/images/characters/veronica/unique-2.png' },
+      { name: 'Bombardment Prep', image: '/images/characters/veronica/unique-3.png' }
+    ]
   },
   'mei-lin': {
-    starter: ['Strike', 'Strike', 'Flame Dragon Guardian', 'Flame Dragon Jewel'],
-    unique: ['Rising Dragon Spire', 'Unity of Attack and Defense', 'Spirit of the Aroma', 'Flame Dragon\'s Sovereighty']
+    portrait: '/images/characters/mei-lin/portrait.png',
+    starter: [
+      { name: 'Strike', image: '/images/characters/mei-lin/starter-0.png' },
+      { name: 'Strike', image: '/images/characters/mei-lin/starter-1.png' },
+      { name: 'Flame Dragon Guardian', image: '/images/characters/mei-lin/starter-2.png' },
+      { name: 'Flame Dragon Jewel', image: '/images/characters/mei-lin/starter-3.png' }
+    ],
+    unique: [
+      { name: 'Rising Dragon Spire', image: '/images/characters/mei-lin/unique-0.png' },
+      { name: 'Unity of Attack and Defense', image: '/images/characters/mei-lin/unique-1.png' },
+      { name: 'Spirit of the Aroma', image: '/images/characters/mei-lin/unique-2.png' },
+      { name: "Flame Dragon's Sovereighty", image: '/images/characters/mei-lin/unique-3.png' }
+    ]
   },
   'orlea': {
-    starter: ['Attack, My Minions', 'Attack, My Minions', 'Heaven\'s Healing', 'Sacred Censer'],
-    unique: ['Growth Acceleration', 'Annoying, Growing Creature', 'Will of Light', '']
+    portrait: '/images/characters/orlea/portrait.png',
+    starter: [
+      { name: 'Attack, My Minions', image: '/images/characters/orlea/starter-0.png' },
+      { name: 'Attack, My Minions', image: '/images/characters/orlea/starter-1.png' },
+      { name: "Heaven's Healing", image: '/images/characters/orlea/starter-2.png' },
+      { name: 'Sacred Censer', image: '/images/characters/orlea/starter-3.png' }
+    ],
+    unique: [
+      { name: 'Growth Acceleration', image: '/images/characters/orlea/unique-0.png' },
+      { name: 'Annoying, Growing Creature', image: '/images/characters/orlea/unique-1.png' },
+      { name: 'Will of Light', image: '/images/characters/orlea/unique-2.png' },
+      { name: '', image: undefined }
+    ]
   },
   'rin': {
-    starter: ['Dark Mist Sword: First Form', 'Dark Mist Sword: Third Form', 'Protection', 'Drawing Slash'],
-    unique: ['Dark Mist Secret Art: Destruction', 'Dark Mist Secret Art: Annihilation', 'Dark Mist Inner Art', 'Dark Mist Secret Art: Black Dance']
+    portrait: '/images/characters/rin/portrait.png',
+    starter: [
+      { name: 'Dark Mist Sword: First Form', image: '/images/characters/rin/starter-0.png' },
+      { name: 'Dark Mist Sword: Third Form', image: '/images/characters/rin/starter-1.png' },
+      { name: 'Protection', image: '/images/characters/rin/starter-2.png' },
+      { name: 'Drawing Slash', image: '/images/characters/rin/starter-3.png' }
+    ],
+    unique: [
+      { name: 'Dark Mist Secret Art: Destruction', image: '/images/characters/rin/unique-0.png' },
+      { name: 'Dark Mist Secret Art: Annihilation', image: '/images/characters/rin/unique-1.png' },
+      { name: 'Dark Mist Inner Art', image: '/images/characters/rin/unique-2.png' },
+      { name: 'Dark Mist Secret Art: Black Dance', image: '/images/characters/rin/unique-3.png' }
+    ]
   },
   'magna': {
-    starter: ['Frozen Fist', 'Frost Shield', 'Frost Shield', 'Ice Fragment'],
-    unique: ['Glacial Iron Fist', 'Ice Wall', 'Frost Charge', 'Storm of Bitter Cold']
+    portrait: '/images/characters/magna/portrait.png',
+    starter: [
+      { name: 'Frozen Fist', image: '/images/characters/magna/starter-0.png' },
+      { name: 'Frost Shield', image: '/images/characters/magna/starter-1.png' },
+      { name: 'Frost Shield', image: '/images/characters/magna/starter-2.png' },
+      { name: 'Ice Fragment', image: '/images/characters/magna/starter-3.png' }
+    ],
+    unique: [
+      { name: 'Glacial Iron Fist', image: '/images/characters/magna/unique-0.png' },
+      { name: 'Ice Wall', image: '/images/characters/magna/unique-1.png' },
+      { name: 'Frost Charge', image: '/images/characters/magna/unique-2.png' },
+      { name: 'Storm of Bitter Cold', image: '/images/characters/magna/unique-3.png' }
+    ]
   },
   'khalipe': {
-    starter: ['Lashing', 'Upward Slash', 'Tyr\'s Vow', 'Vulture Ejection'],
-    unique: ['Greatsword Aquila', 'Overpower', 'Rally', 'Absolute Protection']
+    portrait: '/images/characters/khalipe/portrait.png',
+    starter: [
+      { name: 'Lashing', image: '/images/characters/khalipe/starter-0.png' },
+      { name: 'Upward Slash', image: '/images/characters/khalipe/starter-1.png' },
+      { name: "Tyr's Vow", image: '/images/characters/khalipe/starter-2.png' },
+      { name: 'Vulture Ejection', image: '/images/characters/khalipe/starter-3.png' }
+    ],
+    unique: [
+      { name: 'Greatsword Aquila', image: '/images/characters/khalipe/unique-0.png' },
+      { name: 'Overpower', image: '/images/characters/khalipe/unique-1.png' },
+      { name: 'Rally', image: '/images/characters/khalipe/unique-2.png' },
+      { name: 'Absolute Protection', image: '/images/characters/khalipe/unique-3.png' }
+    ]
   },
   'luke': {
-    starter: ['Single Shot', 'Single Shot', 'Shadow Concealment', 'Rapid Fire'],
-    unique: ['Stealth Reload', 'Seize the Opportunity', 'Dance of the Demon', 'Finisher Round']
+    portrait: '/images/characters/luke/portrait.png',
+    starter: [
+      { name: 'Single Shot', image: '/images/characters/luke/starter-0.png' },
+      { name: 'Single Shot', image: '/images/characters/luke/starter-1.png' },
+      { name: 'Shadow Concealment', image: '/images/characters/luke/starter-2.png' },
+      { name: 'Rapid Fire', image: '/images/characters/luke/starter-3.png' }
+    ],
+    unique: [
+      { name: 'Stealth Reload', image: '/images/characters/luke/unique-0.png' },
+      { name: 'Seize the Opportunity', image: '/images/characters/luke/unique-1.png' },
+      { name: 'Dance of the Demon', image: '/images/characters/luke/unique-2.png' },
+      { name: 'Finisher Round', image: '/images/characters/luke/unique-3.png' }
+    ]
   }
 }
 
@@ -146,6 +408,7 @@ type CardType = 'neutral' | 'monster' | 'forbidden' | 'starter'
 type DeckCard = {
   id: string
   name: string
+  image?: string
   cardType: CardType
   isStartingCard: boolean
   hasNormalEpiphany: boolean
@@ -179,33 +442,41 @@ export function RunTracker() {
   const [actionHistory, setActionHistory] = useState<Action[]>([])
   
   const [deck, setDeck] = useState<DeckCard[]>([
-    { id: '1', name: '', cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
-    { id: '2', name: '', cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
-    { id: '3', name: '', cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
-    { id: '4', name: '', cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
-    { id: '5', name: '', cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
-    { id: '6', name: '', cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
-    { id: '7', name: '', cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
-    { id: '8', name: '', cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
+    { id: '1', name: '', image: undefined, cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
+    { id: '2', name: '', image: undefined, cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
+    { id: '3', name: '', image: undefined, cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
+    { id: '4', name: '', image: undefined, cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
+    { id: '5', name: '', image: undefined, cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
+    { id: '6', name: '', image: undefined, cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
+    { id: '7', name: '', image: undefined, cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
+    { id: '8', name: '', image: undefined, cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
   ])
 
   const handleCharacterChange = (character: string) => {
     const actualCharacter = character === "none" ? "" : character
-    setSelectedCharacter(actualCharacter)
+    setSelectedCharacter(actualCharacter || 'none')
     
     if (!actualCharacter) {
-      // Reset to empty names if no character selected
-      setDeck(deck.map((card, index) => ({
+      // Reset to empty names/images if no character selected
+      setDeck(prev => prev.map((card) => ({
         ...card,
-        name: ''
+        name: '',
+        image: undefined
       })))
     } else {
-      // Update deck with character's card names
+      // Update deck with character's card names and images
       const characterData = CHARACTER_CARDS[actualCharacter]
-      setDeck(deck.map((card, index) => ({
-        ...card,
-        name: index < 4 ? characterData.starter[index] : characterData.unique[index - 4]
-      })))
+      if (!characterData) return
+
+      setDeck(prev => prev.map((card, index) => {
+        const isStarter = index < 4
+        const source: CardEntry | undefined = isStarter ? characterData.starter[index] : characterData.unique[index - 4]
+        return {
+          ...card,
+          name: source?.name ?? '',
+          image: source?.image
+        }
+      }))
     }
   }
 
@@ -417,6 +688,7 @@ export function RunTracker() {
     const newCard: DeckCard = {
       id: Date.now().toString(),
       name: '',
+      image: undefined,
       cardType: type,
       isStartingCard: false,
       hasNormalEpiphany: false,
@@ -460,14 +732,14 @@ export function RunTracker() {
     const characterData = selectedCharacter !== 'none' ? CHARACTER_CARDS[selectedCharacter] : null
     
     setDeck([
-      { id: '1', name: characterData ? characterData.starter[0] : '', cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
-      { id: '2', name: characterData ? characterData.starter[1] : '', cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
-      { id: '3', name: characterData ? characterData.starter[2] : '', cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
-      { id: '4', name: characterData ? characterData.starter[3] : '', cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
-      { id: '5', name: characterData ? characterData.unique[0] : '', cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
-      { id: '6', name: characterData ? characterData.unique[1] : '', cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
-      { id: '7', name: characterData ? characterData.unique[2] : '', cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
-      { id: '8', name: characterData ? characterData.unique[3] : '', cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
+      { id: '1', name: characterData ? (characterData.starter[0] as CardEntry).name : '', image: characterData ? (characterData.starter[0] as CardEntry).image : undefined, cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
+      { id: '2', name: characterData ? (characterData.starter[1] as CardEntry).name : '', image: characterData ? (characterData.starter[1] as CardEntry).image : undefined, cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
+      { id: '3', name: characterData ? (characterData.starter[2] as CardEntry).name : '', image: characterData ? (characterData.starter[2] as CardEntry).image : undefined, cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
+      { id: '4', name: characterData ? (characterData.starter[3] as CardEntry).name : '', image: characterData ? (characterData.starter[3] as CardEntry).image : undefined, cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
+      { id: '5', name: characterData ? (characterData.unique[0] as CardEntry).name : '', image: characterData ? (characterData.unique[0] as CardEntry).image : undefined, cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
+      { id: '6', name: characterData ? (characterData.unique[1] as CardEntry).name : '', image: characterData ? (characterData.unique[1] as CardEntry).image : undefined, cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
+      { id: '7', name: characterData ? (characterData.unique[2] as CardEntry).name : '', image: characterData ? (characterData.unique[2] as CardEntry).image : undefined, cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
+      { id: '8', name: characterData ? (characterData.unique[3] as CardEntry).name : '', image: characterData ? (characterData.unique[3] as CardEntry).image : undefined, cardType: 'starter', isStartingCard: true, hasNormalEpiphany: false, hasDivineEpiphany: false, isRemoved: false, wasConverted: false },
     ])
     setRemovalCount(0)
     setDuplicationCount(0)
@@ -723,6 +995,12 @@ export function RunTracker() {
 
                       <div className="flex h-full flex-col justify-between">
                         <div className="space-y-2">
+                          {card.image ? (
+                            <img src={card.image} alt={card.name || 'card image'} className="mb-2 h-20 w-full object-cover rounded-md" />
+                          ) : (
+                            <div className="mb-2 h-20 w-full rounded-md bg-[#0A0B0F] border border-border flex items-center justify-center text-xs text-muted-foreground">No image</div>
+                          )}
+
                           {card.name && (
                             <div className={`text-sm font-medium leading-tight break-words ${
                               card.wasConverted ? 'text-muted-foreground/50' : 'text-foreground'
