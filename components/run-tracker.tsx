@@ -993,43 +993,58 @@ export function RunTracker() {
                         </button>
                       )}
 
-                      <div className="flex h-full flex-col justify-between">
-                        <div className="space-y-2">
-                          {card.image ? (
-                            <img src={card.image} alt={card.name || 'card image'} className="mb-2 h-20 w-full object-cover rounded-md" />
-                          ) : (
-                            <div className="mb-2 h-20 w-full rounded-md bg-[#0A0B0F] border border-border flex items-center justify-center text-xs text-muted-foreground">No image</div>
-                          )}
+                    {/* REPLACE the existing: <div className="flex h-full flex-col justify-between"> ... </div> */}
+                    <div className="flex h-full flex-col">
+                      <div className="relative h-full w-full rounded-md overflow-hidden">
+                        {card.image ? (
+                          // image fills the entire card area
+                          <img
+                            src={card.image}
+                            alt={card.name || 'card image'}
+                            className="absolute inset-0 h-full w-full object-cover"
+                          />
+                        ) : (
+                          <div className="absolute inset-0 flex items-center justify-center bg-[#0A0B0F] text-xs text-muted-foreground">
+                            No image
+                          </div>
+                        )}
 
-                          {card.name && (
-                            <div className={`text-sm font-medium leading-tight break-words ${
-                              card.wasConverted ? 'text-muted-foreground/50' : 'text-foreground'
-                            }`}>
-                              {card.name}
+                        {/* Overlay content — z-10 so it sits above the image. gradient to keep text readable */}
+                        <div className="absolute inset-0 z-10 flex flex-col justify-between p-4 bg-gradient-to-t from-black/70 via-transparent/0 to-transparent/0">
+                          <div className="space-y-2">
+                            {card.name && (
+                              <div
+                                className={`text-sm font-medium leading-tight break-words ${
+                                  card.wasConverted ? 'text-muted-foreground/50' : 'text-foreground'
+                                }`}
+                              >
+                                {card.name}
+                              </div>
+                            )}
+
+                            <div className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
+                              {card.cardType === 'starter' ? (index < 4 ? 'Starter' : 'Unique') : card.cardType}
                             </div>
-                          )}
-                          
-                          <div className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
-                            {card.cardType === 'starter' ? (index < 4 ? 'Starter' : 'Unique') : card.cardType}
+
+                            <div className="space-y-1">
+                              {card.hasNormalEpiphany && (
+                                <Badge variant="outline" className="h-5 text-[10px] border-[#5B1FAF]/30 bg-[#5B1FAF]/10 text-[#5B1FAF]">Epiphany</Badge>
+                              )}
+                              {card.hasDivineEpiphany && (
+                                <Badge variant="outline" className="h-5 text-[10px] border-[#19F7E1]/30 bg-[#19F7E1]/10 text-[#19F7E1]">Divine Epiphany</Badge>
+                              )}
+                            </div>
                           </div>
-                          
-                          <div className="space-y-1">
-                            {card.hasNormalEpiphany && (
-                              <Badge variant="outline" className="h-5 text-[10px] border-[#5B1FAF]/30 bg-[#5B1FAF]/10 text-[#5B1FAF]">Epiphany</Badge>
-                            )}
-                            {card.hasDivineEpiphany && (
-                              <Badge variant="outline" className="h-5 text-[10px] border-[#19F7E1]/30 bg-[#19F7E1]/10 text-[#19F7E1]">Divine Epiphany</Badge>
-                            )}
-                          </div>
-                        </div>
-                        
-                        <div className="text-right">
-                          <div className="text-2xl font-bold text-[#5B1FAF]">
-                            {getCardPointValue(card)}
+
+                          <div className="text-right">
+                            <div className="text-2xl font-bold text-[#5B1FAF]">
+                              {getCardPointValue(card)}
+                            </div>
                           </div>
                         </div>
                       </div>
-
+                    </div>
+                    
                       {selectedCard === card.id && !card.isRemoved && (
                         <div className="absolute inset-0 flex flex-col gap-1 rounded-lg bg-[#06070A]/98 p-2 backdrop-blur-sm ring-2 ring-[#5B1FAF]/50">
                           <Button
