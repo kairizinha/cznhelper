@@ -669,7 +669,7 @@ export function RunTracker() {
               cardType: 'neutral', 
               wasConverted: true,
               isStartingCard: false,
-              image: c.image ?? DEFAULT_CARD_IMAGES.neutral
+              image: DEFAULT_CARD_IMAGES.neutral
             } 
           : c
       ))
