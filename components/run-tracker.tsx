@@ -1348,7 +1348,7 @@ export function RunTracker() {
                               convertToMutantSample(card.id)
                             }}
                           >
-                            Mutant Sample
+                            [Remove] Event
                           </Button>
                           <Button
                             size="sm"
