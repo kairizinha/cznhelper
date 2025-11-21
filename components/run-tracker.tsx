@@ -388,11 +388,11 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
 
 // default images for generic cards
 const DEFAULT_CARD_IMAGES: Record<'neutral' | 'monster' | 'forbidden' | 'starter' | 'placeholder', string> = {
-  neutral: '/images/cards/neutral.png',
-  monster: '/images/cards/monster.png',
-  forbidden: '/images/cards/forbidden.png',
-  starter: '/images/cards/starter.png',
-  placeholder: '/images/cards/placeholder.png'
+  neutral: '/images/card/neutral.png',
+  monster: '/images/card/monster.png',
+  forbidden: '/images/card/forbidden.png',
+  starter: '/images/card/starter.png',
+  placeholder: '/images/card/placeholder.png'
 };
 
 const TIER_LIMITS: Record<number, number> = {
