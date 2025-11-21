@@ -386,6 +386,15 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
   }
 }
 
+// default images for generic cards
+const DEFAULT_CARD_IMAGES: Record<'neutral' | 'monster' | 'forbidden' | 'starter' | 'placeholder', string> = {
+  neutral: '/images/cards/neutral.png',
+  monster: '/images/cards/monster.png',
+  forbidden: '/images/cards/forbidden.png',
+  starter: '/images/cards/starter.png',
+  placeholder: '/images/cards/placeholder.png'
+};
+
 const TIER_LIMITS: Record<number, number> = {
   1: 30,
   2: 40,
@@ -653,16 +662,17 @@ export function RunTracker() {
       previousConversionCount: conversionCount
     }])
     
-    setDeck(deck.map(c => 
-      c.id === cardId 
-        ? { 
-            ...c, 
-            cardType: 'neutral', 
-            wasConverted: true,
-            isStartingCard: false
-          } 
-        : c
-    ))
+      setDeck(deck.map(c => 
+        c.id === cardId 
+          ? { 
+              ...c, 
+              cardType: 'neutral', 
+              wasConverted: true,
+              isStartingCard: false,
+              image: c.image ?? DEFAULT_CARD_IMAGES.neutral
+            } 
+          : c
+      ))
     setConversionCount(conversionCount + 1)
     setTotalPoints(totalPoints + cost)
     setSelectedCard(null)
@@ -694,7 +704,7 @@ export function RunTracker() {
     const newCard: DeckCard = {
       id: Date.now().toString(),
       name: '',
-      image: undefined,
+      image: DEFAULT_CARD_IMAGES[type] ?? DEFAULT_CARD_IMAGES.placeholder,
       cardType: type,
       isStartingCard: false,
       hasNormalEpiphany: false,
