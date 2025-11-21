@@ -684,6 +684,7 @@ const removeCard = (cardId: string) => {
 
   const newRemovalCount = removalCount + 1
 
+  // Scaling cost: 0, 10, 30, 50, 70
   let scaleCost = 0
   if (newRemovalCount === 1) scaleCost = 0
   else if (newRemovalCount === 2) scaleCost = 10
@@ -691,11 +692,14 @@ const removeCard = (cardId: string) => {
   else if (newRemovalCount === 4) scaleCost = 50
   else scaleCost = 70
 
-  // Total points contributed by the card (base + epiphany)
+  // Starter/base card tax (+20) if applicable
+  const starterTax = (card.isStartingCard || card.hasNormalEpiphany) && !card.wasConverted ? 20 : 0
+
+  // Total points contributed by the card (base + epiphanies)
   const totalCardPoints = getCardPointValue(card)
 
-  // Final removal cost: scaleCost minus total points (so removing card sets its contribution to 0)
-  const removalCost = scaleCost - totalCardPoints
+  // Final removal cost = scaleCost + starterTax - totalCardPoints
+  const removalCost = scaleCost + starterTax - totalCardPoints
 
   setDeck(deck.map(c =>
     c.id === cardId ? { ...c, isRemoved: true, removalCost } : c
