@@ -319,9 +319,9 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
     ],
     unique: [
       { name: 'Growth Acceleration', image: '/images/character/orlea/unique1.png' },
-      { name: 'Annoying, Growing Creature', image: '/images/character/orlea/unique2.png' },
-      { name: 'Will of Light', image: '/images/character/orlea/unique3.png' },
-      { name: '', image: undefined }
+      { name: 'Annoying', image: '/images/character/orlea/unique2.png' },
+      { name: 'Growing Creature', image: '/images/character/orlea/unique3.png' },
+      { name: 'Will of Light', image: '/images/character/orlea/unique4.png' }
     ]
   },
   'rin': {
