@@ -415,6 +415,7 @@ type DeckCard = {
   wasConverted: boolean
   removalCost?: number
   isMutantSample?: boolean // Added to differentiate mutant samples
+  isDuplicated?: boolean
 }
 
 type Action = {
@@ -707,8 +708,9 @@ export function RunTracker() {
     const newCard: DeckCard = {
       ...card,
       id: Date.now().toString(),
-      name: `${card.name} (Copy)`,
+      name: card.name, // Changed from `${card.name} (Copy)`
       isRemoved: false,
+      isDuplicated: true, // Added flag
     }
 
     setActionHistory([
@@ -1264,7 +1266,7 @@ export function RunTracker() {
                                 {card.hasNormalEpiphany && (
                                   <Badge
                                     variant="outline"
-                                    className="h-5 text-[10px] border-[#5B1FAF]/50 bg-[#5B1FAF]/30 text-white font-semibold"
+                                    className="h-5 text-[10px] border-gray-400/40 bg-gray-700/40 text-white font-semibold"
                                     style={{
                                       textShadow:
                                         "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0 0 3px #000",
@@ -1276,13 +1278,37 @@ export function RunTracker() {
                                 {card.hasDivineEpiphany && (
                                   <Badge
                                     variant="outline"
-                                    className="h-5 text-[10px] border-[#19F7E1]/50 bg-[#19F7E1]/30 text-white font-semibold"
+                                    className="h-5 text-[10px] border-slate-300/40 bg-slate-600/40 text-white font-semibold"
                                     style={{
                                       textShadow:
                                         "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0 0 3px #000",
                                     }}
                                   >
                                     Divine Epiphany
+                                  </Badge>
+                                )}
+                                {card.isDuplicated && (
+                                  <Badge
+                                    variant="outline"
+                                    className="h-5 text-[10px] border-zinc-400/40 bg-zinc-700/40 text-white font-semibold"
+                                    style={{
+                                      textShadow:
+                                        "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0 0 3px #000",
+                                    }}
+                                  >
+                                    Duplicated
+                                  </Badge>
+                                )}
+                                {card.wasConverted && (
+                                  <Badge
+                                    variant="outline"
+                                    className="h-5 text-[10px] border-neutral-400/40 bg-neutral-700/40 text-white font-semibold"
+                                    style={{
+                                      textShadow:
+                                        "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0 0 3px #000",
+                                    }}
+                                  >
+                                    Converted
                                   </Badge>
                                 )}
                               </div>
