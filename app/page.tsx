@@ -1,11 +1,9 @@
-import { RunTracker } from "@/components/run-tracker"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Link from "next/link"
-import { BookOpen } from "lucide-react"
+import { BookOpen, Calculator, AlertTriangle } from "lucide-react"
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <header className="border-b border-border bg-card backdrop-blur-sm">
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
@@ -15,161 +13,63 @@ export default function Home() {
               </h1>
               <p className="mt-1 text-sm text-muted-foreground">Track your progress through the ongoing nightmare</p>
             </div>
-            <div className="flex items-center gap-6">
-              <Link
-                href="/guides"
-                className="flex items-center gap-2 px-4 py-2 rounded-lg border border-purple-400/30 bg-purple-400/10 hover:bg-purple-400/20 transition-colors"
-              >
-                <BookOpen className="w-4 h-4 text-purple-400" />
-                <span className="text-sm font-medium text-purple-400">Character Guides</span>
-              </Link>
-              <div className="text-right">
-                <p className="text-xs text-muted-foreground">
-                  Made by <span className="text-purple-400 font-semibold text-chart-3">lilyium.box</span>
-                </p>
-                <p className="text-xs text-muted-foreground/70">Thanks to Sproot &amp; Zyla for testing</p>
-              </div>
+            <div className="text-right">
+              <p className="text-xs text-muted-foreground">
+                Made by <span className="text-purple-400 font-semibold text-chart-3">lilyium.box</span>
+              </p>
+              <p className="text-xs text-muted-foreground/70">Thanks to Sproot &amp; Zyla for testing</p>
             </div>
           </div>
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8">
-        <Tabs defaultValue="tracker" className="space-y-6">
-          <TabsList className="grid w-full max-w-md grid-cols-2 bg-card border border-border">
-            <TabsTrigger
-              value="tracker"
-              className="data-[state=active]:bg-purple-400/20 data-[state=active]:text-purple-400"
+      <main className="flex-1 container mx-auto px-4 py-12 flex items-center justify-center">
+        <div className="w-full max-w-4xl space-y-8">
+          <div className="text-center space-y-2">
+            <h2 className="text-4xl font-bold tracking-tight">Choose Your Tool</h2>
+            <p className="text-muted-foreground text-lg">Select what you need help with</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Calculator Card */}
+            <Link
+              href="/calculator"
+              className="group relative rounded-lg border-2 border-border bg-card p-8 hover:border-purple-400 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-400/20"
             >
-              Run Tracker
-            </TabsTrigger>
-            <TabsTrigger
-              value="helper"
-              className="data-[state=active]:bg-purple-400/20 data-[state=active]:text-purple-400"
-            >
-              Helper
-            </TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="tracker" className="space-y-6">
-            <RunTracker />
-          </TabsContent>
-
-          <TabsContent value="helper" className="space-y-6">
-            <div className="rounded-lg border border-border bg-card p-6 space-y-8">
-              <div>
-                <h2 className="text-2xl font-bold text-foreground mb-2">Faint Memory Calculation Rules</h2>
-                <p className="text-base text-muted-foreground">
-                  Understanding how points are calculated in Chaos Zero Nightmare
-                </p>
-              </div>
-
-              <div className="space-y-8">
-                <section className="space-y-3">
-                  <h3 className="text-lg font-semibold text-purple-400">Tier System</h3>
-                  <p className="text-base text-muted-foreground leading-relaxed">
-                    Each tier has a point cap that determines how many Faint Memories can be recorded:
+              <div className="flex flex-col items-center text-center space-y-4">
+                <div className="w-16 h-16 rounded-full bg-purple-400/20 flex items-center justify-center group-hover:bg-purple-400/30 transition-colors">
+                  <Calculator className="w-8 h-8 text-purple-400" />
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-2xl font-bold">Save Data Calculator</h3>
+                  <p className="text-muted-foreground">
+                    Track your runs and calculate Faint Memory points for tier progression
                   </p>
-                  <ul className="text-base text-muted-foreground space-y-1 ml-4">
-                    <li>Tier 1-14: 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160</li>
-                    <li className="text-cyan-400">Nightmare Mode: Adds +10 to the cap (e.g., Tier 3 becomes 60)</li>
-                  </ul>
-                </section>
-
-                <div className="h-px bg-border" />
-
-                <section className="space-y-3">
-                  <h3 className="text-lg font-semibold text-purple-400">Card Acquisition</h3>
-                  <ul className="text-base text-muted-foreground space-y-2">
-                    <li>
-                      <span className="text-cyan-400 font-semibold">Neutral Cards:</span> 20 points
-                    </li>
-                    <li>
-                      <span className="text-red-400 font-semibold">Monster Cards:</span> 80 points
-                    </li>
-                    <li>
-                      <span className="text-purple-400 font-semibold">Forbidden Cards:</span> 20 points
-                    </li>
-                  </ul>
-                </section>
-
-                <div className="h-px bg-border" />
-
-                <section className="space-y-3">
-                  <h3 className="text-lg font-semibold text-purple-400">Epiphanies</h3>
-                  <ul className="text-base text-muted-foreground space-y-2">
-                    <li>
-                      <span className="text-foreground font-semibold">Normal Epiphany:</span> +10 points (FREE on
-                      Starter/Unique cards)
-                    </li>
-                    <li>
-                      <span className="text-foreground font-semibold">Divine Epiphany:</span> +20 points (applies to all
-                      card types including Unique cards)
-                    </li>
-                    <li className="text-sm text-muted-foreground/70 italic ml-4">
-                      Note: Normal and Divine Epiphanies cannot be applied simultaneously
-                    </li>
-                  </ul>
-                </section>
-
-                <div className="h-px bg-border" />
-
-                <section className="space-y-3">
-                  <h3 className="text-lg font-semibold text-purple-400">Card Removal</h3>
-                  <ul className="text-base text-muted-foreground space-y-2">
-                    <li>
-                      <span className="text-foreground font-semibold">Neutral Cards:</span> 1st removal = 0 points, then
-                      10, 30, 50, and 70+ from 5th onward
-                    </li>
-                    <li>
-                      <span className="text-foreground font-semibold">Starter/Unique Cards:</span> Same progression + 20
-                      point tax per removal
-                    </li>
-                    <li className="text-sm text-muted-foreground/70 italic ml-4">
-                      Example: Removing 2nd Starter card = 10 (progression) + 20 (tax) = 30 points
-                    </li>
-                  </ul>
-                </section>
-
-                <div className="h-px bg-border" />
-
-                <section className="space-y-3">
-                  <h3 className="text-lg font-semibold text-purple-400">Card Duplication</h3>
-                  <ul className="text-base text-muted-foreground space-y-2">
-                    <li>
-                      <span className="text-foreground font-semibold">Cost:</span> 1st = 0 points, then 10, 30, 50, and
-                      70+ from 5th onward
-                    </li>
-                    <li className="text-sm text-muted-foreground/70 italic">
-                      If the original card has Divine Epiphany or other modifiers, the duplicate inherits the same cost
-                    </li>
-                  </ul>
-                </section>
-
-                <div className="h-px bg-border" />
-
-                <section className="space-y-3">
-                  <h3 className="text-lg font-semibold text-purple-400">Card Conversion</h3>
-                  <ul className="text-base text-muted-foreground space-y-2">
-                    <li>
-                      <span className="text-foreground font-semibold">Converting to Neutral:</span> 10 points
-                      (conversion) + 20 points (new neutral acquisition) = 30 total
-                    </li>
-                    <li className="text-sm text-muted-foreground/70 italic">
-                      If the converted neutral is removed, subtract 20 points (the acquisition cost)
-                    </li>
-                    <li className="text-sm text-muted-foreground/70 italic ml-4">
-                      Example: Convert Starter → Neutral (30) → Remove it = 10 final points
-                    </li>
-                    <li className="text-sm text-muted-foreground/70 italic">
-                      The conversion record persists even if the card is removed
-                    </li>
-                  </ul>
-                </section>
+                </div>
               </div>
-            </div>
-          </TabsContent>
-        </Tabs>
+            </Link>
+
+            {/* Character Guides Card */}
+            <Link
+              href="/guides"
+              className="group relative rounded-lg border-2 border-border bg-card p-8 hover:border-cyan-400 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-cyan-400/20"
+            >
+              <div className="flex flex-col items-center text-center space-y-4">
+                <div className="w-16 h-16 rounded-full bg-cyan-400/20 flex items-center justify-center group-hover:bg-cyan-400/30 transition-colors">
+                  <BookOpen className="w-8 h-8 text-cyan-400" />
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-2xl font-bold">Character Guides</h3>
+                  <p className="text-muted-foreground">Browse character builds, strategies, and detailed information</p>
+                </div>
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-yellow-500/20 border border-yellow-500/50">
+                  <AlertTriangle className="w-4 h-4 text-yellow-400" />
+                  <span className="text-xs font-medium text-yellow-400">Work in Progress</span>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
       </main>
     </div>
   )

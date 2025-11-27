@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
+import { ArrowLeft } from "lucide-react"
 
 const characters = [
   "rin",
@@ -28,232 +29,21 @@ const characters = [
   "rei",
 ]
 
-const guideContent = {
-  rin: {
-    sections: [
-      { id: "overview", title: "Character Overview" },
-      { id: "skills", title: "Skills & Abilities" },
-      { id: "playstyle", title: "Playstyle" },
-      { id: "talents", title: "Talents" },
-      { id: "constellations", title: "Constellations" },
-      { id: "artifacts", title: "Artifacts" },
-      { id: "er-requirements", title: "ER Requirements" },
-      { id: "artifact-stats", title: "Artifact Stats" },
-      { id: "artifact-sets", title: "Artifact Sets" },
-      { id: "weapons", title: "Weapons" },
-      { id: "teams", title: "Teams" },
-      { id: "credits", title: "Credits" },
-    ],
-  },
-  amir: {
-    sections: [
-      { id: "overview", title: "Character Overview" },
-      { id: "skills", title: "Skills & Abilities" },
-      { id: "playstyle", title: "Playstyle" },
-      { id: "talents", title: "Talents" },
-      { id: "constellations", title: "Constellations" },
-      { id: "artifacts", title: "Artifacts" },
-      { id: "er-requirements", title: "ER Requirements" },
-      { id: "artifact-stats", title: "Artifact Stats" },
-      { id: "artifact-sets", title: "Artifact Sets" },
-      { id: "weapons", title: "Weapons" },
-      { id: "teams", title: "Teams" },
-      { id: "credits", title: "Credits" },
-    ],
-  },
-  beryl: {
-    sections: [
-      { id: "overview", title: "Character Overview" },
-      { id: "skills", title: "Skills & Abilities" },
-      { id: "playstyle", title: "Playstyle" },
-      { id: "talents", title: "Talents" },
-      { id: "constellations", title: "Constellations" },
-      { id: "artifacts", title: "Artifacts" },
-      { id: "er-requirements", title: "ER Requirements" },
-      { id: "artifact-stats", title: "Artifact Stats" },
-      { id: "artifact-sets", title: "Artifact Sets" },
-      { id: "weapons", title: "Weapons" },
-      { id: "teams", title: "Teams" },
-      { id: "credits", title: "Credits" },
-    ],
-  },
-  cassius: {
-    sections: [
-      { id: "overview", title: "Character Overview" },
-      { id: "skills", title: "Skills & Abilities" },
-      { id: "playstyle", title: "Playstyle" },
-      { id: "talents", title: "Talents" },
-      { id: "constellations", title: "Constellations" },
-      { id: "artifacts", title: "Artifacts" },
-      { id: "er-requirements", title: "ER Requirements" },
-      { id: "artifact-stats", title: "Artifact Stats" },
-      { id: "artifact-sets", title: "Artifact Sets" },
-      { id: "weapons", title: "Weapons" },
-      { id: "teams", title: "Teams" },
-      { id: "credits", title: "Credits" },
-    ],
-  },
-  haru: {
-    sections: [
-      { id: "overview", title: "Character Overview" },
-      { id: "skills", title: "Skills & Abilities" },
-      { id: "playstyle", title: "Playstyle" },
-      { id: "talents", title: "Talents" },
-      { id: "constellations", title: "Constellations" },
-      { id: "artifacts", title: "Artifacts" },
-      { id: "er-requirements", title: "ER Requirements" },
-      { id: "artifact-stats", title: "Artifact Stats" },
-      { id: "artifact-sets", title: "Artifact Sets" },
-      { id: "weapons", title: "Weapons" },
-      { id: "teams", title: "Teams" },
-      { id: "credits", title: "Credits" },
-    ],
-  },
-  khalipe: {
-    sections: [
-      { id: "overview", title: "Character Overview" },
-      { id: "skills", title: "Skills & Abilities" },
-      { id: "playstyle", title: "Playstyle" },
-      { id: "talents", title: "Talents" },
-      { id: "constellations", title: "Constellations" },
-      { id: "artifacts", title: "Artifacts" },
-      { id: "er-requirements", title: "ER Requirements" },
-      { id: "artifact-stats", title: "Artifact Stats" },
-      { id: "artifact-sets", title: "Artifact Sets" },
-      { id: "weapons", title: "Weapons" },
-      { id: "teams", title: "Teams" },
-      { id: "credits", title: "Credits" },
-    ],
-  },
-  hugo: {
-    sections: [
-      { id: "overview", title: "Character Overview" },
-      { id: "skills", title: "Skills & Abilities" },
-      { id: "playstyle", title: "Playstyle" },
-      { id: "talents", title: "Talents" },
-      { id: "constellations", title: "Constellations" },
-      { id: "artifacts", title: "Artifacts" },
-      { id: "er-requirements", title: "ER Requirements" },
-      { id: "artifact-stats", title: "Artifact Stats" },
-      { id: "artifact-sets", title: "Artifact Sets" },
-      { id: "weapons", title: "Weapons" },
-      { id: "teams", title: "Teams" },
-      { id: "credits", title: "Credits" },
-    ],
-  },
-  magnus: {
-    sections: [
-      { id: "overview", title: "Character Overview" },
-      { id: "skills", title: "Skills & Abilities" },
-      { id: "playstyle", title: "Playstyle" },
-      { id: "talents", title: "Talents" },
-      { id: "constellations", title: "Constellations" },
-      { id: "artifacts", title: "Artifacts" },
-      { id: "er-requirements", title: "ER Requirements" },
-      { id: "artifact-stats", title: "Artifact Stats" },
-      { id: "artifact-sets", title: "Artifact Sets" },
-      { id: "weapons", title: "Weapons" },
-      { id: "teams", title: "Teams" },
-      { id: "credits", title: "Credits" },
-    ],
-  },
-  luke: {
-    sections: [
-      { id: "overview", title: "Character Overview" },
-      { id: "skills", title: "Skills & Abilities" },
-      { id: "playstyle", title: "Playstyle" },
-      { id: "talents", title: "Talents" },
-      { id: "constellations", title: "Constellations" },
-      { id: "artifacts", title: "Artifacts" },
-      { id: "er-requirements", title: "ER Requirements" },
-      { id: "artifact-stats", title: "Artifact Stats" },
-      { id: "artifact-sets", title: "Artifact Sets" },
-      { id: "weapons", title: "Weapons" },
-      { id: "teams", title: "Teams" },
-      { id: "credits", title: "Credits" },
-    ],
-  },
-  maribell: {
-    sections: [
-      { id: "overview", title: "Character Overview" },
-      { id: "skills", title: "Skills & Abilities" },
-      { id: "playstyle", title: "Playstyle" },
-      { id: "talents", title: "Talents" },
-      { id: "constellations", title: "Constellations" },
-      { id: "artifacts", title: "Artifacts" },
-      { id: "er-requirements", title: "ER Requirements" },
-      { id: "artifact-stats", title: "Artifact Stats" },
-      { id: "artifact-sets", title: "Artifact Sets" },
-      { id: "weapons", title: "Weapons" },
-      { id: "teams", title: "Teams" },
-      { id: "credits", title: "Credits" },
-    ],
-  },
-  mika: {
-    sections: [
-      { id: "overview", title: "Character Overview" },
-      { id: "skills", title: "Skills & Abilities" },
-      { id: "playstyle", title: "Playstyle" },
-      { id: "talents", title: "Talents" },
-      { id: "constellations", title: "Constellations" },
-      { id: "artifacts", title: "Artifacts" },
-      { id: "er-requirements", title: "ER Requirements" },
-      { id: "artifact-stats", title: "Artifact Stats" },
-      { id: "artifact-sets", title: "Artifact Sets" },
-      { id: "weapons", title: "Weapons" },
-      { id: "teams", title: "Teams" },
-      { id: "credits", title: "Credits" },
-    ],
-  },
-  meiLin: {
-    sections: [
-      { id: "overview", title: "Character Overview" },
-      { id: "skills", title: "Skills & Abilities" },
-      { id: "playstyle", title: "Playstyle" },
-      { id: "talents", title: "Talents" },
-      { id: "constellations", title: "Constellations" },
-      { id: "artifacts", title: "Artifacts" },
-      { id: "er-requirements", title: "ER Requirements" },
-      { id: "artifact-stats", title: "Artifact Stats" },
-      { id: "artifact-sets", title: "Artifact Sets" },
-      { id: "weapons", title: "Weapons" },
-      { id: "teams", title: "Teams" },
-      { id: "credits", title: "Credits" },
-    ],
-  },
-  lucas: {
-    sections: [
-      { id: "overview", title: "Character Overview" },
-      { id: "skills", title: "Skills & Abilities" },
-      { id: "playstyle", title: "Playstyle" },
-      { id: "talents", title: "Talents" },
-      { id: "constellations", title: "Constellations" },
-      { id: "artifacts", title: "Artifacts" },
-      { id: "er-requirements", title: "ER Requirements" },
-      { id: "artifact-stats", title: "Artifact Stats" },
-      { id: "artifact-sets", title: "Artifact Sets" },
-      { id: "weapons", title: "Weapons" },
-      { id: "teams", title: "Teams" },
-      { id: "credits", title: "Credits" },
-    ],
-  },
-  magna: {
-    sections: [
-      { id: "overview", title: "Character Overview" },
-      { id: "skills", title: "Skills & Abilities" },
-      { id: "playstyle", title: "Playstyle" },
-      { id: "talents", title: "Talents" },
-      { id: "constellations", title: "Constellations" },
-      { id: "artifacts", title: "Artifacts" },
-      { id: "er-requirements", title: "ER Requirements" },
-      { id: "artifact-stats", title: "Artifact Stats" },
-      { id: "artifact-sets", title: "Artifact Sets" },
-      { id: "weapons", title: "Weapons" },
-      { id: "teams", title: "Teams" },
-      { id: "credits", title: "Credits" },
-    ],
-  },
-}
+const defaultSections = [
+  { id: "infographic", title: "1. Infographic", level: 1 },
+  { id: "character-overview", title: "2. Character Overview", level: 1 },
+  { id: "profile", title: "2.1. Profile", level: 2 },
+  { id: "cards", title: "2.2. Cards", level: 2 },
+  { id: "potentials", title: "2.3. Potentials", level: 2 },
+  { id: "manifest-egos", title: "2.4. Manifest Ego", level: 2 },
+  { id: "save-data", title: "3. Save Data", level: 1 },
+  { id: "memory-fragments", title: "4. Memory Fragments", level: 1 },
+  { id: "memory-stats", title: "4.1. Memory Stats", level: 2 },
+  { id: "memory-sets", title: "4.2. Memory Sets", level: 2 },
+  { id: "partners", title: "5. Partners", level: 1 },
+  { id: "teams", title: "6. Teams", level: 1 },
+  { id: "credits", title: "7. Credits", level: 1 },
+]
 
 export default async function CharacterGuidePage({
   params,
@@ -271,8 +61,6 @@ export default async function CharacterGuidePage({
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ")
 
-  const sections = guideContent[character as keyof typeof guideContent]?.sections || []
-
   return (
     <div className="min-h-screen bg-background">
       <header className="border-b border-border bg-card backdrop-blur-sm">
@@ -282,13 +70,13 @@ export default async function CharacterGuidePage({
               <h1 className="text-3xl font-bold tracking-tight text-balance bg-gradient-to-r from-red-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
                 {characterName} Guide
               </h1>
-              <p className="mt-1 text-sm text-muted-foreground">Optimal builds and strategies</p>
             </div>
             <Link
               href="/guides"
-              className="text-sm text-purple-400 hover:text-purple-300 transition-colors underline underline-offset-4"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg border border-purple-500/20 bg-purple-500/10 text-purple-400 hover:bg-purple-500/20 hover:border-purple-500/40 transition-all duration-200"
             >
-              ← Back to Characters
+              <ArrowLeft className="w-4 h-4" />
+              <span className="text-sm font-medium">Back to Characters</span>
             </Link>
           </div>
         </div>
@@ -297,25 +85,25 @@ export default async function CharacterGuidePage({
       <main className="container mx-auto px-4 py-8">
         <div className="flex gap-6">
           {/* Sticky Table of Contents */}
-          {sections.length > 0 && (
-            <aside className="hidden lg:block w-64 shrink-0">
-              <nav className="sticky top-4 rounded-lg border border-border bg-card p-4">
-                <h2 className="text-lg font-semibold mb-4">Table of Contents</h2>
-                <ul className="space-y-2">
-                  {sections.map((section) => (
-                    <li key={section.id}>
-                      <a
-                        href={`#${section.id}`}
-                        className="text-sm text-muted-foreground hover:text-purple-400 transition-colors block py-1"
-                      >
-                        {section.title}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-            </aside>
-          )}
+          <aside className="hidden lg:block w-64 shrink-0">
+            <nav className="sticky top-4 rounded-lg border border-border bg-card p-4">
+              <h2 className="text-lg font-semibold mb-4">Table of Contents</h2>
+              <ul className="space-y-1.5">
+                {defaultSections.map((section) => (
+                  <li key={section.id}>
+                    <a
+                      href={`#${section.id}`}
+                      className={`text-sm text-muted-foreground hover:text-purple-400 transition-colors block py-1 ${
+                        section.level === 2 ? "pl-4" : ""
+                      }`}
+                    >
+                      {section.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </aside>
 
           {/* Main Content */}
           <div className="flex-1">
@@ -333,21 +121,16 @@ export default async function CharacterGuidePage({
 
               {/* Guide Content Sections */}
               <div className="p-8 space-y-8">
-                {sections.length > 0 ? (
-                  sections.map((section) => (
-                    <section key={section.id} id={section.id} className="scroll-mt-24">
-                      <h2 className="text-2xl font-bold mb-4 text-purple-400">{section.title}</h2>
-                      <p className="text-muted-foreground">
-                        Content for {section.title.toLowerCase()} will be added here.
-                      </p>
-                    </section>
-                  ))
-                ) : (
-                  <p className="text-muted-foreground text-center py-12">
-                    Guide content for <span className="text-purple-400 font-semibold">{characterName}</span> will be
-                    added here.
-                  </p>
-                )}
+                {defaultSections.map((section) => (
+                  <section key={section.id} id={section.id} className="scroll-mt-24">
+                    <h2 className={`font-bold mb-4 text-purple-400 ${section.level === 1 ? "text-2xl" : "text-xl"}`}>
+                      {section.title}
+                    </h2>
+                    <p className="text-muted-foreground">
+                      Content for {section.title.replace(/^\d+(\.\d+)?\.?\s*/, "").toLowerCase()} will be added here.
+                    </p>
+                  </section>
+                ))}
               </div>
             </div>
           </div>

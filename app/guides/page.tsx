@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import Link from "next/link"
-import { Search, X } from "lucide-react"
+import { Search, X, Home, AlertTriangle } from "lucide-react"
 
 const jobTypes = [
   {
@@ -146,9 +146,10 @@ export default function CharacterGuidesPage() {
             </h1>
             <Link
               href="/"
-              className="text-sm text-purple-400 hover:text-purple-300 transition-colors underline underline-offset-4"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg border border-purple-400/30 bg-purple-400/10 hover:bg-purple-400/20 transition-colors"
             >
-              ← Back to Calculator
+              <Home className="w-4 h-4 text-purple-400" />
+              <span className="text-sm font-medium text-purple-400">Home</span>
             </Link>
           </div>
         </div>
@@ -156,6 +157,19 @@ export default function CharacterGuidesPage() {
 
       <main className="container mx-auto px-4 py-8">
         <div className="space-y-6">
+          <div className="rounded-lg border-2 border-yellow-500/50 bg-yellow-500/10 p-4">
+            <div className="flex items-start gap-3">
+              <AlertTriangle className="w-5 h-5 text-yellow-400 mt-0.5 flex-shrink-0" />
+              <div>
+                <h3 className="font-semibold text-yellow-400 mb-1">Work in Progress</h3>
+                <p className="text-sm text-yellow-400/90">
+                  Character guides are currently being developed. Some information may be incomplete or subject to
+                  change.
+                </p>
+              </div>
+            </div>
+          </div>
+
           <div className="flex items-center gap-2">
             <div className="relative flex-1 max-w-md">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />

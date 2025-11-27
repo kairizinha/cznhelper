@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -438,111 +438,57 @@ const formatCharacterName = (key: string) =>
     .join(" ")
 
 export function RunTracker() {
+  const [character, setCharacter] = useState("") // Renamed from selectedCharacter
   const [tier, setTier] = useState(1)
-  const [nightmareMode, setNightmareMode] = useState(false)
-  const [selectedCharacter, setSelectedCharacter] = useState<string>("none")
+  const [nightmareMode, setNightmareMode] = useState(false) // Renamed from isNightmare
+  const [selectedCard, setSelectedCard] = useState<string | null>(null)
+  const [showAddCard, setShowAddCard] = useState(false)
   const [removalCount, setRemovalCount] = useState(0)
   const [duplicationCount, setDuplicationCount] = useState(0)
   const [conversionCount, setConversionCount] = useState(0)
   const [totalPoints, setTotalPoints] = useState(0)
-  const [selectedCard, setSelectedCard] = useState<string | null>(null)
-  const [showAddCard, setShowAddCard] = useState(false)
   const [actionHistory, setActionHistory] = useState<Action[]>([])
+  const [deck, setDeck] = useState<DeckCard[]>([]) // Moved state initialization up
 
-  const [deck, setDeck] = useState<DeckCard[]>([
-    {
-      id: "1",
-      name: "",
-      image: undefined,
-      cardType: "starter",
-      isStartingCard: true,
-      hasNormalEpiphany: false,
-      hasDivineEpiphany: false,
-      isRemoved: false,
-      wasConverted: false,
-    },
-    {
-      id: "2",
-      name: "",
-      image: undefined,
-      cardType: "starter",
-      isStartingCard: true,
-      hasNormalEpiphany: false,
-      hasDivineEpiphany: false,
-      isRemoved: false,
-      wasConverted: false,
-    },
-    {
-      id: "3",
-      name: "",
-      image: undefined,
-      cardType: "starter",
-      isStartingCard: true,
-      hasNormalEpiphany: false,
-      hasDivineEpiphany: false,
-      isRemoved: false,
-      wasConverted: false,
-    },
-    {
-      id: "4",
-      name: "",
-      image: undefined,
-      cardType: "starter",
-      isStartingCard: true,
-      hasNormalEpiphany: false,
-      hasDivineEpiphany: false,
-      isRemoved: false,
-      wasConverted: false,
-    },
-    {
-      id: "5",
-      name: "",
-      image: undefined,
-      cardType: "starter",
-      isStartingCard: true,
-      hasNormalEpiphany: false,
-      hasDivineEpiphany: false,
-      isRemoved: false,
-      wasConverted: false,
-    },
-    {
-      id: "6",
-      name: "",
-      image: undefined,
-      cardType: "starter",
-      isStartingCard: true,
-      hasNormalEpiphany: false,
-      hasDivineEpiphany: false,
-      isRemoved: false,
-      wasConverted: false,
-    },
-    {
-      id: "7",
-      name: "",
-      image: undefined,
-      cardType: "starter",
-      isStartingCard: true,
-      hasNormalEpiphany: false,
-      hasDivineEpiphany: false,
-      isRemoved: false,
-      wasConverted: false,
-    },
-    {
-      id: "8",
-      name: "",
-      image: undefined,
-      cardType: "starter",
-      isStartingCard: true,
-      hasNormalEpiphany: false,
-      hasDivineEpiphany: false,
-      isRemoved: false,
-      wasConverted: false,
-    },
-  ])
+  useEffect(() => {
+    const savedState = localStorage.getItem("czn-run-tracker")
+    if (savedState) {
+      try {
+        const parsed = JSON.parse(savedState)
+        setCharacter(parsed.character || "")
+        setTier(parsed.tier || 1)
+        setNightmareMode(parsed.isNightmare || false) // Use setNightmareMode
+        setDeck(parsed.deck || [])
+        setActionHistory(parsed.actionHistory || [])
+        setRemovalCount(parsed.removalCount || 0)
+        setDuplicationCount(parsed.duplicationCount || 0)
+        setConversionCount(parsed.conversionCount || 0)
+      } catch (e) {
+        console.error("Failed to parse saved state:", e)
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    // Only save if we have some data to save (character selected or deck has cards)
+    if (character || deck.length > 0) {
+      const state = {
+        character,
+        tier,
+        isNightmare: nightmareMode, // Use nightmareMode
+        deck,
+        actionHistory,
+        removalCount,
+        duplicationCount,
+        conversionCount,
+      }
+      localStorage.setItem("czn-run-tracker", JSON.stringify(state))
+    }
+  }, [character, tier, nightmareMode, deck, actionHistory, removalCount, duplicationCount, conversionCount])
 
   const handleCharacterChange = (character: string) => {
     const actualCharacter = character === "none" ? "" : character
-    setSelectedCharacter(actualCharacter || "none")
+    setCharacter(actualCharacter || "none") // Use setCharacter
 
     if (!actualCharacter) {
       // Reset to empty names/images if no character selected
@@ -574,7 +520,7 @@ export function RunTracker() {
     }
   }
 
-  const limit = TIER_LIMITS[tier] + (nightmareMode ? 10 : 0)
+  const limit = TIER_LIMITS[tier] + (nightmareMode ? 10 : 0) // Use nightmareMode
 
   const calculateRemovalCost = (card: DeckCard, currentRemovalCount: number): number => {
     const count = currentRemovalCount + 1
@@ -886,7 +832,7 @@ export function RunTracker() {
   }
 
   const resetDeck = () => {
-    const characterData = selectedCharacter !== "none" ? CHARACTER_CARDS[selectedCharacter] : null
+    const characterData = character !== "none" ? CHARACTER_CARDS[character] : null // Use character state
 
     setDeck([
       {
@@ -937,7 +883,7 @@ export function RunTracker() {
         id: "5",
         name: characterData ? (characterData.unique[0] as CardEntry).name : "",
         image: characterData ? (characterData.unique[0] as CardEntry).image : undefined,
-        cardType: "starter",
+        cardType: "starter", // Defaulting to starter, might need adjustment if unique cards have different types
         isStartingCard: true,
         hasNormalEpiphany: false,
         hasDivineEpiphany: false,
@@ -948,7 +894,7 @@ export function RunTracker() {
         id: "6",
         name: characterData ? (characterData.unique[1] as CardEntry).name : "",
         image: characterData ? (characterData.unique[1] as CardEntry).image : undefined,
-        cardType: "starter",
+        cardType: "starter", // Defaulting to starter
         isStartingCard: true,
         hasNormalEpiphany: false,
         hasDivineEpiphany: false,
@@ -959,7 +905,7 @@ export function RunTracker() {
         id: "7",
         name: characterData ? (characterData.unique[2] as CardEntry).name : "",
         image: characterData ? (characterData.unique[2] as CardEntry).image : undefined,
-        cardType: "starter",
+        cardType: "starter", // Defaulting to starter
         isStartingCard: true,
         hasNormalEpiphany: false,
         hasDivineEpiphany: false,
@@ -970,7 +916,7 @@ export function RunTracker() {
         id: "8",
         name: characterData ? (characterData.unique[3] as CardEntry).name : "",
         image: characterData ? (characterData.unique[3] as CardEntry).image : undefined,
-        cardType: "starter",
+        cardType: "starter", // Defaulting to starter
         isStartingCard: true,
         hasNormalEpiphany: false,
         hasDivineEpiphany: false,
@@ -1089,7 +1035,7 @@ export function RunTracker() {
                     <Checkbox
                       id="nightmare"
                       checked={nightmareMode}
-                      onCheckedChange={(checked) => setNightmareMode(checked as boolean)}
+                      onCheckedChange={(checked) => setNightmareMode(checked as boolean)} // Use setNightmareMode
                     />
                     <Label htmlFor="nightmare" className="cursor-pointer">
                       Nightmare Mode
@@ -1162,7 +1108,9 @@ export function RunTracker() {
               <CardContent className="space-y-4">
                 <div className="space-y-2">
                   <Label>Character</Label>
-                  <Select value={selectedCharacter} onValueChange={handleCharacterChange}>
+                  <Select value={character} onValueChange={handleCharacterChange}>
+                    {" "}
+                    {/* Use character state */}
                     <SelectTrigger>
                       <SelectValue placeholder="Select a character..." />
                     </SelectTrigger>
@@ -1232,7 +1180,7 @@ export function RunTracker() {
                             </div>
                           )}
 
-                          {["amir", "luke", "hugo", "yuki"].includes(selectedCharacter) && (
+                          {["amir", "luke", "hugo", "yuki"].includes(character) && ( // Use character state
                             <img
                               src="/images/card/order-border.png"
                               alt="Order border"
@@ -1240,7 +1188,7 @@ export function RunTracker() {
                             />
                           )}
 
-                          {["tressa", "rin", "renoa", "rei", "kayron"].includes(selectedCharacter) && (
+                          {["tressa", "rin", "renoa", "rei", "kayron"].includes(character) && ( // Use character state
                             <img
                               src="/images/card/void-border.png"
                               alt="Void border"
@@ -1248,7 +1196,7 @@ export function RunTracker() {
                             />
                           )}
 
-                          {["nia", "khalipe", "orlea", "cassius"].includes(selectedCharacter) && (
+                          {["nia", "khalipe", "orlea", "cassius"].includes(character) && ( // Use character state
                             <img
                               src="/images/card/instinct-border.png"
                               alt="Instinct border"
@@ -1257,7 +1205,7 @@ export function RunTracker() {
                           )}
 
                           {["selena", "lucas", "mei-lin", "maribell", "veronica", "owen"].includes(
-                            selectedCharacter,
+                            character, // Use character state
                           ) && (
                             <img
                               src="/images/card/passion-border.png"
@@ -1266,7 +1214,7 @@ export function RunTracker() {
                             />
                           )}
 
-                          {["magna", "mika", "beryl", "haru"].includes(selectedCharacter) && (
+                          {["magna", "mika", "beryl", "haru"].includes(character) && ( // Use character state
                             <img
                               src="/images/card/justice-border.png"
                               alt="Justice border"
@@ -1496,7 +1444,8 @@ export function RunTracker() {
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Tier</span>
                     {/* CHANGE: Changed from harsh #19F7E1 to softer cyan-400 */}
-                    <span className="font-bold text-cyan-400">{nightmareMode ? `${tier + 1} (Nightmare)` : tier}</span>
+                    <span className="font-bold text-cyan-400">{nightmareMode ? `${tier + 1} (Nightmare)` : tier}</span>{" "}
+                    {/* Use nightmareMode */}
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Points</span>
