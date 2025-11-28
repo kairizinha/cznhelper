@@ -3,9 +3,8 @@
 import { useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import Image from "next/image"
 import Link from "next/link"
-import { Search, X } from "lucide-react"
+import { Search, X, Home, AlertTriangle } from "lucide-react"
 
 const jobTypes = [
   {
@@ -117,6 +116,17 @@ export default function CharacterGuidesPage() {
     return matchesSearch && matchesJob && matchesFaction && matchesRarity
   })
 
+  console.log("[v0] Total characters:", characters.length)
+  console.log("[v0] Filtered characters:", filteredCharacters.length)
+  console.log(
+    "[v0] Tressa in filtered?",
+    filteredCharacters.find((c) => c.id === "tressa"),
+  )
+  console.log(
+    "[v0] Yuki in filtered?",
+    filteredCharacters.find((c) => c.id === "yuki"),
+  )
+
   const handleJobFilter = (jobId: string) => {
     setSelectedJob(selectedJob === jobId ? null : jobId)
   }
@@ -146,9 +156,10 @@ export default function CharacterGuidesPage() {
             </h1>
             <Link
               href="/"
-              className="text-sm text-purple-400 hover:text-purple-300 transition-colors underline underline-offset-4"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg border border-purple-400/30 bg-purple-400/10 hover:bg-purple-400/20 transition-colors"
             >
-              ← Back to Calculator
+              <Home className="w-4 h-4 text-purple-400" />
+              <span className="text-sm font-medium text-purple-400">Home</span>
             </Link>
           </div>
         </div>
@@ -156,6 +167,19 @@ export default function CharacterGuidesPage() {
 
       <main className="container mx-auto px-4 py-8">
         <div className="space-y-6">
+          <div className="rounded-lg border-2 border-yellow-500/50 bg-yellow-500/10 p-4">
+            <div className="flex items-start gap-3">
+              <AlertTriangle className="w-5 h-5 text-yellow-400 mt-0.5 flex-shrink-0" />
+              <div>
+                <h3 className="font-semibold text-yellow-400 mb-1">Work in Progress</h3>
+                <p className="text-sm text-yellow-400/90">
+                  Character guides are currently being developed. Some information may be incomplete or subject to
+                  change.
+                </p>
+              </div>
+            </div>
+          </div>
+
           <div className="flex items-center gap-2">
             <div className="relative flex-1 max-w-md">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -231,13 +255,7 @@ export default function CharacterGuidesPage() {
                   selectedFaction === faction.id ? faction.color : "bg-card hover:bg-card/80"
                 }`}
               >
-                <Image
-                  src={faction.icon || "/placeholder.svg"}
-                  alt={faction.name}
-                  width={16}
-                  height={16}
-                  className="opacity-70"
-                />
+                <img src={faction.icon || "/placeholder.svg"} alt={faction.name} width={20} height={20} />
                 {faction.name}
               </Button>
             ))}
@@ -256,13 +274,7 @@ export default function CharacterGuidesPage() {
                     : "bg-card hover:bg-card/80"
                 }`}
               >
-                <Image
-                  src={job.icon || "/placeholder.svg"}
-                  alt={job.name}
-                  width={16}
-                  height={16}
-                  className="opacity-70"
-                />
+                <img src={job.icon || "/placeholder.svg"} alt={job.name} width={20} height={20} />
                 {job.name}
               </Button>
             ))}
@@ -273,6 +285,9 @@ export default function CharacterGuidesPage() {
               const job = jobTypes.find((j) => j.id === character.job)
               const faction = factionTypes.find((f) => f.id === character.faction)
 
+              const imagePath = `/images/characters/${character.id}half.webp`
+              console.log(`[v0] Rendering ${character.name} with image:`, imagePath)
+
               return (
                 <Link
                   key={character.id}
@@ -280,36 +295,23 @@ export default function CharacterGuidesPage() {
                   className="group relative aspect-[3/4] rounded-lg overflow-hidden border-2 border-border bg-card hover:border-purple-400 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-400/20"
                 >
                   <div className="absolute inset-0">
-                    {/* Update: Remove hyphen from filename */}
-                    <Image
-                      src={`/images/characters/${character.id}half.webp`}
+                    <img
+                      src={imagePath || "/placeholder.svg"}
                       alt={character.name}
-                      fill
-                      className="object-cover"
+                      className="object-cover w-full h-full"
+                      onError={(e) => {
+                        console.error(`[v0] Failed to load image for ${character.name}:`, imagePath)
+                      }}
                     />
                   </div>
 
                   <div className="absolute top-2 left-2 flex flex-col gap-1">
                     <div className="w-9 h-9 rounded-md bg-black/70 backdrop-blur-sm border border-white/20 flex items-center justify-center p-1.5">
-                      {job && (
-                        <Image
-                          src={job.icon || "/placeholder.svg"}
-                          alt={job.name}
-                          width={22}
-                          height={22}
-                          className="opacity-90 brightness-200"
-                        />
-                      )}
+                      {job && <img src={job.icon || "/placeholder.svg"} alt={job.name} width={24} height={24} />}
                     </div>
                     <div className="w-9 h-9 rounded-md bg-black/70 backdrop-blur-sm border border-white/20 flex items-center justify-center p-1.5">
                       {faction && (
-                        <Image
-                          src={faction.icon || "/placeholder.svg"}
-                          alt={faction.name}
-                          width={22}
-                          height={22}
-                          className="opacity-90 brightness-200"
-                        />
+                        <img src={faction.icon || "/placeholder.svg"} alt={faction.name} width={24} height={24} />
                       )}
                     </div>
                   </div>
