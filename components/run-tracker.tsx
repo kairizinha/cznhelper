@@ -383,7 +383,7 @@ const DEFAULT_CARD_IMAGES: Record<"neutral" | "monster" | "forbidden" | "starter
   monster: "/images/card/monster.png",
   forbidden: "/images/card/forbidden.png",
   starter: "/images/card/starter.png",
-  placeholder: "/playing-cards-scattered.png",
+  placeholder: "/placeholder.svg?height=300&width=200",
 }
 
 const TIER_LIMITS: Record<number, number> = {
@@ -1220,6 +1220,9 @@ export function RunTracker() {
                       <div className="flex h-full flex-col">
                         {/* Card image - position relative for proper stacking */}
                         <div className="relative flex-1 overflow-hidden rounded-t-lg">
+                          {card.image === DEFAULT_CARD_IMAGES.placeholder && (
+                            <div className="absolute inset-0 bg-black/70 z-[1]" />
+                          )}
                           <Image
                             src={card.image || "/placeholder.svg"}
                             alt={card.name || "Card"}

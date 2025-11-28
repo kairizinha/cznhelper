@@ -264,7 +264,16 @@ export default function CharacterGuidesPage() {
                     : "bg-card hover:bg-card/80"
                 }`}
               >
-                <Image src={job.icon || "/placeholder.svg"} alt={job.name} width={20} height={20} unoptimized />
+                <img
+                  src={job.icon || "/placeholder.svg"}
+                  alt={job.name}
+                  width={20}
+                  height={20}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement
+                    target.src = "/placeholder.svg?height=20&width=20"
+                  }}
+                />
                 {job.name}
               </Button>
             ))}
@@ -298,12 +307,11 @@ export default function CharacterGuidesPage() {
                   <div className="absolute top-2 left-2 flex flex-col gap-1">
                     <div className="w-9 h-9 rounded-md bg-black/70 backdrop-blur-sm border border-white/20 flex items-center justify-center p-1.5">
                       {job && (
-                        <Image
+                        <img
                           src={job.icon || "/placeholder.svg"}
                           alt={job.name}
                           width={24}
                           height={24}
-                          unoptimized
                           onError={(e) => {
                             const target = e.target as HTMLImageElement
                             target.src = "/placeholder.svg?height=24&width=24"
