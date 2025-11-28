@@ -17,6 +17,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import Image from "next/image" // Import Image from next/image
 
 /**
  * Inline CHARACTER_CARDS with images (option 2).
@@ -377,13 +378,12 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
   // Assuming the first instance is the correct one.
 }
 
-// default images for generic cards
 const DEFAULT_CARD_IMAGES: Record<"neutral" | "monster" | "forbidden" | "starter" | "placeholder", string> = {
   neutral: "/images/card/neutral.png",
   monster: "/images/card/monster.png",
   forbidden: "/images/card/forbidden.png",
   starter: "/images/card/starter.png",
-  placeholder: "/images/card/placeholder.png",
+  placeholder: "/playing-cards-scattered.png",
 }
 
 const TIER_LIMITS: Record<number, number> = {
@@ -1164,10 +1164,10 @@ export function RunTracker() {
                 <div className="space-y-2">
                   <Label>Character</Label>
                   <Select value={character} onValueChange={handleCharacterChange}>
-                    <SelectTrigger>
+                    <SelectTrigger className="relative z-50">
                       <SelectValue placeholder="Select a character..." />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="z-50">
                       {Object.keys(CHARACTER_CARDS)
                         .sort()
                         .map((char) => (
@@ -1218,21 +1218,21 @@ export function RunTracker() {
                       )}
 
                       <div className="flex h-full flex-col">
-                        <div className="relative h-full w-full rounded-md overflow-hidden">
-                          {card.image ? (
-                            // image fills the entire card area
-                            <img
-                              src={card.image || "/placeholder.svg"}
-                              alt={card.name || "card image"}
-                              className="absolute inset-0 h-full w-full object-cover"
-                            />
-                          ) : (
-                            <div className="absolute inset-0 flex items-center justify-center bg-card/50 border-2 border-dashed border-border/30 text-xs text-muted-foreground">
-                              No image
-                            </div>
-                          )}
+                        {/* Card image - position relative for proper stacking */}
+                        <div className="relative flex-1 overflow-hidden rounded-t-lg">
+                          <Image
+                            src={card.image || "/placeholder.svg"}
+                            alt={card.name || "Card"}
+                            fill
+                            className="object-cover"
+                            unoptimized
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement
+                              target.src = "/placeholder.svg?height=300&width=200"
+                            }}
+                          />
 
-                          {["amir", "luke", "hugo", "yuki"].includes(character) && ( // Use character state
+                          {["amir", "luke", "hugo", "yuki"].includes(character) && (
                             <img
                               src="/images/card/order-border.png"
                               alt="Order border"
@@ -1240,7 +1240,7 @@ export function RunTracker() {
                             />
                           )}
 
-                          {["tressa", "rin", "renoa", "rei", "kayron"].includes(character) && ( // Use character state
+                          {["tressa", "rin", "renoa", "rei", "kayron"].includes(character) && (
                             <img
                               src="/images/card/void-border.png"
                               alt="Void border"
@@ -1248,7 +1248,7 @@ export function RunTracker() {
                             />
                           )}
 
-                          {["nia", "khalipe", "orlea", "cassius"].includes(character) && ( // Use character state
+                          {["nia", "khalipe", "orlea", "cassius"].includes(character) && (
                             <img
                               src="/images/card/instinct-border.png"
                               alt="Instinct border"
@@ -1256,9 +1256,7 @@ export function RunTracker() {
                             />
                           )}
 
-                          {["selena", "lucas", "mei-lin", "maribell", "veronica", "owen"].includes(
-                            character, // Use character state
-                          ) && (
+                          {["selena", "lucas", "mei-lin", "maribell", "veronica", "owen"].includes(character) && (
                             <img
                               src="/images/card/passion-border.png"
                               alt="Passion border"
@@ -1266,7 +1264,7 @@ export function RunTracker() {
                             />
                           )}
 
-                          {["magna", "mika", "beryl", "haru"].includes(character) && ( // Use character state
+                          {["magna", "mika", "beryl", "haru"].includes(character) && (
                             <img
                               src="/images/card/justice-border.png"
                               alt="Justice border"

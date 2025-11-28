@@ -288,13 +288,27 @@ export default function CharacterGuidesPage() {
                       fill
                       className="object-cover"
                       unoptimized
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement
+                        target.src = "/placeholder.svg?height=400&width=300"
+                      }}
                     />
                   </div>
 
                   <div className="absolute top-2 left-2 flex flex-col gap-1">
                     <div className="w-9 h-9 rounded-md bg-black/70 backdrop-blur-sm border border-white/20 flex items-center justify-center p-1.5">
                       {job && (
-                        <Image src={job.icon || "/placeholder.svg"} alt={job.name} width={24} height={24} unoptimized />
+                        <Image
+                          src={job.icon || "/placeholder.svg"}
+                          alt={job.name}
+                          width={24}
+                          height={24}
+                          unoptimized
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement
+                            target.src = "/placeholder.svg?height=24&width=24"
+                          }}
+                        />
                       )}
                     </div>
                     <div className="w-9 h-9 rounded-md bg-black/70 backdrop-blur-sm border border-white/20 flex items-center justify-center p-1.5">
@@ -305,6 +319,10 @@ export default function CharacterGuidesPage() {
                           width={24}
                           height={24}
                           unoptimized
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement
+                            target.src = "/placeholder.svg?height=24&width=24"
+                          }}
                         />
                       )}
                     </div>
