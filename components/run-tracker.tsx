@@ -383,7 +383,7 @@ const DEFAULT_CARD_IMAGES: Record<"neutral" | "monster" | "forbidden" | "starter
   monster: "/images/card/monster.png",
   forbidden: "/images/card/forbidden.png",
   starter: "/images/card/starter.png",
-  placeholder: "/placeholder.svg?height=300&width=200",
+  placeholder: "none", // Changed from placeholder.svg to "none" to indicate no image
 }
 
 const TIER_LIMITS: Record<number, number> = {
@@ -1220,26 +1220,27 @@ export function RunTracker() {
                       <div className="flex h-full flex-col">
                         {/* Card image - position relative for proper stacking */}
                         <div className="relative flex-1 overflow-hidden rounded-t-lg">
-                          {card.image === DEFAULT_CARD_IMAGES.placeholder && (
-                            <div className="absolute inset-0 bg-black/70 z-[1]" />
+                          {card.image === DEFAULT_CARD_IMAGES.placeholder || card.image === "none" ? (
+                            <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-slate-900 to-black" />
+                          ) : (
+                            <Image
+                              src={card.image || "/placeholder.svg"}
+                              alt={card.name || "Card"}
+                              fill
+                              className="object-cover"
+                              unoptimized
+                              onError={(e) => {
+                                const target = e.target as HTMLImageElement
+                                target.src = "/placeholder.svg?height=300&width=200"
+                              }}
+                            />
                           )}
-                          <Image
-                            src={card.image || "/placeholder.svg"}
-                            alt={card.name || "Card"}
-                            fill
-                            className="object-cover"
-                            unoptimized
-                            onError={(e) => {
-                              const target = e.target as HTMLImageElement
-                              target.src = "/placeholder.svg?height=300&width=200"
-                            }}
-                          />
 
                           {["amir", "luke", "hugo", "yuki"].includes(character) && (
                             <img
                               src="/images/card/order-border.png"
                               alt="Order border"
-                              className="absolute left-0 top-0 h-full w-auto z-[5] pointer-events-none"
+                              className="absolute left-0 top-0 h-full w-auto z-10 pointer-events-none"
                             />
                           )}
 
@@ -1247,7 +1248,7 @@ export function RunTracker() {
                             <img
                               src="/images/card/void-border.png"
                               alt="Void border"
-                              className="absolute left-0 top-0 h-full w-auto z-[5] pointer-events-none"
+                              className="absolute left-0 top-0 h-full w-auto z-10 pointer-events-none"
                             />
                           )}
 
@@ -1255,7 +1256,7 @@ export function RunTracker() {
                             <img
                               src="/images/card/instinct-border.png"
                               alt="Instinct border"
-                              className="absolute left-0 top-0 h-full w-auto z-[5] pointer-events-none"
+                              className="absolute left-0 top-0 h-full w-auto z-10 pointer-events-none"
                             />
                           )}
 
@@ -1263,7 +1264,7 @@ export function RunTracker() {
                             <img
                               src="/images/card/passion-border.png"
                               alt="Passion border"
-                              className="absolute left-0 top-0 h-full w-auto z-[5] pointer-events-none"
+                              className="absolute left-0 top-0 h-full w-auto z-10 pointer-events-none"
                             />
                           )}
 
@@ -1271,7 +1272,7 @@ export function RunTracker() {
                             <img
                               src="/images/card/justice-border.png"
                               alt="Justice border"
-                              className="absolute left-0 top-0 h-full w-auto z-[5] pointer-events-none"
+                              className="absolute left-0 top-0 h-full w-auto z-10 pointer-events-none"
                             />
                           )}
 
