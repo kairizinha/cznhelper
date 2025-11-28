@@ -438,7 +438,7 @@ const formatCharacterName = (key: string) =>
     .join(" ")
 
 export function RunTracker() {
-  const [character, setCharacter] = useState("")
+  const [character, setCharacter] = useState("none") // Set default character to "none" instead of empty string
   const [tier, setTier] = useState(1)
   const [nightmareMode, setNightmareMode] = useState(false)
   const [selectedCard, setSelectedCard] = useState<string | null>(null)
@@ -455,7 +455,7 @@ export function RunTracker() {
     if (savedState) {
       try {
         const parsed = JSON.parse(savedState)
-        setCharacter(parsed.character || "")
+        setCharacter(parsed.character || "none")
         setTier(parsed.tier || 1)
         setNightmareMode(parsed.isNightmare || false)
         setDeck(parsed.deck || [])
@@ -466,6 +466,19 @@ export function RunTracker() {
       } catch (error) {
         console.error("Failed to parse saved state:", error)
       }
+    } else {
+      const placeholderDeck: DeckCard[] = Array.from({ length: 8 }, (_, i) => ({
+        id: String(i + 1),
+        name: "",
+        image: undefined,
+        cardType: "starter" as CardType,
+        isStartingCard: true,
+        hasNormalEpiphany: false,
+        hasDivineEpiphany: false,
+        isRemoved: false,
+        wasConverted: false,
+      }))
+      setDeck(placeholderDeck)
     }
   }, [])
 
@@ -488,11 +501,21 @@ export function RunTracker() {
 
   const handleCharacterChange = (character: string) => {
     const actualCharacter = character === "none" ? "" : character
-    setCharacter(actualCharacter || "none")
+    setCharacter(character) // Use the passed character string directly
 
     if (!actualCharacter) {
-      // Reset to empty deck if no character selected
-      setDeck([])
+      const placeholderDeck: DeckCard[] = Array.from({ length: 8 }, (_, i) => ({
+        id: String(i + 1),
+        name: "",
+        image: undefined,
+        cardType: "starter" as CardType,
+        isStartingCard: true,
+        hasNormalEpiphany: false,
+        hasDivineEpiphany: false,
+        isRemoved: false,
+        wasConverted: false,
+      }))
+      setDeck(placeholderDeck)
     } else {
       // Get character data
       const characterData = CHARACTER_CARDS[actualCharacter]
