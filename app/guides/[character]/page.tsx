@@ -108,8 +108,12 @@ export default async function CharacterGuidePage({
           <div className="flex-1">
             <div className="rounded-lg border border-border bg-card overflow-hidden">
               {/* Full Character Artwork */}
-              <div className="relative w-full h-[500px] bg-gradient-to-br from-purple-900/20 to-black/40 flex items-center justify-center">
-                {/* removed Image component as it is not used */}
+              <div className="relative w-full h-[400px] bg-gradient-to-br from-purple-900/20 to-black/40 flex items-center justify-center">
+                <img
+                  src={`/images/characters/${character}.webp`}
+                  alt={`${characterName} full artwork`}
+                  className="w-full h-full object-contain"
+                />
               </div>
 
               {/* Guide Content Sections */}
