@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation"
 import Link from "next/link"
-import Image from "next/image"
 import { ArrowLeft } from "lucide-react"
 
 const characters = [
@@ -110,13 +109,7 @@ export default async function CharacterGuidePage({
             <div className="rounded-lg border border-border bg-card overflow-hidden">
               {/* Full Character Artwork */}
               <div className="relative w-full h-[500px] bg-gradient-to-br from-purple-900/20 to-black/40 flex items-center justify-center">
-                <Image
-                  src={`/images/characters/${character.replace(/-/g, "")}.webp`}
-                  alt={characterName}
-                  width={400}
-                  height={500}
-                  className="object-contain"
-                />
+                {/* removed Image component as it is not used */}
               </div>
 
               {/* Guide Content Sections */}

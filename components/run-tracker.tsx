@@ -332,7 +332,7 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
     portrait: "/images/character/magna/portrait.png",
     starter: [
       { name: "Frozen Fist", image: "/images/character/magna/starter1.png" },
-      { name: "Frost Shield", image: "/images/character/magna/starter2.png" },
+      { name: "Frost Shield", image: "/images/character/magna/starter3.png" },
       { name: "Frost Shield", image: "/images/character/magna/starter3.png" },
       { name: "Ice Fragment", image: "/images/character/magna/starter4.png" },
     ],
@@ -521,51 +521,33 @@ export function RunTracker() {
       const characterData = CHARACTER_CARDS[actualCharacter]
       if (!characterData) return
 
-      // If deck is empty, create initial 8-card deck
-      if (deck.length === 0) {
-        const initialDeck: DeckCard[] = [
-          // 4 starter cards
-          ...characterData.starter.map((card, index) => ({
-            id: String(index + 1),
-            name: card.name,
-            image: card.image,
-            cardType: "starter" as CardType,
-            isStartingCard: true,
-            hasNormalEpiphany: false,
-            hasDivineEpiphany: false,
-            isRemoved: false,
-            wasConverted: false,
-          })),
-          // 4 unique cards
-          ...characterData.unique.map((card, index) => ({
-            id: String(index + 5),
-            name: card.name,
-            image: card.image,
-            cardType: "starter" as CardType, // Defaulting to starter, might need adjustment if unique cards have different types
-            isStartingCard: true,
-            hasNormalEpiphany: false,
-            hasDivineEpiphany: false,
-            isRemoved: false,
-            wasConverted: false,
-          })),
-        ]
-        setDeck(initialDeck)
-      } else {
-        // Update existing deck with character's card names and images
-        setDeck((prev) =>
-          prev.map((card, index) => {
-            const isStarter = index < 4
-            const source: CardEntry | undefined = isStarter
-              ? characterData.starter[index]
-              : characterData.unique[index - 4]
-            return {
-              ...card,
-              name: source?.name ?? "",
-              image: source?.image,
-            }
-          }),
-        )
-      }
+      const initialDeck: DeckCard[] = [
+        // 4 starter cards
+        ...characterData.starter.map((card, index) => ({
+          id: String(index + 1),
+          name: card.name,
+          image: card.image,
+          cardType: "starter" as CardType,
+          isStartingCard: true,
+          hasNormalEpiphany: false,
+          hasDivineEpiphany: false,
+          isRemoved: false,
+          wasConverted: false,
+        })),
+        // 4 unique cards
+        ...characterData.unique.map((card, index) => ({
+          id: String(index + 5),
+          name: card.name,
+          image: card.image,
+          cardType: "starter" as CardType, // Defaulting to starter, might need adjustment if unique cards have different types
+          isStartingCard: true,
+          hasNormalEpiphany: false,
+          hasDivineEpiphany: false,
+          isRemoved: false,
+          wasConverted: false,
+        })),
+      ]
+      setDeck(initialDeck)
     }
   }
 
