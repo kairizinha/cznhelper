@@ -367,14 +367,7 @@ export default function VeronicaGuidePage() {
                                     </div>
 
                                     {/* Name and Type */}
-                                    <div className="flex-1 pt-0.5"
-                                      style={{
-                                        backgroundImage: `
-                                        linear-gradient(to bottom, rgba(0,0,0,0.7), transparent),
-                                        linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.9) 50%, transparent)
-                                        `,
-                                      }}
-                                      >
+                                    <div className="flex-1 pt-0.5">
                                       <h5
                                         className="text-white font-bold text-[24px] leading-tight drop-shadow-lg"
                                         style={{

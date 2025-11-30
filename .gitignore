@@ -90,4 +90,8 @@ jspm_packages/
 .fusebox/
 
 # DynamoDB Local files
+<<<<<<< HEAD
 .dynamodb/
+=======
+.dynamodb/
+>>>>>>> 19be89a68a08bf0f4faa0c44ff527f44fb58c942
