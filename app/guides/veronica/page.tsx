@@ -28,35 +28,35 @@ export default function VeronicaGuidePage() {
           tier: "A+",
           cost: 1,
           type: "upgrade",
-          description: "[Unique/Initiation] Create 1 Ballista card(s). At the start of the turn, create 1 Ballista card(s), with a 50% chance to additionally create 1 more ",
+          description: "[ Unique / Initiation ] Create 1 Ballista card(s).\nAt the start of the turn,\ncreate 1 Ballista card(s),\nwith a 50% chance to additionally create 1 more",
           reasoning: "[Placeholder]",
         },
         {
           tier: "Niche",
           cost: 1,
           type: "upgrade",
-          description: "[Unique/Initiation] Create 1 Piercing Ballista card(s). At the start of the turn, create 1 Piercing Ballista card(s)",
+          description: "[ Unique / Initiation ] Create 1 Piercing Ballista.\nAt the start of the turn, \ncreate 1 Piercing Ballista card(s)",
           reasoning: "[Placeholder]",
         },
         {
-          tier: "A+",
+          tier: "A",
           cost: 1,
           type: "upgrade",
-          description: "[Unique/Initiation] Create 1 Enhanced Ballista card(s). At the start of the turn, create 1 Enhanced Ballista card(s)",
+          description: "[ Unique / Initiation ] Create 1 Enhanced Ballista.\nAt the start of the turn, \ncreate 1 Enhanced Ballista card(s)",
           reasoning: "[Placeholder]",
         },
         {
           tier: "S+",
           cost: 1,
           type: "upgrade",
-          description: "[Unique/Initiation] Create 1 Giant Ballista card(s). At the start of the turn, create 1 Giant Ballista card(s)",
+          description: "[ Unique / Initiation ] Create 1 Giant Ballista. \nAt the start of the turn, \ncreate 1 Giant Ballista \ncard(s)",
           reasoning: "[Placeholder]",
         },
         {
-          tier: "S",
+          tier: "A+",
           cost: 1,
           type: "upgrade",
-          description: "[Unique/Initiation] Create 1 Shelling Ballista card(s). At the start of the turn, create 1 Shelling Ballista card(s)",
+          description: "[ Unique / Initiation ] Create 1 Shelling Ballista. \nAt the start of the turn, \ncreate 1 Shelling Ballista \ncard(s)",
           reasoning: "[Placeholder]",
         },
       ],
@@ -71,35 +71,35 @@ export default function VeronicaGuidePage() {
           tier: "S+",
           cost: 0,
           type: "skill",
-          description: "Draw 2 other Combatant's card(s)",
+          description: "Draw 2 other \n Combatant's card(s)",
+          reasoning: "[Placeholder]",
+        },
+        {
+          tier: "A+",
+          cost: 1,
+          type: "skill",
+          description: "150% Shield \nDraw 2 other \nCombatant's card(s) \nIf that card is a Skill Card, \n1 Reload",
           reasoning: "[Placeholder]",
         },
         {
           tier: "S",
-          cost: 0,
-          type: "skill",
-          description: "Gain 80% Shield. Draw 2 card(s) from other combatant",
-          reasoning: "[Placeholder]",
-        },
-        {
-          tier: "B",
           cost: 1,
           type: "skill",
-          description: "Gain 120% Shield. Draw 1 card(s) from other combatant",
+          description: "150% Shield \nDraw 2 other \nCombatant's card(s) \nDecrease Cost of 1 of those cards by 1 for 1 turn",
           reasoning: "[Placeholder]",
         },
         {
           tier: "A",
           cost: 1,
           type: "skill",
-          description: "Gain 100% Shield. Draw 3 card(s) from other combatant",
+          description: "150% Shield \n1 Reload equal to \nnumber of other \nCombatant's skill card(s) \nin hand",
           reasoning: "[Placeholder]",
         },
         {
-          tier: "Niche",
-          cost: 2,
+          tier: "B",
+          cost: 1,
           type: "skill",
-          description: "Gain 150% Shield. Draw 3 card(s) from other combatant. Gain 1 Reload",
+          description: "150% Shield \nDiscard all other \nCombatant's card(s) in hand \n1 Reload equal to that number",
           reasoning: "[Placeholder]",
         },
       ],
@@ -111,38 +111,38 @@ export default function VeronicaGuidePage() {
       baseType: "upgrade",
       epiphanies: [
         {
-          tier: "B",
+          tier: "S+",
           cost: 1,
           type: "upgrade",
-          description: "When another combatant uses Skill Card, gain 1 Reload",
+          description: "When using a Skill Card,\n 1 Reload",
+          reasoning: "[Placeholder]",
+        },
+        {
+          tier: "A+",
+          cost: 0,
+          type: "upgrade",
+          description: "[ Unique ] When another combatant uses Skill Card, 1 Reload \nIf 3 are used, at the start of the next turn, create 1 Micro Ballista card(s)",
+          reasoning: "[Placeholder]",
+        },
+        {
+          tier: "B",
+          cost: 1,
+          type: "skill",
+          description: "[Exhaust 2] For 1 turn(s), when a \ncard is used, \n1 Reload",
           reasoning: "[Placeholder]",
         },
         {
           tier: "S",
-          cost: 0,
-          type: "upgrade",
-          description: "When another combatant uses Skill Card, gain 1 Reload",
-          reasoning: "[Placeholder]",
-        },
-        {
-          tier: "A",
           cost: 1,
           type: "upgrade",
-          description: "When another combatant uses Skill Card, gain 1 Reload. Draw 1",
+          description: "When another combatant uses Skill Card, 1 Reload \n50% Chance to gain additional 1 Reload",
           reasoning: "[Placeholder]",
         },
         {
           tier: "Niche",
           cost: 1,
-          type: "upgrade",
-          description: "When any combatant uses Attack Card, gain 1 Reload",
-          reasoning: "[Placeholder]",
-        },
-        {
-          tier: "B",
-          cost: 1,
-          type: "upgrade",
-          description: "At the start of turn, gain 1 Reload",
+          type: "skill",
+          description: "[ Retain / Retrieve 4 ] Reload 2",
           reasoning: "[Placeholder]",
         },
       ],
@@ -353,26 +353,41 @@ export default function VeronicaGuidePage() {
                                       <span
                                         className="text-white font-bold text-5xl scale-x-75"
                                         style={{
-                                          textShadow:
-                                            "0 0 40px rgba(255, 255, 255, 0.8), 0 0 20px rgba(150, 196, 255, 0.5), 0 2px 8px rgba(0,0,0,0.9)",
-                                          filter: "drop-shadow(0 0 8px rgba(68, 65, 65, 0.6), 0.6))",
+                                          WebkitTextStroke: "1px rgba(96, 78, 255, 0.62)",
+                                          textShadow: `
+                                            0 0 15px rgba(96, 78, 255, 0.6),
+                                            0 0 30px rgba(96, 78, 255, 0.4),
+                                            0 0 45px rgba(96, 78, 255, 0.2),
+                                          `
                                         }}
                                       >
                                         {epiphany.cost}
                                       </span>
                                       <div
                                         className="w-full h-0.5 bg-white mt-0.5 scale-x-75"
-                                        style={{ boxShadow: "0 0 1px rgba(1, 90, 255, 0.9)" }}
+                                        style={{
+                                          backgroundColor: "#ffffff",
+                                          WebkitBoxShadow: `
+                                            0 0 6px rgba(96, 78, 255, 0.9),
+                                            0 0 9px rgba(96, 78, 255, 0.6),
+                                            0 0 9px rgba(96, 78, 255, 0.3)
+                                          `
+                                        }}
                                       />
                                     </div>
 
                                     {/* Name and Type */}
                                     <div className="flex-1 pt-0.5">
                                       <h5
-                                        className="text-white font-bold text-[24px] leading-tight drop-shadow-lg"
+                                        className="text-white font-bold text-[20px] leading-tight drop-shadow-lg"
                                         style={{
-                                          textShadow: "0 2px 4px rgba(0, 0, 0, 0.9)",
-                                          transform: "scaleX(0.55)",
+                                          textShadow: `
+                                          -1px -1px 0 #000,
+                                           1px -1px 0 #000,
+                                          -1px  1px 0 #000,
+                                           1px  1px 0 #000
+                                        `,
+                                          transform: "scaleX(0.7)",
                                           transformOrigin: "left",
                                           maxWidth: "180%",
                                           whiteSpace: "nowrap",
@@ -393,7 +408,15 @@ export default function VeronicaGuidePage() {
                                           alt={epiphany.type}
                                           className="w-5 h-5"
                                         />
-                                        <span className="text-white/95 text-[18px] font-medium capitalize drop-shadow">
+                                        <span className="text-white/100 text-[14px] font-large capitalize drop-shadow "
+                                        style={{
+                                          textShadow: `
+                                          -1px -1px 0 #000,
+                                           1px -1px 0 #000,
+                                          -1px  1px 0 #000,
+                                           1px  1px 0 #000
+                                        `
+                                        }}>
                                           {epiphany.type}
                                         </span>
                                       </div>
@@ -415,9 +438,10 @@ export default function VeronicaGuidePage() {
                                           </p>
                                         )}
                                         <p
-                                          className="text-white text-center text-sm leading-snug m-0"
+                                          className="text-white text-center text-sm leading-snug m-0 whitespace-pre-line"
                                           dangerouslySetInnerHTML={{
-                                            __html: remainingText.replace(/(\d+%?)/g, '<span style="color: #7ce2fb">$1</span>'),
+                                            __html: remainingText
+                                            .replace(/(\d+%?)/g, '<span style="color: #7ce2fb">$1</span>'),
                                           }}
                                         />
                                       </>
