@@ -319,13 +319,13 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
       { name: "Dark Mist Sword: First Form", image: "/images/character/rin/starter1.png" },
       { name: "Dark Mist Sword: Third Form", image: "/images/character/rin/starter2.png" },
       { name: "Protection", image: "/images/character/rin/starter3.png" },
-      { name: "Drawing Slash", image: "/images/character/rin/starter4.png" },
+      { name: "Drawing Slash", image: "/images/character/rin/starter4.gif" },
     ],
     unique: [
-      { name: "Dark Mist Secret Art: Destruction", image: "/images/character/rin/unique1.png" },
-      { name: "Dark Mist Secret Art: Annihilation", image: "/images/character/rin/unique2.png" },
-      { name: "Dark Mist Inner Art", image: "/images/character/rin/unique3.png" },
-      { name: "Dark Mist Secret Art: Black Dance", image: "/images/character/rin/unique4.png" },
+      { name: "Dark Mist Secret Art: Destruction", image: "/images/character/rin/unique1.gif" },
+      { name: "Dark Mist Secret Art: Annihilation", image: "/images/character/rin/unique2.gif" },
+      { name: "Dark Mist Inner Art", image: "/images/character/rin/unique3.gif" },
+      { name: "Dark Mist Secret Art: Black Dance", image: "/images/character/rin/unique4.gif" },
     ],
   },
   magna: {
@@ -1203,7 +1203,7 @@ export function RunTracker() {
                             <img
                               src={card.image || "/placeholder.svg"}
                               alt={card.name || "card image"}
-                              className="absolute inset-0 h-[108%] w-[full] object-cover"
+                              className="absolute inset-0 h-[108%] w-[full] object-cover scale-116"
                             />
                           ) : (
                             <div className="absolute inset-0 flex items-center justify-center bg-card/50 border-2 border-dashed border-border/30 text-xs text-muted-foreground">
