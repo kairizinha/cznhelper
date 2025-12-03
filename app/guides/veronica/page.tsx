@@ -60,7 +60,7 @@ export default function VeronicaGuidePage() {
           reasoning: "[Placeholder reasoning text]",
         },
         {
-          tier: "A",
+          tier: "B",
           cost: 1,
           type: "upgrade",
           description: "[ Unique / Initiation ] Create 1 Enhanced Ballista.\nAt the start of the turn, \ncreate 1 Enhanced Ballista card(s)",
@@ -74,7 +74,7 @@ export default function VeronicaGuidePage() {
           reasoning: "[Placeholder reasoning text]",
         },
         {
-          tier: "A+",
+          tier: "S",
           cost: 1,
           type: "upgrade",
           description: "[ Unique / Initiation ] Create 1 Shelling Ballista. \nAt the start of the turn, \ncreate 1 Shelling Ballista \ncard(s)",
@@ -111,14 +111,14 @@ export default function VeronicaGuidePage() {
           reasoning: "[Placeholder]",
         },
         {
-          tier: "A",
+          tier: "B",
           cost: 1,
           type: "skill",
           description: "150% Shield \n1 Reload equal to \nnumber of other \nCombatant's skill card(s) \nin hand",
           reasoning: "[Placeholder]",
         },
         {
-          tier: "B",
+          tier: "C",
           cost: 1,
           type: "skill",
           description: "150% Shield \nDiscard all other \nCombatant's card(s) in hand \n1 Reload equal to that number",
@@ -148,7 +148,7 @@ export default function VeronicaGuidePage() {
           reasoning: "[Placeholder]",
         },
         {
-          tier: "B",
+          tier: "A",
           cost: 1,
           type: "skill",
           description: "[Exhaust 2] For 1 turn(s), when a \ncard is used, \n1 Reload",
@@ -177,38 +177,38 @@ export default function VeronicaGuidePage() {
       baseType: "skill",
       epiphanies: [
         {
+          tier: "S",
+          cost: 1,
+          type: "skill",
+          description: "Choose 1 Ballista card in hand, +150% Damage amount until activated. \nDraw 2",
+          reasoning: "[Placeholder]",
+        },
+        {
           tier: "A",
           cost: 1,
           type: "skill",
-          description: "Choose 1 Ballista card in hand, +100% Damage amount until activated. Draw 1",
+          description: "Draw 1 \nIncrease Damage Amount of Ballista by 30% for 1 turn",
+          reasoning: "[Placeholder]",
+        },
+        {
+          tier: "S+",
+          cost: 1,
+          type: "skill",
+          description: "Draw 2 \nWhen drawing a Skill card, create 1 Ballista",
           reasoning: "[Placeholder]",
         },
         {
           tier: "S",
-          cost: 0,
-          type: "skill",
-          description: "Choose 1 Ballista card in hand, +80% Damage amount until activated. Draw 1",
-          reasoning: "[Placeholder]",
-        },
-        {
-          tier: "B",
           cost: 1,
           type: "skill",
-          description: "Choose 1 Ballista card in hand, +150% Damage amount until activated",
+          description: "+250% Damage Amount of 1 random Ballista card in hand, \nExhaust after activation",
           reasoning: "[Placeholder]",
         },
         {
-          tier: "A",
+          tier: "C",
           cost: 1,
           type: "skill",
-          description: "Choose 1 Ballista card in hand, +100% Damage amount until activated. Draw 2",
-          reasoning: "[Placeholder]",
-        },
-        {
-          tier: "Situational",
-          cost: 2,
-          type: "skill",
-          description: "Choose 2 Ballista cards in hand, +120% Damage amount until activated. Draw 2",
+          description: "Select and Exhaust 1 Ballista in hand \nCreate 2 Ballista, decrease Damage Amount of those cards by 25% until activated",
           reasoning: "[Placeholder]",
         },
       ],
@@ -301,15 +301,21 @@ export default function VeronicaGuidePage() {
                     <img src="/images/icon-ego-passion.webp" alt="Passion" className="w-5 h-5" />
                     <span className="text-red-400 text-sm font-medium">Passion</span>
                   </div>
+                  
                   <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-500/20 border border-purple-500/40">
                     <img src="/images/icon-job-ranger.webp" alt="Ranger" className="w-5 h-5" />
                     <span className="text-purple-400 text-sm font-medium">Ranger</span>
                   </div>
                 </div>
 
-                <div className="p-4 rounded-lg bg-background/50 border border-border">
-                  <h3 className="text-lg font-semibold mb-2 text-purple-300">Role: [Placeholder]</h3>
-                  <p className="text-muted-foreground leading-relaxed">[Placeholder]</p>
+                <div className="rounded-sm bg-background/50 border border-border">
+                <div className="relative w-full h-[400px] bg-gradient-to-br from-red-500/20 to-black/30 flex items-center justify-center warp">
+                <img
+                  src={`/images/characters/veronica.webp`}
+                  alt={`veronica full artwork`}
+                  className="w-full h-full object-contain"
+                />
+              </div>
                 </div>
               </div>
             </section>
@@ -706,7 +712,7 @@ export default function VeronicaGuidePage() {
                         effect:
                           "When Upgrade Cards are used, increase Damage Amount of the next 5 Passion Cards used by 20%",
                         icon: "/images/sets/spark-of-passion.webp",
-                        why: "Due to Veronica's Reload mechanic, the Passion set's 20% bonus is effectively outperformed by the consistent +12% Attack provided by Black Wing. While Passion is a viable option, Blackwing offers better overall performance for her."
+                        why: "Due to Veronica's Reload mechanic, the Passion set's 20% bonus is effectively outperformed by the consistent +12% Attack provided by Black Wing. While Passion is a viable option, Black Wing offers better overall performance for her."
                       },
 
                       {
@@ -806,7 +812,7 @@ export default function VeronicaGuidePage() {
                   {
                     id: 1,
                     name: "Daisy",
-                    role: "2/5",
+                    role: "C",
                     image: "/images/partners/partner1.png",
                     description: "Placeholder partner explanation",
                     synergy: "Placeholder synergy details",
@@ -814,7 +820,7 @@ export default function VeronicaGuidePage() {
                   {
                     id: 2,
                     name: "Nakia",
-                    role: "5/5",
+                    role: "S",
                     image: "/images/partners/partner2.png",
                     description: "Placeholder partner explanation",
                     synergy: "Placeholder synergy details",
@@ -822,7 +828,7 @@ export default function VeronicaGuidePage() {
                   {
                     id: 3,
                     name: "Marin",
-                    role: "1/5",
+                    role: "B",
                     image: "/images/partners/partner3.png",
                     description: "Placeholder partner explanation",
                     synergy: "Placeholder synergy details",
@@ -830,7 +836,7 @@ export default function VeronicaGuidePage() {
                   {
                     id: 4,
                     name: "Rosaria",
-                    role: "5/5",
+                    role: "S+",
                     image: "/images/partners/partner4.png",
                     description: "Placeholder partner explanation",
                     synergy: "Placeholder synergy details",
@@ -838,7 +844,7 @@ export default function VeronicaGuidePage() {
                   {
                     id: 5,
                     name: "Solia",
-                    role: "3/5",
+                    role: "A",
                     image: "/images/partners/partner5.png",
                     description: "Placeholder partner explanation",
                     synergy: "Placeholder synergy details",
@@ -846,7 +852,7 @@ export default function VeronicaGuidePage() {
                   {
                     id: 6,
                     name: "Tina",
-                    role: "0/5",
+                    role: "?",
                     image: "/images/partners/partner6.png",
                     description: "Placeholder partner explanation",
                     synergy: "Placeholder synergy details",
@@ -866,16 +872,13 @@ export default function VeronicaGuidePage() {
                         />
                         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-2 pt-6">
                           <p className="text-[18px] font-semibold text-white text-center">{partner.name}</p>
-                          <p className="text-[16px] text-purple-300 text-center">{partner.role}</p>
+                          <p className="text-[24px] text-purple-300 text-center px-5">{partner.role}</p>
                         </div>
                       </div>
                     </DialogTrigger>
                     <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
                       <DialogHeader>
-                        <DialogTitle className="text-2xl text-purple-400">{partner.name}</DialogTitle>
-                        <DialogDescription className="text-base text-muted-foreground">
-                          {partner.role}
-                        </DialogDescription>
+                        <DialogTitle className="text-2xl text-purple-400 text-center">{partner.name}</DialogTitle>
                       </DialogHeader>
                       <div className="space-y-4 mt-4">
                         <div className="flex justify-center">

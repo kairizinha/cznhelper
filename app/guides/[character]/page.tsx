@@ -21,6 +21,7 @@ const characters = [
   "lucas",
   "kayron",
   "tressa",
+  "chizuru",
   "orlea",
   "mika",
   "nia",
