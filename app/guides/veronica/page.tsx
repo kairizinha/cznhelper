@@ -907,69 +907,69 @@ export default function VeronicaGuidePage() {
                 Placeholder
               </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Team 1 */}
                 <Dialog>
                   <DialogTrigger asChild>
                     <div className="group cursor-pointer hover:scale-105 rounded-xl border-2 border-purple-500/30 bg-gradient-to-br from-purple-500/5 to-transparent p-4 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300">
                       <div className="flex items-center gap-2 mb-3">
-                        <div className="w-2 h-2 rounded-full bg-purple-500 animate-pulse"></div>
-                        <h3 className="text-base font-semibold text-purple-400">Passion Weakness</h3>
-                      </div>
+                        <div className="w-2 h-2 rounded-full bg-red-400"></div>
+                        <h3 className="text-base font-semibold text-[#ff7a7a]">Passion Weakness</h3>
+                        </div>
                       <div className="grid grid-cols-3 gap-2 mb-3">
                         {/* Veronica */}
-                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-purple-500/50 bg-card shadow-md group- transition-transform">
+                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-red-400/50 bg-card shadow-md group- transition-transform">
                           <img
                             src="/images/characters/veronicahalf.webp"
                             alt="Veronica"
                             className="object-cover w-full h-full"
                           />
                           <div className="absolute top-1 left-1 flex flex-col gap-0.5">
-                            <div className="w-6 h-6 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
+                            <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
                               <img src="/images/icon-job-ranger.webp" alt="Ranger" className="w-full h-full" />
                             </div>
-                            <div className="w-6 h-6 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
+                            <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
                               <img src="/images/icon-ego-passion.webp" alt="Passion" className="w-full h-full" />
                             </div>
                           </div>
                           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent px-1 py-1.5">
-                            <p className="text-[10px] font-semibold text-white text-center">Veronica</p>
+                            <p className="text-sm font-semibold text-white text-center">Veronica</p>
                           </div>
                         </div>
 
                         {/* Mei Lin */}
-                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-red-500/50 bg-card shadow-md group- transition-transform">
+                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-red-400/50 bg-card shadow-md group- transition-transform">
                           <img
                             src="/images/characters/meilinhalf.webp"
                             alt="Mei Lin"
                             className="object-cover w-full h-full"
                           />
                           <div className="absolute top-1 left-1 flex flex-col gap-0.5">
-                            <div className="w-6 h-6 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
+                            <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
                               <img src="/images/icon-job-striker.webp" alt="Striker" className="w-full h-full" />
                             </div>
-                            <div className="w-6 h-6 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
+                            <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
                               <img src="/images/icon-ego-passion.webp" alt="Passion" className="w-full h-full" />
                             </div>
                           </div>
                           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent px-1 py-1.5">
-                            <p className="text-[10px] font-semibold text-white text-center">Mei Lin</p>
+                            <p className="text-sm font-semibold text-white text-center">Mei Lin</p>
                           </div>
                         </div>
 
                         {/* Rei */}
-                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-violet-500/50 bg-card shadow-md group- transition-transform">
+                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-violet-400/50 bg-card shadow-md group- transition-transform">
                           <img src="/images/characters/reihalf.webp" alt="Rei" className="object-cover w-full h-full" />
                           <div className="absolute top-1 left-1 flex flex-col gap-0.5">
-                            <div className="w-6 h-6 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
+                            <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
                               <img src="/images/icon-job-controller.webp" alt="Controller" className="w-full h-full" />
                             </div>
-                            <div className="w-6 h-6 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
+                            <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
                               <img src="/images/icon-ego-void.webp" alt="Void" className="w-full h-full" />
                             </div>
                           </div>
                           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent px-1 py-1.5">
-                            <p className="text-[10px] font-semibold text-white text-center">Rei</p>
+                            <p className="text-sm font-semibold text-white text-center">Rei</p>
                           </div>
                         </div>
                       </div>
@@ -1005,24 +1005,24 @@ export default function VeronicaGuidePage() {
                 {/* Team 2 */}
                 <Dialog>
                   <DialogTrigger asChild>
-                    <div className="group cursor-pointer hover:scale-105 rounded-xl border-2 border-blue-500/30 bg-gradient-to-br from-blue-500/5 to-transparent p-4 hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300">
+                    <div className="group cursor-pointer hover:scale-105 rounded-xl border-2 border-blue-500/30 bg-gradient-to-br from-blue-500/5 to-transparent p-4 hover:border-purple-400 hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div>
                         <h3 className="text-base font-semibold text-blue-400">Team 2</h3>
                       </div>
                       <div className="grid grid-cols-3 gap-2 mb-3">
                         {/* Veronica */}
-                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-purple-500/50 bg-card shadow-md group- transition-transform">
+                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-red-400/50 bg-card shadow-md group- transition-transform">
                           <img
                             src="/images/characters/veronicahalf.webp"
                             alt="Veronica"
                             className="object-cover w-full h-full"
                           />
                           <div className="absolute top-1 left-1 flex flex-col gap-0.5">
-                            <div className="w-6 h-6 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
+                            <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
                               <img src="/images/icon-job-ranger.webp" alt="Ranger" className="w-full h-full" />
                             </div>
-                            <div className="w-6 h-6 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
+                            <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
                               <img src="/images/icon-ego-passion.webp" alt="Passion" className="w-full h-full" />
                             </div>
                           </div>
@@ -1031,19 +1031,19 @@ export default function VeronicaGuidePage() {
                           </div>
                         </div>
 
-                        {/* Haru */}
+                        {/* Owen */}
                         <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-blue-500/50 bg-card shadow-md group- transition-transform">
                           <img
-                            src="/images/characters/haruhalf.webp"
+                            src="/images/characters/owenhalf.webp"
                             alt="Haru"
                             className="object-cover w-full h-full"
                           />
                           <div className="absolute top-1 left-1 flex flex-col gap-0.5">
-                            <div className="w-6 h-6 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
-                              <img src="/images/icon-job-controller.webp" alt="Controller" className="w-full h-full" />
+                            <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
+                              <img src="/images/icon-job-striker.webp" alt="Striker" className="w-full h-full" />
                             </div>
-                            <div className="w-6 h-6 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
-                              <img src="/images/icon-ego-justice.webp" alt="Justice" className="w-full h-full" />
+                            <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
+                              <img src="/images/icon-ego-passion.webp" alt="Passion" className="w-full h-full" />
                             </div>
                           </div>
                           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent px-1 py-1.5">
@@ -1059,10 +1059,10 @@ export default function VeronicaGuidePage() {
                             className="object-cover w-full h-full"
                           />
                           <div className="absolute top-1 left-1 flex flex-col gap-0.5">
-                            <div className="w-6 h-6 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
+                            <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
                               <img src="/images/icon-job-vanguard.webp" alt="Vanguard" className="w-full h-full" />
                             </div>
-                            <div className="w-6 h-6 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
+                            <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
                               <img src="/images/icon-ego-instinct.webp" alt="Instinct" className="w-full h-full" />
                             </div>
                           </div>
