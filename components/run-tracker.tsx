@@ -1464,7 +1464,7 @@ export function RunTracker() {
           </div>
 
           <div className="space-y-4">
-            <Card>
+            <Card className="sticky top-4">
               <CardHeader>
                 <CardTitle>Run Summary</CardTitle>
                 <CardDescription>Current run statistics</CardDescription>
@@ -1473,13 +1473,12 @@ export function RunTracker() {
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Tier</span>
-                    {/* CHANGE: Changed from harsh #19F7E1 to softer cyan-400 */}
-                    <span className="font-bold text-cyan-400">{nightmareMode ? `${tier + 1} (Nightmare)` : tier}</span>{" "}
-                    {/* Use nightmareMode */}
+                    <span className="font-bold text-cyan-400">
+                      {nightmareMode ? `${tier + 1} (Nightmare)` : tier}
+                    </span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Points</span>
-                    {/* CHANGE: Changed from harsh colors to softer red-400 and cyan-400 */}
                     <span className={`font-bold ${percentage > 100 ? "text-red-400" : "text-cyan-400"}`}>
                       {totalPoints} / {limit}
                     </span>
@@ -1519,12 +1518,10 @@ export function RunTracker() {
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Normal Epiphanies</span>
-                    {/* CHANGE: Changed from harsh #5B1FAF to softer purple-400 */}
                     <span className="font-bold">{deck.filter((c) => c.hasNormalEpiphany).length}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Divine Epiphanies</span>
-                    {/* CHANGE: Changed from harsh #19F7E1 to softer cyan-400 */}
                     <span className="font-bold">{deck.filter((c) => c.hasDivineEpiphany).length}</span>
                   </div>
                 </div>
