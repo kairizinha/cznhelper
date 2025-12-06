@@ -76,6 +76,14 @@
   --sidebar-ring: oklch(0.439 0 0);
 }
 
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 /* drop this in globals.css */
 .text-discord-muted {
   color: #caccd1; /* very soft white-gray */

@@ -14,6 +14,9 @@ import {
 } from "@/components/ui/dialog"
 
 import { useState } from "react"
+import { GearTooltip } from "@/components/GearTooltip"; // adjust the path if needed
+
+
 
 export default function VeronicaGuidePage() {
   const [expandedEpiphany, setExpandedEpiphany] = useState<string | null>(null)
@@ -27,9 +30,10 @@ export default function VeronicaGuidePage() {
     { id: "card-epiphany", title: "2. Card Epiphany", level: 1 },
     { id: "firing-preparation", title: "2.1. Firing Preparation", level: 2 },
     { id: "repose", title: "2.2. Repose", level: 2 },
-    { id: "sir-kowalski", title: "2.3. Sir Kowalski", level: 2 },
     { id: "pendant-of-resolution", title: "2.4. Pendant of Resolution", level: 2 },
+    { id: "sir-kowalski", title: "2.3. Sir Kowalski", level: 2 },
     { id: "recommended-save-data", title: "3. Recommended Save Data", level: 1 },
+    { id: "equipments", title: "3.1. Equipments", level: 2 },
     { id: "memory-fragments", title: "4. Memory Fragments", level: 1 },
     { id: "partners", title: "5. Partners", level: 1 },
     { id: "teams", title: "6. Teams", level: 1 },
@@ -43,7 +47,7 @@ export default function VeronicaGuidePage() {
       baseType: "upgrade",
       epiphanies: [
         {
-          tier: "A",
+          tier: "S",
           cost: 1,
           type: "upgrade",
           description: "[ Unique / Initiation ] Create 1 Ballista card(s).\nAt the start of the turn,\ncreate 1 Ballista card(s),\nwith a 50% chance to additionally create 1 more",
@@ -58,7 +62,7 @@ export default function VeronicaGuidePage() {
           reasoning: "[Placeholder reasoning text]",
         },
         {
-          tier: "C",
+          tier: "B",
           cost: 1,
           type: "upgrade",
           description: "[ Unique / Initiation ] Create 1 Enhanced Ballista.\nAt the start of the turn, \ncreate 1 Enhanced Ballista card(s)",
@@ -146,7 +150,7 @@ export default function VeronicaGuidePage() {
           reasoning: "[Placeholder]",
         },
         {
-          tier: "C",
+          tier: "B",
           cost: 1,
           type: "skill",
           description: "[Exhaust 2] For 1 turn(s), when a \ncard is used, \n1 Reload",
@@ -196,14 +200,14 @@ export default function VeronicaGuidePage() {
           reasoning: "[Placeholder]",
         },
         {
-          tier: "Situational",
+          tier: "S",
           cost: 1,
           type: "skill",
           description: "+250% Damage Amount of 1 random Ballista card in hand, \nExhaust after activation",
           reasoning: "[Placeholder]",
         },
         {
-          tier: "B",
+          tier: "C",
           cost: 1,
           type: "skill",
           description: "Select and Exhaust 1 Ballista in hand \nCreate 2 Ballista, decrease Damage Amount of those cards by 25% until activated",
@@ -336,8 +340,8 @@ export default function VeronicaGuidePage() {
           {/* Main Content */}
           <div className="flex-1 space-y-8">
             {/* 1. Overview */}
-            <section id="overview" className="rounded-lg border border-border bg-card p-8 scroll-mt-24">
-              <h2 className="text-2xl font-bold mb-6 text-purple-400">1. Overview</h2>
+            <section id="overview" className="rounded-lg border border-border bg-card p-8 scroll-mt-6">
+            <h2 className="text-2xl font-bold mb-6 text-purple-400">1. Overview</h2>
               <div className="space-y-4">
                 <div className="flex flex-wrap gap-3 mb-4">
                   <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/20 border border-red-500/50">
@@ -364,16 +368,17 @@ export default function VeronicaGuidePage() {
             </section>
 
             {/* 2. Card Epiphany */}
-            <section id="card-epiphany" className="rounded-lg border border-border bg-card p-8 scroll-mt-24">
-              <h2 className="text-2xl font-bold mb-6 text-purple-400">2. Card Epiphany</h2>
-              <p className="text-muted-foreground mb-6 whitespace-pre-line">
-              {`S+ (Best), S (Excellent), A (Strong), B (Average), C (Low Impact), Situational (Niche-use only). 
-              Click a Epiphany group for details.`}
+            <section id="card-epiphany" className="rounded-lg border border-border bg-card p-8 scroll-mt-6">
+            <h2 className="text-2xl font-bold mb-6 text-purple-400">2. Card Epiphany</h2>
+              <p className="text-muted-foreground mb-6">
+              S+ (Best), S (Excellent), A (Strong), B (Average), C (Low Impact), Situational (Niche-use only).
+              <br />
+              Click a Epiphany group for explanation.
               </p>
 
               <div className="space-y-12">
                 {uniqueCards.map((cardData) => (
-                  <div key={cardData.id} id={cardData.id} className="scroll-mt-24">
+                  <div key={cardData.id} id={cardData.id} className="scroll-mt-6">
                     <h3 className="text-xl font-bold mb-6 text-purple-300">{cardData.name}</h3>
 
                     <Dialog>
@@ -406,7 +411,7 @@ export default function VeronicaGuidePage() {
                                   <img
                                     src={cardData.image || "/placeholder.svg"}
                                     alt={cardData.name}
-                                    className="w-full h-full object-cover scale-107"
+                                    className="w-full h-full object-cover scale-108"
                                   />
 
                                   {/* Card Info Overlay */}
@@ -562,29 +567,25 @@ export default function VeronicaGuidePage() {
             </section>
 
             {/* 3. Recommended Save Data */}
-            <section id="recommended-save-data" className="rounded-lg border border-border bg-card p-8 scroll-mt-24">
-              <h2 className="text-2xl font-bold mb-6 text-purple-400">3. Recommended Save Data</h2>
+            <section id="recommended-save-data" className="rounded-lg border border-border bg-card p-8 scroll-mt-6">
+            <h2 className="text-2xl font-bold mb-6 text-purple-400">3. Recommended Save Data</h2>
               <p className="text-muted-foreground mb-6">
-                Recommended deck builds to start with. These are examples - you can customize based on your playstyle.
+                These are examples - you can change based on your playstyle.
               </p>
 
               <div className="space-y-12">
-                {/* Build 1: High Draw Build */}
+                {/* Build 1 */}
                 <div className="space-y-6">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-xl font-bold text-purple-300">High Draw Build</h3>
+                    <h3 className="text-xl font-bold text-purple-300">Draw Engine</h3>
                     <span className="px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/40 text-blue-400 text-sm font-bold">
-                      [XXX Points]
+                      [XXX]
                     </span>
                   </div>
 
-                  <p className="text-sm text-muted-foreground">
-                    <strong className="text-white">Removed:</strong> 3 Starter Basic Cards
-                  </p>
-
                   {/* 5 cards on top */}
                   <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
-                    {[1, 2, 3, 4, 5].map((i) => (
+                    {[1, 2, 3, 4, 5,].map((i) => (
                       <div
                         key={i}
                         className="relative rounded-lg overflow-hidden border-2 border-dashed border-red-500/50 bg-red-900/20"
@@ -612,41 +613,35 @@ export default function VeronicaGuidePage() {
                     ))}
                   </div>
 
-                  {/* Strategy dropdown */}
+                  {/* Dropdown */}
                   <Collapsible>
                     <CollapsibleTrigger className="w-full px-4 py-2.5 rounded-lg bg-background/50 border border-border hover:bg-background/70 transition-colors flex items-center justify-between group">
                       <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground">
-                        Build Strategy & Explanation
+                        Save Data Explanation
                       </span>
                       <ChevronDown className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-transform group-data-[state=open]:rotate-180" />
                     </CollapsibleTrigger>
                     <CollapsibleContent className="mt-3">
                       <div className="p-4 rounded-lg bg-background/50 border border-border">
                         <p className="text-sm text-muted-foreground leading-relaxed">
-                          [Placeholder: Explanation why this build works, when to use it, key combos, playstyle tips,
-                          etc.]
+                          Explanation will be added here
                         </p>
                       </div>
                     </CollapsibleContent>
                   </Collapsible>
                 </div>
 
-                {/* Build 2: Burst Damage Build */}
+                {/* Build 2 */}
                 <div className="space-y-6">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-xl font-bold text-purple-300">Burst Damage Build</h3>
+                    <h3 className="text-xl font-bold text-purple-300">Mei Lin</h3>
                     <span className="px-3 py-1 rounded-full bg-red-500/20 border border-red-500/40 text-red-400 text-sm font-bold">
                       [XXX Points]
                     </span>
                   </div>
 
-                  <p className="text-sm text-muted-foreground">
-                    <strong className="text-white">Removed:</strong> 3 Starter Basic Cards
-                  </p>
-
                   {/* 5 cards on top */}
                   <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
-                    {/* Placeholder cards matching the High Draw Build style */}
                     {[1, 2, 3, 4, 5].map((i) => (
                       <div
                         key={i}
@@ -678,14 +673,14 @@ export default function VeronicaGuidePage() {
                   <Collapsible>
                     <CollapsibleTrigger className="w-full px-4 py-2.5 rounded-lg bg-background/50 border border-border hover:bg-background/70 transition-colors flex items-center justify-between group">
                       <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground">
-                        Build Strategy & Explanation
+                        Save Data Explanation
                       </span>
                       <ChevronDown className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-transform group-data-[state=open]:rotate-180" />
                     </CollapsibleTrigger>
                     <CollapsibleContent className="mt-3">
                       <div className="p-4 rounded-lg bg-background/50 border border-border">
                         <p className="text-sm text-muted-foreground leading-relaxed">
-                          [Placeholder: Build explanation]
+                          Explanation will be added here
                         </p>
                       </div>
                     </CollapsibleContent>
@@ -694,13 +689,692 @@ export default function VeronicaGuidePage() {
               </div>
             </section>
 
-            {/* 4. Memory Fragments */}
-            <section id="memory-fragments" className="rounded-xl border border-border bg-card p-6 md:p-8 scroll-mt-24">
-              <h2 className="text-2xl font-bold mb-8 text-purple-400 text-center">Memory Fragments</h2>
+            {/* 3.1. Equipments */}
+            <section id="equipments" className="rounded-lg border border-border bg-card p-8 scroll-mt-6">
+              <h2 className="text-2xl font-bold mb-6 text-purple-400">3.1. Equipments</h2>
+              <p className="text-muted-foreground mb-6 whitespace-pre-line">
+                These are her best equipment options, listed by priority, you usually can’t equip them all at once.
+                <br/>
+                Only one unique item per character or they come from different Chaos Manifestations.
+                <br/>
+                Hover over the tooltip to see each item’s source.
+              </p>
 
-              {/* Added state for expanded memory sets */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {/* Weapon Category */}
+                <div className="space-y-2">
+                  <div className="flex items-center justify-center gap-2 mb-3">
+                    <h3 className="text-lg font-bold text-orange-300">Weapon</h3>
+                  </div>
+
+                {/* Best in Slot Weapon */}
+                <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
+                  <GearTooltip text={`Cthulu Monster`} />
+
+                  <div className="relative w-21 h-32 flex-shrink-1">
+                    <img
+                      src="/images/bg_equipment_rarity_unique.webp"
+                      alt="Unique Rarity"
+                      className="w-full h-full object-contain"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <img
+                        src="/images/gear/intellect.webp"
+                        alt="Intellect of Discord"
+                        className="w-16 h-16 object-contain relative z-10"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-base font-bold mb-1" style={{ color: "rgb(163, 96, 255)" }}>
+                      Intellect of Discord
+                    </h4>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
+                      <span>Attack</span>
+                      <span className="text-white font-semibold">+82</span>
+                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      +<span className="text-[#FF8C00]">18</span>% Attack<br/>
+                      On Ravage, decrease Stress of allies by <span className="text-[#FF8C00]">1</span>
+                    </p>
+                  </div>
+                </div>
+
+                {/* Show More Weapons Modal */}
+                <Dialog>
+                  <DialogTrigger asChild>
+                  <div className="flex justify-center w-full">
+                    <button
+                      className="flex items-center justify-center gap-2 text-xs w-40
+                                rounded-lg overflow-hidden border border-border bg-card 
+                                hover:border-purple-400 transition-all duration-300 
+                                hover:scale-105 hover:shadow-lg hover:shadow-purple-400/20 py-1 mt-3"
+                    >
+                      Show More
+                      <ChevronDown className="h-3 w-3"/>
+                    </button>
+                    </div>
+                  </DialogTrigger>
+
+                  <DialogContent className="max-w-3xl w-full bg-gray-900 p-6 rounded-lg overflow-y-auto max-h-[80vh] scrollbar-none">
+                  <DialogHeader>
+                    <DialogTitle className="text-lg font-bold">
+                      Alternative Weapon
+                    </DialogTitle>
+                    <DialogDescription className="text-sm text-gray-300">
+                      Scroll to see more options, listed by priority.
+                    </DialogDescription>
+                  </DialogHeader>
+
+                    <div className="space-y-4 mt-4">
+
+
+                      {/* 2nd Option */}
+                      <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
+                        <GearTooltip text={`Cthulu Monster`} />
+                        <div className="relative w-21 h-32 flex-shrink-1">
+                          <img
+                            src="/images/bg_equipment_rarity_unique.webp"
+                            alt="Unique Rarity"
+                            className="w-full h-full object-contain"
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <img src="/images/gear/tentacles.webp" alt="Tentacles of Chaos" className="w-16 h-16 object-contain relative z-10" />
+                          </div>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-base font-bold mb-1" style={{ color: "rgb(163, 96, 255)" }}>
+                            Tentacles of Chaos
+                          </h4>
+                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
+                            <span>Attack</span>
+                            <span className="text-white font-semibold">+82</span>
+                          </div>
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            +<span className="text-[#FF8C00]">8</span>% ally Attack<br/>
+                            Upon enemy Defeat, -<span className="text-[#FF8C00]">2</span> Stress to the Combatant<br/> with the highest Stress
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* 3rd Option */}
+                      <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
+                        <GearTooltip text={`City of Mist
+                      Laboratory 0`} />
+                        <div className="relative w-21 h-32 flex-shrink-1">
+                          <img
+                            src="/images/bg_equipment_rarity_unique.webp"
+                            alt="Unique Rarity"
+                            className="w-full h-full object-contain"
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <img src="/images/gear/foggy.webp" alt="Foggy Crystal Ball" className="w-16 h-16 object-contain relative z-10" />
+                          </div>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-base font-bold mb-1" style={{ color: "rgb(163, 96, 255)" }}>
+                            Foggy Crystal Ball
+                          </h4>
+                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
+                            <span>Attack</span>
+                            <span className="text-white font-semibold">+82</span>
+                          </div>
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            Increase Damage Amount of Attack Cards with a
+                            <br />
+                            Cost of <span className="text-[#FF8C00]">0</span> by <span className="text-[#FF8C00]">40</span>%
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* 4th Option */}
+                      <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
+                        <GearTooltip text={`Seasonal Dellang Shop`} />
+                        <div className="relative w-21 h-32 flex-shrink-1">
+                          <img
+                            src="/images/bg_equipment_rarity_legend.webp"
+                            alt="Legend Rarity"
+                            className="w-full h-full object-contain"
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <img src="/images/gear/dopamine.webp" alt={`W-52 "Dopamine Injector"`} className="w-16 h-16 object-contain relative z-10" />
+                          </div>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-base font-bold mb-1" style={{ color: "rgb(255, 150, 0)" }}>
+                            W-52 "Dopamine Injector"
+                          </h4>
+                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
+                            <span>Attack</span>
+                            <span className="text-white font-semibold">+82</span>
+                          </div>
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            When Drawing by an ability, increase Damage Amount by <span className="text-[#FF8C00]">20</span>%
+                            for <span className="text-[#FF8C00]">1</span> turn (<span className="text-[#FF8C00]">2</span> times per turn)
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* 5th Option */}
+                      <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
+                        <GearTooltip text={`Laboratory 0`} />
+                        <div className="relative w-21 h-32 flex-shrink-1">
+                          <img
+                            src="/images/bg_equipment_rarity_legend.webp"
+                            alt="Legend Rarity"
+                            className="w-full h-full object-contain"
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <img src="/images/gear/mutant.webp" alt={`Mutant Predator Spike`} className="w-16 h-16 object-contain relative z-10" />
+                          </div>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-base font-bold mb-1" style={{ color: "rgb(255, 150, 0)" }}>
+                            Mutant Predator Spike
+                          </h4>
+                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
+                            <span>Attack</span>
+                            <span className="text-white font-semibold">+82</span>
+                          </div>
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            When there are <span className="text-[#FF8C00]">4</span> or more cards in hand<br/>increase Damage Amount by <span className="text-[#FF8C00]">30</span>%
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* 6th Option */}
+                      <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
+                        <GearTooltip text={`Dellang Shop`} />
+                        <div className="relative w-21 h-32 flex-shrink-1">
+                          <img
+                            src="/images/bg_equipment_rarity_legend.webp"
+                            alt="Legend Rarity"
+                            className="w-full h-full object-contain"
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <img src="/images/gear/second.webp" alt="Second Method" className="w-16 h-16 object-contain relative z-10" />
+                          </div>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-base font-bold mb-1" style={{ color: "rgb(255, 150, 0)" }}>
+                            Second Method
+                          </h4>
+                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
+                            <span>Attack</span>
+                            <span className="text-white font-semibold">+82</span>
+                          </div>
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            Extra Attack damage +<span className="text-[#FF8C00]">35</span>%
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* 7th Option */}
+                      <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
+                        <GearTooltip text={`Dellang Shop`} />
+                        <div className="relative w-21 h-32 flex-shrink-1">
+                          <img
+                            src="/images/bg_equipment_rarity_legend.webp"
+                            alt="Legend Rarity"
+                            className="w-full h-full object-contain"
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <img src="/images/gear/rfs.webp" alt="RFS-17" className="w-16 h-16 object-contain relative z-10" />
+                          </div>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-base font-bold mb-1" style={{ color: "rgb(255, 150, 0)" }}>
+                            RFS-17
+                          </h4>
+                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
+                            <span>Attack</span>
+                            <span className="text-white font-semibold">+82</span>
+                          </div>
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            +<span className="text-[#FF8C00]">10</span>% Critical Chance of Attack Cards with cost <span className="text-[#FF8C00]">0</span>
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* 8th Option */}
+                      <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
+                        <GearTooltip text={`Dellang Shop`} />
+                        <div className="relative w-21 h-32 flex-shrink-1">
+                          <img
+                            src="/images/bg_equipment_rarity_rare.webp"
+                            alt="Rare Rarity"
+                            className="w-full h-full object-contain"
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <img src="/images/gear/obsidian.webp" alt="Obsidian Sword" className="w-16 h-16 object-contain relative z-10" />
+                          </div>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-base font-bold mb-1" style={{ color: "rgb(51, 160, 243)" }}>
+                            Obsidian Sword
+                          </h4>
+                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
+                            <span>Attack</span>
+                            <span className="text-white font-semibold">+82</span>
+                          </div>
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            Increase damage amount by <span className="text-[#FF8C00]">12</span>%
+                          </p>
+                        </div>
+                      </div>
+
+
+                    
+                    </div>
+                    
+                  </DialogContent>
+                </Dialog>
+                </div>
+
+                {/* Armor Category */}
+                <div className="space-y-2">
+                  <div className="flex items-center justify-center gap-2 mb-3">
+                    <h3 className="text-lg font-bold text-blue-300">Armor</h3>
+                  </div>
+
+                {/* Best in Slot Armor */}
+                <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
+                  <GearTooltip text={`City of Mist
+                    Laboratory 0`} />
+
+                  <div className="relative w-21 h-32 flex-shrink-1">
+                    <img
+                      src="/images/bg_equipment_rarity_unique.webp"
+                      alt="Unique Rarity"
+                      className="w-full h-full object-contain"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <img
+                        src="/images/gear/fragment.webp"
+                        alt="Fragment of the Empty Void"
+                        className="w-16 h-16 object-contain relative z-10"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-base font-bold mb-1" style={{ color: "rgb(163, 96, 255)" }}>
+                      Fragment of the Empty Void
+                    </h4>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
+                      <span>Defense</span>
+                      <span className="text-white font-semibold">+31</span>
+                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      At the start of battle, Discard up to <span className="text-[#FF8C00]">3</span> cards, Draw equal to the number
+                    </p>
+                  </div>
+                </div>
+
+                {/* Show More Armor Modal */}
+                <Dialog>
+                  <DialogTrigger asChild>
+                  <div className="flex justify-center w-full">
+                    <button
+                      className="flex items-center justify-center gap-2 text-xs w-40
+                                rounded-lg overflow-hidden border border-border bg-card 
+                                hover:border-purple-400 transition-all duration-300 
+                                hover:scale-105 hover:shadow-lg hover:shadow-purple-400/20 py-1 mt-3"
+                    >
+                      Show More
+                      <ChevronDown className="h-3 w-3"/>
+                    </button>
+                    </div>
+                  </DialogTrigger>
+
+                  <DialogContent className="max-w-3xl w-full bg-gray-900 p-6 rounded-lg overflow-y-auto max-h-[80vh] scrollbar-none">
+                  <DialogHeader>
+                    <DialogTitle className="text-lg font-bold">
+                      Alternative Armor
+                    </DialogTitle>
+                    <DialogDescription className="text-sm text-gray-300">
+                      Scroll to see more options, listed by priority.
+                    </DialogDescription>
+                  </DialogHeader>
+
+                    <div className="space-y-4 mt-4">
+
+                      {/* 2nd Option */}
+                      <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
+                        <GearTooltip text={`Laboratory 0`} />
+                        <div className="relative w-21 h-32 flex-shrink-1">
+                          <img
+                            src="/images/bg_equipment_rarity_legend.webp"
+                            alt="Legend Rarity"
+                            className="w-full h-full object-contain"
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <img src="/images/gear/rocket.webp" alt="Rocket-Adorned Cape" className="w-16 h-16 object-contain relative z-10" />
+                          </div>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-base font-bold mb-1" style={{ color: "rgb(255, 150, 0)" }}>
+                            Rocket-Adorned Cape
+                          </h4>
+                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
+                            <span>Defense</span>
+                            <span className="text-white font-semibold">+31</span>
+                          </div>
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            At the start of the battle,<br/> <span className="text-[#FF8C00]">1</span> Damage Reduction and Draw <span className="text-[#FF8C00]">1</span>
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* 3rd Option */}
+                      <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
+                      <GearTooltip text={`The Blue Pot
+                          City of Mist
+                          Laboratory 0`} />
+                        <div className="relative w-21 h-32 flex-shrink-1">
+                          <img
+                            src="/images/bg_equipment_rarity_legend.webp"
+                            alt="Legend Rarity"
+                            className="w-full h-full object-contain"
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <img src="/images/gear/shield.webp" alt="Shield of the Watcher" className="w-16 h-16 object-contain relative z-10" />
+                          </div>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-base font-bold mb-1" style={{ color: "rgb(255, 150, 0)" }}>
+                            Shield of the Watcher
+                          </h4>
+                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
+                            <span>Defense</span>
+                            <span className="text-white font-semibold">+31</span>
+                          </div>
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            When taking Damage, <span className="text-[#FF8C00]">1</span> Mark on the attacker
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* 4th Option */}
+                      <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
+                        <GearTooltip text={`Laboratory 0`} />
+                        <div className="relative w-21 h-32 flex-shrink-1">
+                          <img
+                            src="/images/bg_equipment_rarity_legend.webp"
+                            alt="Legend Rarity"
+                            className="w-full h-full object-contain"
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <img src="/images/gear/wings.webp" alt="Wings of Freedom" className="w-16 h-16 object-contain relative z-10" />
+                          </div>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-base font-bold mb-1" style={{ color: "rgb(255, 150, 0)" }}>
+                            Wings of Freedom
+                          </h4>
+                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
+                            <span>Defense</span>
+                            <span className="text-white font-semibold">+31</span>
+                          </div>
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                           When hit, increase Damage Amount <span className="text-[#FF8C00]">10</span>% <br/>(can stack up to <span className="text-[#FF8C00]">3</span> times)
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* 5th Option */}
+                      <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
+                       <GearTooltip text={`Seasonal Dellang Shop`} />
+                        <div className="relative w-21 h-32 flex-shrink-1">
+                          <img
+                            src="/images/bg_equipment_rarity_rare.webp"
+                            alt="Rare Rarity"
+                            className="w-full h-full object-contain"
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <img src="/images/gear/brainwave.webp" alt="Brainwave-Blocking Helmet" className="w-16 h-16 object-contain relative z-10" />
+                          </div>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-base font-bold mb-1" style={{ color: "rgb(51, 160, 243)" }}>
+                            Brainwave-Blocking Helmet
+                          </h4>
+                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
+                            <span>Defense</span>
+                            <span className="text-white font-semibold">+31</span>
+                          </div>
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            When Drawing by an ability, <span className="text-[#FF8C00]">40</span>% Fixed Shield
+                          </p>
+                        </div>
+                      </div>
+
+                    </div>
+                  </DialogContent>
+                </Dialog>
+                </div>
+
+
+                {/* Acessory Category */}
+                <div className="space-y-2">
+                  <div className="flex items-center justify-center gap-2 mb-3">
+                    <h3 className="text-lg font-bold text-purple-300">Acessory</h3>
+                  </div>
+
+                {/* Best in Slot Acessory */}
+                <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
+                  <GearTooltip text={`Cthulu Monster`} />
+
+                  <div className="relative w-21 h-32 flex-shrink-1">
+                    <img
+                      src="/images/bg_equipment_rarity_unique.webp"
+                      alt="Unique Rarity"
+                      className="w-full h-full object-contain"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <img
+                        src="/images/gear/sphere.webp"
+                        alt="Sphere of Randomness"
+                        className="w-16 h-16 object-contain relative z-10"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-base font-bold mb-1" style={{ color: "rgb(163, 96, 255)" }}>
+                      Sphere of Randomness
+                    </h4>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
+                      <span>Health</span>
+                      <span className="text-white font-semibold">+83</span>
+                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      +<span className="text-[#FF8C00]">10</span>% max HP <br/>
+                      At the start of battle, +<span className="text-[#FF8C00]">1</span> AP, Draw <span className="text-[#FF8C00]">1</span>
+                    </p>
+                  </div>
+                </div>
+
+                {/* Show More Acessory Modal */}
+                <Dialog>
+                  <DialogTrigger asChild>
+                  <div className="flex justify-center w-full">
+                    <button
+                      className="flex items-center justify-center gap-2 text-xs w-40
+                                rounded-lg overflow-hidden border border-border bg-card 
+                                hover:border-purple-400 transition-all duration-300 
+                                hover:scale-105 hover:shadow-lg hover:shadow-purple-400/20 py-1 mt-3"
+                    >
+                      Show More
+                      <ChevronDown className="h-3 w-3"/>
+                    </button>
+                    </div>
+                  </DialogTrigger>
+
+                  <DialogContent className="max-w-3xl w-full bg-gray-900 p-6 rounded-lg overflow-y-auto max-h-[80vh] scrollbar-none">
+                  <DialogHeader>
+                    <DialogTitle className="text-lg font-bold">
+                      Alternative Acessory
+                    </DialogTitle>
+                    <DialogDescription className="text-sm text-gray-300">
+                      Scroll to see more options, listed by priority.
+                    </DialogDescription>
+                  </DialogHeader>
+
+                    <div className="space-y-4 mt-4">
+
+                      {/* 2nd Option */}
+                      <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
+                        <GearTooltip text={`Seasonal Dellang Shop`} />
+                        <div className="relative w-21 h-32 flex-shrink-1">
+                          <img
+                            src="/images/bg_equipment_rarity_legend.webp"
+                            alt="Legend Rarity"
+                            className="w-full h-full object-contain"
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <img src="/images/gear/superconduct.webp" alt="Superconductive Protein" className="w-16 h-16 object-contain relative z-10" />
+                          </div>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-base font-bold mb-1" style={{ color: "rgb(255, 150, 0)" }}>
+                            Superconductive Protein
+                          </h4>
+                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
+                            <span>Health</span>
+                            <span className="text-white font-semibold">+83</span>
+                          </div>
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                           At the start of the battle, change the cost of <span className="text-[#FF8C00]">1</span> card in your hand to <span className="text-[#FF8C00]">0</span> for <span className="text-[#FF8C00]">1</span> turn
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* 3rd Option */}
+                      <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
+                        <GearTooltip text={`Twin Star's Shadow`} />
+                        <div className="relative w-21 h-32 flex-shrink-1">
+                          <img
+                            src="/images/bg_equipment_rarity_unique.webp"
+                            alt="Unique Rarity"
+                            className="w-full h-full object-contain"
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <img src="/images/gear/pulsating.webp" alt="Pulsating Egg" className="w-16 h-16 object-contain relative z-10" />
+                          </div>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-base font-bold mb-1" style={{ color: "rgb(163, 96, 255)" }}>
+                           Pulsating Egg
+                          </h4>
+                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
+                            <span>Health</span>
+                            <span className="text-white font-semibold">+83</span>
+                          </div>
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                           +<span className="text-[#FF8C00]">15</span>% Attack, +<span className="text-[#FF8C00]">10</span>% Max HP
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* 4th Option */}
+                      <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
+                        <GearTooltip text={`Swamp of Judgment`} />
+                        <div className="relative w-21 h-32 flex-shrink-1">
+                          <img
+                            src="/images/bg_equipment_rarity_unique.webp"
+                            alt="Unique Rarity"
+                            className="w-full h-full object-contain"
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <img src="/images/gear/verdant.webp" alt="Verdant Shackles" className="w-16 h-16 object-contain relative z-10" />
+                          </div>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-base font-bold mb-1" style={{ color: "rgb(163, 96, 255)" }}>
+                          Verdant Shackles
+                          </h4>
+                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
+                            <span>Health</span>
+                            <span className="text-white font-semibold">+83</span>
+                          </div>
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                          +<span className="text-[#FF8C00]">12</span>% Attack, +<span className="text-[#FF8C00]">12</span>% Defense
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* 5th Option */}
+                      <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
+                        <GearTooltip text={`Seasonal Dellang Shop`} />
+                        <div className="relative w-21 h-32 flex-shrink-1">
+                          <img
+                            src="/images/bg_equipment_rarity_legend.webp"
+                            alt="Legend Rarity"
+                            className="w-full h-full object-contain"
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <img src="/images/gear/emblem.webp" alt="Emblem of an Exceptional Entity" className="w-16 h-16 object-contain relative z-10" />
+                          </div>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-base font-bold mb-1" style={{ color: "rgb(255, 150, 0)" }}>
+                          Emblem of an Exceptional Entity
+                          </h4>
+                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
+                            <span>Health</span>
+                            <span className="text-white font-semibold">+83</span>
+                          </div>
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                          +<span className="text-[#FF8C00]">30</span>% Damage Amount<br/>
+                          Stress received becomes <span className="text-[#FF8C00]">0</span> (<span className="text-[#FF8C00]">1</span> for each battle)
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* 5th Option */}
+                      <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
+                       <GearTooltip text={`Dellang Shop`} />
+                        <div className="relative w-21 h-32 flex-shrink-1">
+                          <img
+                            src="/images/bg_equipment_rarity_rare.webp"
+                            alt="Rare Rarity"
+                            className="w-full h-full object-contain"
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <img src="/images/gear/cube.webp" alt="Amorphous Cube" className="w-16 h-16 object-contain relative z-10" />
+                          </div>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-base font-bold mb-1" style={{ color: "rgb(51, 160, 243)" }}>
+                            Amorphous Cube
+                          </h4>
+                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
+                            <span>Health</span>
+                            <span className="text-white font-semibold">+83</span>
+                          </div>
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            At the start of battle, +<span className="text-[#FF8C00]">25</span>% Damage
+                          </p>
+                        </div>
+                      </div>
+
+
+                    </div>
+                   </DialogContent>
+                  </Dialog>
+                </div>
+              </div>
+            </section>
+
+
+            {/* 4. Memory Fragments */}
+            <section id="memory-fragments" className="rounded-lg border border-border bg-card p-8 scroll-mt-6">
+            <h2 className="text-2xl font-bold mb-6 text-purple-400">4. Memory Fragments</h2>
+
+              {/* BEST IN SLOT */}
               <div className="space-y-12">
-                {/* BEST IN SLOT */}
                 <div>
                   <div className="text-center mb-6">
                     <span className="px-4 py-1.5 rounded-lg text-sm font-bold uppercase tracking-wider bg-amber-500/20 text-amber-400 border border-amber-500/40 shadow-sm">
@@ -778,7 +1452,7 @@ export default function VeronicaGuidePage() {
               </div>
 
               {/* Main Stats + Substat Priority */}
-              <div className="mt-8 space-y-7">
+              <div className="mt-6 space-y-6">
                 {/* Main Stats */}
                 <div className="grid grid-cols-3 gap-4">
                   <div className="text-center">
@@ -807,26 +1481,26 @@ export default function VeronicaGuidePage() {
                 </div>
 
                 {/* Substat Priority */}
-                <div className="mt-10 text-center justify-center text-[12px]">
+                <div className="mt-8 text-center justify-center text-[14px]">
                   {/* Priority Chain */}
                   <div className="flex items-center justify-center gap-4 md:gap-4 flex-wrap">
                     <div className="px-6 py-3 rounded-full bg-pink-500/20 border-2 border-pink-500/70 font-bold text-pink-300 shadow-lg shadow-pink-500/20">
                       Extra Damage
                     </div>
-                    <span className="text-3xl font-light text-muted-foreground/40 select-none">›</span>
-                    <div className="px-5 py-2.5 rounded-full bg-purple-500/20 border border-purple-500/50 font-semibold text-purple-300">
+                    <span className="text-2xl text-muted-foreground/40">›</span>
+                    <div className="px-4 py-2 rounded-full bg-purple-500/20 border border-purple-500/50 font-semibold text-purple-300">
                       Critical Rate
                     </div>
-                    <span className="text-3xl font-light text-muted-foreground/40 select-none">=</span>
-                    <div className="px-5 py-2.5 rounded-full bg-purple-500/20 border border-purple-500/50 font-semibold text-purple-300">
+                    <span className="text-2xl text-muted-foreground/40">=</span>
+                    <div className="px-4 py-2 rounded-full bg-purple-500/20 border border-purple-500/50 font-semibold text-purple-300">
                       Critical Damage
                     </div>
                     <span className="text-2xl text-muted-foreground/40">›</span>
-                    <div className="px-5 py-2 rounded-full bg-muted/70 border border-border text-muted-foreground">
+                    <div className="px-3 py-1 rounded-full bg-muted/70 border border-border text-muted-foreground">
                       Attack %
                     </div>
-                    <span className="text-muted-foreground/60 mx-2">or</span>
-                    <div className="px-5 py-2 rounded-full bg-muted/70 border border-border text-muted-foreground">
+                    <span className="text-muted-foreground/60">or</span>
+                    <div className="px-3 py-1 rounded-full bg-muted/70 border border-border text-muted-foreground">
                       Attack +
                     </div>
                   </div>
@@ -834,7 +1508,7 @@ export default function VeronicaGuidePage() {
                   {/* Explanation */}
                   <div className="mt-7.5 mx-auto text-center">
                     <p className="text-[12px] leading-relaxed text-muted-foreground">
-                      <strong className="text-foreground">bleh blah blah</strong>
+                      <strong className="text-muted-foreground">Text will be added here</strong>
                     </p>
                   </div>
                 </div>
