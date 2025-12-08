@@ -47,40 +47,44 @@ export default function VeronicaGuidePage() {
       baseType: "upgrade",
       epiphanies: [
         {
+          id: "Firing Preparation I",
           tier: "S",
           cost: 1,
           type: "upgrade",
           description: "[ Unique / Initiation ] Create 1 Ballista card(s).\nAt the start of the turn,\ncreate 1 Ballista card(s),\nwith a 50% chance to additionally create 1 more",
-          reasoning:
-            "[Placeholder reasoning text]",
+          reasoning: "Probably the highest raw damage potential, but it suffers from heavy RNG making it inconsistent, it lacks AoE but strong on bosses",
         },
         {
+          id: "Firing Preparation II",
           tier: "Situational",
           cost: 1,
           type: "upgrade",
           description: "[ Unique / Initiation ] Create 1 Piercing Ballista.\nAt the start of the turn, \ncreate 1 Piercing Ballista card(s)",
-          reasoning: "[Placeholder reasoning text]",
+          reasoning: "Lowest damage among the Ballista epiphanies if enemy has no shield, but strong against shielded foes like Judas because of the piercing damage",
         },
         {
+          id: "Firing Preparation III",
           tier: "B",
           cost: 1,
           type: "upgrade",
           description: "[ Unique / Initiation ] Create 1 Enhanced Ballista.\nAt the start of the turn, \ncreate 1 Enhanced Ballista card(s)",
-          reasoning: "[Placeholder reasoning text]",
+          reasoning: "Nothing special, it have lower damage potential than other epiphanies, however the 30% Critical Chance makes damage more consistent",
         },
         {
+          id: "Firing Preparation IV",
           tier: "S+",
           cost: 1,
           type: "upgrade",
           description: "[ Unique / Initiation ] Create 1 Giant Ballista. \nAt the start of the turn, \ncreate 1 Giant Ballista \ncard(s)",
-          reasoning: "[Placeholder reasoning text]",
+          reasoning: "Best overall; lower single-target damage but AoE is so strong it doesn't matter, mitigates targeting RNG without E2—always pick if unsure",
         },
         {
+          id: "Firing Preparation V",
           tier: "S",
           cost: 1,
           type: "upgrade",
           description: "[ Unique / Initiation ] Create 1 Shelling Ballista. \nAt the start of the turn, \ncreate 1 Shelling Ballista \ncard(s)",
-          reasoning: "[Placeholder reasoning text]",
+          reasoning: "Best for Veronica DPS; it makes Kowalski and Morale additive buffs stronger, her E2 makes it consistent and even stronger",
         },
       ],
     },
@@ -91,40 +95,45 @@ export default function VeronicaGuidePage() {
       baseType: "skill",
       epiphanies: [
         {
+          id: "Repose I",
           tier: "S+",
           cost: 0,
           type: "skill",
           description: "Draw 2 other \n Combatant's card(s)",
-          reasoning: "[Placeholder]",
+          reasoning: "Arguably the best Repose option, 0 cost free 2 draw and it gets even stronger with a Divine Epiphany that adds +1 draw or +1 AP",
         },
         {
+          id: "Repose II",
           tier: "A",
           cost: 1,
           type: "skill",
           description: "150% Shield \nDraw 2 other \nCombatant's card(s) \nIf that card is a Skill Card, \n1 Reload",
-          reasoning: "[Placeholder]",
+          reasoning: "A weaker version of Repose III, it still has value since you draw and MIGHT get Reload, but the effect is much lower impact overall, and the other Repose options outperform it",
         },
         {
+          id: "Repose III",
           tier: "S",
           cost: 1,
           type: "skill",
           description:
             "150% Shield \nDraw 2 other \nCombatant's card(s) \nDecrease Cost of 1 of those cards by 1 for 1 turn",
-          reasoning: "[Placeholder]",
+          reasoning: "Second best pick, a bit less consistent since it can break some builds. Divine upgrade that makes this 0 cost it might becomes the best option",
         },
         {
-          tier: "B",
+          id: "Repose IV",
+          tier: "C",
           cost: 1,
           type: "skill",
           description: "150% Shield \n1 Reload equal to \nnumber of other \nCombatant's skill card(s) \nin hand",
-          reasoning: "[Placeholder]",
+          reasoning: "Reload is already covered by the pendant of resolution card, so there's no real reason to pick this",
         },
         {
+          id: "Repose V",
           tier: "C",
           cost: 1,
           type: "skill",
           description: "150% Shield \nDiscard all other \nCombatant's card(s) in hand \n1 Reload equal to that number",
-          reasoning: "[Placeholder]",
+          reasoning: "Worst choice. Hand discard is too punishing and the Reload payoff doesn't justify it",
         },
       ],
     },
@@ -135,40 +144,44 @@ export default function VeronicaGuidePage() {
       baseType: "upgrade",
       epiphanies: [
         {
+          id: "Pendant of Resolution I",
           tier: "S+",
           cost: 1,
           type: "upgrade",
           description: "When using a Skill Card,\n 1 Reload",
-          reasoning: "[Placeholder]",
+          reasoning: "Best overall option, it is just a direct upgrade of the base card, nothing special",
         },
         {
-          tier: "A",
+          id: "Pendant of Resolution II",
+          tier: "B",
           cost: 0,
           type: "upgrade",
-          description:
-            "[ Unique ] When another combatant uses Skill Card, 1 Reload \nIf 3 are used, at the start of the next turn, create 1 Micro Ballista card(s)",
-          reasoning: "[Placeholder]",
+          description: "[ Unique ] When another combatant uses Skill Card, 1 Reload \nIf 3 are used, at the start of the next turn, create 1 Micro Ballista card(s)",
+          reasoning: "Gives some Reload from other Skill Cards, but the Micro Ballista is worthless, not a strong pick compared to other Pendants",
         },
         {
-          tier: "B",
+          id: "Pendant of Resolution III",
+          tier: "A",
           cost: 1,
           type: "skill",
           description: "[Exhaust 2] For 1 turn(s), when a \ncard is used, \n1 Reload",
-          reasoning: "[Placeholder]",
+          reasoning: "Decent option, provides consistent Reload but not particularly strong",
         },
         {
-          tier: "S",
+          id: "Pendant of Resolution IV",
+          tier: "A",
           cost: 1,
           type: "upgrade",
           description: "When another combatant uses Skill Card, 1 Reload \n50% Chance to gain additional 1 Reload",
-          reasoning: "[Placeholder]",
+          reasoning: "Unreliable due to RNG, but otherwise a straightforward base card upgrade that can provide extra Reload",
         },
         {
-          tier: "Situational",
+          id: "Pendant of Resolution V",
+          tier: "S+",
           cost: 1,
           type: "skill",
           description: "[ Retain / Retrieve 4 ] Reload 2",
-          reasoning: "[Placeholder]",
+          reasoning: "Best Pendant if paired with a -1 cost Divine Epiphany; otherwise it's a bit expensive. Excellent for Mei Lin, as it provides 8 Passion stacks",
         },
       ],
     },
@@ -179,39 +192,44 @@ export default function VeronicaGuidePage() {
       baseType: "skill",
       epiphanies: [
         {
+          id: "Sir Kowalski I",
           tier: "S",
           cost: 1,
           type: "skill",
           description: "Choose 1 Ballista card in hand, +150% Damage amount until activated. \nDraw 2",
-          reasoning: "[Placeholder]",
+          reasoning: "Good option, draws 2 and boosts Ballista damage; with -1 cost Divine Epiphany it get more value",
         },
         {
-          tier: "A",
+          id: "Sir Kowalski II",
+          tier: "B",
           cost: 1,
           type: "skill",
           description: "Draw 1 \nIncrease Damage Amount of Ballista by 30% for 1 turn",
-          reasoning: "[Placeholder]",
+          reasoning: "Decent but not great, grants 1 draw but the 30% multiplicative Ballista boost is less valuable since Veronica already has a lot of multiplicative damage",
         },
         {
+          id: "Sir Kowalski III",
           tier: "S+",
           cost: 1,
           type: "skill",
           description: "Draw 2 \nWhen drawing a Skill card, create 1 Ballista",
-          reasoning: "[Placeholder]",
+          reasoning: "Basically a Repose, drawing Skill cards creates Ballista, and a -1 cost Divine Epiphany makes it even stronger",
         },
         {
-          tier: "S",
+          id: "Sir Kowalski IV",
+          tier: "S+",
           cost: 1,
           type: "skill",
           description: "+250% Damage Amount of 1 random Ballista card in hand, \nExhaust after activation",
-          reasoning: "[Placeholder]",
+          reasoning: "Best option for Veronica DPS, provides the highest damage boost, triggers mid-turn and counts as a normal targetting attack, activating Passion Weakness if the enemy has it",
         },
         {
+          id: "Sir Kowalski V",
           tier: "C",
           cost: 1,
           type: "skill",
           description: "Select and Exhaust 1 Ballista in hand \nCreate 2 Ballista, decrease Damage Amount of those cards by 25% until activated",
-          reasoning: "[Placeholder]",
+          reasoning: "Honestly questionable, it exhausts a Ballista but doesn't trigger it like the IV option, making it more useless",
         },
       ],
     },
@@ -533,13 +551,15 @@ export default function VeronicaGuidePage() {
                         </div>
                       </DialogTrigger>
 
-                      <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+                      <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto scrollbar-none">
                         <DialogHeader>
                           <DialogTitle className="text-2xl text-purple-400">
                             {cardData.name} - Epiphany Guide
                           </DialogTitle>
-                          <DialogDescription className="text-base">
-                            Detailed explanations for each epiphany
+                          <DialogDescription className="text-[14px] text-white/70">
+                            Detailed explanations for every Epiphany choice.
+                            <br/>
+                            Divine Epiphanies aren't covered here unless they give a major impact.
                           </DialogDescription>
                         </DialogHeader>
                         <div className="space-y-6 mt-4">
@@ -552,7 +572,7 @@ export default function VeronicaGuidePage() {
                                   {epiphany.tier} Tier
                                 </span>
                                 <span className="text-sm font-semibold text-foreground">
-                                  Cost: {epiphany.cost} | Type: <span className="capitalize">{epiphany.type}</span>
+                                  {epiphany.id}
                                 </span>
                               </div>
                               <p className="text-sm text-muted-foreground leading-relaxed">{epiphany.reasoning}</p>
