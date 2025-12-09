@@ -1059,6 +1059,32 @@ export function RunTracker() {
     setSelectedCard(null)
   }
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement
+  
+      // If no card is selected → do nothing
+      if (!selectedCard) return
+  
+      // Find the currently selected card element
+      const selectedCardElement = document.getElementById(`card-${selectedCard}`)
+      if (!selectedCardElement) return
+  
+      // If the click is inside the selected card → do nothing (keep menu open)
+      if (selectedCardElement.contains(target)) return
+  
+      // Otherwise: click was outside → close the menu
+      setSelectedCard(null)
+    }
+  
+    // Listen for clicks on the whole document
+    document.addEventListener("click", handleClickOutside)
+  
+    return () => {
+      document.removeEventListener("click", handleClickOutside)
+    }
+  }, [selectedCard]) // Re-run when selectedCard changes
+
   return (
     <TooltipProvider>
       <div className="space-y-6">
@@ -1205,6 +1231,7 @@ export function RunTracker() {
                   {deck.map((card, index) => (
                     <div
                       key={card.id}
+                      id={`card-${card.id}`}
                       className={`group relative aspect-[2/3] cursor-pointer rounded-lg transition-all hover:scale-105 ${
                         selectedCard === card.id ? "shadow-lg shadow-[#5B1FAF]/20" : ""
                       } ${card.isRemoved ? "opacity-30 grayscale" : ""} ${
@@ -1378,6 +1405,7 @@ export function RunTracker() {
 
                       {selectedCard === card.id && !card.isRemoved && !card.isMutantSample && (
                         <div className="absolute inset-0 z-30 flex flex-col gap-1 rounded-lg bg-[#06070A]/80 p-2 backdrop-blur-sm ring-2 ring-purple-400/100">
+                          
                           <Button
                             size="sm"
                             variant="outline"
