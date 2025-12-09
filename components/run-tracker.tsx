@@ -1268,14 +1268,14 @@ export function RunTracker() {
                         </button>
                       )}
 
-                      <div className="flex h-full flex-col">
-                        <div className="relative h-full w-full rounded-md overflow-hidden">
+                      <div className="flex w-full h-full flex-co">
+                        <div className="relative h-full w-full rounded-md overflow-hidden ">
                           {card.image ? (
                             // image fills the entire card area
                             <img
                               src={card.image || "/placeholder.svg"}
                               alt={card.name || "card image"}
-                              className="absolute inset-0 h-[107%] w-full object-cover"
+                              className={`absolute inset-0 h-[95%] w-full overflow-hidden scale-110 ${card.isDuplicated ? "scale-x-[-1]" : ""}`}
                             />
                           ) : (
                             <div className="absolute inset-0 flex items-center justify-center bg-card/50 border-2 border-dashed border-border/30 text-xs text-muted-foreground">
@@ -1345,7 +1345,7 @@ export function RunTracker() {
                             <img
                               src="/images/card/deco_card_copy.png"
                               alt="Duplicate border"
-                              className="absolute right-0 top-0 h-full w-auto z-[7] pointer-events-none"
+                              className="absolute -right-0.5 top-0 h-full w-auto z-[7] pointer-events-none"
                             />
                           )}
 
