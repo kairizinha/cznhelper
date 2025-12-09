@@ -1236,7 +1236,7 @@ export function RunTracker() {
                       id={`card-${card.id}`}
                       className={`group relative aspect-[2/3] cursor-pointer rounded-lg transition-all hover:scale-105 ${
                         selectedCard === card.id ? "shadow-lg shadow-[#5B1FAF]/20" : ""
-                      } ${card.isRemoved ? "opacity-30 grayscale" : ""} ${
+                      } ${card.isRemoved ? "opacity-50 grayscale" : ""} ${
                         card.cardType === "starter"
                           ? "bg-gradient-to-br from-[#0A0B0F] to-[#06070A]"
                           : card.cardType === "neutral"
@@ -1350,7 +1350,7 @@ export function RunTracker() {
                           )}
 
                           {/* Overlay content — z-10 so it sits above the image. gradient to keep text readable */}
-                          <div className="absolute inset-0 z-0 pointer-events-none flex flex-col justify-between p-4 pl-6 bg-gradient-to-b from-black/60 via-transparent to-black/70">
+                          <div className="absolute inset-0 z-0 pointer-events-none flex flex-col justify-between p-4 pl-5 bg-gradient-to-b from-black/60 via-transparent to-black/60">
                             <div className="space-y-4">
                               {!card.isRemoved && (
                                 <div className="flex items-center gap-2">
