@@ -1059,32 +1059,34 @@ export function RunTracker() {
     setSelectedCard(null)
   }
 
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement
-  
-      // If no card is selected → do nothing
+
       if (!selectedCard) return
   
-      // Find the currently selected card element
+
       const selectedCardElement = document.getElementById(`card-${selectedCard}`)
       if (!selectedCardElement) return
   
-      // If the click is inside the selected card → do nothing (keep menu open)
+
       if (selectedCardElement.contains(target)) return
   
-      // Otherwise: click was outside → close the menu
+
       setSelectedCard(null)
     }
   
-    // Listen for clicks on the whole document
+
     document.addEventListener("click", handleClickOutside)
   
     return () => {
       document.removeEventListener("click", handleClickOutside)
     }
-  }, [selectedCard]) // Re-run when selectedCard changes
+  }, [selectedCard]) //
 
+
+  
   return (
     <TooltipProvider>
       <div className="space-y-6">
@@ -1227,7 +1229,7 @@ export function RunTracker() {
                 </div>
 
 
-                <div className="grid grid-cols-4 gap-3 max-w-[720px] mx-auto">
+                <div className="grid grid-cols-4 gap-3 max-w-[780px]">
                   {deck.map((card, index) => (
                     <div
                       key={card.id}
@@ -1597,6 +1599,37 @@ export function RunTracker() {
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Divine Epiphanies</span>
                     <span className="font-bold">{deck.filter((c) => c.hasDivineEpiphany).length}</span>
+                  </div>
+                  <div className="flex-col flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={undoLastAction}
+                      disabled={actionHistory.length === 0}
+                      className="gap-2 
+                        !border !border-[#5B1FAF]/50 
+                        !bg-[#5B1FAF]/10 
+                        hover:!bg-[#5B1FAF]/20 
+                        hover:!border-[#5B1FAF]/70
+                        disabled:opacity-50"
+                    >
+                      <Undo className="h-4 w-4" />
+                      Undo
+                    </Button>
+
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={resetDeck}
+                      className="gap-2 
+                        !border !border-[#C41729]/50 
+                        !bg-[#C41729]/10 
+                        hover:!bg-[#C41729]/20 
+                        hover:!border-[#C41729]/70"
+                    >
+                      <RotateCcw className="h-4 w-4" />
+                      Reset
+                    </Button>
                   </div>
                 </div>
               </CardContent>
