@@ -1275,7 +1275,7 @@ export function RunTracker() {
                             <img
                               src={card.image || "/placeholder.svg"}
                               alt={card.name || "card image"}
-                              className={`absolute inset-0 h-[95%] w-full overflow-hidden scale-110 ${card.isDuplicated ? "scale-x-[-1]" : ""}`}
+                              className={`absolute inset-0 h-[100%] w-full overflow-hidden scale-105 ${card.isDuplicated ? "scale-x-[-1]" : ""}`}
                             />
                           ) : (
                             <div className="absolute inset-0 flex items-center justify-center bg-card/50 border-2 border-dashed border-border/30 text-xs text-muted-foreground">
