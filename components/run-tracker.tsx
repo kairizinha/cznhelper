@@ -1287,7 +1287,7 @@ export function RunTracker() {
                             <img
                               src="/images/card/order-border.png"
                               alt="Order border"
-                              className="absolute left-0 top-0 h-full w-auto z-[5] pointer-events-none scale-102"
+                              className="absolute left-0 top-0.5 h-full w-auto z-[5] pointer-events-none scale-104"
                             />
                           )}
 
@@ -1295,7 +1295,7 @@ export function RunTracker() {
                             <img
                               src="/images/card/void-border.png"
                               alt="Void border"
-                              className="absolute left-0 top-0 h-full w-auto z-[5] pointer-events-none scale-102"
+                              className="absolute left-0 top-0.5 h-full w-auto z-[5] pointer-events-none scale-104"
                             />
                           )}
 
@@ -1303,7 +1303,7 @@ export function RunTracker() {
                             <img
                               src="/images/card/instinct-border.png"
                               alt="Instinct border"
-                              className="absolute left-0 top-0 h-full w-auto z-[5] pointer-events-none scale-102"
+                              className="absolute left-0 top-0.5 h-full w-auto z-[5] pointer-events-none scale-104"
                             />
                           )}
 
@@ -1311,7 +1311,7 @@ export function RunTracker() {
                             <img
                               src="/images/card/passion-border.png"
                               alt="Passion border"
-                              className="absolute left-0 top-0 h-full w-auto z-[5] pointer-events-none scale-102"
+                              className="absolute left-0 top-0.5 h-full w-auto z-[5] pointer-events-none scale-104"
                             />
                           )}
 
@@ -1319,7 +1319,7 @@ export function RunTracker() {
                             <img
                               src="/images/card/justice-border.png"
                               alt="Justice border"
-                              className="absolute left-0 top-0 h-full w-auto z-[5] pointer-events-none scale-102"
+                              className="absolute left-0 top-0.5 h-full w-auto z-[5] pointer-events-none scale-104"
                             />
                           )}
 
@@ -1328,7 +1328,7 @@ export function RunTracker() {
                             <img
                               src="/images/card/neutral-border.png"
                               alt="Neutral border"
-                              className="absolute left-0 top-0 h-full w-auto z-[6] pointer-events-none"
+                              className="absolute left-0 top-0.5 h-full w-auto z-[5] pointer-events-none scale-104"
                             />
                           )}
 
@@ -1337,7 +1337,7 @@ export function RunTracker() {
                             <img
                               src="/images/card/monster-border.png"
                               alt="Monster Card Border"
-                              className="absolute left-0 top-0 h-full w-auto z-[6] pointer-events-none"
+                              className="absolute left-0 top-0.5 h-full w-auto z-[5] pointer-events-none scale-104"
                             />
                           )}
 
@@ -1345,7 +1345,7 @@ export function RunTracker() {
                             <img
                               src="/images/card/deco_card_copy.png"
                               alt="Duplicate border"
-                              className="absolute right-0 top-0 h-full w-auto z-[7] pointer-events-none"
+                              className="absolute right-0 top-0 h-full w-auto z-[5] pointer-events-none scale-101"
                             />
                           )}
 
