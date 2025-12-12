@@ -790,10 +790,10 @@ export default function ChizuruGuidePage() {
                                                 )
                                                 .replace(
                                                   /Shadow of the\s*Moon\+/gi,
-                                                  '<span style="color: #C8FF2E; text-decoration: underline; text-underline-offset: 2px">$&</span>',
+                                                  '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>',
                                                 ).replace(
                                                   /Moonslash/gi,
-                                                  '<span style="color: #C8FF2E; text-decoration: underline; text-underline-offset: 2px">$&</span>',
+                                                  '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>',
                                                 ),
                                             }}
                                           />
@@ -950,10 +950,10 @@ export default function ChizuruGuidePage() {
                                                 )
                                                 .replace(
                                                   /Shadow of the\s*Moon\+/gi,
-                                                  '<span style="color: #C8FF2E; text-decoration: underline; text-underline-offset: 2px">$&</span>',
+                                                  '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>',
                                                 ).replace(
                                                   /Moonslash/gi,
-                                                  '<span style="color: #C8FF2E; text-decoration: underline; text-underline-offset: 2px">$&</span>',
+                                                  '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>',
                                                 ),
                                             }}
                                           />
@@ -983,11 +983,11 @@ export default function ChizuruGuidePage() {
                         <p className="text-sm text-muted-foreground leading-relaxed">
                           Stack up for a huge Shadow of the Moon to Nuke the enemy
                           <br/>
-                          Oni 2 or Oni 5 are also options for Orlea, just depends if you wanna spend buffs or not
+                          Oni Hunt 2 or Oni Hunt 5 are also options for Orlea, just depends if you wanna spend buffs or not
                           <br/>
-                          3 Tsuki, 2 Oni is Optimal Ratio,
+                          3 Tsukuyomi, 2 Oni Hunt is Optimal Ratio,
                           <br/>
-                          2 Tsuki, 3 Oni is also fine, 4 of one or the other is bad
+                          2 Tsukuyomi, 3 Oni Hunt is also fine, 4 of one or the other is bad
                         </p>
                       </div>
                     </CollapsibleContent>
@@ -1143,10 +1143,10 @@ export default function ChizuruGuidePage() {
                                                 )
                                                 .replace(
                                                   /Shadow of the\s*Moon\+/gi,
-                                                  '<span style="color: #C8FF2E; text-decoration: underline; text-underline-offset: 2px">$&</span>',
+                                                  '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>',
                                                 ).replace(
                                                   /Moonslash/gi,
-                                                  '<span style="color: #C8FF2E; text-decoration: underline; text-underline-offset: 2px">$&</span>',
+                                                  '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>',
                                                 ),
                                             }}
                                           />
@@ -1303,10 +1303,10 @@ export default function ChizuruGuidePage() {
                                                 )
                                                 .replace(
                                                   /Shadow of the\s*Moon\+/gi,
-                                                  '<span style="color: #C8FF2E; text-decoration: underline; text-underline-offset: 2px">$&</span>',
+                                                  '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>',
                                                 ).replace(
                                                   /Moonslash/gi,
-                                                  '<span style="color: #C8FF2E; text-decoration: underline; text-underline-offset: 2px">$&</span>',
+                                                  '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>',
                                                 ),
                                             }}
                                           />
@@ -1334,7 +1334,7 @@ export default function ChizuruGuidePage() {
                     <CollapsibleContent className="mt-3">
                       <div className="p-4 rounded-lg bg-background/50 border border-border">
                         <p className="text-sm text-muted-foreground leading-relaxed">
-                        At E2, Tsuki 1 + Tsuki 5 on a Moon+ will refund itself, and then you can play 4 Moon+ in a row
+                        At E2, Tsukuyomi 1 + Tsukuyomi 5 on a Moon+ will refund itself, and then you can play 4 Moon+ in a row
                         </p>
                       </div>
                     </CollapsibleContent>
