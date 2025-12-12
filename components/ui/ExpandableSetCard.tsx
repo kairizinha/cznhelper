@@ -47,7 +47,10 @@ export default function ExpandableSetCard({
                   )}
                 </div>
               </div>
-              <p className="text-sm text-muted-foreground mt-1">{set.effect}</p>
+              <p 
+                className="text-sm text-muted-foreground mt-1"
+                dangerouslySetInnerHTML={{ __html: set.effect }}
+              />
             </div>
           </div>
         </div>
