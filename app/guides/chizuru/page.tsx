@@ -1373,7 +1373,7 @@ export default function ChizuruGuidePage() {
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <img
-                        src="/images/gear/Intellect-of-Discord.webp"
+                        src="/images/gear/Intellect-Of-Discord.webp"
                         alt="Intellect of Discord"
                         className="w-16 h-16 object-contain relative z-10"
                       />
@@ -1768,7 +1768,7 @@ export default function ChizuruGuidePage() {
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <img
-                        src="/images/gear/Sphere-of-Randomness.webp"
+                        src="/images/gear/Sphere-Of-Randomness.webp"
                         alt="Sphere of Randomness"
                         className="w-16 h-16 object-contain relative z-10"
                       />
@@ -1991,8 +1991,7 @@ export default function ChizuruGuidePage() {
                     {[
                       {
                         name: "Orb of Inhibition",
-                        effect:
-                          "When Hitting 2 times with 1 Attack Card, +10% Damage Amount to <span style=\"color: #a78bfa\">Void</span> Cards for 1 turn (2 times per turn)",
+                        effect: "When Hitting 2 times with 1 Attack Card, +10% Damage Amount to <span style=\"color: #a78bfa\">Void</span> Cards for 1 turn (2 times per turn)",
                         icon: "/images/sets/orb-of-inhibition.webp",
                         why: "Weak and Conditional, but still better then Void set, because this set is Additve Generic."
                       },
@@ -2080,7 +2079,7 @@ export default function ChizuruGuidePage() {
             <section id="partners" className="rounded-lg border border-border bg-card p-8 scroll-mt-24">
               <h2 className="text-2xl font-bold mb-6 text-purple-400">5. Partners</h2>
               <p className="text-muted-foreground mb-6 whitespace-pre-line">
-                {`Chizuru does not have many partners, so the choices are limited.\nClick on the partners below to see more information.`}
+                {`Click on the partners below to see more information.`}
               </p>
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                 {[
@@ -2173,7 +2172,7 @@ export default function ChizuruGuidePage() {
             <section id="teams" className="rounded-lg border border-border bg-card p-8 scroll-mt-24">
               <h2 className="text-2xl font-bold mb-6 text-purple-400">6. Teams</h2>
               <p className="text-muted-foreground mb-6 whitespace-pre-line">
-                Below are 2 example teams for Chizuru Main DPS
+                Below are 2 example teams for Chizuru DPS
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -2182,13 +2181,13 @@ export default function ChizuruGuidePage() {
                   <DialogTrigger asChild>
                     <div className="group cursor-pointer hover:scale-105 rounded-xl border-2 border-purple-500/30 bg-gradient-to-br from-purple-500/5 to-transparent p-4 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300">
                       <div className="flex items-center gap-2 mb-3">
-                        <div className="w-2 h-2 rounded-full bg-red-400"></div>
-                        <h3 className="text-base font-semibold text-[#ff7a7a]">Chizuru Hypercarry (with Draw)</h3>
+                        <div className="w-2 h-2 rounded-full bg-violet-400"></div>
+                        <h3 className="text-base font-semibold text-violet-400">Chizuru Hypercarry</h3>
                         </div>
                       <div className="grid grid-cols-3 gap-2 mb-3">
 
                         {/* Chizuru */}
-                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-red-400/50 bg-card shadow-md group- transition-transform">
+                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-violet-400/50 bg-card shadow-md group- transition-transform">
                           <img
                             src="/images/characters/chizuruhalf.webp"
                             alt="Chizuru"
@@ -2208,7 +2207,7 @@ export default function ChizuruGuidePage() {
                         </div>
 
                         {/* Rei */}
-                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-red-400/50 bg-card shadow-md group- transition-transform">
+                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-violet-400/50 bg-card shadow-md group- transition-transform">
                           <img
                             src="/images/characters/reihalf.webp"
                             alt="Rei"
@@ -2228,7 +2227,7 @@ export default function ChizuruGuidePage() {
                         </div>
 
                         {/* Veronica */}
-                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-violet-400/50 bg-card shadow-md group- transition-transform">
+                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-red-400/50 bg-card shadow-md group- transition-transform">
                           <img src="/images/characters/veronicahalf.webp" alt="Veronica" className="object-cover w-full h-full" />
                           <div className="absolute top-1 left-1 flex flex-col gap-0.5">
                             <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
@@ -2304,13 +2303,13 @@ export default function ChizuruGuidePage() {
                   <DialogTrigger asChild>
                     <div className="group cursor-pointer hover:scale-105 rounded-xl border-2 border-purple-500/30 bg-gradient-to-br from-purple-500/5 to-transparent p-4 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300">
                       <div className="flex items-center gap-2 mb-3">
-                        <div className="w-2 h-2 rounded-full bg-red-400"></div>
-                        <h3 className="text-base font-semibold text-[#ff7a7a]">Mono Void</h3>
+                        <div className="w-2 h-2 rounded-full bg-violet-400"></div>
+                        <h3 className="text-base font-semibold text-violet-400">Mono Void</h3>
                         </div>
                       <div className="grid grid-cols-3 gap-2 mb-3">
 
                         {/* Chizuru */}
-                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-red-400/50 bg-card shadow-md group- transition-transform">
+                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-violet-400/50 bg-card shadow-md group- transition-transform">
                           <img
                             src="/images/characters/chizuruhalf.webp"
                             alt="Chizuru"
@@ -2330,7 +2329,7 @@ export default function ChizuruGuidePage() {
                         </div>
 
                         {/* Tressa */}
-                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-red-400/50 bg-card shadow-md group- transition-transform">
+                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-violet-400/50 bg-card shadow-md group- transition-transform">
                           <img
                             src="/images/characters/tressahalf.webp"
                             alt="Tressa"

@@ -739,7 +739,7 @@ export default function VeronicaGuidePage() {
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <img
-                        src="/images/gear/intellect.webp"
+                        src="/images/gear/Intellect-Of-Discord.webp"
                         alt="Intellect of Discord"
                         className="w-16 h-16 object-contain relative z-10"
                       />
@@ -800,7 +800,7 @@ export default function VeronicaGuidePage() {
                             className="w-full h-full object-contain"
                           />
                           <div className="absolute inset-0 flex items-center justify-center">
-                            <img src="/images/gear/tentacles.webp" alt="Tentacles of Chaos" className="w-16 h-16 object-contain relative z-10" />
+                            <img src="/images/gear/Tentacles-Of-Chaos.webp" alt="Tentacles of Chaos" className="w-16 h-16 object-contain relative z-10" />
                           </div>
                         </div>
                         <div className="flex-1 min-w-0">
@@ -829,7 +829,7 @@ export default function VeronicaGuidePage() {
                             className="w-full h-full object-contain"
                           />
                           <div className="absolute inset-0 flex items-center justify-center">
-                            <img src="/images/gear/foggy.webp" alt="Foggy Crystal Ball" className="w-16 h-16 object-contain relative z-10" />
+                            <img src="/images/gear/Foggy-Crystal-Ball.webp" alt="Foggy Crystal Ball" className="w-16 h-16 object-contain relative z-10" />
                           </div>
                         </div>
                         <div className="flex-1 min-w-0">
@@ -858,7 +858,7 @@ export default function VeronicaGuidePage() {
                             className="w-full h-full object-contain"
                           />
                           <div className="absolute inset-0 flex items-center justify-center">
-                            <img src="/images/gear/dopamine.webp" alt={`W-52 "Dopamine Injector"`} className="w-16 h-16 object-contain relative z-10" />
+                            <img src="/images/gear/W-52-Dopamine-Injector.webp" alt={`W-52 "Dopamine Injector"`} className="w-16 h-16 object-contain relative z-10" />
                           </div>
                         </div>
                         <div className="flex-1 min-w-0">
@@ -886,7 +886,7 @@ export default function VeronicaGuidePage() {
                             className="w-full h-full object-contain"
                           />
                           <div className="absolute inset-0 flex items-center justify-center">
-                            <img src="/images/gear/mutant.webp" alt={`Mutant Predator Spike`} className="w-16 h-16 object-contain relative z-10" />
+                            <img src="/images/gear/Mutant-Predator-Spike.webp" alt={`Mutant Predator Spike`} className="w-16 h-16 object-contain relative z-10" />
                           </div>
                         </div>
                         <div className="flex-1 min-w-0">
@@ -913,7 +913,7 @@ export default function VeronicaGuidePage() {
                             className="w-full h-full object-contain"
                           />
                           <div className="absolute inset-0 flex items-center justify-center">
-                            <img src="/images/gear/second.webp" alt="Second Method" className="w-16 h-16 object-contain relative z-10" />
+                            <img src="/images/gear/Second-Method.webp" alt="Second Method" className="w-16 h-16 object-contain relative z-10" />
                           </div>
                         </div>
                         <div className="flex-1 min-w-0">
@@ -940,7 +940,7 @@ export default function VeronicaGuidePage() {
                             className="w-full h-full object-contain"
                           />
                           <div className="absolute inset-0 flex items-center justify-center">
-                            <img src="/images/gear/rfs.webp" alt="RFS-17" className="w-16 h-16 object-contain relative z-10" />
+                            <img src="/images/gear/RFS-17.webp" alt="RFS-17" className="w-16 h-16 object-contain relative z-10" />
                           </div>
                         </div>
                         <div className="flex-1 min-w-0">
@@ -967,7 +967,7 @@ export default function VeronicaGuidePage() {
                             className="w-full h-full object-contain"
                           />
                           <div className="absolute inset-0 flex items-center justify-center">
-                            <img src="/images/gear/obsidian.webp" alt="Obsidian Sword" className="w-16 h-16 object-contain relative z-10" />
+                            <img src="/images/gear/Obsidian-Sword.webp" alt="Obsidian Sword" className="w-16 h-16 object-contain relative z-10" />
                           </div>
                         </div>
                         <div className="flex-1 min-w-0">
@@ -1011,7 +1011,7 @@ export default function VeronicaGuidePage() {
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <img
-                        src="/images/gear/fragment.webp"
+                        src="/images/gear/Fragment-of-the-Empty-Void.webp"
                         alt="Fragment of the Empty Void"
                         className="w-16 h-16 object-contain relative z-10"
                       />
@@ -1070,7 +1070,7 @@ export default function VeronicaGuidePage() {
                             className="w-full h-full object-contain"
                           />
                           <div className="absolute inset-0 flex items-center justify-center">
-                            <img src="/images/gear/rocket.webp" alt="Rocket-Adorned Cape" className="w-16 h-16 object-contain relative z-10" />
+                            <img src="/images/gear/Rocket-Adorned-Cape.webp" alt="Rocket-Adorned Cape" className="w-16 h-16 object-contain relative z-10" />
                           </div>
                         </div>
                         <div className="flex-1 min-w-0">
@@ -1099,7 +1099,7 @@ export default function VeronicaGuidePage() {
                             className="w-full h-full object-contain"
                           />
                           <div className="absolute inset-0 flex items-center justify-center">
-                            <img src="/images/gear/shield.webp" alt="Shield of the Watcher" className="w-16 h-16 object-contain relative z-10" />
+                            <img src="/images/gear/Shield-of-the-Watcher.webp" alt="Shield of the Watcher" className="w-16 h-16 object-contain relative z-10" />
                           </div>
                         </div>
                         <div className="flex-1 min-w-0">
@@ -1126,7 +1126,7 @@ export default function VeronicaGuidePage() {
                             className="w-full h-full object-contain"
                           />
                           <div className="absolute inset-0 flex items-center justify-center">
-                            <img src="/images/gear/wings.webp" alt="Wings of Freedom" className="w-16 h-16 object-contain relative z-10" />
+                            <img src="/images/gear/Wings-of-Freedom.webp" alt="Wings of Freedom" className="w-16 h-16 object-contain relative z-10" />
                           </div>
                         </div>
                         <div className="flex-1 min-w-0">
@@ -1153,7 +1153,7 @@ export default function VeronicaGuidePage() {
                             className="w-full h-full object-contain"
                           />
                           <div className="absolute inset-0 flex items-center justify-center">
-                            <img src="/images/gear/brainwave.webp" alt="Brainwave-Blocking Helmet" className="w-16 h-16 object-contain relative z-10" />
+                            <img src="/images/gear/Brainwave-Blocking-Helmet.webp" alt="Brainwave-Blocking Helmet" className="w-16 h-16 object-contain relative z-10" />
                           </div>
                         </div>
                         <div className="flex-1 min-w-0">
@@ -1194,7 +1194,7 @@ export default function VeronicaGuidePage() {
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <img
-                        src="/images/gear/sphere.webp"
+                        src="/images/gear/Sphere-Of-Randomness.webp"
                         alt="Sphere of Randomness"
                         className="w-16 h-16 object-contain relative z-10"
                       />
@@ -1254,7 +1254,7 @@ export default function VeronicaGuidePage() {
                             className="w-full h-full object-contain"
                           />
                           <div className="absolute inset-0 flex items-center justify-center">
-                            <img src="/images/gear/superconduct.webp" alt="Superconductive Protein" className="w-16 h-16 object-contain relative z-10" />
+                            <img src="/images/gear/Superconductive-Protein.webp" alt="Superconductive Protein" className="w-16 h-16 object-contain relative z-10" />
                           </div>
                         </div>
                         <div className="flex-1 min-w-0">
@@ -1281,7 +1281,7 @@ export default function VeronicaGuidePage() {
                             className="w-full h-full object-contain"
                           />
                           <div className="absolute inset-0 flex items-center justify-center">
-                            <img src="/images/gear/pulsating.webp" alt="Pulsating Egg" className="w-16 h-16 object-contain relative z-10" />
+                            <img src="/images/gear/Pulsating-Egg.webp" alt="Pulsating Egg" className="w-16 h-16 object-contain relative z-10" />
                           </div>
                         </div>
                         <div className="flex-1 min-w-0">
@@ -1308,7 +1308,7 @@ export default function VeronicaGuidePage() {
                             className="w-full h-full object-contain"
                           />
                           <div className="absolute inset-0 flex items-center justify-center">
-                            <img src="/images/gear/verdant.webp" alt="Verdant Shackles" className="w-16 h-16 object-contain relative z-10" />
+                            <img src="/images/gear/Verdant-Shackles.webp" alt="Verdant Shackles" className="w-16 h-16 object-contain relative z-10" />
                           </div>
                         </div>
                         <div className="flex-1 min-w-0">
@@ -1335,7 +1335,7 @@ export default function VeronicaGuidePage() {
                             className="w-full h-full object-contain"
                           />
                           <div className="absolute inset-0 flex items-center justify-center">
-                            <img src="/images/gear/emblem.webp" alt="Emblem of an Exceptional Entity" className="w-16 h-16 object-contain relative z-10" />
+                            <img src="/images/gear/Emblem-of-an-Exceptional-Entity.webp" alt="Emblem of an Exceptional Entity" className="w-16 h-16 object-contain relative z-10" />
                           </div>
                         </div>
                         <div className="flex-1 min-w-0">
@@ -1363,7 +1363,7 @@ export default function VeronicaGuidePage() {
                             className="w-full h-full object-contain"
                           />
                           <div className="absolute inset-0 flex items-center justify-center">
-                            <img src="/images/gear/cube.webp" alt="Amorphous Cube" className="w-16 h-16 object-contain relative z-10" />
+                            <img src="/images/gear/Amorphous-Cube.webp" alt="Amorphous Cube" className="w-16 h-16 object-contain relative z-10" />
                           </div>
                         </div>
                         <div className="flex-1 min-w-0">
@@ -1408,19 +1408,19 @@ export default function VeronicaGuidePage() {
                         name: "Black Wing",
                         effect: "+12% Attack",
                         icon: "/images/sets/black-wing.webp",
-                        why: "Why?",
+                        why: "Best 2-Set bonus in general",
                       },
                       {
                         name: "Executioner's Tool",
                         effect: "+25% Critical Damage",
                         icon: "/images/sets/executioners-tool.webp",
-                        why: "Why?",
+                        why: "Best 2-Set bonus in general",
                       },
                       {
                         name: "Cursed Corpse",
                         effect: "Increases damage dealt to target inflicted with Agony by 10%",
                         icon: "/images/sets/cursed-corpse.webp",
-                        why: "Prioritize Cursed Corpse when Agony debuff is reliably applied. Otherwise, slot any Memory Fragment piece purely for its substats"
+                        why: "Optional damage boost if achievable, not required; substats are more important in general"
                       },
                     ].map((set) => (
                       <ExpandableSetCard
@@ -1446,17 +1446,16 @@ export default function VeronicaGuidePage() {
                     {[
                       {
                         name: "Spark of Passion",
-                        effect:
-                          "When Upgrade Cards are used, increase Damage Amount of the next 5 Passion Cards used by 20%",
+                        effect: "When Upgrade Cards are used, increase Damage Amount of the next 5 <span style=\"color:rgb(250, 139, 139)\">Passion</span> Cards used by 20%",
                         icon: "/images/sets/spark-of-passion.webp",
-                        why: "Due to Veronica's Reload mechanic, the Passion set's 20% bonus is effectively outperformed by the consistent +12% Attack provided by Black Wing or +25% Critical Damage from Executioner's Tool. While Passion is a viable option, using 2/2 set offers better overall performance for her."
+                        why: "Due to Reload mechanic (huge multiplicative damage buff for ballista), the 20% multiplicative damage bonus from the 4-Set is outperformed by the 2-Set bonus, while this set is a viable option, using 2/2 set offers better overall performance for her"
                       },
 
                       {
                         name: "Black Wing",
                         effect: "+12% Attack",
                         icon: "/images/sets/black-wing.webp",
-                        why: "Why?",                      
+                        why: "Best 2-Set bonus in general",
                       },
                     ].map((set) => (
                       <ExpandableSetCard
@@ -1476,9 +1475,9 @@ export default function VeronicaGuidePage() {
                 {/* Main Stats */}
                 <div className="grid grid-cols-3 gap-4">
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-purple-400">IV</div>
+                    <div className="text-3xl font-bold text-white-100">IV</div>
                     <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Ideal</div>
-                    <div className="py-2 px-4 rounded bg-purple-500/10 border border-purple-500/30 text-sm font-medium text-purple-300">
+                    <div className="py-2 px-4 rounded bg-white-500/10 border border-white-500/30 text-sm font-medium text-white-300">
                       Critical Rate
                     </div>
                   </div>
@@ -1492,7 +1491,7 @@ export default function VeronicaGuidePage() {
                   </div>
 
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-cyan-400">VI</div>
+                    <div className="text-3xl font-bold text-cyan-300">VI</div>
                     <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Imagination</div>
                     <div className="py-2 px-4 rounded bg-cyan-500/10 border border-cyan-500/30 text-sm font-medium text-cyan-300">
                       Attack %
@@ -1539,57 +1538,51 @@ export default function VeronicaGuidePage() {
             <section id="partners" className="rounded-lg border border-border bg-card p-8 scroll-mt-24">
               <h2 className="text-2xl font-bold mb-6 text-purple-400">5. Partners</h2>
               <p className="text-muted-foreground mb-6 whitespace-pre-line">
-                {`Placeholder`}
+                {`Click on the partners below to see more information.`}
               </p>
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                 {[
                   {
                     id: 1,
-                    name: "Daisy",
-                    role: "C",
-                    image: "/images/partners/partner1.png",
+                    name: "Marin",
+                    role: "S+",
+                    image: "/images/partners/marin.webp",
                     description: "Placeholder partner explanation",
-                    synergy: "Placeholder synergy details",
                   },
                   {
                     id: 2,
-                    name: "Nakia",
-                    role: "S",
-                    image: "/images/partners/partner2.png",
+                    name: "Rosaria",
+                    role: "S+",
+                    image: "/images/partners/rosaria.webp",
                     description: "Placeholder partner explanation",
-                    synergy: "Placeholder synergy details",
                   },
                   {
                     id: 3,
-                    name: "Marin",
-                    role: "S+",
-                    image: "/images/partners/partner3.png",
+                    name: "Nakia",
+                    role: "S",
+                    image: "/images/partners/nakia.webp",
                     description: "Placeholder partner explanation",
-                    synergy: "Placeholder synergy details",
                   },
                   {
                     id: 4,
-                    name: "Rosaria",
-                    role: "S+",
-                    image: "/images/partners/partner4.png",
+                    name: "Solia",
+                    role: "A",
+                    image: "/images/partners/solia.webp",
                     description: "Placeholder partner explanation",
-                    synergy: "Placeholder synergy details",
                   },
                   {
                     id: 5,
-                    name: "Solia",
-                    role: "A",
-                    image: "/images/partners/partner5.png",
+                    name: "Daisy",
+                    role: "C",
+                    image: "/images/partners/daisy.webp",
                     description: "Placeholder partner explanation",
-                    synergy: "Placeholder synergy details",
                   },
                   {
                     id: 6,
                     name: "Tina",
-                    role: "",
-                    image: "/images/partners/partner6.png",
+                    role: "Situational",
+                    image: "/images/partners/tina.webp",
                     description: "Placeholder partner explanation",
-                    synergy: "Placeholder synergy details",
                   },
                 ].map((partner) => (
                   <Dialog
@@ -1631,12 +1624,8 @@ export default function VeronicaGuidePage() {
                           />
                         </div>
                         <div>
-                          <h3 className="text-lg font-semibold text-foreground mb-2">Why Use This Partner?</h3>
+                          <h3 className="text-lg font-semibold text-foreground mb-2">Description</h3>
                           <p className="text-muted-foreground leading-relaxed">{partner.description}</p>
-                        </div>
-                        <div>
-                          <h3 className="text-lg font-semibold text-foreground mb-2">Synergy Details</h3>
-                          <p className="text-muted-foreground leading-relaxed">{partner.synergy}</p>
                         </div>
                       </div>
                     </DialogContent>
@@ -1649,7 +1638,7 @@ export default function VeronicaGuidePage() {
             <section id="teams" className="rounded-lg border border-border bg-card p-8 scroll-mt-24">
               <h2 className="text-2xl font-bold mb-6 text-purple-400">6. Teams</h2>
               <p className="text-muted-foreground mb-6 whitespace-pre-line">
-                Placeholder
+                Below are 2 example teams for Veronica Support and DPS
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1659,7 +1648,7 @@ export default function VeronicaGuidePage() {
                     <div className="group cursor-pointer hover:scale-105 rounded-xl border-2 border-purple-500/30 bg-gradient-to-br from-purple-500/5 to-transparent p-4 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-2 h-2 rounded-full bg-red-400"></div>
-                        <h3 className="text-base font-semibold text-[#ff7a7a]">Mei Lin Hypercarry</h3>
+                        <h3 className="text-base font-semibold text-red-400/100">Mei Lin Hypercarry</h3>
                         </div>
                       <div className="grid grid-cols-3 gap-2 mb-3">
 
@@ -1754,7 +1743,7 @@ export default function VeronicaGuidePage() {
                     <div className="group cursor-pointer hover:scale-105 rounded-xl border-2 border-purple-500/30 bg-gradient-to-br from-purple-500/5 to-transparent p-4 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-2 h-2 rounded-full bg-red-400"></div>
-                        <h3 className="text-base font-semibold text-[#ff7a7a]">Veronica DPS</h3>
+                        <h3 className="text-base font-semibold text-red-400/100">Veronica DPS</h3>
                         </div>
                       <div className="grid grid-cols-3 gap-2 mb-3">
 
