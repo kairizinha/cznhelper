@@ -1434,7 +1434,7 @@ export default function ChizuruGuidePage() {
                             className="w-full h-full object-contain"
                           />
                           <div className="absolute inset-0 flex items-center justify-center">
-                            <img src="/images/gear/Tentacles-of-Chaos.webp" alt="Tentacles of Chaos" className="w-16 h-16 object-contain relative z-10" />
+                            <img src="/images/gear/Tentacles-Of-Chaos.webp" alt="Tentacles of Chaos" className="w-16 h-16 object-contain relative z-10" />
                           </div>
                         </div>
                         <div className="flex-1 min-w-0">
