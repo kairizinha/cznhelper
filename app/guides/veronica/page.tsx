@@ -367,9 +367,9 @@ export default function VeronicaGuidePage() {
                     <span className="text-red-400 text-sm font-medium">Passion</span>
                   </div>
                   
-                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-500/20 border border-purple-500/40">
+                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black-500/20 border border-black-500/40">
                     <img src="/images/icon-job-ranger.webp" alt="Ranger" className="w-5 h-5" />
-                    <span className="text-purple-400 text-sm font-medium">Ranger</span>
+                    <span className="text-black-400 text-sm font-medium">Ranger</span>
                   </div>
                 </div>
 
