@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/dialog"
 
 import { useState } from "react"
-import { GearTooltip } from "@/components/GearTooltip"; // adjust the path if needed
+import { GearTooltip } from "@/components/GearTooltip";
 
 
 
