@@ -533,9 +533,18 @@ export default function VeronicaGuidePage() {
                                             <p
                                               className="text-white text-center text-sm leading-snug m-0 whitespace-pre-line"
                                               dangerouslySetInnerHTML={{
-                                                __html: remainingText.replace(
+                                                __html: remainingText
+                                                .replace(
                                                   /(\d+%?)/g,
                                                   '<span style="color: #7ce2fb">$1</span>',
+                                                )
+                                                .replace(
+                                                  /(Piercing\s*Ballista|Enhanced\s*Ballista|Giant\s*Ballista|Shelling\s*Ballista)/gi,
+                                                  '<span style="color: #C8FF2E; text-decoration: underline; text-underline-offset: 2px">$1</span>',
+                                                )
+                                                .replace(
+                                                  /(Ballista)/gi,
+                                                  '<span style="color: #C8FF2E; text-decoration: underline; text-underline-offset: 2px">$1</span>',
                                                 ),
                                               }}
                                             />
@@ -1475,9 +1484,9 @@ export default function VeronicaGuidePage() {
                 {/* Main Stats */}
                 <div className="grid grid-cols-3 gap-4">
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-white-100">IV</div>
+                    <div className="text-3xl font-bold text-purple-400">IV</div>
                     <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Ideal</div>
-                    <div className="py-2 px-4 rounded bg-white-500/10 border border-white-500/30 text-sm font-medium text-white-300">
+                    <div className="py-2 px-4 rounded bg-purple-500/10 border border-purple-500/30 text-sm font-medium text-purple-300">
                       Critical Rate
                     </div>
                   </div>
@@ -1491,9 +1500,9 @@ export default function VeronicaGuidePage() {
                   </div>
 
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-cyan-300">VI</div>
-                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Imagination</div>
-                    <div className="py-2 px-4 rounded bg-cyan-500/10 border border-cyan-500/30 text-sm font-medium text-cyan-300">
+                    <div className="text-3xl font-bold text-purple-400">IV</div>
+                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Ideal</div>
+                    <div className="py-2 px-4 rounded bg-purple-500/10 border border-purple-500/30 text-sm font-medium text-purple-300">
                       Attack %
                     </div>
                   </div>
@@ -1526,8 +1535,8 @@ export default function VeronicaGuidePage() {
 
                   {/* Explanation */}
                   <div className="mt-7.5 mx-auto text-center">
-                    <p className="text-[12px] leading-relaxed text-muted-foreground">
-                      <strong className="text-muted-foreground">Text will be added here</strong>
+                  <p className="text-[14px] leading-relaxed text-muted-foreground">
+                      <span className="text-muted-foreground">Prioritize Extra Damage first, Critical Rate and Critical Damage for ideal crit ratio. Then prioritize Flat Attack and Attack % for more damage.<br/>Passion Damage% is preferred over Attack% for most cases.</span>
                     </p>
                   </div>
                 </div>

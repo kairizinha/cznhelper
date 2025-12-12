@@ -1953,19 +1953,19 @@ export default function ChizuruGuidePage() {
                         name: "Black Wing",
                         effect: "+12% Attack",
                         icon: "/images/sets/black-wing.webp",
-                        why: "Best 2 set bonus in general.",
+                        why: "Best 2-Set bonus in general",
                       },
                       {
                         name: "Executioner's Tool",
                         effect: "+25% Critical Damage",
                         icon: "/images/sets/executioners-tool.webp",
-                        why: "Best 2 set bonus in general.",
+                        why: "Best 2-Set bonus in general",
                       },
                       {
                         name: "Cursed Corpse",
                         effect: "Increases damage dealt to target inflicted with Agony by 10%",
                         icon: "/images/sets/cursed-corpse.webp",
-                        why: "Optional damage boost if achievable, not required; substats are more important in general."
+                        why: "Optional damage boost if achievable, not required; substats are more important in general"
                       },
                     ].map((set) => (
                       <ExpandableSetCard
@@ -2036,8 +2036,8 @@ export default function ChizuruGuidePage() {
                   </div>
 
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-purple-400">VI</div>
-                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Imagination</div>
+                    <div className="text-3xl font-bold text-purple-400">IV</div>
+                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Ideal</div>
                     <div className="py-2 px-4 rounded bg-purple-500/10 border border-purple-500/30 text-sm font-medium text-purple-300">
                       Attack %
                     </div>
@@ -2067,8 +2067,8 @@ export default function ChizuruGuidePage() {
 
                   {/* Explanation */}
                   <div className="mt-7.5 mx-auto text-center">
-                    <p className="text-[12px] leading-relaxed text-muted-foreground">
-                      <strong className="text-muted-foreground">Prioritize Critical Rate and Critical Damage for ideal crit ratio. Then prioritize Flat Attack and Attack % for more damage.<br/>Void Damage% is preferred over Attack% for most cases.</strong>
+                    <p className="text-[14px] leading-relaxed text-muted-foreground">
+                      <span className="text-muted-foreground">Prioritize Critical Rate and Critical Damage for ideal crit ratio. Then prioritize Flat Attack and Attack % for more damage.<br/>Void Damage% is preferred over Attack% for most cases.</span>
                     </p>
                   </div>
                 </div>
