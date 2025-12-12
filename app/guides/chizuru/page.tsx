@@ -44,7 +44,7 @@ export default function ChizuruGuidePage() {
     {
       id: "karmic-flames",
       name: "Karmic Flames",
-      image: "/images/character/chizuru/starter4.png",
+      image: "/images/character/chizuru/karmic_flames.gif",
       baseType: "attack",
       epiphanies: [
         {
@@ -92,7 +92,7 @@ export default function ChizuruGuidePage() {
     {
       id: "tsukuyomi",
       name: "Tsukuyomi",
-      image: "/images/character/chizuru/unique1.png",
+      image: "/images/character/chizuru/tsukuyomi.gif",
       baseType: "skill",
       epiphanies: [
         {
@@ -141,7 +141,7 @@ export default function ChizuruGuidePage() {
     {
       id: "bound-at-dusk",
       name: "Bound At Dusk",
-      image: "/images/character/chizuru/unique2.png",
+      image: "/images/character/chizuru/bound_at_dusk.gif",
       baseType: "upgrade",
       epiphanies: [
         {
@@ -189,7 +189,7 @@ export default function ChizuruGuidePage() {
     {
       id: "oni-hunt",
       name: "Oni Hunt",
-      image: "/images/character/chizuru/unique3.png",
+      image: "/images/character/chizuru/oni_hunt.gif",
       baseType: "attack",
       epiphanies: [
         {
@@ -236,42 +236,268 @@ export default function ChizuruGuidePage() {
     },
   ]
 
-  const recommendedSaveData1 = {
-    "tsukuyomi-oni-mixed": {
-      topRow: [
-        { id: "card1", name: "Karmic Flames", image: "/images/character/chizuru/starter4.png", cost: 1, type: "skill", description: "[ Initiation / Exhaust] 1 Cursed Shackles\nWhen a target inflicted\nwith Cursed Shackles\nis defeated, create this\ncard" },
-        { id: "card2", name: "Tsukuyomi", image: "/images/character/chizuru/unique1.png", cost: 0, type: "skill", description: "Add 2 Hit(s) to the next\nShadow of the Moon,\nShadow of the Moon+\nused" },
-        { id: "card3", name: "Tsukuyomi", image: "/images/character/chizuru/unique1.png", cost: 0, type: "skill", description: "Add 2 Hit(s) to the next\nShadow of the Moon,\nShadow of the Moon+\nused" },
-        { id: "card4", name: "Tsukuyomi", image: "/images/character/chizuru/unique1.png", cost: 0, type: "skill", description: "Add 2 Hit(s) to the next\nShadow of the Moon,\nShadow of the Moon+\nused" },
-        { id: "card5", name: "Placeholder", image: "/placeholder.svg", cost: 1, type: "skill", description: "" },
-      ],
-      bottomRow: [
-        { id: "card6", name: "Bound At Dusk", image: "/images/character/chizuru/unique2.png", cost: 0, type: "upgrade", description: "[ Initiation / Unique ] At the start of the turn,\ngain Inhibit\nDecrease Cost by 1\nuntil 2 random card(s)\nare used" },
-        { id: "card7", name: "Oni Hunt", image: "/images/character/chizuru/unique3.png", cost: 1, type: "attack", description: "[ Haste ] 60% Damage x 4\n+40% Damage Amount\nto the next Bind card\nused" },
-        { id: "card8", name: "Oni Hunt", image: "/images/character/chizuru/unique3.png", cost: 1, type: "attack", description: "[ Haste ] 60% Damage x 4\n+40% Damage Amount\nto the next Bind card\nused" },
-        { id: "card9", name: "Shadow of the Moon", image: "/images/character/chizuru/unique4.png", cost: 1, type: "attack", description: "[ Bind / Retain ] 72% Damage\n+20% Damage Amount\nfor each Bind stack" },
-        { id: "card10", name: "Placeholder", image: "/placeholder.svg", cost: 0, type: "skill", description: "" },
-      ],
+  const commonCards: Record<string, any> = {
+    "Shadow of the Moon": {
+      id: "shadow-of-the-moon",
+      name: "Shadow of the Moon",
+      image: "/images/character/chizuru/sotm.gif",
+      cost: 1,
+      type: "attack",
+      description: "[ Bind / Retain ] 72% Damage\n+20% Damage Amount\nfor each Bind stack",
     },
+  };
+
+  function getEpiphanyFromRef(ref: string, cardsArray = uniqueCards) {
+    const match = ref.match(/(.*)\s+(I|II|III|IV|V)$/i);
+    let baseRef: string;
+    let roman: string | undefined;
+    
+    if (match) {
+      baseRef = match[1].trim().toLowerCase();
+      roman = match[2].toUpperCase();
+    } else {
+      baseRef = ref.trim().toLowerCase();
+    }
+  
+    const baseCard = cardsArray.find(
+      c => c.id === baseRef || c.name.toLowerCase() === baseRef.replace(/\s+/g, ' ')
+    );
+  
+    const romanToIndex: Record<string, number> = { I: 0, II: 1, III: 2, IV: 3, V: 4 };
+    
+    if (baseCard) {
+      let epiphany;
+      if (roman && romanToIndex[roman] !== undefined) {
+        epiphany = baseCard.epiphanies[romanToIndex[roman]];
+      }
+      epiphany = epiphany || baseCard.epiphanies[0]; // safe fallback
+    
+      return {
+        id: `epiphany-${ref.replace(/\s+/g, '-')}`,
+        name: epiphany.id,
+        image: baseCard.image,
+        cost: epiphany.cost,
+        type: epiphany.type || baseCard.baseType,
+        description: epiphany.description,
+      };
+    }
+  
+    const commonKey = Object.keys(commonCards).find(
+      key => key.toLowerCase() === ref.toLowerCase()
+    );
+    if (commonKey) {
+      const card = commonCards[commonKey];
+      return {
+        id: card.id,
+        name: card.name,
+        image: card.image,
+        cost: card.cost,
+        type: card.type,
+        description: card.description,
+      };
+    }
   }
 
-  const recommendedSaveData2 = {
-    "e2-moon-spam": {
-      topRow: [
-        { id: "card1", name: "Karmic Flames", image: "/images/character/chizuru/starter4.png", cost: 1, type: "skill", description: "[ Initiation / Exhaust] 1 Cursed Shackles\nWhen a target inflicted\nwith Cursed Shackles\nis defeated, create this\ncard" },
-        { id: "card2", name: "Tsukuyomi", image: "/images/character/chizuru/unique1.png", cost: 1, type: "upgrade", description: "[ Unique / Lead ] When an Attack Card\nof this unit is used, 2\nWill-O'-Wisp" },
-        { id: "card3", name: "Tsukuyomi", image: "/images/character/chizuru/unique1.png", cost: 0, type: "skill", description: "3 Will-O'-Wisp for each\nHit of the next Attack\nCard of this unit used" },
-        { id: "card4", name: "Tsukuyomi", image: "/images/character/chizuru/unique1.png", cost: 0, type: "skill", description: "3 Will-O'-Wisp for each\nHit of the next Attack\nCard of this unit used" },
-        { id: "card5", name: "Placeholder", image: "/placeholder.svg", cost: 1, type: "skill", description: "" },
-      ],
-      bottomRow: [
-        { id: "card6", name: "Tsukuyomi", image: "/images/character/chizuru/unique1.png", cost: 0, type: "skill", description: "3 Will-O'-Wisp for each\nHit of the next Attack\nCard of this unit used" },
-        { id: "card7", name: "Bound at Dusk", image: "/images/character/chizuru/unique2.png", cost: 1, type: "upgrade", description: "[ Initiation / Unique ] At the start of the turn,\ngain Inhibit\nWhen Shadow of the\nMoon+ is used, decrease\nCost of the next 1 card(s)\nused by 1" },
-        { id: "card8", name: "Oni Hunt", image: "/images/character/chizuru/unique3.png", cost: 1, type: "skill", description: "Create 2 Moonslash\nApply Exhaust to those\ncards, decrease Cost\nby 1 until used" },
-        { id: "card9", name: "Shadow of the Moon", image: "/images/character/chizuru/unique4.png", cost: 1, type: "attack", description: "[ Bind / Retain ] 72% Damage\n+20% Damage Amount\nfor each Bind stack" },
-        { id: "card10", name: "Placeholder", image: "/placeholder.svg", cost: 0, type: "skill", description: "" },
-      ],
-    },
+  // Define the type for a single deck entry
+  type DeckEntry = {
+    ref: string;
+    count?: number;
+    cardsArray?: typeof uniqueCards;
+  };
+
+  // Define the type for recommendedDecks
+  type RecommendedDecks = {
+    [key: string]: DeckEntry[];
+  };
+
+  // Type your recommendedDecks object
+  const recommendedDecks: RecommendedDecks = {
+    "tsukuyomi-oni-mixed": [
+      { ref: "Karmic Flames V", count: 1 },
+      { ref: "Tsukuyomi III", count: 3 },
+      { ref: "Bound At Dusk I", count: 1 },
+      { ref: "Oni Hunt I", count: 2 },
+      { ref: "Shadow of the Moon", count: 1 },
+    ],
+    "e2-moon-spam": [
+      { ref: "Karmic Flames V", count: 1 },
+      { ref: "Tsukuyomi V", count: 1 },
+      { ref: "Tsukuyomi I", count: 3 },
+      { ref: "Bound At Dusk II", count: 1 },
+      { ref: "Oni Hunt IV", count: 1 },
+      { ref: "Shadow of the Moon", count: 1 },
+    ],
+  };
+
+  function generateDeckRows(deckKey: keyof typeof recommendedDecks): { topRow: any[]; bottomRow: any[] } {
+    const spec = recommendedDecks[deckKey] || [];
+    const deck: any[] = [];           // This will hold only the real cards
+    let globalIndex = 0;
+
+    // Add all real cards (with unique IDs)
+    spec.forEach((entry) => {
+      const { ref, count = 1, cardsArray = uniqueCards } = entry;
+      const baseCard = getEpiphanyFromRef(ref, cardsArray);
+
+      if (!baseCard) {
+        console.warn(`Card not found: ${ref}`);
+        return;
+      }
+
+      for (let i = 0; i < count; i++) {
+        deck.push({
+          ...baseCard,
+          id: `${baseCard.id}-${globalIndex++}`,
+        });
+      }
+    });
+
+    // Build top row → exactly 4 cards + 1 empty on the right
+    const topRow: any[] = [];
+    for (let i = 0; i < 4; i++) {
+      topRow.push(deck[i] || createPlaceholder(`top-${i}`));
+    }
+    topRow.push(createPlaceholder("top-right-empty")); // Always empty
+
+    // Build bottom row → next 4 cards + 1 empty on the right
+    const bottomRow: any[] = [];
+    for (let i = 0; i < 4; i++) {
+      const card = deck[4 + i];
+      bottomRow.push(card || createPlaceholder(`bottom-${i}`));
+    }
+    bottomRow.push(createPlaceholder("bottom-right-empty")); // Always empty
+
+    return { topRow, bottomRow };
+  }
+
+  // Helper function to avoid repeating placeholder object
+  function createPlaceholder(idSuffix: string) {
+    return {
+      id: `placeholder-${idSuffix}`,
+      name: "Placeholder",
+      image: "/placeholder.svg",
+      cost: 0,
+      type: "skill",
+      description: "",
+    };
+  }
+
+  function CardDisplay({ card }: { card: any }) {
+    const isPlaceholder = card.name === "Placeholder";
+
+    return (
+      <div className="relative rounded-lg overflow-hidden border-2 border-border hover:border-purple-400/50 transition-all duration-200">
+        {/* Void Border */}
+        <div className="absolute left-0 -top-0.5 -bottom-0.5 w-3 z-10">
+          <img src="/images/card/void-border.png" alt="" className="h-full w-full object-cover" />
+        </div>
+
+        <div className="relative aspect-[2/3] bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden rounded-md">
+          {isPlaceholder ? (
+            <div className="w-full h-full flex flex-col items-center justify-center">
+              <span className="text-sm text-muted-foreground font-semibold">Placeholder</span>
+              <span className="text-xs text-muted-foreground/70">[Empty Slot]</span>
+            </div>
+          ) : (
+            <>
+              <img
+                src={card.image || "/placeholder.svg"}
+                alt={card.name}
+                className="w-full h-full object-cover scale-125"
+              />
+              <div className="absolute inset-0 flex flex-col">
+                {/* Top Section: Cost + Name + Type */}
+                <div className="p-2 pt-1.5 pl-5">
+                  <div className="flex items-start gap-1.5">
+                    <div className="flex-shrink-0 flex flex-col items-center justify-center">
+                      <span
+                        className="text-white font-bold text-5xl scale-x-80"
+                        style={{
+                          WebkitTextStroke: "1px rgba(0, 0, 0, 0.38)",
+                          textShadow: `-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000`,
+                        }}
+                      >
+                        {card.cost}
+                      </span>
+                      <div className="w-full h-0.5 bg-white mt-0.5 scale-x-80" style={{ backgroundColor: "#ffffff", WebkitBoxShadow: `-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000` }} />
+                    </div>
+                    <div className="flex-1 pt-0.5">
+                      <h5
+                        className="text-white font-bold text-[20px] leading-tight drop-shadow-lg"
+                        style={{
+                          textShadow: `-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000`,
+                          transform: "scaleX(0.65)",
+                          transformOrigin: "left",
+                          maxWidth: "180%",
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                        }}
+                      >
+                        {card.name}
+                      </h5>
+                      <div className="flex items-center gap-1">
+                        <img
+                          src={
+                            card.type === "attack"
+                              ? "/images/icon-category-card-attack.webp"
+                              : card.type === "skill"
+                              ? "/images/icon-category-card-skill.webp"
+                              : "/images/icon-category-card-upgrade.webp"
+                          }
+                          alt={card.type}
+                          className="w-5 h-5"
+                        />
+                        <span className="text-white/100 text-[14px] font-large capitalize drop-shadow" style={{ textShadow: `-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000` }}>
+                          {card.type}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Description Section */}
+                {card.description && (
+                  <div className="mt-auto p-2.5 pl-3 py-5 bg-gradient-to-t from-black/95 via-black/90 to-transparent flex flex-col items-center justify-center gap-0">
+                    {(() => {
+                      const { bracketedText, remainingText } = parseDescription(card.description)
+                      return (
+                        <>
+                          {bracketedText && (
+                            <p
+                              className="text-center font-medium text-sm leading-snug m-0"
+                              style={{ color: "#e3b46c" }}
+                            >
+                              {bracketedText}
+                            </p>
+                          )}
+                          <p
+                            className="text-white text-center text-sm leading-snug m-0 whitespace-pre-line"
+                            dangerouslySetInnerHTML={{
+                              __html: remainingText
+                                .replace(
+                                  /(\d+%?)/g,
+                                  '<span style="color: #7ce2fb">$1</span>',
+                                )
+                                .replace(
+                                  /Shadow of the\s*Moon\+/gi,
+                                  '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>',
+                                ).replace(
+                                  /Moonslash/gi,
+                                  '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>',
+                                ),
+                            }}
+                          />
+                        </>
+                      )
+                    })()}
+                  </div>
+                )}
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    );
   }
 
   const parseDescription = (desc: string) => {
@@ -468,7 +694,7 @@ export default function ChizuruGuidePage() {
                                   <img
                                     src={cardData.image || "/placeholder.svg"}
                                     alt={cardData.name}
-                                    className="w-full h-full object-cover scale-108"
+                                    className="w-full h-full object-cover scale-125"
                                   />
 
                                   {/* Card Info Overlay */}
@@ -650,327 +876,27 @@ export default function ChizuruGuidePage() {
                     </span>
                   </div>
 
-                  {/* 5 cards on top */}
-                  <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
-                    {recommendedSaveData1["tsukuyomi-oni-mixed"].topRow.map((card, index) => (
-                      <div
-                        key={card.id}
-                        className="relative rounded-lg overflow-hidden border-2 border-border hover:border-purple-400/50 transition-all duration-200"
-                      >
-                        {/* Void Border */}
-                        <div className="absolute left-0 -top-0.5 -bottom-0.5 w-3 z-10">
-                          <img
-                            src="/images/card/void-border.png"
-                            alt=""
-                            className="h-full w-full object-cover"
-                          />
+                  {(() => {
+                    const { topRow, bottomRow } = generateDeckRows("tsukuyomi-oni-mixed");
+                    return (
+                      <>
+                        {/* Top Row */}
+                        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
+                          {topRow.map((card, index) => (
+                            <CardDisplay key={card.id || index} card={card} />
+                          ))}
                         </div>
 
-                        {/* Card Image */}
-                        <div className="relative aspect-[2/3] bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden rounded-md">
-                          {index === 4 || card.id === "card5" ? (
-                            <div className="w-full h-full flex flex-col items-center justify-center">
-                              <span className="text-sm text-muted-foreground font-semibold">Card 5</span>
-                              <span className="text-xs text-muted-foreground/70">[Placeholder]</span>
-                            </div>
-                          ) : (
-                            <>
-                              <img
-                                src={card.image || "/placeholder.svg"}
-                                alt={card.name}
-                                className="w-full h-full object-cover scale-108"
-                              />
-                              {/* Card Info Overlay */}
-                              <div className="absolute inset-0 flex flex-col">
-                                {/* Top Section */}
-                                <div className="p-2 pt-1.5 pl-5">
-                                  <div className="flex items-start gap-1.5">
-                                    {/* Cost */}
-                                    <div className="flex-shrink-0 flex flex-col items-center justify-center">
-                                      <span
-                                        className="text-white font-bold text-5xl scale-x-80"
-                                        style={{
-                                          WebkitTextStroke: "1px rgba(0, 0, 0, 0.38)",
-                                          textShadow: `
-                                              -1px -1px 0 #000,
-                                               1px -1px 0 #000,
-                                              -1px  1px 0 #000,
-                                               1px  1px 0 #000
-                                            `,
-                                        }}
-                                      >
-                                        {card.cost}
-                                      </span>
-                                      <div
-                                        className="w-full h-0.5 bg-white mt-0.5 scale-x-80"
-                                        style={{
-                                          backgroundColor: "#ffffff",
-                                          WebkitBoxShadow: `
-                                              -1px -1px 0 #000,
-                                               1px -1px 0 #000,
-                                              -1px  1px 0 #000,
-                                               1px  1px 0 #000
-                                              `,
-                                        }}
-                                      />
-                                    </div>
-
-                                    {/* Name and Type */}
-                                    <div className="flex-1 pt-0.5">
-                                      <h5
-                                        className="text-white font-bold text-[20px] leading-tight drop-shadow-lg"
-                                        style={{
-                                          textShadow: `
-                                              -1px -1px 0 #000,
-                                               1px -1px 0 #000,
-                                              -1px  1px 0 #000,
-                                               1px  1px 0 #000
-                                            `,
-                                          transform: "scaleX(0.65)",
-                                          transformOrigin: "left",
-                                          maxWidth: "180%",
-                                          whiteSpace: "nowrap",
-                                          overflow: "hidden",
-                                        }}
-                                      >
-                                        {card.name}
-                                      </h5>
-                                      <div className="flex items-center gap-1">
-                                        <img
-                                          src={
-                                            card.type === "attack"
-                                              ? "/images/icon-category-card-attack.webp"
-                                              : card.type === "skill"
-                                                ? "/images/icon-category-card-skill.webp"
-                                                : "/images/icon-category-card-upgrade.webp"
-                                          }
-                                          alt={card.type}
-                                          className="w-5 h-5"
-                                        />
-                                        <span
-                                          className="text-white/100 text-[14px] font-large capitalize drop-shadow "
-                                          style={{
-                                            textShadow: `
-                                              -1px -1px 0 #000,
-                                               1px -1px 0 #000,
-                                              -1px  1px 0 #000,
-                                               1px  1px 0 #000
-                                            `,
-                                          }}
-                                        >
-                                          {card.type}
-                                        </span>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-
-                                {/* Description Section */}
-                                {card.description && (
-                                  <div className="mt-auto p-2.5 pl-3 py-5 bg-gradient-to-t from-black/95 via-black/90 to-transparent flex flex-col items-center justify-center gap-0">
-                                    {(() => {
-                                      const { bracketedText, remainingText } = parseDescription(card.description)
-                                      return (
-                                        <>
-                                          {bracketedText && (
-                                            <p
-                                              className="text-center font-medium text-sm leading-snug m-0"
-                                              style={{ color: "#e3b46c" }}
-                                            >
-                                              {bracketedText}
-                                            </p>
-                                          )}
-                                          <p
-                                            className="text-white text-center text-sm leading-snug m-0 whitespace-pre-line"
-                                            dangerouslySetInnerHTML={{
-                                              __html: remainingText
-                                                .replace(
-                                                  /(\d+%?)/g,
-                                                  '<span style="color: #7ce2fb">$1</span>',
-                                                )
-                                                .replace(
-                                                  /Shadow of the\s*Moon\+/gi,
-                                                  '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>',
-                                                ).replace(
-                                                  /Moonslash/gi,
-                                                  '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>',
-                                                ),
-                                            }}
-                                          />
-                                        </>
-                                      )
-                                    })()}
-                                  </div>
-                                )}
-                              </div>
-                            </>
-                          )}
+                        {/* Bottom Row */}
+                        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
+                          {bottomRow.map((card, index) => (
+                            <CardDisplay key={card.id || index} card={card} />
+                          ))}
                         </div>
-                      </div>
-                    ))}
-                  </div>
+                      </>
+                    );
+                  })()}
 
-                  {/* 5 cards on bottom */}
-                  <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
-                    {recommendedSaveData1["tsukuyomi-oni-mixed"].bottomRow.map((card, index) => (
-                      <div
-                        key={card.id}
-                        className="relative rounded-lg overflow-hidden border-2 border-border hover:border-purple-400/50 transition-all duration-200"
-                      >
-                        {/* Void Border */}
-                        <div className="absolute left-0 -top-0.5 -bottom-0.5 w-3 z-10">
-                          <img
-                            src="/images/card/void-border.png"
-                            alt=""
-                            className="h-full w-full object-cover"
-                          />
-                        </div>
-
-                        {/* Card Image */}
-                        <div className="relative aspect-[2/3] bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden rounded-md">
-                          {index === 4 || card.id === "card10" ? (
-                            <div className="w-full h-full flex flex-col items-center justify-center">
-                              <span className="text-sm text-muted-foreground font-semibold">Card 10</span>
-                              <span className="text-xs text-muted-foreground/70">[Placeholder]</span>
-                            </div>
-                          ) : (
-                            <>
-                              <img
-                                src={card.image || "/placeholder.svg"}
-                                alt={card.name}
-                                className="w-full h-full object-cover scale-108"
-                              />
-                              {/* Card Info Overlay */}
-                              <div className="absolute inset-0 flex flex-col">
-                                {/* Top Section */}
-                                <div className="p-2 pt-1.5 pl-5">
-                                  <div className="flex items-start gap-1.5">
-                                    {/* Cost */}
-                                    <div className="flex-shrink-0 flex flex-col items-center justify-center">
-                                      <span
-                                        className="text-white font-bold text-5xl scale-x-80"
-                                        style={{
-                                          WebkitTextStroke: "1px rgba(0, 0, 0, 0.38)",
-                                          textShadow: `
-                                              -1px -1px 0 #000,
-                                               1px -1px 0 #000,
-                                              -1px  1px 0 #000,
-                                               1px  1px 0 #000
-                                            `,
-                                        }}
-                                      >
-                                        {card.cost}
-                                      </span>
-                                      <div
-                                        className="w-full h-0.5 bg-white mt-0.5 scale-x-80"
-                                        style={{
-                                          backgroundColor: "#ffffff",
-                                          WebkitBoxShadow: `
-                                              -1px -1px 0 #000,
-                                               1px -1px 0 #000,
-                                              -1px  1px 0 #000,
-                                               1px  1px 0 #000
-                                              `,
-                                        }}
-                                      />
-                                    </div>
-
-                                    {/* Name and Type */}
-                                    <div className="flex-1 pt-0.5">
-                                      <h5
-                                        className="text-white font-bold text-[20px] leading-tight drop-shadow-lg"
-                                        style={{
-                                          textShadow: `
-                                              -1px -1px 0 #000,
-                                               1px -1px 0 #000,
-                                              -1px  1px 0 #000,
-                                               1px  1px 0 #000
-                                            `,
-                                          transform: "scaleX(0.65)",
-                                          transformOrigin: "left",
-                                          maxWidth: "180%",
-                                          whiteSpace: "nowrap",
-                                          overflow: "hidden",
-                                        }}
-                                      >
-                                        {card.name}
-                                      </h5>
-                                      <div className="flex items-center gap-1">
-                                        <img
-                                          src={
-                                            card.type === "attack"
-                                              ? "/images/icon-category-card-attack.webp"
-                                              : card.type === "skill"
-                                                ? "/images/icon-category-card-skill.webp"
-                                                : "/images/icon-category-card-upgrade.webp"
-                                          }
-                                          alt={card.type}
-                                          className="w-5 h-5"
-                                        />
-                                        <span
-                                          className="text-white/100 text-[14px] font-large capitalize drop-shadow "
-                                          style={{
-                                            textShadow: `
-                                              -1px -1px 0 #000,
-                                               1px -1px 0 #000,
-                                              -1px  1px 0 #000,
-                                               1px  1px 0 #000
-                                            `,
-                                          }}
-                                        >
-                                          {card.type}
-                                        </span>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-
-                                {/* Description Section */}
-                                {card.description && (
-                                  <div className="mt-auto p-2.5 pl-3 py-5 bg-gradient-to-t from-black/95 via-black/90 to-transparent flex flex-col items-center justify-center gap-0">
-                                    {(() => {
-                                      const { bracketedText, remainingText } = parseDescription(card.description)
-                                      return (
-                                        <>
-                                          {bracketedText && (
-                                            <p
-                                              className="text-center font-medium text-sm leading-snug m-0"
-                                              style={{ color: "#e3b46c" }}
-                                            >
-                                              {bracketedText}
-                                            </p>
-                                          )}
-                                          <p
-                                            className="text-white text-center text-sm leading-snug m-0 whitespace-pre-line"
-                                            dangerouslySetInnerHTML={{
-                                              __html: remainingText
-                                                .replace(
-                                                  /(\d+%?)/g,
-                                                  '<span style="color: #7ce2fb">$1</span>',
-                                                )
-                                                .replace(
-                                                  /Shadow of the\s*Moon\+/gi,
-                                                  '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>',
-                                                ).replace(
-                                                  /Moonslash/gi,
-                                                  '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>',
-                                                ),
-                                            }}
-                                          />
-                                        </>
-                                      )
-                                    })()}
-                                  </div>
-                                )}
-                              </div>
-                            </>
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Dropdown  */}
                   <Collapsible>
                     <CollapsibleTrigger className="w-full px-4 py-2.5 rounded-lg bg-background/50 border border-border hover:bg-background/70 transition-colors flex items-center justify-between group">
                       <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground">
@@ -982,11 +908,11 @@ export default function ChizuruGuidePage() {
                       <div className="p-4 rounded-lg bg-background/50 border border-border">
                         <p className="text-sm text-muted-foreground leading-relaxed">
                           Stack up for a huge Shadow of the Moon to Nuke the enemy
-                          <br/>
+                          <br />
                           Oni Hunt 2 or Oni Hunt 5 are also options for Orlea, just depends if you wanna spend buffs or not
-                          <br/>
+                          <br />
                           3 Tsukuyomi, 2 Oni Hunt is Optimal Ratio,
-                          <br/>
+                          <br />
                           2 Tsukuyomi, 3 Oni Hunt is also fine, 4 of one or the other is bad
                         </p>
                       </div>
@@ -1003,327 +929,27 @@ export default function ChizuruGuidePage() {
                     </span>
                   </div>
 
-                  {/* 5 cards on top */}
-                  <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
-                    {recommendedSaveData2["e2-moon-spam"].topRow.map((card, index) => (
-                      <div
-                        key={card.id}
-                        className="relative rounded-lg overflow-hidden border-2 border-border hover:border-purple-400/50 transition-all duration-200"
-                      >
-                        {/* Void Border */}
-                        <div className="absolute left-0 -top-0.5 -bottom-0.5 w-3 z-10">
-                          <img
-                            src="/images/card/void-border.png"
-                            alt=""
-                            className="h-full w-full object-cover"
-                          />
+                  {(() => {
+                    const { topRow, bottomRow } = generateDeckRows("e2-moon-spam");
+                    return (
+                      <>
+                        {/* Top Row */}
+                        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
+                          {topRow.map((card, index) => (
+                            <CardDisplay key={card.id || index} card={card} />
+                          ))}
                         </div>
 
-                        {/* Card Image */}
-                        <div className="relative aspect-[2/3] bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden rounded-md">
-                          {index === 4 || card.id === "card5" ? (
-                            <div className="w-full h-full flex flex-col items-center justify-center">
-                              <span className="text-sm text-muted-foreground font-semibold">Card 5</span>
-                              <span className="text-xs text-muted-foreground/70">[Placeholder]</span>
-                            </div>
-                          ) : (
-                            <>
-                              <img
-                                src={card.image || "/placeholder.svg"}
-                                alt={card.name}
-                                className="w-full h-full object-cover scale-108"
-                              />
-                              {/* Card Info Overlay */}
-                              <div className="absolute inset-0 flex flex-col">
-                                {/* Top Section */}
-                                <div className="p-2 pt-1.5 pl-5">
-                                  <div className="flex items-start gap-1.5">
-                                    {/* Cost */}
-                                    <div className="flex-shrink-0 flex flex-col items-center justify-center">
-                                      <span
-                                        className="text-white font-bold text-5xl scale-x-80"
-                                        style={{
-                                          WebkitTextStroke: "1px rgba(0, 0, 0, 0.38)",
-                                          textShadow: `
-                                              -1px -1px 0 #000,
-                                               1px -1px 0 #000,
-                                              -1px  1px 0 #000,
-                                               1px  1px 0 #000
-                                            `,
-                                        }}
-                                      >
-                                        {card.cost}
-                                      </span>
-                                      <div
-                                        className="w-full h-0.5 bg-white mt-0.5 scale-x-80"
-                                        style={{
-                                          backgroundColor: "#ffffff",
-                                          WebkitBoxShadow: `
-                                              -1px -1px 0 #000,
-                                               1px -1px 0 #000,
-                                              -1px  1px 0 #000,
-                                               1px  1px 0 #000
-                                              `,
-                                        }}
-                                      />
-                                    </div>
-
-                                    {/* Name and Type */}
-                                    <div className="flex-1 pt-0.5">
-                                      <h5
-                                        className="text-white font-bold text-[20px] leading-tight drop-shadow-lg"
-                                        style={{
-                                          textShadow: `
-                                              -1px -1px 0 #000,
-                                               1px -1px 0 #000,
-                                              -1px  1px 0 #000,
-                                               1px  1px 0 #000
-                                            `,
-                                          transform: "scaleX(0.65)",
-                                          transformOrigin: "left",
-                                          maxWidth: "180%",
-                                          whiteSpace: "nowrap",
-                                          overflow: "hidden",
-                                        }}
-                                      >
-                                        {card.name}
-                                      </h5>
-                                      <div className="flex items-center gap-1">
-                                        <img
-                                          src={
-                                            card.type === "attack"
-                                              ? "/images/icon-category-card-attack.webp"
-                                              : card.type === "skill"
-                                                ? "/images/icon-category-card-skill.webp"
-                                                : "/images/icon-category-card-upgrade.webp"
-                                          }
-                                          alt={card.type}
-                                          className="w-5 h-5"
-                                        />
-                                        <span
-                                          className="text-white/100 text-[14px] font-large capitalize drop-shadow "
-                                          style={{
-                                            textShadow: `
-                                              -1px -1px 0 #000,
-                                               1px -1px 0 #000,
-                                              -1px  1px 0 #000,
-                                               1px  1px 0 #000
-                                            `,
-                                          }}
-                                        >
-                                          {card.type}
-                                        </span>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-
-                                {/* Description Section */}
-                                {card.description && (
-                                  <div className="mt-auto p-2.5 pl-3 py-5 bg-gradient-to-t from-black/95 via-black/90 to-transparent flex flex-col items-center justify-center gap-0">
-                                    {(() => {
-                                      const { bracketedText, remainingText } = parseDescription(card.description)
-                                      return (
-                                        <>
-                                          {bracketedText && (
-                                            <p
-                                              className="text-center font-medium text-sm leading-snug m-0"
-                                              style={{ color: "#e3b46c" }}
-                                            >
-                                              {bracketedText}
-                                            </p>
-                                          )}
-                                          <p
-                                            className="text-white text-center text-sm leading-snug m-0 whitespace-pre-line"
-                                            dangerouslySetInnerHTML={{
-                                              __html: remainingText
-                                                .replace(
-                                                  /(\d+%?)/g,
-                                                  '<span style="color: #7ce2fb">$1</span>',
-                                                )
-                                                .replace(
-                                                  /Shadow of the\s*Moon\+/gi,
-                                                  '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>',
-                                                ).replace(
-                                                  /Moonslash/gi,
-                                                  '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>',
-                                                ),
-                                            }}
-                                          />
-                                        </>
-                                      )
-                                    })()}
-                                  </div>
-                                )}
-                              </div>
-                            </>
-                          )}
+                        {/* Bottom Row */}
+                        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
+                          {bottomRow.map((card, index) => (
+                            <CardDisplay key={card.id || index} card={card} />
+                          ))}
                         </div>
-                      </div>
-                    ))}
-                  </div>
+                      </>
+                    );
+                  })()}
 
-                  {/* 5 cards on bottom */}
-                  <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
-                    {recommendedSaveData2["e2-moon-spam"].bottomRow.map((card, index) => (
-                      <div
-                        key={card.id}
-                        className="relative rounded-lg overflow-hidden border-2 border-border hover:border-purple-400/50 transition-all duration-200"
-                      >
-                        {/* Void Border */}
-                        <div className="absolute left-0 -top-0.5 -bottom-0.5 w-3 z-10">
-                          <img
-                            src="/images/card/void-border.png"
-                            alt=""
-                            className="h-full w-full object-cover"
-                          />
-                        </div>
-
-                        {/* Card Image */}
-                        <div className="relative aspect-[2/3] bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden rounded-md">
-                          {index === 4 || card.id === "card10" ? (
-                            <div className="w-full h-full flex flex-col items-center justify-center">
-                              <span className="text-sm text-muted-foreground font-semibold">Card 10</span>
-                              <span className="text-xs text-muted-foreground/70">[Placeholder]</span>
-                            </div>
-                          ) : (
-                            <>
-                              <img
-                                src={card.image || "/placeholder.svg"}
-                                alt={card.name}
-                                className="w-full h-full object-cover scale-108"
-                              />
-                              {/* Card Info Overlay */}
-                              <div className="absolute inset-0 flex flex-col">
-                                {/* Top Section */}
-                                <div className="p-2 pt-1.5 pl-5">
-                                  <div className="flex items-start gap-1.5">
-                                    {/* Cost */}
-                                    <div className="flex-shrink-0 flex flex-col items-center justify-center">
-                                      <span
-                                        className="text-white font-bold text-5xl scale-x-80"
-                                        style={{
-                                          WebkitTextStroke: "1px rgba(0, 0, 0, 0.38)",
-                                          textShadow: `
-                                              -1px -1px 0 #000,
-                                               1px -1px 0 #000,
-                                              -1px  1px 0 #000,
-                                               1px  1px 0 #000
-                                            `,
-                                        }}
-                                      >
-                                        {card.cost}
-                                      </span>
-                                      <div
-                                        className="w-full h-0.5 bg-white mt-0.5 scale-x-80"
-                                        style={{
-                                          backgroundColor: "#ffffff",
-                                          WebkitBoxShadow: `
-                                              -1px -1px 0 #000,
-                                               1px -1px 0 #000,
-                                              -1px  1px 0 #000,
-                                               1px  1px 0 #000
-                                              `,
-                                        }}
-                                      />
-                                    </div>
-
-                                    {/* Name and Type */}
-                                    <div className="flex-1 pt-0.5">
-                                      <h5
-                                        className="text-white font-bold text-[20px] leading-tight drop-shadow-lg"
-                                        style={{
-                                          textShadow: `
-                                              -1px -1px 0 #000,
-                                               1px -1px 0 #000,
-                                              -1px  1px 0 #000,
-                                               1px  1px 0 #000
-                                            `,
-                                          transform: "scaleX(0.65)",
-                                          transformOrigin: "left",
-                                          maxWidth: "180%",
-                                          whiteSpace: "nowrap",
-                                          overflow: "hidden",
-                                        }}
-                                      >
-                                        {card.name}
-                                      </h5>
-                                      <div className="flex items-center gap-1">
-                                        <img
-                                          src={
-                                            card.type === "attack"
-                                              ? "/images/icon-category-card-attack.webp"
-                                              : card.type === "skill"
-                                                ? "/images/icon-category-card-skill.webp"
-                                                : "/images/icon-category-card-upgrade.webp"
-                                          }
-                                          alt={card.type}
-                                          className="w-5 h-5"
-                                        />
-                                        <span
-                                          className="text-white/100 text-[14px] font-large capitalize drop-shadow "
-                                          style={{
-                                            textShadow: `
-                                              -1px -1px 0 #000,
-                                               1px -1px 0 #000,
-                                              -1px  1px 0 #000,
-                                               1px  1px 0 #000
-                                            `,
-                                          }}
-                                        >
-                                          {card.type}
-                                        </span>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-
-                                {/* Description Section */}
-                                {card.description && (
-                                  <div className="mt-auto p-2.5 pl-3 py-5 bg-gradient-to-t from-black/95 via-black/90 to-transparent flex flex-col items-center justify-center gap-0">
-                                    {(() => {
-                                      const { bracketedText, remainingText } = parseDescription(card.description)
-                                      return (
-                                        <>
-                                          {bracketedText && (
-                                            <p
-                                              className="text-center font-medium text-sm leading-snug m-0"
-                                              style={{ color: "#e3b46c" }}
-                                            >
-                                              {bracketedText}
-                                            </p>
-                                          )}
-                                          <p
-                                            className="text-white text-center text-sm leading-snug m-0 whitespace-pre-line"
-                                            dangerouslySetInnerHTML={{
-                                              __html: remainingText
-                                                .replace(
-                                                  /(\d+%?)/g,
-                                                  '<span style="color: #7ce2fb">$1</span>',
-                                                )
-                                                .replace(
-                                                  /Shadow of the\s*Moon\+/gi,
-                                                  '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>',
-                                                ).replace(
-                                                  /Moonslash/gi,
-                                                  '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>',
-                                                ),
-                                            }}
-                                          />
-                                        </>
-                                      )
-                                    })()}
-                                  </div>
-                                )}
-                              </div>
-                            </>
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Dropdown */}
                   <Collapsible>
                     <CollapsibleTrigger className="w-full px-4 py-2.5 rounded-lg bg-background/50 border border-border hover:bg-background/70 transition-colors flex items-center justify-between group">
                       <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground">
@@ -1334,7 +960,7 @@ export default function ChizuruGuidePage() {
                     <CollapsibleContent className="mt-3">
                       <div className="p-4 rounded-lg bg-background/50 border border-border">
                         <p className="text-sm text-muted-foreground leading-relaxed">
-                        At E2, Tsukuyomi 1 + Tsukuyomi 5 on a Moon+ will refund itself, and then you can play 4 Moon+ in a row
+                          At E2, Tsukuyomi 1 + Tsukuyomi 5 on a Moon+ will refund itself, and then you can play 4 Moon+ in a row
                         </p>
                       </div>
                     </CollapsibleContent>
