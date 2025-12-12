@@ -77,7 +77,7 @@ export default function ChizuruGuidePage() {
           cost: 2,
           type: "skill",
           description: "[ Initiation ] 1 Cursed Shackles\nCreate 1 Shadow of the\nMoon",
-          reasoning: "Best overall; lower single-target damage but AoE is so strong it doesn't matter, mitigates targeting RNG without E2—always pick if unsure",
+          reasoning: "Expensive, but 5 wisps, is good with Bound At Dusk 5",
         },
         {
           id: "Karmic Flames V",
