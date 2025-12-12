@@ -16,6 +16,12 @@ export default function CalculatorPage() {
               <p className="mt-1 text-sm text-muted-foreground">Track your progress through the ongoing nightmare</p>
             </div>
             <div className="flex items-center gap-6">
+              <div className="text-right">
+                <p className="text-xs text-muted-foreground">
+                  Made by <span className="text-purple-400 font-semibold">lilyium.box</span>
+                </p>
+                <p className="text-xs text-muted-foreground/70">Thanks to Sproot & Zyla for testing</p>
+              </div>
               <Link
                 href="/"
                 className="flex items-center gap-2 px-4 py-2 rounded-lg border border-purple-400/30 bg-purple-400/10 hover:bg-purple-400/20 transition-colors"
@@ -23,12 +29,6 @@ export default function CalculatorPage() {
                 <Home className="w-4 h-4 text-purple-400" />
                 <span className="text-sm font-medium text-purple-400">Home</span>
               </Link>
-              <div className="text-right">
-                <p className="text-xs text-muted-foreground">
-                  Made by <span className="text-purple-400 font-semibold">lilyium.box</span>
-                </p>
-                <p className="text-xs text-muted-foreground/70">Thanks to Sproot & Zyla for testing</p>
-              </div>
             </div>
           </div>
         </div>

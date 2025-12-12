@@ -156,13 +156,21 @@ export default function CharacterGuidesPage() {
             <h1 className="text-3xl font-bold tracking-tight text-balance bg-gradient-to-r from-red-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
               Character Guides
             </h1>
-            <Link
-              href="/"
-              className="flex items-center gap-2 px-4 py-2 rounded-lg border border-purple-400/30 bg-purple-400/10 hover:bg-purple-400/20 transition-colors"
-            >
-              <Home className="w-4 h-4 text-purple-400" />
-              <span className="text-sm font-medium text-purple-400">Home</span>
-            </Link>
+            <div className="flex items-center gap-4">
+              <div className="text-right">
+                <p className="text-xs text-muted-foreground">
+                  Made by <span className="text-purple-400 font-semibold">lilyium.box</span>
+                </p>
+                <p className="text-xs text-muted-foreground/70">Thanks to Sproot for the resources & Zyla for helping in development</p>
+              </div>
+              <Link
+                href="/"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg border border-purple-400/30 bg-purple-400/10 hover:bg-purple-400/20 transition-colors"
+              >
+                <Home className="w-4 h-4 text-purple-400" />
+                <span className="text-sm font-medium text-purple-400">Home</span>
+              </Link>
+            </div>
           </div>
         </div>
       </header>
