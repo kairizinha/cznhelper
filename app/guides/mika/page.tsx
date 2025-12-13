@@ -44,7 +44,7 @@ export default function ChizuruGuidePage() {
     {
       id: "source-of-water",
       name: "Source of Water",
-      image: "/images/character/mika/source_of_water.gif",
+      image: "/images/character/mika/starter4.gif",
       baseType: "skill",
       epiphanies: [
         {
@@ -53,7 +53,7 @@ export default function ChizuruGuidePage() {
           cost: 0,
           type: "skill",
           description: "Heal 150%\nGain 1 AP\n1 Wave",
-          reasoning: "Provides healing and AP gain while generating 1 Wave. Wave stacks accumulate and convert to AP when reaching 3 stacks.",
+          reasoning: "Upgraded base card with Wave – stacks to 3 for bonus AP",
         },
         {
           id: "Source of Water II",
@@ -61,7 +61,7 @@ export default function ChizuruGuidePage() {
           cost: 1,
           type: "skill",
           description: "Heal 150%\nGain 2 AP\nWhen Recovering, decrease Cost by 1 for 1 turn",
-          reasoning: "Higher AP gain but costs 1. Cost reduction when recovering helps with sustain builds.",
+          reasoning: "Massive 2 AP + heal for 1-cost; cost refund on Recovering enables conditional 0-cost.",
         },
         {
           id: "Source of Water III",
@@ -77,7 +77,7 @@ export default function ChizuruGuidePage() {
           cost: 0,
           type: "skill",
           description: "Heal 150%\nGain 1 AP\nDecrease Stress of allies by 2",
-          reasoning: "Stress reduction utility makes this valuable for longer fights and team support.",
+          reasoning: "Stress reduction utility makes this valuable for longer fights.",
         },
         {
           id: "Source of Water V",
@@ -85,14 +85,14 @@ export default function ChizuruGuidePage() {
           cost: 0,
           type: "skill",
           description: "[Exhaust]\nHeal 100%\nGain 3 AP",
-          reasoning: "Massive AP gain at the cost of exhaust. Excellent for burst turns and AP generation.",
+          reasoning: "Generates massive AP at exhaust cost. Good for Haru or Kayron for explosive single-turn damage.",
         },
       ],
     },
     {
       id: "blessing-of-waves",
       name: "Blessing of Waves",
-      image: "/images/character/mika/blessing_of_waves.gif",
+      image: "/images/character/mika/unique1.gif",
       baseType: "skill",
       epiphanies: [
         {
@@ -140,16 +140,16 @@ export default function ChizuruGuidePage() {
     {
       id: "tactical-analysis",
       name: "Tactical Analysis",
-      image: "/images/character/mika/tactical_analysis.gif",
+      image: "/images/character/mika/unique2.gif",
       baseType: "skill",
       epiphanies: [
         {
           id: "Tactical Analysis I",
-          tier: "S",
+          tier: "S+",
           cost: 0,
           type: "skill",
           description: "Heal 50%\n1 Wave\nFor 2 turns, +50% Healing",
-          reasoning: "Adds healing and extends healing bonus duration, making it more valuable for sustained fights.",
+          reasoning: "Upgrades with healing + extended healing bonus duration. Ideal for prolonged battles; heals directly generate more daggers for Tressa.",
         },
         {
           id: "Tactical Analysis II",
@@ -165,11 +165,11 @@ export default function ChizuruGuidePage() {
           cost: 0,
           type: "skill",
           description: "2 Wave\nFor 1 turn, +100% own Healing",
-          reasoning: "Doubles own healing bonus instead of team-wide, making it excellent for self-sustain builds.",
+          reasoning: "Generates 2 Wave, accelerating AP generation through Wave conversion. Maintains healing bonus for sustain..",
         },
         {
           id: "Tactical Analysis IV",
-          tier: "F",
+          tier: "C",
           cost: 0,
           type: "skill",
           description: "When own card is used, 1 Wave for 1 turn",
@@ -188,7 +188,7 @@ export default function ChizuruGuidePage() {
     {
       id: "whirlpool",
       name: "Whirlpool",
-      image: "/images/character/mika/whirlpool.gif",
+      image: "/images/character/mika/unique3.gif",
       baseType: "attack",
       epiphanies: [
         {
@@ -217,11 +217,11 @@ export default function ChizuruGuidePage() {
         },
         {
           id: "Whirlpool IV",
-          tier: "F",
+          tier: "C",
           cost: 4,
           type: "attack",
           description: "300% Damage to all enemies\nIf Recovered, decrease Cost by 1 until used",
-          reasoning: "DPS MIKA is a meme. Despite higher damage numbers, Mika cannot effectively deal damage. The high cost and conditional reduction make this inefficient, especially since the damage output is still negligible.",
+          reasoning: "High base cost + conditional reduction yields negligible output. Niche value in Cassius/Tressa decks to contribute toward 0-cost card.",
         },
         {
           id: "Whirlpool V",
@@ -247,7 +247,7 @@ export default function ChizuruGuidePage() {
     "Deluge": {
       id: "deluge",
       name: "Deluge",
-      image: "/images/character/mika/deluge.gif",
+      image: "/images/character/mika/unique4.gif",
       cost: 1,
       type: "upgrade",
       description: "[Unique / Initiation]\n1 Wave\nAt the start of the turn, 1 Wave",
@@ -664,7 +664,7 @@ export default function ChizuruGuidePage() {
           <div className="flex-1 space-y-8">
             {/* 1. Overview */}
             <section id="overview" className="rounded-lg border border-border bg-card p-8 scroll-mt-6">
-            <h2 className="text-2xl font-bold mb-6 text-blue-400">1. Overview</h2>
+            <h2 className="text-2xl font-bold mb-6 text-purple-400">1. Overview</h2>
               <div className="space-y-4">
                 <div className="flex flex-wrap gap-3 mb-4">
                   <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/20 border border-blue-500/50">
@@ -672,9 +672,9 @@ export default function ChizuruGuidePage() {
                     <span className="text-blue-400 text-sm font-medium">Justice</span>
                   </div>
                   
-                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-500/20 border border-purple-500/40">
+                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black-500/20 border border-black-500/40">
                     <img src="/images/icon-job-controller.webp" alt="Controller" className="w-5 h-5" />
-                    <span className="text-white-400 text-sm font-medium">Controller</span>
+                    <span className="text-black-400 text-sm font-medium">Controller</span>
                   </div>
                 </div>
 
@@ -1558,29 +1558,26 @@ export default function ChizuruGuidePage() {
                 <div className="grid grid-cols-3 gap-4">
                   <div className="text-center">
                     <div className="text-3xl font-bold text-purple-400">IV</div>
-                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Main Stat</div>
+                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Ideal</div>
                     <div className="py-2 px-4 rounded bg-purple-500/10 border border-purple-500/30 text-sm font-medium text-purple-300">
-                      HP
+                      HP %
                     </div>
-                    <div className="text-xs text-muted-foreground mt-1">Largely Unimportant</div>
                   </div>
 
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-purple-400">V</div>
-                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Main Stat</div>
+                    <div className="text-3xl font-bold text-cyan-400">V</div>
+                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Desire</div>
                     <div className="py-2 px-4 rounded bg-purple-500/10 border border-purple-500/30 text-sm font-medium text-purple-300">
-                      HP
+                      HP %
                     </div>
-                    <div className="text-xs text-muted-foreground mt-1">Largely Unimportant</div>
                   </div>
 
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-purple-400">VI</div>
-                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Main Stat</div>
+                    <div className="text-3xl font-bold text-purple-400">IV</div>
+                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Ideal</div>
                     <div className="py-2 px-4 rounded bg-purple-500/10 border border-purple-500/30 text-sm font-medium text-purple-300">
                       Ego Recovery
                     </div>
-                    <div className="text-xs text-muted-foreground mt-1">Ego Recovery helps alot with gaining Ego Points to use Ego Skills and Partner Skills</div>
                   </div>
                 </div>
 
@@ -1588,27 +1585,33 @@ export default function ChizuruGuidePage() {
                 <div className="mt-8 text-center justify-center text-[14px]">
                   {/* Priority Chain */}
                   <div className="flex items-center justify-center gap-4 md:gap-4 flex-wrap">
-                    <div className="px-4 py-2 rounded-full bg-purple-500/20 border border-purple-500/50 font-semibold text-purple-300">
-                      Ego
+                    <div className="px-6 py-3 rounded-full bg-pink-500/20 border-2 border-pink-500/70 font-bold text-pink-300 shadow-lg shadow-pink-500/20">
+                      Ego Recovery
                     </div>
                     <span className="text-2xl text-muted-foreground/40">›</span>
                     <div className="px-4 py-2 rounded-full bg-purple-500/20 border border-purple-500/50 font-semibold text-purple-300">
-                      Def
+                      Defense %
+                    </div>
+                    <span className="text-2xl text-muted-foreground/40">=</span>
+                    <div className="px-4 py-2 rounded-full bg-purple-500/20 border border-purple-500/50 font-semibold text-purple-300">
+                      Defense +
                     </div>
                     <span className="text-2xl text-muted-foreground/40">›</span>
                     <div className="px-3 py-1 rounded-full bg-muted/70 border border-border text-muted-foreground">
-                      Def%
+                      HP %
                     </div>
-                    <span className="text-2xl text-muted-foreground/40">››</span>
+                    <span className="text-muted-foreground/60">or</span>
                     <div className="px-3 py-1 rounded-full bg-muted/70 border border-border text-muted-foreground">
-                      HP
+                      HP +
                     </div>
                   </div>
 
                   {/* Explanation */}
                   <div className="mt-7.5 mx-auto text-center">
                     <p className="text-[14px] leading-relaxed text-muted-foreground">
-                      <span className="text-muted-foreground">Important Substats: Ego Recovery &gt; Def &gt; Def% &gt;&gt; HP<br/>Sub stats are more important then full Scrab/Healer set</span>
+                      <span className="text-muted-foreground">
+                        
+                        </span>
                     </p>
                   </div>
                 </div>
@@ -1647,7 +1650,7 @@ export default function ChizuruGuidePage() {
                   {
                     id: 4,
                     name: "Yvonne",
-                    role: "F",
+                    role: "C",
                     image: "/images/partners/yvonne.webp",
                     description: "Bad",
                   },

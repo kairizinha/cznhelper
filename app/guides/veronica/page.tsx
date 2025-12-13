@@ -43,7 +43,7 @@ export default function VeronicaGuidePage() {
     {
       id: "firing-preparation",
       name: "Firing Preparation",
-      image: "/images/character/veronica/starter4.png",
+      image: "/images/character/veronica/starter4.gif",
       baseType: "upgrade",
       epiphanies: [
         {
@@ -64,7 +64,7 @@ export default function VeronicaGuidePage() {
         },
         {
           id: "Firing Preparation III",
-          tier: "B",
+          tier: "A",
           cost: 1,
           type: "upgrade",
           description: "[ Unique / Initiation ] Create 1 Enhanced Ballista.\nAt the start of the turn, \ncreate 1 Enhanced Ballista card(s)",
@@ -91,7 +91,7 @@ export default function VeronicaGuidePage() {
     {
       id: "repose",
       name: "Repose",
-      image: "/images/character/veronica/unique1.png",
+      image: "/images/character/veronica/unique1.gif",
       baseType: "skill",
       epiphanies: [
         {
@@ -140,7 +140,7 @@ export default function VeronicaGuidePage() {
     {
       id: "pendant-of-resolution",
       name: "Pendant of Resolution",
-      image: "/images/character/veronica/unique2.png",
+      image: "/images/character/veronica/unique2.gif",
       baseType: "upgrade",
       epiphanies: [
         {
@@ -153,7 +153,7 @@ export default function VeronicaGuidePage() {
         },
         {
           id: "Pendant of Resolution II",
-          tier: "B",
+          tier: "C",
           cost: 0,
           type: "upgrade",
           description: "[ Unique ] When another combatant uses Skill Card, 1 Reload \nIf 3 are used, at the start of the next turn, create 1 Micro Ballista card(s)",
@@ -177,7 +177,7 @@ export default function VeronicaGuidePage() {
         },
         {
           id: "Pendant of Resolution V",
-          tier: "S+",
+          tier: "Situational",
           cost: 1,
           type: "skill",
           description: "[ Retain / Retrieve 4 ] Reload 2",
@@ -188,7 +188,7 @@ export default function VeronicaGuidePage() {
     {
       id: "sir-kowalski",
       name: "Sir Kowalski",
-      image: "/images/character/veronica/unique3.png",
+      image: "/images/character/veronica/unique3.gif",
       baseType: "skill",
       epiphanies: [
         {
@@ -217,7 +217,7 @@ export default function VeronicaGuidePage() {
         },
         {
           id: "Sir Kowalski IV",
-          tier: "S+",
+          tier: "Situational",
           cost: 1,
           type: "skill",
           description: "+250% Damage Amount of 1 random Ballista card in hand, \nExhaust after activation",
@@ -239,10 +239,10 @@ export default function VeronicaGuidePage() {
     "Bombardment Prep": {
       id: "bombardment-prep",
       name: "Bombardment Prep",
-      image: "/images/character/veronica/unique4.png",
+      image: "/images/character/veronica/unique4.gif",
       cost: 1,
       type: "upgrade",
-      description: "At start of turn,\ncreate 1 Ballista card(s)",
+      description: "[ Unique] \nIncrease max stack of \nReload by 1 \n1 Reload ",
     },
   };
 
@@ -401,7 +401,7 @@ function CardDisplay({ card }: { card: any }) {
             <img
               src={card.image || "/placeholder.svg"}
               alt={card.name}
-              className="w-full h-full object-cover scale-108"
+              className="w-full h-full object-cover scale-125"
             />
             <div className="absolute inset-0 flex flex-col">
               {/* Top Section: Cost + Name + Type */}
@@ -681,7 +681,7 @@ function CardDisplay({ card }: { card: any }) {
                                   <img
                                     src={cardData.image || "/placeholder.svg"}
                                     alt={cardData.name}
-                                    className="w-full h-full object-cover scale-108"
+                                    className="w-full h-full object-cover scale-125"
                                   />
 
                                   {/* Card Info Overlay */}
@@ -860,7 +860,7 @@ function CardDisplay({ card }: { card: any }) {
                     <div className="flex items-center justify-between">
                       <h3 className="text-xl font-bold text-purple-300">Draw Engine Build</h3>
                       <span className="px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/40 text-blue-400 text-sm font-bold">
-                        [XXX]
+                        [140 Faint Memory Cost without Convert Method]
                       </span>
                     </div>
 
@@ -911,7 +911,7 @@ function CardDisplay({ card }: { card: any }) {
                     <div className="flex items-center justify-between">
                       <h3 className="text-xl font-bold text-purple-300">Mei Lin Passion Build</h3>
                       <span className="px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/40 text-blue-400 text-sm font-bold">
-                        [XXX]
+                        [170 Faint Memory Cost with all 3 Base Converted]
                       </span>
                     </div>
 
@@ -944,7 +944,11 @@ function CardDisplay({ card }: { card: any }) {
                       <CollapsibleContent className="mt-3">
                         <div className="p-4 rounded-lg bg-background/50 border border-border">
                           <p className="text-sm text-muted-foreground leading-relaxed">
-                            Optimized for Mei Lin synergy. Pendant of Resolution V gives massive Passion stacks.
+                            Optimized for Mei Lin burst. Pendant of Resolution V gives massive Passion stacks for Aromata and Rising Dragon Spire.
+                            <br/>
+                            <strong>Need -1 Cost for that card on Divine Epiphany, otherwise is expensive.</strong>
+                            <br/>
+                            <i>150 Faint Memory cost if removed all 3 base cards without conversion and having -1 less Pendant of Resolution V</i>
                           </p>
                         </div>
                       </CollapsibleContent>

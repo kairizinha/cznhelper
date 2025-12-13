@@ -44,7 +44,7 @@ export default function ChizuruGuidePage() {
     {
       id: "karmic-flames",
       name: "Karmic Flames",
-      image: "/images/character/chizuru/karmic_flames.gif",
+      image: "/images/character/chizuru/starter4.gif",
       baseType: "attack",
       epiphanies: [
         {
@@ -92,7 +92,7 @@ export default function ChizuruGuidePage() {
     {
       id: "tsukuyomi",
       name: "Tsukuyomi",
-      image: "/images/character/chizuru/tsukuyomi.gif",
+      image: "/images/character/chizuru/unique1.gif",
       baseType: "skill",
       epiphanies: [
         {
@@ -141,7 +141,7 @@ export default function ChizuruGuidePage() {
     {
       id: "bound-at-dusk",
       name: "Bound At Dusk",
-      image: "/images/character/chizuru/bound_at_dusk.gif",
+      image: "/images/character/chizuru/unique2.gif",
       baseType: "upgrade",
       epiphanies: [
         {
@@ -189,7 +189,7 @@ export default function ChizuruGuidePage() {
     {
       id: "oni-hunt",
       name: "Oni Hunt",
-      image: "/images/character/chizuru/oni_hunt.gif",
+      image: "/images/character/chizuru/unique3.gif",
       baseType: "attack",
       epiphanies: [
         {
@@ -240,7 +240,7 @@ export default function ChizuruGuidePage() {
     "Shadow of the Moon": {
       id: "shadow-of-the-moon",
       name: "Shadow of the Moon",
-      image: "/images/character/chizuru/sotm.gif",
+      image: "/images/character/chizuru/unique4.gif",
       cost: 1,
       type: "attack",
       description: "[ Bind / Retain ] 72% Damage\n+20% Damage Amount\nfor each Bind stack",
@@ -872,7 +872,7 @@ export default function ChizuruGuidePage() {
                   <div className="flex items-center justify-between">
                     <h3 className="text-xl font-bold text-purple-300">Tsukuyomi & Oni Hunt Mixed Build</h3>
                     <span className="px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/40 text-blue-400 text-sm font-bold">
-                      [140 Faint Memory Cost without Convert Methods]
+                      [140 Faint Memory Cost without Convert Method]
                     </span>
                   </div>
 
