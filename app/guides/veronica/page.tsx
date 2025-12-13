@@ -43,7 +43,7 @@ export default function VeronicaGuidePage() {
     {
       id: "firing-preparation",
       name: "Firing Preparation",
-      image: "/images/character/veronica/starter4.gif",
+      image: "/images/character/veronica/starter4.png",
       baseType: "upgrade",
       epiphanies: [
         {
@@ -91,7 +91,7 @@ export default function VeronicaGuidePage() {
     {
       id: "repose",
       name: "Repose",
-      image: "/images/character/veronica/unique1.gif",
+      image: "/images/character/veronica/unique1.png",
       baseType: "skill",
       epiphanies: [
         {
@@ -140,7 +140,7 @@ export default function VeronicaGuidePage() {
     {
       id: "pendant-of-resolution",
       name: "Pendant of Resolution",
-      image: "/images/character/veronica/unique2.gif",
+      image: "/images/character/veronica/unique2.png",
       baseType: "upgrade",
       epiphanies: [
         {
@@ -188,7 +188,7 @@ export default function VeronicaGuidePage() {
     {
       id: "sir-kowalski",
       name: "Sir Kowalski",
-      image: "/images/character/veronica/unique3.gif",
+      image: "/images/character/veronica/unique3.png",
       baseType: "skill",
       epiphanies: [
         {
@@ -239,7 +239,7 @@ export default function VeronicaGuidePage() {
     "Bombardment Prep": {
       id: "bombardment-prep",
       name: "Bombardment Prep",
-      image: "/images/character/veronica/unique4.gif",
+      image: "/images/character/veronica/unique4.png",
       cost: 1,
       type: "upgrade",
       description: "[ Unique] \nIncrease max stack of \nReload by 1 \n1 Reload ",

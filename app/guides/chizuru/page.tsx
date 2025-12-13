@@ -44,7 +44,7 @@ export default function ChizuruGuidePage() {
     {
       id: "karmic-flames",
       name: "Karmic Flames",
-      image: "/images/character/chizuru/starter4.gif",
+      image: "/images/character/chizuru/starter4.png",
       baseType: "attack",
       epiphanies: [
         {
@@ -92,7 +92,7 @@ export default function ChizuruGuidePage() {
     {
       id: "tsukuyomi",
       name: "Tsukuyomi",
-      image: "/images/character/chizuru/unique1.gif",
+      image: "/images/character/chizuru/unique1.png",
       baseType: "skill",
       epiphanies: [
         {
@@ -141,7 +141,7 @@ export default function ChizuruGuidePage() {
     {
       id: "bound-at-dusk",
       name: "Bound At Dusk",
-      image: "/images/character/chizuru/unique2.gif",
+      image: "/images/character/chizuru/unique2.png",
       baseType: "upgrade",
       epiphanies: [
         {
@@ -189,7 +189,7 @@ export default function ChizuruGuidePage() {
     {
       id: "oni-hunt",
       name: "Oni Hunt",
-      image: "/images/character/chizuru/unique3.gif",
+      image: "/images/character/chizuru/unique3.png",
       baseType: "attack",
       epiphanies: [
         {
@@ -240,7 +240,7 @@ export default function ChizuruGuidePage() {
     "Shadow of the Moon": {
       id: "shadow-of-the-moon",
       name: "Shadow of the Moon",
-      image: "/images/character/chizuru/unique4.gif",
+      image: "/images/character/chizuru/unique4.png",
       cost: 1,
       type: "attack",
       description: "[ Bind / Retain ] 72% Damage\n+20% Damage Amount\nfor each Bind stack",
