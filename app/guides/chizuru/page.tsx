@@ -3,7 +3,6 @@ import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import { ChevronDown } from "lucide-react"
 import ExpandableSetCard from "@/components/ui/ExpandableSetCard"
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import {
   Dialog,
   DialogContent,
@@ -15,43 +14,9 @@ import {
 
 import { useState } from "react"
 import { GearTooltip } from "@/components/GearTooltip"; // adjust the path if needed
-import { describe } from "node:test"
-
-// Component to render cost using individual cost images
-function CostDisplay({ cost, size = 'md' }: { cost: number; size?: 'sm' | 'md' | 'lg' }) {
-  const costStr = cost.toString()
-  
-  // Size configurations for different contexts
-  const sizeConfig = {
-    sm: 'h-8 sm:h-9', // For epiphany cards
-    md: 'h-9 sm:h-10', // Default
-    lg: 'h-12 sm:h-14', // For base cards
-  }
-  
-  return (
-    <div className="flex items-center justify-start gap-0">
-      {costStr.split('').map((char, index) => {
-        // Map each digit to its corresponding image file
-        const imagePath = `/images/card/cost${char}.png`
-        return (
-          <img
-            key={index}
-            src={imagePath}
-            alt={char}
-            className={`${sizeConfig[size]} object-contain`}
-            style={{ imageRendering: 'auto' }}
-          />
-        )
-      })}
-    </div>
-  )
-}
 
 export default function ChizuruGuidePage() {
-  const [expandedEpiphany, setExpandedEpiphany] = useState<string | null>(null)
   const [expandedMemorySet, setExpandedMemorySet] = useState<string | null>(null)
-  const [isCardEpiphanyModalOpen, setIsCardEpiphanyModalOpen] = useState(false)
-  const [isTeamsModalOpen, setIsTeamsModalOpen] = useState(false)
   const [selectedPartner, setSelectedPartner] = useState<number | null>(null)
   const [selectedCardForEpiphanies, setSelectedCardForEpiphanies] = useState<typeof uniqueCards[0] | null>(null)
 
