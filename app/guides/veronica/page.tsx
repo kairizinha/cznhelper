@@ -79,6 +79,13 @@ export default function VeronicaGuidePage() {
           reasoning: "Best for Veronica DPS; it makes Kowalski and Morale additive buffs stronger, her E2 makes it consistent and even stronger",
         },
       ],
+      divineEpiphanies: [
+        {
+          name: "-1 Cost",
+          description: "Decrease Cost by 1",
+          reasoning: "Excellent for cost efficiency, making Firing Preparation more accessible.",
+          icon: "/images/card/icon_card_battle_expand_vitor.png",
+        }],
     },
     {
       id: "repose",
@@ -127,6 +134,26 @@ export default function VeronicaGuidePage() {
           type: "skill",
           description: "180% Shield \nDiscard all other \nCombatant's card(s) in hand \n1 Reload equal to that number",
           reasoning: "Worst choice. Hand discard is too punishing and the Reload payoff doesn't justify it",
+        },
+      ],
+      divineEpiphanies: [
+        {
+          name: "+1 Draw",
+          description: "Draw 1 card",
+          reasoning: "Arguably the best Divine Epiphany for Repose I, making it even stronger with additional draw.",
+          icon: "/images/card/icon_card_battle_expand_secred.png",
+        },
+        {
+          name: "+1 AP",
+          description: "Gain 1 AP",
+          reasoning: "Excellent for Repose I, providing additional action points to maximize value from the 0-cost draw.",
+          icon: "/images/card/icon_card_battle_expand_nihilum.png",
+        },
+        {
+          name: "-1 Cost",
+          description: "Decrease Cost by 1",
+          reasoning: "Great for Repose III, making it 0-cost and potentially the best option.",
+          icon: "/images/card/icon_card_battle_expand_vitor.png",
         },
       ],
     },
@@ -178,6 +205,13 @@ export default function VeronicaGuidePage() {
           reasoning: "Best Pendant if paired with a -1 cost Divine Epiphany; otherwise it's a bit expensive. Excellent for Mei Lin, as it provides 8 Passion stacks",
         },
       ],
+      divineEpiphanies: [
+        {
+          name: "-1 Cost",
+          description: "Decrease Cost by 1",
+          reasoning: "Best Divine Epiphany for Pendant of Resolution V, making it 0-cost and excellent for Mei Lin builds.",
+          icon: "/images/card/icon_card_battle_expand_vitor.png",
+        }],
     },
     {
       id: "sir-kowalski",
@@ -225,6 +259,20 @@ export default function VeronicaGuidePage() {
           type: "skill",
           description: "Select and Exhaust 1 Ballista in hand \nCreate 2 Ballista, decrease Damage Amount of those cards by 25% until activated",
           reasoning: "Honestly questionable, it exhausts a Ballista but doesn't trigger it like the IV option, making it more useless",
+        },
+      ],
+      divineEpiphanies: [
+        {
+          name: "-1 Cost",
+          description: "Decrease Cost by 1",
+          reasoning: "Excellent for Sir Kowalski I and III, making them 0-cost and significantly increasing their value.",
+          icon: "/images/card/icon_card_battle_expand_vitor.png",
+        },
+        {
+          name: "+1 Draw",
+          description: "Draw 1 card",
+          reasoning: "Great for maintaining card draw and cycling through your deck more efficiently.",
+          icon: "/images/card/icon_card_battle_expand_secred.png",
         },
       ],
     },
@@ -1087,6 +1135,47 @@ function CardDisplay({ card }: { card: any }) {
                             </div>
                           ))}
                         </div>
+
+                        {/* Divine Epiphanies */}
+                        {cardData.divineEpiphanies && cardData.divineEpiphanies.length > 0 && (
+                          <div className="mt-6 sm:mt-8 space-y-3 sm:space-y-4">
+                            <h3 className="text-lg sm:text-xl font-bold text-purple-300">Divine Epiphanies</h3>
+                            <p className="text-xs sm:text-sm text-muted-foreground mb-4">
+                              Good Divine Epiphanies that this card can roll:
+                            </p>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                              {cardData.divineEpiphanies.map((divineEpiphany: any, index: number) => (
+                                <div key={index} className="p-3 sm:p-4 rounded-lg bg-gradient-to-br from-purple-900/30 to-purple-800/20 border border-purple-500/40">
+                                  <div className="flex items-center gap-2 mb-2">
+                                    {divineEpiphany.icon && (
+                                      <img
+                                        src={divineEpiphany.icon}
+                                        alt={divineEpiphany.name || "Divine Epiphany"}
+                                        className="w-8 h-8 sm:w-10 sm:h-10 object-contain flex-shrink-0"
+                                      />
+                                    )}
+                                    <span className="px-2 py-1 rounded-full text-xs font-bold bg-purple-500/30 text-purple-200 border border-purple-400/50">
+                                      Divine
+                                    </span>
+                                    {divineEpiphany.name && (
+                                      <span className="text-xs sm:text-sm font-semibold text-purple-200">
+                                        {divineEpiphany.name}
+                                      </span>
+                                    )}
+                                  </div>
+                                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
+                                    {divineEpiphany.description}
+                                  </p>
+                                  {divineEpiphany.reasoning && (
+                                    <p className="text-xs text-purple-300/80 mt-2 italic leading-relaxed">
+                                      {divineEpiphany.reasoning}
+                                    </p>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
                       </DialogContent>
                     </Dialog>
                   )
