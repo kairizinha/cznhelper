@@ -29,10 +29,10 @@ export default function ChizuruGuidePage() {
   const sections = [
     { id: "overview", title: "1. Overview", level: 1 },
     { id: "card-epiphany", title: "2. Card Epiphany", level: 1 },
-    { id: "karmic-flames", title: "2.1. Karmic Flames", level: 2 },
-    { id: "tsukuyomi", title: "2.2. Tsukuyomi", level: 2 },
-    { id: "bound-at-dusk", title: "2.3. Bound at Dusk", level: 2 },
-    { id: "oni-hunt", title: "2.4. Oni Hunt", level: 2 },
+    { id: "source-of-water", title: "2.1. Source of Water", level: 2 },
+    { id: "blessing-of-waves", title: "2.2. Blessing of Waves", level: 2 },
+    { id: "tactical-analysis", title: "2.3. Tactical Analysis", level: 2 },
+    { id: "whirpool", title: "2.4. Whirpool", level: 2 },
     { id: "recommended-save-data", title: "3. Recommended Save Data", level: 1 },
     { id: "equipments", title: "3.1. Equipments", level: 2 },
     { id: "memory-fragments", title: "4. Memory Fragments", level: 1 },
@@ -42,208 +42,215 @@ export default function ChizuruGuidePage() {
 
   const uniqueCards = [
     {
-      id: "karmic-flames",
-      name: "Karmic Flames",
-      image: "/images/character/chizuru/starter4.png",
-      baseType: "attack",
-      epiphanies: [
-        {
-          id: "Karmic Flames I",
-          tier: "A",
-          cost: 1,
-          type: "attack",
-          description: "[ Initiation ] 180% Damage\n1 Cursed Shackles\nCursed Shackles: Add 1 Hit",
-          reasoning: "Extra hit is good for Wil o Wisp Stacking if better options are not available.",
-        },
-        {
-          id: "Karmic Flames II",
-          tier: "S",
-          cost: 1,
-          type: "attack",
-          description: "[ Initiation ] 180% Damage\n1 Cursed Shackles\nCursed Shackles:\nDecrease Cost of the\nnext card of this unit\nused by 1",
-          reasoning: "Refunds itself (only on enemies with shackle already), but requires Draw support",
-        },
-        {
-          id: "Karmic Flames III",
-          tier: "B",
-          cost: 1,
-          type: "attack",
-          description: "[ Initiation ] 216% Damage\n1 Cursed Shackles\nCursed Shackles:\nIncrease Damage\nAmount by 100%",
-          reasoning: "Single Target Damage, really bad compared to other options.",
-        },
-        {
-          id: "Karmic Flames IV",
-          tier: "C",
-          cost: 2,
-          type: "skill",
-          description: "[ Initiation ] 1 Cursed Shackles\nCreate 1 Shadow of the\nMoon",
-          reasoning: "Expensive, but 5 wisps, is good with Bound At Dusk 5",
-        },
-        {
-          id: "Karmic Flames V",
-          tier: "S+",
-          cost: 1,
-          type: "skill",
-          description: "[ Initiation / Exhaust] 1 Cursed Shackles\nWhen a target inflicted\nwith Cursed Shackles\nis defeated, create this\ncard",
-          reasoning: "Best Karmic Flames option, Exhausts itself and it returns once you finish off the ST, but worse others for Multi/Spawn Mobs",
-        },
-      ],
-    },
-    {
-      id: "tsukuyomi",
-      name: "Tsukuyomi",
-      image: "/images/character/chizuru/unique1.png",
+      id: "source-of-water",
+      name: "Source of Water",
+      image: "/images/character/mika/starter4.png",
       baseType: "skill",
       epiphanies: [
         {
-          id: "Tsukuyomi I",
+          id: "Source of Water I",
           tier: "S",
           cost: 0,
           type: "skill",
-          description: "3 Will-O'-Wisp for each\nHit of the next Attack\nCard of this unit used",
-          reasoning: "Best source of Will-O'-Wisp, it is a direct upgrade of the base card",
+          description: "Heal 150%\nGain 1 AP\n1 Wave",
+          reasoning: "Upgraded base card with Wave – stacks to 3 for bonus AP",
         },
         {
-          id: "Tsukuyomi II",
+          id: "Source of Water II",
+          tier: "S+",
+          cost: 1,
+          type: "skill",
+          description: "Heal 150%\nGain 2 AP\nWhen Recovering, decrease Cost by 1 for 1 turn",
+          reasoning: "Massive 2 AP + heal for 1-cost; cost refund on Recovering enables conditional 0-cost.",
+        },
+        {
+          id: "Source of Water III",
           tier: "A",
           cost: 0,
           type: "skill",
-          description: "Add 1 Hit(s) to the next\nAttack Card of this unit\nused, 1 Will-O'-Wisp for\neach Hit",
-          reasoning: "+1 Hit but much less Will-O'-Wisp generation",
+          description: "[Retain]\nHeal 150%\nGain 1 AP\nIncrease Heal Amount of the next card used by 50%",
+          reasoning: "Retain allows holding for better timing. Synergizes with healing-focused builds.",
         },
         {
-          id: "Tsukuyomi III",
-          tier: "S+",
-          cost: 0,
-          type: "skill",
-          description:
-            "Add 2 Hit(s) to the next\nShadow of the Moon,\nShadow of the Moon+\nused",
-          reasoning: "+2 hit to moon, infinite stacking, with Rei or Orlea, its insane",
-        },
-        {
-          id: "Tsukuyomi IV",
-          tier: "C",
-          cost: 0,
-          type: "skill",
-          description: "3 Will-O'-Wisp for each\nAttack Card of this unit\nin hand",
-          reasoning: "Because it only works for Chizuru's Cards, it is not possible to get many stacks",
-        },
-        {
-          id: "Tsukuyomi V",
+          id: "Source of Water IV",
           tier: "Situational",
-          cost: 1,
-          type: "upgrade",
-          description: "[ Unique / Lead ] When an Attack Card\nof this unit is used, 2\nWill-O'-Wisp",
-          reasoning: "Insanely good with Oni 4 and good if you have duped base Tsukuyomi",
+          cost: 0,
+          type: "skill",
+          description: "Heal 150%\nGain 1 AP\nDecrease Stress of allies by 2",
+          reasoning: "Stress reduction utility makes this valuable for longer fights.",
+        },
+        {
+          id: "Source of Water V",
+          tier: "Situational",
+          cost: 0,
+          type: "skill",
+          description: "[Exhaust]\nHeal 100%\nGain 3 AP",
+          reasoning: "Generates massive AP at exhaust cost. Good for Haru or Kayron for explosive single-turn damage.",
         },
       ],
     },
     {
-      id: "bound-at-dusk",
-      name: "Bound At Dusk",
-      image: "/images/character/chizuru/unique2.png",
-      baseType: "upgrade",
+      id: "blessing-of-waves",
+      name: "Blessing of Waves",
+      image: "/images/character/mika/unique1.png",
+      baseType: "skill",
       epiphanies: [
         {
-          id: "Bound At Dusk I",
+          id: "Blessing of Waves I",
           tier: "S+",
           cost: 1,
-          type: "upgrade",
-          description: "[ Initiation / Unique ] At the start of the turn,\ngain Inhibit\nDecrease Cost by 1\nuntil 2 random card(s)\nare used",
-          reasoning: "Technically +2 AP but it's still RNG and can potentially break Conqueror set",
+          type: "skill",
+          description: "[Retain]\nHeal 150%\nIncrease Heal Amount by\n30% for each AP\nGain Shield equal to Heal\nAmount overflow",
+          reasoning: "Shield generation from overflow healing provides excellent defensive utility and synergizes with high AP builds.",
         },
         {
-          id: "Bound At Dusk II",
+          id: "Blessing of Waves II",
           tier: "S",
           cost: 1,
-          type: "upgrade",
-          description: "[ Initiation / Unique ] At the start of the turn,\ngain Inhibit\nWhen Shadow of the\nMoon+ is used, decrease\nCost of the next 1 card(s)\nused by 1",
-          reasoning: "Good for spamming Shadow of the Moon+, needs draw supports and a bit of luck",
+          type: "skill",
+          description: "[Retain]\nHeal 150%\nIncrease Heal Amount by\n30% for each AP\n1 Wave",
+          reasoning: "Generates 1 Wave while maintaining strong healing scaling with AP. Wave stacks convert to AP when reaching 3 stacks.",
         },
         {
-          id: "Bound At Dusk III",
-          tier: "S",
-          cost: 1,
-          type: "upgrade",
-          description: "[ Initiation / Unique ] At the start of the turn,\ngain Inhibit\nActivate 2 random\ncard(s) of other\nCombatants",
-          reasoning: "Good with allies that doesn't have 0 cost cards",
-        },
-        {
-          id: "Bound At Dusk IV",
+          id: "Blessing of Waves III",
           tier: "C",
           cost: 1,
-          type: "upgrade",
-          description: "[ Initiation / Unique ] At the start of the turn,\ngain Inhibit\nActivate 2 random\nLead cards",
-          reasoning: "Way too reliant on RNG to be a good option",
+          type: "skill",
+          description: "[Retain]\nHeal 150%\nIncrease Heal Amount of the\nnext card used by 20% for\neach AP",
+          reasoning: "Transfers healing bonus to next card instead of current heal, useful for setup turns.",
         },
         {
-          id: "Bound At Dusk V",
-          tier: "B",
+          id: "Blessing of Waves IV",
+          tier: "A",
           cost: 1,
-          type: "upgrade",
-          description: "[ Initiation / Unique ] At the start of the turn,\ngain Inhibit\nDecrease Cost of the\ncard with the highest\nCost by 2",
-          reasoning: "Only synergizes with Karmic Flames IV for Chizuru herself, not a strong pick",
+          type: "skill",
+          description: "[Retain]\nHeal 150%\nDamage to random enemies\nequal to Healing",
+          reasoning: "Converts healing into damage, providing offensive utility while maintaining defensive value.",
+        },
+        {
+          id: "Blessing of Waves V",
+          tier: "Situational",
+          cost: 0,
+          type: "skill",
+          description: "[Finale]\nHeal 50%\nHeal Amount +50% for each\nAP used this turn",
+          reasoning: "Poor choice compared to other Blessing of Waves epiphanies. The scaling requires high AP investment and doesn't provide immediate value.",
         },
       ],
     },
     {
-      id: "oni-hunt",
-      name: "Oni Hunt",
-      image: "/images/character/chizuru/unique3.png",
+      id: "tactical-analysis",
+      name: "Tactical Analysis",
+      image: "/images/character/mika/unique2.png",
+      baseType: "skill",
+      epiphanies: [
+        {
+          id: "Tactical Analysis I",
+          tier: "S+",
+          cost: 0,
+          type: "skill",
+          description: "Heal 50%\n1 Wave\nFor 2 turns, +50% Healing",
+          reasoning: "Upgrades with healing + extended healing bonus duration. Ideal for prolonged battles; heals directly generate more daggers for Tressa.",
+        },
+        {
+          id: "Tactical Analysis II",
+          tier: "A",
+          cost: 0,
+          type: "skill",
+          description: "2 Wave\nFor 1 turn, +50% Healing",
+          reasoning: "Generates 2 Wave, accelerating AP generation through Wave conversion. Maintains healing bonus for sustain.",
+        },
+        {
+          id: "Tactical Analysis III",
+          tier: "A",
+          cost: 0,
+          type: "skill",
+          description: "2 Wave\nFor 1 turn, +100% own Healing",
+          reasoning: "Generates 2 Wave, accelerating AP generation through Wave conversion. Maintains healing bonus for sustain..",
+        },
+        {
+          id: "Tactical Analysis IV",
+          tier: "C",
+          cost: 0,
+          type: "skill",
+          description: "When own card is used, 1 Wave for 1 turn",
+          reasoning: "Very poor. Passive Wave generation requires multiple card plays to accumulate effectively, making it inefficient compared to other Tactical Analysis options.",
+        },
+        {
+          id: "Tactical Analysis V",
+          tier: "S+",
+          cost: 0,
+          type: "upgrade",
+          description: "2 Wave\n+50% Healing",
+          reasoning: "Permanent upgrade that generates 2 Wave on card use and provides healing bonus. Excellent value as an upgrade.",
+        },
+      ],
+    },
+    {
+      id: "whirlpool",
+      name: "Whirlpool",
+      image: "/images/character/mika/unique3.png",
       baseType: "attack",
       epiphanies: [
         {
-          id: "Oni Hunt I",
+          id: "Whirlpool I",
+          tier: "C",
+          cost: 2,
+          type: "attack",
+          description: "200% Damage to all enemies\nHeal 100% for each target hit",
+          reasoning: "Poor for DPS. Mika cannot effectively deal damage, and this epiphany only provides healing which doesn't contribute to damage output.",
+        },
+        {
+          id: "Whirlpool II",
           tier: "S+",
           cost: 1,
           type: "attack",
-          description: "[ Haste ] 60% Damage x 4\n+40% Damage Amount\nto the next Bind card\nused",
-          reasoning: "4 Will-O'-Wisp stacks on use, additive damage bonus synergy and increased SotM damage",
+          description: "200% Damage to all enemies\n1 Wave for each target hit",
+          reasoning: "Good whirlpool epiphany. Cost reduction to 1 and Wave generation per target hit makes this valuable. Multiple targets can quickly build Wave stacks that convert to AP, enabling better card plays.",
         },
         {
-          id: "Oni Hunt II",
-          tier: "A",
-          cost: 1,
-          type: "attack",
-          description: "[ Haste ] 216% Damage\n+60% Damage Amount\nto the next Bind card\nused",
-          reasoning: "Alternative to Oni Hunt I, however base Oni Hunt with Neutral epiphany is usually better",
-        },
-        {
-          id: "Oni Hunt III",
+          id: "Whirlpool III",
           tier: "C",
-          cost: 1,
+          cost: 2,
           type: "attack",
-          description: "[ Haste ] 72% Damage x 3\nIf there are no other\nAttack Cards in hand,\nadd 2 Hit(s)",
-          reasoning: "Conditional +2 hits to base, no increase to SotM Damage, pretty bad pick",
+          description: "200% Damage to all enemies\nIncrease Heal Amount of the next card used by 20% for each target hit",
+          reasoning: "Poor for DPS. Only provides healing bonuses which don't help with damage output. Mika's damage is too weak to make this worthwhile.",
         },
         {
-          id: "Oni Hunt IV",
-          tier: "S",
-          cost: 1,
-          type: "skill",
-          description: "[ Haste ] Create 2 Moonslash\nApply Exhaust to those\ncards, decrease Cost\nby 1 until used",
-          reasoning: "Can be used alongside Tsukuyomi V to spam Moonslash to generate Will-O'-Wisp",
+          id: "Whirlpool IV",
+          tier: "C",
+          cost: 4,
+          type: "attack",
+          description: "300% Damage to all enemies\nIf Recovered, decrease Cost by 1 until used",
+          reasoning: "High base cost + conditional reduction yields negligible output. Niche value in Cassius/Tressa decks to contribute toward 0-cost card.",
         },
         {
-          id: "Oni Hunt V",
-          tier: "B",
-          cost: 1,
-          type: "upgrade",
-          description: "[ Unique ] +40% Damage Amount\nto Shadow of the\nMoon+\nAt the start of the turn,\n3 Will-O'-Wisp",
-          reasoning: "+40% Damage to SotM is not the best and 3 Will-O'-Wisp per turn isn't really that much",
+          id: "Whirlpool V",
+          tier: "C",
+          cost: 2,
+          type: "attack",
+          description: "Heal 100%\n100% (200%) Damage to all enemies\nIncrease Damage Amount equal to Heal Amount of this card",
+          reasoning: "Poor for DPS. Even with damage scaling based on heal amount, Mika's base damage is too weak to make this effective. The healing doesn't translate to meaningful damage output.",
         },
       ],
     },
   ]
 
   const commonCards: Record<string, any> = {
-    "Shadow of the Moon": {
-      id: "shadow-of-the-moon",
-      name: "Shadow of the Moon",
-      image: "/images/character/chizuru/unique4.png",
+    "Water Barrier": {
+      id: "water-barrier",
+      name: "Water Barrier",
+      image: "/images/character/mika/starter2.png",
       cost: 1,
-      type: "attack",
-      description: "[ Bind / Retain ] 72% Damage\n+20% Damage Amount\nfor each Bind stack",
+      type: "skill",
+      description: "Heal 120%",
+    },
+    "Deluge": {
+      id: "deluge",
+      name: "Deluge",
+      image: "/images/character/mika/unique4.png",
+      cost: 1,
+      type: "upgrade",
+      description: "[Unique / Initiation]\n1 Wave\nAt the start of the turn, 1 Wave",
     },
   };
 
@@ -312,20 +319,19 @@ export default function ChizuruGuidePage() {
 
   // Type your recommendedDecks object
   const recommendedDecks: RecommendedDecks = {
-    "tsukuyomi-oni-mixed": [
-      { ref: "Karmic Flames V", count: 1 },
-      { ref: "Tsukuyomi III", count: 3 },
-      { ref: "Bound At Dusk I", count: 1 },
-      { ref: "Oni Hunt I", count: 2 },
-      { ref: "Shadow of the Moon", count: 1 },
+    "standard-battery-mika": [
+      { ref: "Water Barrier", count: 1 },
+      { ref: "Source of Water II", count: 4 },
+      { ref: "Blessing of Waves II", count: 1 },
+      { ref: "Tactical Analysis V", count: 1 },
+      { ref: "Deluge", count: 1 },
     ],
-    "e2-moon-spam": [
-      { ref: "Karmic Flames V", count: 1 },
-      { ref: "Tsukuyomi V", count: 1 },
-      { ref: "Tsukuyomi I", count: 3 },
-      { ref: "Bound At Dusk II", count: 1 },
-      { ref: "Oni Hunt IV", count: 1 },
-      { ref: "Shadow of the Moon", count: 1 },
+    "all-heal-mika": [
+      { ref: "Water Barrier", count: 2 },
+      { ref: "Source of Water II", count: 3 },
+      { ref: "Blessing of Waves II", count: 1 },
+      { ref: "Tactical Analysis I", count: 1 },
+      { ref: "Deluge", count: 1 },
     ],
   };
 
@@ -387,9 +393,9 @@ export default function ChizuruGuidePage() {
 
     return (
       <div className="relative rounded-lg overflow-hidden border-2 border-border hover:border-purple-400/50 transition-all duration-200">
-        {/* Void Border */}
+        {/* Justice Border */}
         <div className="absolute left-0 -top-0.5 -bottom-0.5 w-3 z-10">
-          <img src="/images/card/void-border.png" alt="" className="h-full w-full object-cover" />
+          <img src="/images/card/justice-border.png" alt="" className="h-full w-full object-cover" />
         </div>
 
         <div className="relative aspect-[2/3] bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden rounded-md">
@@ -478,13 +484,6 @@ export default function ChizuruGuidePage() {
                                   /(\d+%?)/g,
                                   '<span style="color: #7ce2fb">$1</span>',
                                 )
-                                .replace(
-                                  /Shadow of the\s*Moon\+/gi,
-                                  '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>',
-                                ).replace(
-                                  /Moonslash/gi,
-                                  '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>',
-                                ),
                             }}
                           />
                         </>
@@ -571,6 +570,47 @@ export default function ChizuruGuidePage() {
           border border-gray-700/50
         `
   
+      case "6/5":
+        return `
+          bg-black/80
+          text-pink-400
+          font-black text-xs tracking-widest
+          border border-pink-500/60
+          shadow-lg shadow-pink-500/30
+          ring-1 ring-pink-500/40
+          ring-offset-1 ring-offset-pink-900/20
+          relative overflow-hidden
+        `
+  
+      case "5/5":
+        return `
+          bg-black/80
+          text-orange-400
+          font-bold text-xs tracking-wider
+          border border-orange-500/60
+          shadow-lg shadow-orange-500/25
+          ring-1 ring-orange-500/30
+          ring-offset-1 ring-offset-orange-900/20
+        `
+  
+      case "4/5":
+        return `
+          bg-black/70
+          text-purple-300
+          font-bold text-xs tracking-wide
+          border border-purple-500/50
+          shadow-md shadow-purple-500/20
+          ring-1 ring-purple-500/20
+        `
+  
+      case "2/5":
+        return `
+          bg-black/50
+          text-red-400
+          font-medium text-xs
+          border border-red-700/30
+        `
+  
       default:
         return "bg-gray-900/70 text-gray-600 border border-gray-800/50 text-xs"
     }
@@ -583,7 +623,7 @@ export default function ChizuruGuidePage() {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-3xl font-bold tracking-tight text-balance bg-gradient-to-r from-red-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                Chizuru Guide
+                Mika Guide
               </h1>
             </div>
             <Link
@@ -627,22 +667,22 @@ export default function ChizuruGuidePage() {
             <h2 className="text-2xl font-bold mb-6 text-purple-400">1. Overview</h2>
               <div className="space-y-4">
                 <div className="flex flex-wrap gap-3 mb-4">
-                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-500/20 border border-purple-500/50">
-                    <img src="/images/icon-ego-void.webp" alt="Void" className="w-5 h-5" />
-                    <span className="text-purple-400 text-sm font-medium">Void</span>
+                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/20 border border-blue-500/50">
+                    <img src="/images/icon-ego-justice.webp" alt="Justice" className="w-5 h-5" />
+                    <span className="text-blue-400 text-sm font-medium">Justice</span>
                   </div>
                   
                   <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black-500/20 border border-black-500/40">
-                    <img src="/images/icon-job-psionic.webp" alt="Psionic" className="w-5 h-5" />
-                    <span className="text-black-400 text-sm font-medium">Psionic</span>
+                    <img src="/images/icon-job-controller.webp" alt="Controller" className="w-5 h-5" />
+                    <span className="text-black-400 text-sm font-medium">Controller</span>
                   </div>
                 </div>
 
                 <div className="rounded-sm bg-background/50 border border-border">
-                <div className="relative w-full h-[400px] bg-gradient-to-br from-purple-500/20 to-black/30 flex items-center justify-center warp">
+                <div className="relative w-full h-[400px] bg-gradient-to-br from-blue-500/20 to-black/30 flex items-center justify-center warp">
                 <img
-                  src={`/images/characters/chizuru.webp`}
-                  alt={`chizuru full artwork`}
+                  src={`/images/characters/mika.webp`}
+                  alt={`mika full artwork`}
                   className="w-full h-full object-contain"
                 />
               </div>
@@ -680,10 +720,10 @@ export default function ChizuruGuidePage() {
 
                               {/* Card Display */}
                               <div className="relative rounded-lg overflow-hidden border-2 border-border hover:border-purple-400/50 transition-all duration-200 max-w-[250px] mx-auto">
-                                {/* Void Border */}
+                                {/* Justice Border */}
                                 <div className="absolute left-0 -top-0.5 -bottom-0.5 w-3 z-10">
                                   <img
-                                    src="/images/card/void-border.png"
+                                    src="/images/card/justice-border.png"
                                     alt=""
                                     className="h-full w-full object-cover"
                                   />
@@ -803,13 +843,6 @@ export default function ChizuruGuidePage() {
                                                                 /(\d+%?)/g,
                                                                 '<span style="color: #7ce2fb">$1</span>',
                                                             )
-                                                            .replace(
-                                                                /Shadow of the\s*Moon\+/gi,
-                                                                '<span style="color: #C8FF2E; text-decoration: underline; text-underline-offset: 2px">$&</span>',
-                                                            ).replace(
-                                                                /Moonslash/gi,
-                                                                '<span style="color: #C8FF2E; text-decoration: underline; text-underline-offset: 2px">$&</span>',
-                                                            ),
                                                     }}
                                                 />
                                           </>
@@ -870,14 +903,14 @@ export default function ChizuruGuidePage() {
                 {/* Build 1 */}
                 <div className="space-y-6">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-xl font-bold text-purple-300">Tsukuyomi & Oni Hunt Mixed Build</h3>
+                    <h3 className="text-xl font-bold text-purple-300">Standard Battery Mika</h3>
                     <span className="px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/40 text-blue-400 text-sm font-bold">
-                      [140 Faint Memory Cost without Convert Method]
+                      [90 Faint Memory Cost without Convert Methods]
                     </span>
                   </div>
 
                   {(() => {
-                    const { topRow, bottomRow } = generateDeckRows("tsukuyomi-oni-mixed");
+                    const { topRow, bottomRow } = generateDeckRows("standard-battery-mika");
                     return (
                       <>
                         {/* Top Row */}
@@ -907,13 +940,13 @@ export default function ChizuruGuidePage() {
                     <CollapsibleContent className="mt-3">
                       <div className="p-4 rounded-lg bg-background/50 border border-border">
                         <p className="text-sm text-muted-foreground leading-relaxed">
-                          Stack up for a huge Shadow of the Moon to Nuke the enemy
+                          Standard AP Battery Mika
                           <br />
-                          Oni Hunt 2 or Oni Hunt 5 are also options for Orlea, just depends if you wanna spend buffs or not
+                          Use up Deluge & Tactical upgrades to exhaust them
                           <br />
-                          3 Tsukuyomi, 2 Oni Hunt is Optimal Ratio,
+                          Keep Blessing in hand till you need it
                           <br />
-                          2 Tsukuyomi, 3 Oni Hunt is also fine, 4 of one or the other is bad
+                          Have fun getting +7 AP from Sources
                         </p>
                       </div>
                     </CollapsibleContent>
@@ -923,14 +956,14 @@ export default function ChizuruGuidePage() {
                 {/* Build 2 */}
                 <div className="space-y-6">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-xl font-bold text-purple-300">E2 Shadow of the Moon+ Spam Build</h3>
+                    <h3 className="text-xl font-bold text-purple-300">Tressa Dagger Generator</h3>
                     <span className="px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/40 text-blue-400 text-sm font-bold">
-                      [140 Faint Memory Cost without Convert Methods]
+                      [60 Faint Memory Cost without Convert Methods]
                     </span>
                   </div>
 
                   {(() => {
-                    const { topRow, bottomRow } = generateDeckRows("e2-moon-spam");
+                    const { topRow, bottomRow } = generateDeckRows("all-heal-mika");
                     return (
                       <>
                         {/* Top Row */}
@@ -960,7 +993,9 @@ export default function ChizuruGuidePage() {
                     <CollapsibleContent className="mt-3">
                       <div className="p-4 rounded-lg bg-background/50 border border-border">
                         <p className="text-sm text-muted-foreground leading-relaxed">
-                          At E2, Tsukuyomi 1 + Tsukuyomi 5 on a Moon+ will refund itself, and then you can play 4 Moon+ in a row
+                          8 Heals on Mika, means 8/16/24/32 Daggers just from Mika
+                          <br />
+                          Lots of room for Neutrals
                         </p>
                       </div>
                     </CollapsibleContent>
@@ -989,37 +1024,32 @@ export default function ChizuruGuidePage() {
 
                 {/* Best in Slot Weapon */}
                 <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
-                  <GearTooltip text={`Cthulu Monster`} />
-
-                  <div className="relative w-21 h-32 flex-shrink-1">
-                    <img
-                      src="/images/bg_equipment_rarity_unique.webp"
-                      alt="Unique Rarity"
-                      className="w-full h-full object-contain"
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <img
-                        src="/images/gear/Intellect-Of-Discord.webp"
-                        alt="Intellect of Discord"
-                        className="w-16 h-16 object-contain relative z-10"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="flex-1 min-w-0">
-                    <h4 className="text-base font-bold mb-1" style={{ color: "rgb(163, 96, 255)" }}>
-                      Intellect of Discord
-                    </h4>
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
-                      <span>Attack</span>
-                      <span className="text-white font-semibold">+82</span>
-                    </div>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      +<span className="text-[#FF8C00]">18</span>% Attack<br/>
-                      On Ravage, decrease Stress of allies by <span className="text-[#FF8C00]">1</span>
-                    </p>
-                  </div>
-                </div>
+                        <GearTooltip text={`C6 Lab 0
+                      C4 Swamp of Judgement`} />
+                        <div className="relative w-21 h-32 flex-shrink-1">
+                          <img
+                            src="/images/bg_equipment_rarity_unique.webp"
+                            alt="Unique Rarity"
+                            className="w-full h-full object-contain"
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <img src="/images/gear/Tentacles-of-Chaos.webp" alt="Tentacles of Chaos" className="w-16 h-16 object-contain relative z-10" />
+                          </div>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-base font-bold mb-1" style={{ color: "rgb(163, 96, 255)" }}>
+                            Tentacles of Chaos
+                          </h4>
+                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
+                            <span>Attack</span>
+                            <span className="text-white font-semibold">+82</span>
+                          </div>
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            +<span className="text-[#FF8C00]">8</span>% Atk to all Allies (Including Self)<br/>
+                            Upon enemy Defeat, -<span className="text-[#FF8C00]">2</span> Stress to the Combatant<br/> with the highest Stress. If Sub Dps Luke this has more Value
+                          </p>
+                        </div>
+                      </div>
 
                 {/* Show More Weapons Modal */}
                 <Dialog>
@@ -1049,122 +1079,65 @@ export default function ChizuruGuidePage() {
 
                     <div className="space-y-4 mt-4">
 
-
-                      {/* 2nd Option */}
+                      {/* 2rd Option */}
                       <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
-                        <GearTooltip text={`Cthulu Monster`} />
+                        <GearTooltip text={`C6 Lab 0
+                      C4 Swamp of Judgement`} />
                         <div className="relative w-21 h-32 flex-shrink-1">
                           <img
-                            src="/images/bg_equipment_rarity_unique.webp"
-                            alt="Unique Rarity"
+                            src="/images/bg_equipment_rarity_legend.webp"
+                            alt="Legend Rarity"
                             className="w-full h-full object-contain"
                           />
                           <div className="absolute inset-0 flex items-center justify-center">
-                            <img src="/images/gear/Tentacles-Of-Chaos.webp" alt="Tentacles of Chaos" className="w-16 h-16 object-contain relative z-10" />
+                            <img src="/images/gear/Crimson-Sword.webp" alt="Crimson Sword" className="w-16 h-16 object-contain relative z-10" />
                           </div>
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h4 className="text-base font-bold mb-1" style={{ color: "rgb(163, 96, 255)" }}>
-                            Tentacles of Chaos
+                          <h4 className="text-base font-bold mb-1" style={{ color: "#FF9600" }}>
+                            Crimson Sword
                           </h4>
                           <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
                             <span>Attack</span>
                             <span className="text-white font-semibold">+82</span>
                           </div>
                           <p className="text-sm text-muted-foreground leading-relaxed">
-                            +<span className="text-[#FF8C00]">8</span>% ally Attack<br/>
-                            Upon enemy Defeat, -<span className="text-[#FF8C00]">2</span> Stress to the Combatant<br/> with the highest Stress
+                            When dealing Damage with a targeting Attack Card, <span className="text-[#FF8C00]">3</span> Agony (<span className="text-[#FF8C00]">1</span> per turn)
                           </p>
                         </div>
                       </div>
 
-                      {/* 3rd Option */}
+                      {/* 3th Option */}
                       <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
-                        <GearTooltip text={`City of Mist
-                      Laboratory 0`} />
+                        <GearTooltip text={`C6 Lab 0
+                      C4 Swamp of Judgement`} />
                         <div className="relative w-21 h-32 flex-shrink-1">
                           <img
-                            src="/images/bg_equipment_rarity_unique.webp"
-                            alt="Unique Rarity"
+                            src="/images/bg_equipment_rarity_rare.webp"
+                            alt="Rare Rarity"
                             className="w-full h-full object-contain"
                           />
                           <div className="absolute inset-0 flex items-center justify-center">
-                            <img src="/images/gear/Foggy-Crystal-Ball.webp" alt="Foggy Crystal Ball" className="w-16 h-16 object-contain relative z-10" />
+                            <img src="/images/gear/Flashbang.webp" alt="Flashbang" className="w-16 h-16 object-contain relative z-10" />
                           </div>
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h4 className="text-base font-bold mb-1" style={{ color: "rgb(163, 96, 255)" }}>
-                            Foggy Crystal Ball
+                          <h4 className="text-base font-bold mb-1" style={{ color: "#33A0F3" }}>
+                            Flashbang
                           </h4>
                           <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
                             <span>Attack</span>
                             <span className="text-white font-semibold">+82</span>
                           </div>
                           <p className="text-sm text-muted-foreground leading-relaxed">
-                            Increase Damage Amount of Attack Cards with a
-                            <br />
-                            Cost of <span className="text-[#FF8C00]">0</span> by <span className="text-[#FF8C00]">40</span>%
+                            At the start of battle, apply <span className="text-[#FF8C00]">3</span> Weaken to a random enemy<br/>Bone Cutter Enabler
                           </p>
                         </div>
                       </div>
 
                       {/* 4th Option */}
                       <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
-                        <GearTooltip text={`Laboratory 0`} />
-                        <div className="relative w-21 h-32 flex-shrink-1">
-                          <img
-                            src="/images/bg_equipment_rarity_legend.webp"
-                            alt="Legend Rarity"
-                            className="w-full h-full object-contain"
-                          />
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <img src="/images/gear/Mutant-Predator-Spike.webp" alt={`Mutant Predator Spike`} className="w-16 h-16 object-contain relative z-10" />
-                          </div>
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <h4 className="text-base font-bold mb-1" style={{ color: "rgb(255, 150, 0)" }}>
-                            Mutant Predator Spike
-                          </h4>
-                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
-                            <span>Attack</span>
-                            <span className="text-white font-semibold">+82</span>
-                          </div>
-                          <p className="text-sm text-muted-foreground leading-relaxed">
-                            When there are <span className="text-[#FF8C00]">4</span> or more cards in hand<br/>increase Damage Amount by <span className="text-[#FF8C00]">30</span>%
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* 5th Option */}
-                      <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
-                        <GearTooltip text={`Dellang Shop`} />
-                        <div className="relative w-21 h-32 flex-shrink-1">
-                          <img
-                            src="/images/bg_equipment_rarity_legend.webp"
-                            alt="Legend Rarity"
-                            className="w-full h-full object-contain"
-                          />
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <img src="/images/gear/RFS-17.webp" alt="RFS-17" className="w-16 h-16 object-contain relative z-10" />
-                          </div>
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <h4 className="text-base font-bold mb-1" style={{ color: "rgb(255, 150, 0)" }}>
-                            RFS-17
-                          </h4>
-                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
-                            <span>Attack</span>
-                            <span className="text-white font-semibold">+82</span>
-                          </div>
-                          <p className="text-sm text-muted-foreground leading-relaxed">
-                            +<span className="text-[#FF8C00]">10</span>% Critical Chance of Attack Cards with cost <span className="text-[#FF8C00]">0</span>
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* 6th Option */}
-                      <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
-                        <GearTooltip text={`Dellang Shop`} />
+                        <GearTooltip text={`C6 Lab 0`} />
                         <div className="relative w-21 h-32 flex-shrink-1">
                           <img
                             src="/images/bg_equipment_rarity_rare.webp"
@@ -1172,49 +1145,22 @@ export default function ChizuruGuidePage() {
                             className="w-full h-full object-contain"
                           />
                           <div className="absolute inset-0 flex items-center justify-center">
-                            <img src="/images/gear/Obsidian-Sword.webp" alt="Obsidian Sword" className="w-16 h-16 object-contain relative z-10" />
+                            <img src="/images/gear/Overcurrent-Shock-Unit.webp" alt="Over Current Shocker" className="w-16 h-16 object-contain relative z-10" />
                           </div>
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h4 className="text-base font-bold mb-1" style={{ color: "rgb(51, 160, 243)" }}>
-                            Obsidian Sword
+                          <h4 className="text-base font-bold mb-1" style={{ color: "#33A0F3" }}>
+                            Over Current Shocker
                           </h4>
                           <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
                             <span>Attack</span>
                             <span className="text-white font-semibold">+82</span>
                           </div>
                           <p className="text-sm text-muted-foreground leading-relaxed">
-                            Increase damage amount by <span className="text-[#FF8C00]">12</span>%
+                            When Owner Draws by ability, <span className="text-[#FF8C00]">50</span>% Fixed Damage to random enemy
                           </p>
                         </div>
-                      </div>
-
-                      {/* 7th Option */}
-                      <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
-                        <GearTooltip text={`Dellang Shop`} />
-                        <div className="relative w-21 h-32 flex-shrink-1">
-                          <img
-                            src="/images/bg_equipment_rarity_rare.webp"
-                            alt="Rare Rarity"
-                            className="w-full h-full object-contain"
-                          />
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <img src="/images/gear/Bone-Cutter.webp" alt={`Bone Cutter`} className="w-16 h-16 object-contain relative z-10" />
-                          </div>
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <h4 className="text-base font-bold mb-1" style={{ color: "rgb(51, 160, 243)" }}>
-                            Bone Cutter
-                          </h4>
-                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
-                            <span>Attack</span>
-                            <span className="text-white font-semibold">+82</span>
-                          </div>
-                          <p className="text-sm text-muted-foreground leading-relaxed">
-                            When hitting a target under Weakened status, +<span className="text-[#FF8C00]">30</span>% Damage
-                          </p>
-                        </div>
-                      </div>                    
+                      </div>              
                     </div>
                     
                   </DialogContent>
@@ -1229,8 +1175,7 @@ export default function ChizuruGuidePage() {
 
                 {/* Best in Slot Armor */}
                 <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
-                  <GearTooltip text={`City of Mist
-                    Laboratory 0`} />
+                  <GearTooltip text={`C6 Lab 0`} />
 
                   <div className="relative w-21 h-32 flex-shrink-1">
                     <img
@@ -1256,7 +1201,7 @@ export default function ChizuruGuidePage() {
                       <span className="text-white font-semibold">+31</span>
                     </div>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      At the start of battle, Discard up to <span className="text-[#FF8C00]">3</span> cards, Draw equal to the number
+                      At the start of battle, Discard up to <span className="text-[#FF8C00]">3</span>, Draw equal number of discards<br/>Stackable among members, Separate discard steps
                     </p>
                   </div>
                 </div>
@@ -1291,7 +1236,7 @@ export default function ChizuruGuidePage() {
 
                       {/* 2nd Option */}
                       <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
-                        <GearTooltip text={`Laboratory 0`} />
+                        <GearTooltip text={`C6 Lab 0`} />
                         <div className="relative w-21 h-32 flex-shrink-1">
                           <img
                             src="/images/bg_equipment_rarity_legend.webp"
@@ -1311,63 +1256,34 @@ export default function ChizuruGuidePage() {
                             <span className="text-white font-semibold">+31</span>
                           </div>
                           <p className="text-sm text-muted-foreground leading-relaxed">
-                            At the start of the battle,<br/> <span className="text-[#FF8C00]">1</span> Damage Reduction and Draw <span className="text-[#FF8C00]">1</span>
+                            At the start of battle, Draw <span className="text-[#FF8C00]">1</span> and gain <span className="text-[#FF8C00]">1</span> Damage Reduction
                           </p>
                         </div>
                       </div>
 
                       {/* 3rd Option */}
                       <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
-                      <GearTooltip text={`The Blue Pot
-                          City of Mist
-                          Laboratory 0`} />
+                        <GearTooltip text={`C6 Lab 0`} />
                         <div className="relative w-21 h-32 flex-shrink-1">
                           <img
-                            src="/images/bg_equipment_rarity_legend.webp"
-                            alt="Legend Rarity"
+                            src="/images/bg_equipment_rarity_rare.webp"
+                            alt="Rare Rarity"
                             className="w-full h-full object-contain"
                           />
                           <div className="absolute inset-0 flex items-center justify-center">
-                            <img src="/images/gear/Shield-of-the-Watcher.webp" alt="Shield of the Watcher" className="w-16 h-16 object-contain relative z-10" />
+                            <img src="/images/gear/Brainwave-Blocking-Helmet.webp" alt="Brainwave Blocking Helmet" className="w-16 h-16 object-contain relative z-10" />
                           </div>
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h4 className="text-base font-bold mb-1" style={{ color: "rgb(255, 150, 0)" }}>
-                            Shield of the Watcher
+                          <h4 className="text-base font-bold mb-1" style={{ color: "#33A0F3" }}>
+                            Brainwave Blocking Helmet
                           </h4>
                           <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
                             <span>Defense</span>
                             <span className="text-white font-semibold">+31</span>
                           </div>
                           <p className="text-sm text-muted-foreground leading-relaxed">
-                            When taking Damage, <span className="text-[#FF8C00]">1</span> Mark on the attacker
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* 4th Option */}
-                      <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
-                        <GearTooltip text={`Laboratory 0`} />
-                        <div className="relative w-21 h-32 flex-shrink-1">
-                          <img
-                            src="/images/bg_equipment_rarity_legend.webp"
-                            alt="Legend Rarity"
-                            className="w-full h-full object-contain"
-                          />
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <img src="/images/gear/Wings-of-Freedom.webp" alt="Wings of Freedom" className="w-16 h-16 object-contain relative z-10" />
-                          </div>
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <h4 className="text-base font-bold mb-1" style={{ color: "rgb(255, 150, 0)" }}>
-                            Wings of Freedom
-                          </h4>
-                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
-                            <span>Defense</span>
-                            <span className="text-white font-semibold">+31</span>
-                          </div>
-                          <p className="text-sm text-muted-foreground leading-relaxed">
-                           When hit, increase Damage Amount <span className="text-[#FF8C00]">10</span>% <br/>(can stack up to <span className="text-[#FF8C00]">3</span> times)
+                            When you Draw by an ability, +<span className="text-[#FF8C00]">40</span>% Fixed Shield
                           </p>
                         </div>
                       </div>
@@ -1384,7 +1300,8 @@ export default function ChizuruGuidePage() {
 
                 {/* Best in Slot Acessory */}
                 <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
-                  <GearTooltip text={`Cthulu Monster`} />
+                  <GearTooltip text={`C6 Lab 0
+                      C4 Swamp of Judgement`} />
 
                   <div className="relative w-21 h-32 flex-shrink-1">
                     <img
@@ -1410,8 +1327,8 @@ export default function ChizuruGuidePage() {
                       <span className="text-white font-semibold">+83</span>
                     </div>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      +<span className="text-[#FF8C00]">10</span>% max HP <br/>
-                      At the start of battle, +<span className="text-[#FF8C00]">1</span> AP, Draw <span className="text-[#FF8C00]">1</span>
+                      +<span className="text-[#FF8C00]">10</span>% HP<br/>
+                      Start of battle, Draw <span className="text-[#FF8C00]">1</span> and <span className="text-[#FF8C00]">1</span> AP
                     </p>
                   </div>
                 </div>
@@ -1446,7 +1363,7 @@ export default function ChizuruGuidePage() {
 
                       {/* 2nd Option */}
                       <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
-                        <GearTooltip text={`Seasonal Dellang Shop`} />
+                        <GearTooltip text={`C6 Lab 0`} />
                         <div className="relative w-21 h-32 flex-shrink-1">
                           <img
                             src="/images/bg_equipment_rarity_legend.webp"
@@ -1473,34 +1390,7 @@ export default function ChizuruGuidePage() {
 
                       {/* 3rd Option */}
                       <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
-                        <GearTooltip text={`Twin Star's Shadow`} />
-                        <div className="relative w-21 h-32 flex-shrink-1">
-                          <img
-                            src="/images/bg_equipment_rarity_unique.webp"
-                            alt="Unique Rarity"
-                            className="w-full h-full object-contain"
-                          />
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <img src="/images/gear/Pulsating-Egg.webp" alt="Pulsating Egg" className="w-16 h-16 object-contain relative z-10" />
-                          </div>
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <h4 className="text-base font-bold mb-1" style={{ color: "rgb(163, 96, 255)" }}>
-                           Pulsating Egg
-                          </h4>
-                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
-                            <span>Health</span>
-                            <span className="text-white font-semibold">+83</span>
-                          </div>
-                          <p className="text-sm text-muted-foreground leading-relaxed">
-                           +<span className="text-[#FF8C00]">15</span>% Attack, +<span className="text-[#FF8C00]">10</span>% Max HP
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* 4th Option */}
-                      <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
-                        <GearTooltip text={`Seasonal Dellang Shop`} />
+                        <GearTooltip text={`C6 Lab 0`} />
                         <div className="relative w-21 h-32 flex-shrink-1">
                           <img
                             src="/images/bg_equipment_rarity_legend.webp"
@@ -1508,27 +1398,82 @@ export default function ChizuruGuidePage() {
                             className="w-full h-full object-contain"
                           />
                           <div className="absolute inset-0 flex items-center justify-center">
-                            <img src="/images/gear/Emblem-of-an-Exceptional-Entity.webp" alt="Emblem of an Exceptional Entity" className="w-16 h-16 object-contain relative z-10" />
+                            <img src="/images/gear/Source-of-the-Forbidden.webp" alt="Source of the Forbidden" className="w-16 h-16 object-contain relative z-10" />
                           </div>
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h4 className="text-base font-bold mb-1" style={{ color: "rgb(255, 150, 0)" }}>
-                          Emblem of an Exceptional Entity
+                          <h4 className="text-base font-bold mb-1" style={{ color: "#FF9600" }}>
+                            Source of the Forbidden
                           </h4>
                           <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
                             <span>Health</span>
                             <span className="text-white font-semibold">+83</span>
                           </div>
                           <p className="text-sm text-muted-foreground leading-relaxed">
-                          +<span className="text-[#FF8C00]">30</span>% Damage Amount<br/>
-                          Stress received becomes <span className="text-[#FF8C00]">0</span> (<span className="text-[#FF8C00]">1</span> for each battle)
+                           When hit, inflict <span className="text-[#FF8C00]">1</span> random debuff Vuln/Weaken/Impair to enemy<br/>(<span className="text-[#FF8C00]">3</span> times per turn)<br/>Vuln is really good, Weaken is ok, Impair usually useless, RNG Value
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* 4th Option */}
+                      <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
+                        <GearTooltip text={`C6 Lab 0
+                      C4 Swamp of Judgement`} />
+                        <div className="relative w-21 h-32 flex-shrink-1">
+                          <img
+                            src="/images/bg_equipment_rarity_legend.webp"
+                            alt="Legend Rarity"
+                            className="w-full h-full object-contain"
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <img src="/images/gear/Water-Drops-Of-The-Goddess.webp" alt="Water Drops of the Goddess" className="w-16 h-16 object-contain relative z-10" />
+                          </div>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-base font-bold mb-1" style={{ color: "#FF9600" }}>
+                            Water Drops of the Goddess
+                          </h4>
+                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
+                            <span>Health</span>
+                            <span className="text-white font-semibold">+83</span>
+                          </div>
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                           At the start of battle, <span className="text-[#FF8C00]">1</span> Storage (Saves <span className="text-[#FF8C00]">1</span> AP between turns)
                           </p>
                         </div>
                       </div>
 
                       {/* 5th Option */}
                       <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
-                       <GearTooltip text={`Dellang Shop`} />
+                        <GearTooltip text={`C4 Swamp of Judgement`} />
+                        <div className="relative w-21 h-32 flex-shrink-1">
+                          <img
+                            src="/images/bg_equipment_rarity_legend.webp"
+                            alt="Legend Rarity"
+                            className="w-full h-full object-contain"
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <img src="/images/gear/Clover-of-the-Forest.webp" alt="Clover of the Forest" className="w-16 h-16 object-contain relative z-10" />
+                          </div>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-base font-bold mb-1" style={{ color: "#FF9600" }}>
+                            Clover of the Forest
+                          </h4>
+                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
+                            <span>Health</span>
+                            <span className="text-white font-semibold">+83</span>
+                          </div>
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                           When Recover via card, +<span className="text-[#FF8C00]">10</span>% ally Attack for <span className="text-[#FF8C00]">1</span> turn (Max <span className="text-[#FF8C00]">1</span> stack)
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* 6th Option */}
+                      <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
+                        <GearTooltip text={`C6 Lab 0
+                      C4 Swamp of Judgement`} />
                         <div className="relative w-21 h-32 flex-shrink-1">
                           <img
                             src="/images/bg_equipment_rarity_rare.webp"
@@ -1536,22 +1481,23 @@ export default function ChizuruGuidePage() {
                             className="w-full h-full object-contain"
                           />
                           <div className="absolute inset-0 flex items-center justify-center">
-                            <img src="/images/gear/Amorphous-Cube.webp" alt="Amorphous Cube" className="w-16 h-16 object-contain relative z-10" />
+                            <img src="/images/gear/Multifaceted-Parallel-Universe-Nexus.webp" alt="Multifaceted Parallel Universe Nexus" className="w-16 h-16 object-contain relative z-10" />
                           </div>
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h4 className="text-base font-bold mb-1" style={{ color: "rgb(51, 160, 243)" }}>
-                            Amorphous Cube
+                          <h4 className="text-base font-bold mb-1" style={{ color: "#33A0F3" }}>
+                            Multifaceted Parallel Universe Nexus or "Lead Prism"
                           </h4>
                           <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/20 text-sm text-gray-300 mb-2">
                             <span>Health</span>
                             <span className="text-white font-semibold">+83</span>
                           </div>
                           <p className="text-sm text-muted-foreground leading-relaxed">
-                            At the start of battle, +<span className="text-[#FF8C00]">25</span>% Damage
+                           At the start of turn, activate <span className="text-[#FF8C00]">1</span> random self Lead card in hand<br/>Enables many good neutral cards
                           </p>
                         </div>
                       </div>
+
                     </div>
                    </DialogContent>
                   </Dialog>
@@ -1564,34 +1510,34 @@ export default function ChizuruGuidePage() {
             <section id="memory-fragments" className="rounded-lg border border-border bg-card p-8 scroll-mt-6">
             <h2 className="text-2xl font-bold mb-6 text-purple-400">4. Memory Fragments</h2>
 
-              {/* BEST IN SLOT */}
+              {/* Memory Fragment Sets */}
               <div className="space-y-12">
                 <div>
                   <div className="text-center mb-6">
                     <span className="px-4 py-1.5 rounded-lg text-sm font-bold uppercase tracking-wider bg-amber-500/20 text-amber-400 border border-amber-500/40 shadow-sm">
-                      Best in Slot
+                      Recommended Set
                     </span>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                     {[
                       {
-                        name: "Black Wing",
-                        effect: "+12% Attack",
-                        icon: "/images/sets/black-wing.webp",
-                        why: "Best 2-Set bonus in general",
+                        name: "Tetra",
+                        effect: "Tetra's Authority Set",
+                        icon: "/images/sets/tetras-authority.webp",
+                        why: "+12% Defense helps with Healing capabilities",
                       },
                       {
-                        name: "Executioner's Tool",
-                        effect: "+25% Critical Damage",
-                        icon: "/images/sets/executioners-tool.webp",
-                        why: "Best 2-Set bonus in general",
+                        name: "Healers",
+                        effect: "Healer's Journey Set",
+                        icon: "/images/sets/healers-journey.webp",
+                        why: "+12% Health increases total HP pool which means more survivability, otherwise useless",
                       },
                       {
-                        name: "Cursed Corpse",
-                        effect: "Increases damage dealt to target inflicted with Agony by 10%",
-                        icon: "/images/sets/cursed-corpse.webp",
-                        why: "Optional damage boost if achievable, not required; substats are more important in general"
+                        name: "Scrab",
+                        effect: "Seth's Scarab Set",
+                        icon: "/images/sets/seths-scarab.webp",
+                        why: "Flex 2-Set slot, use whatever has the best substats"
                       },
                     ].map((set) => (
                       <ExpandableSetCard
@@ -1600,41 +1546,6 @@ export default function ChizuruGuidePage() {
                         tier="bis"
                         isExpanded={expandedMemorySet === set.name + "bis"}
                         onToggle={() => setExpandedMemorySet(expandedMemorySet === set.name + "bis" ? null : set.name + "bis")}
-                      />
-                    ))}
-                  </div>
-                </div>
-
-                {/* SECONDARY */}
-                <div>
-                  <div className="text-center mb-6">
-                    <span className="px-4 py-1.5 rounded-lg text-sm font-bold uppercase tracking-wider bg-cyan-500/20 text-cyan-400 border border-cyan-500/40">
-                      Secondary
-                    </span>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    {[
-                      {
-                        name: "Orb of Inhibition",
-                        effect: "When Hitting 2 times with 1 Attack Card, +10% Damage Amount to <span style=\"color: #a78bfa\">Void</span> Cards for 1 turn (2 times per turn)",
-                        icon: "/images/sets/orb-of-inhibition.webp",
-                        why: "Weak and Conditional, but still better then Void set, because this set is Additve Generic."
-                      },
-
-                      {
-                        name: "Executioner's Tool",
-                        effect: "+25% Critical Damage",
-                        icon: "/images/sets/executioners-tool.webp",
-                        why: "Best 2 set bonus in general.",                      
-                      },
-                    ].map((set) => (
-                      <ExpandableSetCard
-                        key={set.name + "secondary"}
-                        set={set}
-                        tier="secondary"
-                        isExpanded={expandedMemorySet === set.name + "secondary"}
-                        onToggle={() => setExpandedMemorySet(expandedMemorySet === set.name + "secondary" ? null : set.name + "secondary")}
                       />
                     ))}
                   </div>
@@ -1649,15 +1560,15 @@ export default function ChizuruGuidePage() {
                     <div className="text-3xl font-bold text-purple-400">IV</div>
                     <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Ideal</div>
                     <div className="py-2 px-4 rounded bg-purple-500/10 border border-purple-500/30 text-sm font-medium text-purple-300">
-                      Critical Rate
+                      HP %
                     </div>
                   </div>
 
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-purple-400">V</div>
+                    <div className="text-3xl font-bold text-cyan-400">V</div>
                     <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Desire</div>
                     <div className="py-2 px-4 rounded bg-purple-500/10 border border-purple-500/30 text-sm font-medium text-purple-300">
-                      Void Damage
+                      HP %
                     </div>
                   </div>
 
@@ -1665,7 +1576,7 @@ export default function ChizuruGuidePage() {
                     <div className="text-3xl font-bold text-purple-400">IV</div>
                     <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Ideal</div>
                     <div className="py-2 px-4 rounded bg-purple-500/10 border border-purple-500/30 text-sm font-medium text-purple-300">
-                      Attack %
+                      Ego Recovery
                     </div>
                   </div>
                 </div>
@@ -1674,27 +1585,33 @@ export default function ChizuruGuidePage() {
                 <div className="mt-8 text-center justify-center text-[14px]">
                   {/* Priority Chain */}
                   <div className="flex items-center justify-center gap-4 md:gap-4 flex-wrap">
+                    <div className="px-6 py-3 rounded-full bg-pink-500/20 border-2 border-pink-500/70 font-bold text-pink-300 shadow-lg shadow-pink-500/20">
+                      Ego Recovery
+                    </div>
+                    <span className="text-2xl text-muted-foreground/40">›</span>
                     <div className="px-4 py-2 rounded-full bg-purple-500/20 border border-purple-500/50 font-semibold text-purple-300">
-                      Critical Rate
+                      Defense %
                     </div>
                     <span className="text-2xl text-muted-foreground/40">=</span>
                     <div className="px-4 py-2 rounded-full bg-purple-500/20 border border-purple-500/50 font-semibold text-purple-300">
-                      Critical Damage
+                      Defense +
                     </div>
                     <span className="text-2xl text-muted-foreground/40">›</span>
                     <div className="px-3 py-1 rounded-full bg-muted/70 border border-border text-muted-foreground">
-                      Attack +
+                      HP %
                     </div>
-                    <span className="text-muted-foreground/60">›</span>
+                    <span className="text-muted-foreground/60">or</span>
                     <div className="px-3 py-1 rounded-full bg-muted/70 border border-border text-muted-foreground">
-                      Attack %
+                      HP +
                     </div>
                   </div>
 
                   {/* Explanation */}
                   <div className="mt-7.5 mx-auto text-center">
                     <p className="text-[14px] leading-relaxed text-muted-foreground">
-                      <span className="text-muted-foreground">Prioritize Critical Rate and Critical Damage for ideal crit ratio. Then prioritize Flat Attack and Attack % for more damage.<br/>Void Damage% is preferred over Attack% for most cases.</span>
+                      <span className="text-muted-foreground">
+                        
+                        </span>
                     </p>
                   </div>
                 </div>
@@ -1707,42 +1624,35 @@ export default function ChizuruGuidePage() {
               <p className="text-muted-foreground mb-6 whitespace-pre-line">
                 {`Click on the partners below to see more information.`}
               </p>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {[
                   {
                     id: 1,
-                    name: "Itsuku",
+                    name: "Nyx",
                     role: "S+",
-                    image: "/images/partners/itsuku.webp",
-                    description: "Signature Partner [BIS]\nPartner Skill can increase one turns damage by alot, fixed damage is largely irrelevant",
+                    image: "/images/partners/nyx.webp",
+                    description: "Best in class, just for the Ego Skill, Everything else is Extra",
                   },
                   {
                     id: 2,
-                    name: "Zatera",
+                    name: "Arwen",
                     role: "S",
-                    image: "/images/partners/zatera.webp",
-                    description: "Best F2P option as it provides a massive Attack boost.",
+                    image: "/images/partners/arwen.webp",
+                    description: "Very good passive, free damage reduction",
                   },
                   {
                     id: 3,
-                    name: "Bria",
+                    name: "Alyssa",
                     role: "A",
-                    image: "/images/partners/bria.webp",
-                    description: "Usable if you need Bria's Partner Skill Utility, otherwise bad.",
+                    image: "/images/partners/alyssa.webp",
+                    description: "Niche if you want the +1 Moral on Partner Skill",
                   },
                   {
                     id: 4,
-                    name: "Anteia",
+                    name: "Yvonne",
                     role: "C",
-                    image: "/images/partners/anteia.webp",
-                    description: "Weaker at E0 than Zatera.",
-                  },
-                  {
-                    id: 5,
-                    name: "Eloise",
-                    role: "Situational",
-                    image: "/images/partners/eloise.webp",
-                    description: "Chizuru doesn't have any Exhaust cards at base, so Eloise is not a good option.",
+                    image: "/images/partners/yvonne.webp",
+                    description: "Bad",
                   },
                 ].map((partner) => (
                   <Dialog
@@ -1754,7 +1664,7 @@ export default function ChizuruGuidePage() {
                       <div className="flex flex-col items-center gap-4 cursor-pointer">
                         {/* Tier Badge outside the card */}
                         <span className={`px-3 py-1.5 rounded-full text-sm font-bold ${getTierColor(partner.role)}`}>
-                          {partner.role} Tier
+                          {partner.role.includes("/") ? partner.role : `${partner.role} Tier`}
                         </span>
               
                         {/* Card Image */}
@@ -1798,7 +1708,7 @@ export default function ChizuruGuidePage() {
             <section id="teams" className="rounded-lg border border-border bg-card p-8 scroll-mt-24">
               <h2 className="text-2xl font-bold mb-6 text-purple-400">6. Teams</h2>
               <p className="text-muted-foreground mb-6 whitespace-pre-line">
-                Below are 2 example teams for Chizuru DPS
+                Below are 2 example teams for Mika Support
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1808,15 +1718,137 @@ export default function ChizuruGuidePage() {
                     <div className="group cursor-pointer hover:scale-105 rounded-xl border-2 border-purple-500/30 bg-gradient-to-br from-purple-500/5 to-transparent p-4 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-2 h-2 rounded-full bg-violet-400"></div>
-                        <h3 className="text-base font-semibold text-violet-400">Chizuru Hypercarry</h3>
+                        <h3 className="text-base font-semibold text-violet-400">Haru Khalipe</h3>
                         </div>
                       <div className="grid grid-cols-3 gap-2 mb-3">
 
-                        {/* Chizuru */}
+                        {/* Haru */}
+                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-blue-400/50 bg-card shadow-md group- transition-transform">
+                          <img
+                            src="/images/characters/haruhalf.webp"
+                            alt="Haru"
+                            className="object-cover w-full h-full"
+                          />
+                          <div className="absolute top-1 left-1 flex flex-col gap-0.5">
+                            <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
+                              <img src="/images/icon-job-striker.webp" alt="Striker" className="w-full h-full" />
+                            </div>
+                            <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
+                              <img src="/images/icon-ego-justice.webp" alt="Justice" className="w-full h-full" />
+                            </div>
+                          </div>
+                          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent px-1 py-1.5">
+                            <p className="text-sm font-semibold text-white text-center">Haru</p>
+                          </div>
+                        </div>
+
+                        {/* Khalipe */}
+                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-orange-400/50 bg-card shadow-md group- transition-transform">
+                          <img
+                            src="/images/characters/khalipehalf.webp"
+                            alt="Khalipe"
+                            className="object-cover w-full h-full"
+                          />
+                          <div className="absolute top-1 left-1 flex flex-col gap-0.5">
+                            <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
+                              <img src="/images/icon-job-vanguard.webp" alt="Vanguard" className="w-full h-full" />
+                            </div>
+                            <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
+                              <img src="/images/icon-ego-instinct.webp" alt="Instinct" className="w-full h-full" />
+                            </div>
+                          </div>
+                          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent px-1 py-1.5">
+                            <p className="text-sm font-semibold text-white text-center">Khalipe</p>
+                          </div>
+                        </div>
+
+                        {/* Mika */}
+                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-blue-400/50 bg-card shadow-md group- transition-transform">
+                          <img src="/images/characters/mikahalf.webp" alt="Mika" className="object-cover w-full h-full" />
+                          <div className="absolute top-1 left-1 flex flex-col gap-0.5">
+                            <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
+                              <img src="/images/icon-job-controller.webp" alt="Controller" className="w-full h-full" />
+                            </div>
+                            <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
+                              <img src="/images/icon-ego-justice.webp" alt="Justice" className="w-full h-full" />
+                            </div>
+                          </div>
+                          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent px-1 py-1.5">
+                            <p className="text-sm font-semibold text-white text-center">Mika</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between text-xs text-muted-foreground">
+                        <span className="font-medium">Mika generates AP for Haru and Khalipe</span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-4 w-4 group-hover:translate-x-1 transition-transform"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </div>
+                    </div>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+                    <DialogHeader>
+                      <DialogTitle className="text-2xl text-purple-400">Team 1: AP Funnel Team</DialogTitle>
+                      <DialogDescription>Detailed team composition and synergy explanation</DialogDescription>
+                    </DialogHeader>
+                    <div className="space-y-4 mt-4">
+                      <div className="space-y-4">
+                        <div>
+                          <h3 className="text-lg font-semibold text-foreground mb-2">Why This Team Works</h3>
+                          <p className="text-muted-foreground leading-relaxed">
+                            This composition focuses on Mika's core strength: <strong className="text-blue-300">AP generation</strong>. Both Haru and Khalipe are extremely AP-hungry characters who need constant Action Points to function effectively. Mika's ability to generate and funnel AP to her allies makes her the perfect support for these two DPS characters who would otherwise struggle with AP management.
+                          </p>
+                        </div>
+                        
+                        <div>
+                          <h3 className="text-lg font-semibold text-foreground mb-2">Synergies</h3>
+                          <div className="space-y-3 text-muted-foreground">
+                            <div>
+                              <strong className="text-blue-300">Mika + Haru:</strong> Haru requires significant AP to use her powerful abilities effectively. Mika's AP generation ensures Haru can consistently use her high-cost cards and maintain her damage output throughout the battle.
+                            </div>
+                            <div>
+                              <strong className="text-orange-300">Mika + Khalipe:</strong> Khalipe is also very AP-hungry, needing AP to maintain her defensive capabilities and offensive pressure. Mika's AP funneling allows Khalipe to use her abilities more frequently, maximizing her effectiveness as both a tank and damage dealer.
+                            </div>
+                            <div>
+                              <strong className="text-blue-300">The Strategy:</strong> Mika generates AP through her abilities → Funnels AP to both Haru and Khalipe → Both DPS characters can use their high-cost, high-impact cards more frequently → Team maintains consistent pressure and damage output throughout the battle.
+                            </div>
+                          </div>
+                        </div>
+
+                        <div>
+                          <h3 className="text-lg font-semibold text-foreground mb-2">Role Distribution</h3>
+                          <ul className="list-disc list-inside space-y-1 text-muted-foreground ml-4">
+                            <li><strong className="text-blue-300">Haru:</strong> Main DPS - AP-hungry striker who benefits greatly from Mika's AP generation</li>
+                            <li><strong className="text-orange-300">Khalipe:</strong> DPS/Tank - AP-hungry vanguard who needs AP to maintain effectiveness</li>
+                            <li><strong className="text-blue-300">Mika:</strong> Support/AP Generator - funnels AP to both Haru and Khalipe to keep them online</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+
+                {/* Team 2 */}
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <div className="group cursor-pointer hover:scale-105 rounded-xl border-2 border-purple-500/30 bg-gradient-to-br from-purple-500/5 to-transparent p-4 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300">
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="w-2 h-2 rounded-full bg-violet-400"></div>
+                        <h3 className="text-base font-semibold text-violet-400">Kayron Hypercarry</h3>
+                        </div>
+                      <div className="grid grid-cols-3 gap-2 mb-3">
+
+                        {/* Kayron */}
                         <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-violet-400/50 bg-card shadow-md group- transition-transform">
                           <img
-                            src="/images/characters/chizuruhalf.webp"
-                            alt="Chizuru"
+                            src="/images/characters/kayronhalf.webp"
+                            alt="Kayron"
                             className="object-cover w-full h-full"
                           />
                           <div className="absolute top-1 left-1 flex flex-col gap-0.5">
@@ -1828,7 +1860,7 @@ export default function ChizuruGuidePage() {
                             </div>
                           </div>
                           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent px-1 py-1.5">
-                            <p className="text-sm font-semibold text-white text-center">Chizuru</p>
+                            <p className="text-sm font-semibold text-white text-center">Kayron</p>
                           </div>
                         </div>
 
@@ -1852,146 +1884,24 @@ export default function ChizuruGuidePage() {
                           </div>
                         </div>
 
-                        {/* Veronica */}
-                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-red-400/50 bg-card shadow-md group- transition-transform">
-                          <img src="/images/characters/veronicahalf.webp" alt="Veronica" className="object-cover w-full h-full" />
-                          <div className="absolute top-1 left-1 flex flex-col gap-0.5">
-                            <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
-                              <img src="/images/icon-job-ranger.webp" alt="Ranger" className="w-full h-full" />
-                            </div>
-                            <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
-                              <img src="/images/icon-ego-passion.webp" alt="Passion" className="w-full h-full" />
-                            </div>
-                          </div>
-                          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent px-1 py-1.5">
-                            <p className="text-sm font-semibold text-white text-center">Veronica</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex items-center justify-between text-xs text-muted-foreground">
-                        <span className="font-medium">Rei Helps with Damage Buffs while Veronica helps with Draws</span>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-4 w-4 group-hover:translate-x-1 transition-transform"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </div>
-                    </div>
-                  </DialogTrigger>
-                  <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
-                    <DialogHeader>
-                      <DialogTitle className="text-2xl text-purple-400">Team 1: Chizuru Hypercarry</DialogTitle>
-                      <DialogDescription>Detailed team composition and synergy explanation</DialogDescription>
-                    </DialogHeader>
-                    <div className="space-y-4 mt-4">
-                      <div className="space-y-4">
-                        <div>
-                          <h3 className="text-lg font-semibold text-foreground mb-2">Why This Team Works</h3>
-                          <p className="text-muted-foreground leading-relaxed">
-                            This composition maximizes Chizuru's damage potential by providing the two things she needs most: <strong className="text-red-300">card draw</strong> and <strong className="text-purple-300">damage amplification</strong>. Chizuru's power comes from stacking Will-O'-Wisp (gained through hits) to empower her Shadow of the Moon attacks. Without proper support, she struggles to cycle through her deck and find key cards like Tsukuyomi and Shadow of the Moon.
-                          </p>
-                        </div>
-                        
-                        <div>
-                          <h3 className="text-lg font-semibold text-foreground mb-2">Synergies</h3>
-                          <div className="space-y-3 text-muted-foreground">
-                            <div>
-                              <strong className="text-purple-300">Rei + Chizuru:</strong> Rei provides damage buffs that multiply Chizuru's Shadow of the Moon damage. Both share Void Ego type, creating natural synergy. Rei's support is especially powerful with Tsukuyomi III (adds 2 hits to Shadow of the Moon), allowing for infinite stacking potential.
-                            </div>
-                            <div>
-                              <strong className="text-red-300">Veronica</strong> +<strong className="text-purple-300"> Chizuru:</strong> Veronica's Repose (0 cost, Draw 2 other combatant's cards) solves Chizuru's card draw problem. This ensures Chizuru can consistently find her Tsukuyomi cards (which generate 3 Will-O'-Wisp per hit) and Shadow of the Moon cards to unleash her damage.
-                            </div>
-                            <div>
-                              <strong className="text-purple-300">The Combo:</strong> Veronica draws cards → Chizuru finds Tsukuyomi → Chizuru uses attack cards to generate Will-O'-Wisp (3 per hit) → Rei's damage buffs amplify the damage → Chizuru uses Shadow of the Moon with massive Will-O'-Wisp stacks for devastating damage.
-                            </div>
-                          </div>
-                        </div>
-
-                        <div>
-                          <h3 className="text-lg font-semibold text-foreground mb-2">Role Distribution</h3>
-                          <ul className="list-disc list-inside space-y-1 text-muted-foreground ml-4">
-                            <li><strong className="text-purple-300">Chizuru:</strong> Main DPS - generates Will-O'-Wisp and deals massive damage with Shadow of the Moon</li>
-                            <li><strong className="text-purple-300">Rei:</strong> Support/Damage Buffer - amplifies Chizuru's damage through buffs</li>
-                            <li><strong className="text-red-300">Veronica:</strong> Support/Draw Engine - provides card draw to keep Chizuru's combo going</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </DialogContent>
-                </Dialog>
-
-                {/* Team 2 */}
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <div className="group cursor-pointer hover:scale-105 rounded-xl border-2 border-purple-500/30 bg-gradient-to-br from-purple-500/5 to-transparent p-4 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300">
-                      <div className="flex items-center gap-2 mb-3">
-                        <div className="w-2 h-2 rounded-full bg-violet-400"></div>
-                        <h3 className="text-base font-semibold text-violet-400">Mono Void</h3>
-                        </div>
-                      <div className="grid grid-cols-3 gap-2 mb-3">
-
-                        {/* Chizuru */}
-                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-violet-400/50 bg-card shadow-md group- transition-transform">
-                          <img
-                            src="/images/characters/chizuruhalf.webp"
-                            alt="Chizuru"
-                            className="object-cover w-full h-full"
-                          />
-                          <div className="absolute top-1 left-1 flex flex-col gap-0.5">
-                            <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
-                              <img src="/images/icon-job-psionic.webp" alt="Psionic" className="w-full h-full" />
-                            </div>
-                            <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
-                              <img src="/images/icon-ego-void.webp" alt="Void" className="w-full h-full" />
-                            </div>
-                          </div>
-                          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent px-1 py-1.5">
-                            <p className="text-sm font-semibold text-white text-center">Chizuru</p>
-                          </div>
-                        </div>
-
-                        {/* Tressa */}
-                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-violet-400/50 bg-card shadow-md group- transition-transform">
-                          <img
-                            src="/images/characters/tressahalf.webp"
-                            alt="Tressa"
-                            className="object-cover w-full h-full"
-                          />
-                          <div className="absolute top-1 left-1 flex flex-col gap-0.5">
-                            <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
-                              <img src="/images/icon-job-psionic.webp" alt="Psionic" className="w-full h-full" />
-                            </div>
-                            <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
-                              <img src="/images/icon-ego-void.webp" alt="Void" className="w-full h-full" />
-                            </div>
-                          </div>
-                          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent px-1 py-1.5">
-                            <p className="text-sm font-semibold text-white text-center">Tressa</p>
-                          </div>
-                        </div>
-
-                        {/* Rei */}
-                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-violet-400/50 bg-card shadow-md group- transition-transform">
-                          <img src="/images/characters/reihalf.webp" alt="Rei" className="object-cover w-full h-full" />
+                        {/* Mika */}
+                        <div className="relative aspect-[2/3] rounded-lg overflow-hidden border border-blue-400/50 bg-card shadow-md group- transition-transform">
+                          <img src="/images/characters/mikahalf.webp" alt="Mika" className="object-cover w-full h-full" />
                           <div className="absolute top-1 left-1 flex flex-col gap-0.5">
                             <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
                               <img src="/images/icon-job-controller.webp" alt="Controller" className="w-full h-full" />
                             </div>
                             <div className="w-8 h-8 rounded bg-black/80 backdrop-blur-sm border border-white/20 flex items-center justify-center p-0.5">
-                              <img src="/images/icon-ego-void.webp" alt="Void" className="w-full h-full" />
+                              <img src="/images/icon-ego-justice.webp" alt="Justice" className="w-full h-full" />
                             </div>
                           </div>
                           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent px-1 py-1.5">
-                            <p className="text-sm font-semibold text-white text-center">Rei</p>
+                            <p className="text-sm font-semibold text-white text-center">Mika</p>
                           </div>
                         </div>
                       </div>
                       <div className="flex items-center justify-between text-xs text-muted-foreground">
-                        <span className="font-medium">Rei's role is the same, however Tressa here helps Chizuru by spamming attack cards to build up  Will-O'-Wisp stacks.</span>
+                        <span className="font-medium">Rei buffs Kayron and Mika generates the necessary AP for the team</span>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="h-4 w-4 group-hover:translate-x-1 transition-transform"
@@ -2006,7 +1916,7 @@ export default function ChizuruGuidePage() {
                   </DialogTrigger>
                   <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
                     <DialogHeader>
-                      <DialogTitle className="text-2xl text-purple-400">Team 2: Chizuru Hypercarry (Tressa Variant)</DialogTitle>
+                      <DialogTitle className="text-2xl text-purple-400">Team 2: Kayron Hypercarry</DialogTitle>
                       <DialogDescription>Detailed team composition and synergy explanation</DialogDescription>
                     </DialogHeader>
                     <div className="space-y-4 mt-4">
@@ -2014,7 +1924,7 @@ export default function ChizuruGuidePage() {
                         <div>
                           <h3 className="text-lg font-semibold text-foreground mb-2">Why This Team Works</h3>
                           <p className="text-muted-foreground leading-relaxed">
-                            This variant replaces Veronica with Tressa, taking a different approach to Will-O'-Wisp generation. Instead of relying on card draw to find Chizuru's cards, Tressa <strong className="text-purple-300">spams attack cards</strong> that Chizuru can use with Tsukuyomi to generate Will-O'-Wisp stacks. All three characters share <strong className="text-purple-300">Void Ego type</strong>, creating strong synergy.
+                            This composition focuses on maximizing Kayron's damage output through <strong className="text-purple-300">damage buffs</strong> from Rei and <strong className="text-blue-300">AP generation</strong> from Mika. Kayron is extremely AP-hungry and requires constant Action Points to maintain his damage output. Rei provides the damage amplification Kayron needs, while Mika ensures he has the AP to use his powerful abilities consistently.
                           </p>
                         </div>
                         
@@ -2022,16 +1932,16 @@ export default function ChizuruGuidePage() {
                           <h3 className="text-lg font-semibold text-foreground mb-2">Synergies</h3>
                           <div className="space-y-3 text-muted-foreground">
                             <div>
-                              <strong className="text-purple-300">Tressa + Chizuru:</strong> Tressa's ability to spam attack cards directly feeds Chizuru's Will-O'-Wisp generation. When Chizuru uses Tsukuyomi (3 Will-O'-Wisp per hit), Tressa's attack cards provide the hits needed to stack Will-O'-Wisp quickly without relying on card draw RNG.
+                              <strong className="text-purple-300">Rei + Kayron:</strong> Rei provides damage buffs that significantly amplify Kayron's damage output. Both share Void Ego type, creating natural synergy. Rei's buffs multiply Kayron's already high damage potential, making him a devastating DPS threat.
                             </div>
                             <div>
-                              <strong className="text-purple-300">Rei + Chizuru:</strong> Rei's role remains the same - providing damage buffs that amplify Chizuru's Shadow of the Moon attacks. The Void Ego synergy between all three characters enhances their effectiveness.
+                              <strong className="text-blue-300">Mika + Kayron:</strong> Kayron is very AP-hungry and needs constant Action Points to function effectively. Mika's AP generation and funneling ensures Kayron can consistently use his high-cost, high-impact cards throughout the battle, maintaining his damage output.
                             </div>
                             <div>
-                              <strong className="text-purple-300">Triple Void Ego:</strong> Having all three characters share Void Ego type creates natural synergy and likely provides team-wide benefits. This makes the team more cohesive than mixed Ego type compositions.
+                              <strong className="text-purple-300">Void Ego Synergy:</strong> Both Kayron and Rei share Void Ego type, which provides team-wide benefits and enhances their effectiveness together.
                             </div>
                             <div>
-                              <strong className="text-purple-300">The Combo:</strong> Tressa spams attack cards → Chizuru uses Tsukuyomi on those attacks → Generates 3 Will-O'-Wisp per hit → Rei's damage buffs amplify → Chizuru unleashes Shadow of the Moon with massive Will-O'-Wisp stacks.
+                              <strong className="text-purple-300">The Strategy:</strong> Rei buffs Kayron's damage → Mika generates and funnels AP to Kayron → Kayron uses his powerful abilities more frequently → Combined with Rei's buffs, Kayron deals massive damage consistently throughout the battle.
                             </div>
                           </div>
                         </div>
@@ -2039,17 +1949,10 @@ export default function ChizuruGuidePage() {
                         <div>
                           <h3 className="text-lg font-semibold text-foreground mb-2">Role Distribution</h3>
                           <ul className="list-disc list-inside space-y-1 text-muted-foreground ml-4">
-                            <li><strong className="text-purple-300">Chizuru:</strong> Main DPS - generates Will-O'-Wisp and deals massive damage with Shadow of the Moon</li>
-                            <li><strong className="text-purple-300">Tressa:</strong> Support/Hit Generator - spams attack cards to help Chizuru build Will-O'-Wisp stacks</li>
-                            <li><strong className="text-purple-300">Rei:</strong> Support/Damage Buffer - amplifies Chizuru's damage through buffs</li>
+                            <li><strong className="text-purple-300">Kayron:</strong> Main DPS - AP-hungry psionic who deals massive damage when properly supported</li>
+                            <li><strong className="text-purple-300">Rei:</strong> Support/Damage Buffer - amplifies Kayron's damage through buffs</li>
+                            <li><strong className="text-blue-300">Mika:</strong> Support/AP Generator - funnels AP to Kayron to keep him active and dealing damage</li>
                           </ul>
-                        </div>
-
-                        <div>
-                          <h3 className="text-lg font-semibold text-foreground mb-2">Comparison to Team 1</h3>
-                          <p className="text-muted-foreground leading-relaxed">
-                            This team trades Veronica's card draw for Tressa's direct attack card generation. It's more consistent for Will-O'-Wisp stacking but may struggle if you need to find specific Chizuru cards. The triple Void Ego synergy is stronger, but you lose Veronica's versatile draw utility.
-                          </p>
                         </div>
                       </div>
                     </div>
