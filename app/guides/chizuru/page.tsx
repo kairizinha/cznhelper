@@ -44,7 +44,7 @@ export default function ChizuruGuidePage() {
           cost: 1,
           type: "attack",
           description: "[ Initiation ] 180% Damage\n1 Cursed Shackles\nCursed Shackles: Add 1 Hit",
-          reasoning: "Extra hit is good for Wil o Wisp Stacking if better options are not available.",
+          reasoning: "Solid option for Will-O'-Wisp stacking. The extra hit helps generate more stacks, but other epiphanies offer better utility or damage scaling.",
         },
         {
           id: "Karmic Flames II",
@@ -52,7 +52,7 @@ export default function ChizuruGuidePage() {
           cost: 1,
           type: "attack",
           description: "[ Initiation ] 180% Damage\n1 Cursed Shackles\nCursed Shackles:\nDecrease Cost of the\nnext card of this unit\nused by 1",
-          reasoning: "Refunds itself (only on enemies with shackle already), but requires Draw support",
+          reasoning: "Excellent cost efficiency. Refunds itself when used on already-shackled enemies, creating a 0-cost cycle. Requires consistent card draw support to maximize value.",
         },
         {
           id: "Karmic Flames III",
@@ -60,7 +60,7 @@ export default function ChizuruGuidePage() {
           cost: 1,
           type: "attack",
           description: "[ Initiation ] 216% Damage\n1 Cursed Shackles\nCursed Shackles:\nIncrease Damage\nAmount by 100%",
-          reasoning: "Single Target Damage, really bad compared to other options.",
+          reasoning: "Higher single-target damage, but lacks the multi-hit or utility of other options. The damage boost is decent but doesn't scale as well as Will-O'-Wisp stacking strategies.",
         },
         {
           id: "Karmic Flames IV",
@@ -68,7 +68,7 @@ export default function ChizuruGuidePage() {
           cost: 2,
           type: "skill",
           description: "[ Initiation ] 1 Cursed Shackles\nCreate 1 Shadow of the\nMoon",
-          reasoning: "Expensive, but 5 wisps, is good with Bound At Dusk 5",
+          reasoning: "Expensive at 2 cost, but generates 5 Will-O'-Wisp when used with Shadow of the Moon. Synergizes well with Bound At Dusk V for cost reduction, but generally too costly for most builds.",
         },
         {
           id: "Karmic Flames V",
@@ -76,7 +76,7 @@ export default function ChizuruGuidePage() {
           cost: 1,
           type: "skill",
           description: "[ Initiation / Exhaust] 1 Cursed Shackles\nWhen a target inflicted\nwith Cursed Shackles\nis defeated, create this\ncard",
-          reasoning: "Best Karmic Flames option, Exhausts itself and it returns once you finish off the ST, but worse others for Multi/Spawn Mobs",
+          reasoning: "Best Karmic Flames epiphany. Self-exhausts but returns when you defeat a shackled enemy, creating infinite value in single-target scenarios. Less effective against multi-enemy or spawn-heavy encounters.",
         },
       ],
     },
@@ -93,7 +93,7 @@ export default function ChizuruGuidePage() {
           cost: 0,
           type: "skill",
           description: "3 Will-O'-Wisp for each\nHit of the next Attack\nCard of this unit used",
-          reasoning: "Best source of Will-O'-Wisp, it is a direct upgrade of the base card",
+          reasoning: "Direct upgrade from base card, providing 50% more Will-O'-Wisp per hit. The most reliable and consistent source of Will-O'-Wisp generation for Chizuru's damage scaling.",
         },
         {
           id: "Tsukuyomi II",
@@ -101,7 +101,7 @@ export default function ChizuruGuidePage() {
           cost: 0,
           type: "skill",
           description: "Add 1 Hit(s) to the next\nAttack Card of this unit\nused, 1 Will-O'-Wisp for\neach Hit",
-          reasoning: "+1 Hit but much less Will-O'-Wisp generation",
+          reasoning: "Adds an extra hit which can be valuable for multi-hit cards, but generates significantly less Will-O'-Wisp compared to Tsukuyomi I. Good for hit-based synergies but weaker for Will-O'-Wisp stacking.",
         },
         {
           id: "Tsukuyomi III",
@@ -110,7 +110,7 @@ export default function ChizuruGuidePage() {
           type: "skill",
           description:
             "Add 2 Hit(s) to the next\nShadow of the Moon,\nShadow of the Moon+\nused",
-          reasoning: "+2 hit to moon, infinite stacking, with Rei or Orlea, its insane",
+          reasoning: "Incredibly powerful for Shadow of the Moon builds. The +2 hits stack infinitely and synergize exceptionally well with Rei's damage buffs or Orlea's support. Enables massive burst damage potential.",
         },
         {
           id: "Tsukuyomi IV",
@@ -118,7 +118,7 @@ export default function ChizuruGuidePage() {
           cost: 0,
           type: "skill",
           description: "3 Will-O'-Wisp for each\nAttack Card of this unit\nin hand",
-          reasoning: "Because it only works for Chizuru's Cards, it is not possible to get many stacks",
+          reasoning: "Limited by Chizuru's hand size and only counts her own attack cards. In practice, you rarely have enough Chizuru attack cards in hand to generate meaningful stacks compared to other epiphanies.",
         },
         {
           id: "Tsukuyomi V",
@@ -126,7 +126,7 @@ export default function ChizuruGuidePage() {
           cost: 1,
           type: "upgrade",
           description: "[ Unique / Lead ] When an Attack Card\nof this unit is used, 2\nWill-O'-Wisp",
-          reasoning: "Insanely good with Oni 4 and good if you have duped base Tsukuyomi",
+          reasoning: "Excellent with Oni Hunt IV (creates Moonslash cards) for passive Will-O'-Wisp generation. Also strong if you have duplicate base Tsukuyomi cards. Requires specific team compositions to maximize value.",
         },
       ],
     },
@@ -143,7 +143,7 @@ export default function ChizuruGuidePage() {
           cost: 1,
           type: "upgrade",
           description: "[ Initiation / Unique ] At the start of the turn,\ngain Inhibit\nDecrease Cost by 1\nuntil 2 random card(s)\nare used",
-          reasoning: "Technically +2 AP but it's still RNG and can potentially break Conqueror set",
+          reasoning: "Provides +2 effective AP per turn through cost reduction. The RNG element can be managed, but be cautious as it may interfere with Conqueror set bonuses if you're relying on specific cost thresholds.",
         },
         {
           id: "Bound At Dusk II",
@@ -151,7 +151,7 @@ export default function ChizuruGuidePage() {
           cost: 1,
           type: "upgrade",
           description: "[ Initiation / Unique ] At the start of the turn,\ngain Inhibit\nWhen Shadow of the\nMoon+ is used, decrease\nCost of the next 1 card(s)\nused by 1",
-          reasoning: "Good for spamming Shadow of the Moon+, needs draw supports and a bit of luck",
+          reasoning: "Excellent for Shadow of the Moon+ spam builds. Enables chaining multiple Shadow of the Moon+ cards when combined with proper draw support. Requires consistent card draw to maximize effectiveness.",
         },
         {
           id: "Bound At Dusk III",
@@ -159,7 +159,7 @@ export default function ChizuruGuidePage() {
           cost: 1,
           type: "upgrade",
           description: "[ Initiation / Unique ] At the start of the turn,\ngain Inhibit\nActivate 2 random\ncard(s) of other\nCombatants",
-          reasoning: "Good with allies that doesn't have 0 cost cards",
+          reasoning: "Strong team support option. Best used with allies who have impactful non-zero-cost cards. Provides additional actions and can enable powerful combos with support characters.",
         },
         {
           id: "Bound At Dusk IV",
@@ -167,7 +167,7 @@ export default function ChizuruGuidePage() {
           cost: 1,
           type: "upgrade",
           description: "[ Initiation / Unique ] At the start of the turn,\ngain Inhibit\nActivate 2 random\nLead cards",
-          reasoning: "Way too reliant on RNG to be a good option",
+          reasoning: "Too RNG-dependent to be reliable. Requires both having Lead cards in hand and the random activation hitting useful cards. Generally inconsistent compared to other options.",
         },
         {
           id: "Bound At Dusk V",
@@ -175,7 +175,7 @@ export default function ChizuruGuidePage() {
           cost: 1,
           type: "upgrade",
           description: "[ Initiation / Unique ] At the start of the turn,\ngain Inhibit\nDecrease Cost of the\ncard with the highest\nCost by 2",
-          reasoning: "Only synergizes with Karmic Flames IV for Chizuru herself, not a strong pick",
+          reasoning: "Limited synergy - primarily works with Karmic Flames IV (2 cost) for Chizuru herself. The -2 cost reduction is significant but too narrow in application to be a strong general pick.",
         },
       ],
     },
@@ -192,7 +192,7 @@ export default function ChizuruGuidePage() {
           cost: 1,
           type: "attack",
           description: "[ Haste ] 60% Damage x 4\n+40% Damage Amount\nto the next Bind card\nused",
-          reasoning: "4 Will-O'-Wisp stacks on use, additive damage bonus synergy and increased SotM damage",
+          reasoning: "Best Oni Hunt epiphany. Generates 4 Will-O'-Wisp on use (via 4 hits with Tsukuyomi), provides strong damage bonus to Shadow of the Moon, and has excellent synergy with Will-O'-Wisp stacking builds.",
         },
         {
           id: "Oni Hunt II",
@@ -200,7 +200,7 @@ export default function ChizuruGuidePage() {
           cost: 1,
           type: "attack",
           description: "[ Haste ] 216% Damage\n+60% Damage Amount\nto the next Bind card\nused",
-          reasoning: "Alternative to Oni Hunt I, however base Oni Hunt with Neutral epiphany is usually better",
+          reasoning: "Higher single-hit damage and better damage bonus than Oni Hunt I, but loses the multi-hit Will-O'-Wisp generation. Base Oni Hunt with Neutral epiphany often provides better value for Will-O'-Wisp stacking.",
         },
         {
           id: "Oni Hunt III",
@@ -208,7 +208,7 @@ export default function ChizuruGuidePage() {
           cost: 1,
           type: "attack",
           description: "[ Haste ] 72% Damage x 3\nIf there are no other\nAttack Cards in hand,\nadd 2 Hit(s)",
-          reasoning: "Conditional +2 hits to base, no increase to SotM Damage, pretty bad pick",
+          reasoning: "Conditional +2 hits requires an empty attack card hand, which is difficult to maintain. Doesn't increase Shadow of the Moon damage bonus and lacks the consistency of other options.",
         },
         {
           id: "Oni Hunt IV",
@@ -216,7 +216,7 @@ export default function ChizuruGuidePage() {
           cost: 1,
           type: "skill",
           description: "[ Haste ] Create 2 Moonslash\nApply Exhaust to those\ncards, decrease Cost\nby 1 until used",
-          reasoning: "Can be used alongside Tsukuyomi V to spam Moonslash to generate Will-O'-Wisp",
+          reasoning: "Excellent synergy with Tsukuyomi V for passive Will-O'-Wisp generation. Creates 0-cost Moonslash cards that can be spammed to build Will-O'-Wisp stacks efficiently.",
         },
         {
           id: "Oni Hunt V",
@@ -224,7 +224,7 @@ export default function ChizuruGuidePage() {
           cost: 1,
           type: "upgrade",
           description: "[ Unique ] +40% Damage Amount\nto Shadow of the\nMoon+\nAt the start of the turn,\n3 Will-O'-Wisp",
-          reasoning: "+40% Damage to SotM is not the best and 3 Will-O'-Wisp per turn isn't really that much",
+          reasoning: "The +40% damage bonus to Shadow of the Moon+ is decent but not exceptional. The 3 Will-O'-Wisp per turn is passive but relatively small compared to active generation methods. Solid but not optimal.",
         },
       ],
     },
@@ -376,6 +376,28 @@ export default function ChizuruGuidePage() {
     };
   }
 
+  // Helper function to get rarity color based on card name
+  function getRarityColor(cardName: string): string {
+    if (cardName?.includes("Oni Hunt")) {
+      return "#FFD700"; // Legend - Gold
+    } else if (cardName?.includes("Shadow of the Moon")) {
+      return "#E9A1FC"; // Unique - Purple
+    } else {
+      return "#6FB0FC"; // Rare - Blue
+    }
+  }
+
+  // Helper function to get rarity background image based on card name
+  function getRarityBackgroundImage(cardName: string): string {
+    if (cardName?.includes("Oni Hunt")) {
+      return "/images/card/card_title_rarity_legend.png";
+    } else if (cardName?.includes("Shadow of the Moon")) {
+      return "/images/card/card_title_rarity_unique.png";
+    } else {
+      return "/images/card/card_title_rarity_rare.png";
+    }
+  }
+
   function CardDisplay({ card }: { card: any }) {
     const isPlaceholder = card.name === "Placeholder";
 
@@ -423,56 +445,89 @@ export default function ChizuruGuidePage() {
                     />
                   </div>
                   {/* Cost */}
-                  <div className="flex-shrink-0 flex flex-col items-center justify-center ml-3">
+                  <div className="flex-shrink-0 flex flex-col items-center justify-center ml-3 relative z-30">
                     <span
-                      className="text-white font-bold text-4xl scale-x-80"
+                      className="font-bold text-4xl scale-x-80"
                       style={{
-                        WebkitTextStroke: "1px rgba(0, 0, 0, 0.38)",
+                        color: "#FFFFFF",
+                        WebkitTextStroke: "1.3px #2D4CAE",
                         textShadow: `
-                        -1px -1px 0 #000,
-                         1px -1px 0 #000,
-                        -1px  1px 0 #000,
-                         1px  1px 0 #000
+                        0 0 2px #5B91FB,
+                        0 0 4px #5B91FB,
+                        0 0 6px #5B91FB,
+                        0 0 8px #5B91FB,
+                        0 0 12px #5B91FB,
+                        0 0 16px #5B91FB,
+                        -1px -1px 0 #5B91FB,
+                         1px -1px 0 #5B91FB,
+                        -1px  1px 0 #5B91FB,
+                         1px  1px 0 #5B91FB,
+                        -2px -2px 4px rgba(91, 145, 251, 0.8),
+                         2px -2px 4px rgba(91, 145, 251, 0.8),
+                        -2px  2px 4px rgba(91, 145, 251, 0.8),
+                         2px  2px 4px rgba(91, 145, 251, 0.8)
                       `,
                       }}
                     >
                       {card.cost}
                     </span>
                     <div
-                      className="w-full h-0.5 bg-white mt-0.5 scale-x-75"
+                      className="w-full h-0.5 mt-0.5 scale-x-75"
                       style={{
-                        backgroundColor: "#ffffff",
-                        WebkitBoxShadow: `
-                        -1px -1px 0 #000,
-                         1px -1px 0 #000,
-                        -1px  1px 0 #000,
-                         1px  1px 0 #000
+                        backgroundColor: "#B6C4F9",
+                        boxShadow: `
+                          0 0 2px #5B91FB,
+                          0 0 4px #5B91FB,
+                          0 0 6px #5B91FB,
+                          0 0 8px rgba(91, 145, 251, 0.6),
+                          inset 0 1px 0 rgba(255, 255, 255, 0.3)
                         `,
                       }}
                     />
                   </div>
                   {/* Name and Type */}
                   <div className="flex-1 pt-0.5 min-w-0">
-                    <h5
-                      className="text-white font-bold leading-tight drop-shadow-lg"
-                      style={{
-                        fontSize: "clamp(0.75rem, 2.5vw, 1.25rem)",
-                        textShadow: `
+                    <div className="relative inline-block">
+                      {/* Background Image - can be positioned separately */}
+                      <div
+                        className="absolute"
+                        style={{
+                          backgroundImage: `url(${getRarityBackgroundImage(card.name)})`,
+                          backgroundRepeat: "no-repeat",
+                          backgroundPosition: "left center",
+                          backgroundSize: "100%",
+                          top: 10,
+                          left: -50,
+                          right: 0,
+                          bottom: 0,
+                          height: "clamp(0.70rem, 2.5vw, 1.25rem)",
+                          width: "250%",
+                        }}
+                      />
+                      {/* Text */}
+                      <h5
+                        className="relative font-bold leading-tight drop-shadow-lg"
+                        style={{
+                          color: getRarityColor(card.name),
+                          fontSize: "clamp(0.70rem, 2.5vw, 1.25rem)",
+                          padding: "5px 0px",
+                          textShadow: `
                         -1px -1px 0 #000,
                          1px -1px 0 #000,
                         -1px  1px 0 #000,
                          1px  1px 0 #000
                       `,
-                        transform: "scaleX(1)",
-                        transformOrigin: "left",
-                        maxWidth: "100%",
-                        whiteSpace: "nowrap",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                      }}
-                    >
-                      {card.name}
-                    </h5>
+                          transform: "scaleX(1)",
+                          transformOrigin: "left",
+                          maxWidth: "100%",
+                          whiteSpace: "wrap",
+                          overflow: "visible",
+                          textOverflow: "ellipsis",
+                        }}
+                      >
+                        {card.name}
+                      </h5>
+                    </div>
                       <div className="flex items-center gap-1">
                         <img
                           src={
@@ -483,11 +538,13 @@ export default function ChizuruGuidePage() {
                               : "/images/icon-category-card-upgrade.webp"
                           }
                           alt={card.type}
-                          className="w-5 h-5"
+                          className="w-4 h-4 sm:w-5 sm:h-5"
                         />
                         <span
                           className="text-white/100 text-[14px] font-large capitalize drop-shadow "
                           style={{
+                            padding: "0px 0px",
+                            fontSize: "clamp(0.65rem, 2vw, 0.875rem)",
                             textShadow: `
                         -1px -1px 0 #000,
                          1px -1px 0 #000,
@@ -771,30 +828,42 @@ export default function ChizuruGuidePage() {
                                     />
                                   </div>
                                   {/* Cost */}
-                                  <div className="flex-shrink-0 flex flex-col items-center justify-center ml-3">
+                                  <div className="flex-shrink-0 flex flex-col items-center justify-center ml-3 relative z-30">
                                     <span
-                                      className="text-white font-bold text-4xl scale-x-80"
+                                      className="font-bold text-4xl scale-x-80"
                                       style={{
-                                        WebkitTextStroke: "1px rgba(0, 0, 0, 0.38)",
+                                        color: "#FFFFFF",
+                                        WebkitTextStroke: "1.3px #2D4CAE",
                                         textShadow: `
-                                        -1px -1px 0 #000,
-                                         1px -1px 0 #000,
-                                        -1px  1px 0 #000,
-                                         1px  1px 0 #000
+                                        0 0 2px #5B91FB,
+                                        0 0 4px #5B91FB,
+                                        0 0 6px #5B91FB,
+                                        0 0 8px #5B91FB,
+                                        0 0 12px #5B91FB,
+                                        0 0 16px #5B91FB,
+                                        -1px -1px 0 #5B91FB,
+                                         1px -1px 0 #5B91FB,
+                                        -1px  1px 0 #5B91FB,
+                                         1px  1px 0 #5B91FB,
+                                        -2px -2px 4px rgba(91, 145, 251, 0.8),
+                                         2px -2px 4px rgba(91, 145, 251, 0.8),
+                                        -2px  2px 4px rgba(91, 145, 251, 0.8),
+                                         2px  2px 4px rgba(91, 145, 251, 0.8)
                                       `,
                                       }}
                                     >
                                       {baseCost}
                                     </span>
                                     <div
-                                      className="w-full h-0.5 bg-white mt-0.5 scale-x-75"
+                                      className="w-full h-0.5 mt-0.5 scale-x-75"
                                       style={{
-                                        backgroundColor: "#ffffff",
-                                        WebkitBoxShadow: `
-                                        -1px -1px 0 #000,
-                                         1px -1px 0 #000,
-                                        -1px  1px 0 #000,
-                                         1px  1px 0 #000
+                                        backgroundColor: "#B6C4F9",
+                                        boxShadow: `
+                                          0 0 2px #5B91FB,
+                                          0 0 4px #5B91FB,
+                                          0 0 6px #5B91FB,
+                                          0 0 8px rgba(91, 145, 251, 0.6),
+                                          inset 0 1px 0 rgba(255, 255, 255, 0.3)
                                         `,
                                       }}
                                     />
@@ -802,24 +871,45 @@ export default function ChizuruGuidePage() {
 
                                   {/* Name and Type */}
                                   <div className="flex-1 pt-0.5">
-                                    <h5
-                                      className="text-white font-bold text-[20px] leading-tight drop-shadow-lg"
-                                      style={{
-                                        textShadow: `
+                                    <div className="relative inline-block">
+                                      {/* Background Image - can be positioned separately */}
+                                      <div
+                                        className="absolute"
+                                        style={{
+                                          backgroundImage: `url(${getRarityBackgroundImage(cardData.name)})`,
+                                          backgroundRepeat: "no-repeat",
+                                          backgroundPosition: "left center",
+                                          backgroundSize: "100%",
+                                          top: 10,
+                                          left: -50,
+                                          right: 0,
+                                          bottom: 0,
+                                          height: "50%",
+                                          width: "300%",
+                                        }}
+                                      />
+                                      {/* Text */}
+                                      <h5
+                                        className="relative font-bold text-[20px] leading-tight drop-shadow-lg"
+                                        style={{
+                                          color: getRarityColor(cardData.name),
+                                          padding: "2px 4px",
+                                          textShadow: `
                                         -1px -1px 0 #000,
                                          1px -1px 0 #000,
                                         -1px  1px 0 #000,
                                          1px  1px 0 #000
                                       `,
-                                        transform: "scaleX(1)",
-                                        transformOrigin: "left",
-                                        maxWidth: "180%",
-                                        whiteSpace: "nowrap",
-                                        overflow: "hidden",
-                                      }}
-                                    >
-                                      {cardData.name}
-                                    </h5>
+                                          transform: "scaleX(1)",
+                                          transformOrigin: "left",
+                                          maxWidth: "180%",
+                                          whiteSpace: "nowrap",
+                                          overflow: "hidden",
+                                        }}
+                                      >
+                                        {cardData.name}
+                                      </h5>
+                                    </div>
                                     <div className="flex items-center gap-1">
                                       <img
                                         src={
@@ -948,30 +1038,42 @@ export default function ChizuruGuidePage() {
                                           />
                                         </div>
                                         {/* Cost */}
-                                        <div className="flex-shrink-0 flex flex-col items-center justify-center ml-3">
+                                        <div className="flex-shrink-0 flex flex-col items-center justify-center ml-3 relative z-30">
                                           <span
-                                            className="text-white font-bold text-3xl sm:text-4xl scale-x-80"
+                                            className="font-bold text-3xl sm:text-4xl scale-x-80"
                                             style={{
-                                              WebkitTextStroke: "1px rgba(0, 0, 0, 0.38)",
+                                              color: "#FFFFFF",
+                                              WebkitTextStroke: "1.3px #2D4CAE",
                                               textShadow: `
-                                              -1px -1px 0 #000,
-                                               1px -1px 0 #000,
-                                              -1px  1px 0 #000,
-                                               1px  1px 0 #000
+                                              0 0 2px #5B91FB,
+                                              0 0 4px #5B91FB,
+                                              0 0 6px #5B91FB,
+                                              0 0 8px #5B91FB,
+                                              0 0 12px #5B91FB,
+                                              0 0 16px #5B91FB,
+                                              -1px -1px 0 #5B91FB,
+                                               1px -1px 0 #5B91FB,
+                                              -1px  1px 0 #5B91FB,
+                                               1px  1px 0 #5B91FB,
+                                              -2px -2px 4px rgba(91, 145, 251, 0.8),
+                                               2px -2px 4px rgba(91, 145, 251, 0.8),
+                                              -2px  2px 4px rgba(91, 145, 251, 0.8),
+                                               2px  2px 4px rgba(91, 145, 251, 0.8)
                                             `,
                                             }}
                                           >
                                             {epiphany.cost}
                                           </span>
                                           <div
-                                            className="w-full h-0.5 bg-white mt-0.5 scale-x-75"
+                                            className="w-full h-0.5 mt-0.5 scale-x-75"
                                             style={{
-                                              backgroundColor: "#ffffff",
-                                              WebkitBoxShadow: `
-                                              -1px -1px 0 #000,
-                                               1px -1px 0 #000,
-                                              -1px  1px 0 #000,
-                                               1px  1px 0 #000
+                                              backgroundColor: "#B6C4F9",
+                                              boxShadow: `
+                                                0 0 2px #5B91FB,
+                                                0 0 4px #5B91FB,
+                                                0 0 6px #5B91FB,
+                                                0 0 8px rgba(91, 145, 251, 0.6),
+                                                inset 0 1px 0 rgba(255, 255, 255, 0.3)
                                               `,
                                             }}
                                           />
@@ -979,24 +1081,45 @@ export default function ChizuruGuidePage() {
 
                                         {/* Name and Type */}
                                         <div className="flex-1 pt-0.5">
-                                          <h5
-                                            className="text-white font-bold text-[16px] sm:text-[18px] md:text-[20px] leading-tight drop-shadow-lg"
-                                            style={{
-                                              textShadow: `
+                                          <div className="relative inline-block">
+                                            {/* Background Image - can be positioned separately */}
+                                            <div
+                                              className="absolute"
+                                              style={{
+                                                backgroundImage: `url(${getRarityBackgroundImage(cardData.name)})`,
+                                                backgroundRepeat: "no-repeat",
+                                                backgroundPosition: "left center",
+                                                backgroundSize: "100%",
+                                                top: 10,
+                                                left: -50,
+                                                right: 0,
+                                                bottom: 0,
+                                                height: "50%",
+                                                width: "300%",
+                                              }}
+                                            />
+                                            {/* Text */}
+                                            <h5
+                                              className="relative font-bold text-[16px] sm:text-[18px] md:text-[20px] leading-tight drop-shadow-lg"
+                                              style={{
+                                                color: getRarityColor(cardData.name),
+                                                padding: "2px 4px",
+                                                textShadow: `
                                               -1px -1px 0 #000,
                                                1px -1px 0 #000,
                                               -1px  1px 0 #000,
                                                1px  1px 0 #000
                                             `,
-                                              transform: "scaleX(1)",
-                                              transformOrigin: "left",
-                                              maxWidth: "180%",
-                                              whiteSpace: "nowrap",
-                                              overflow: "hidden",
-                                            }}
-                                          >
-                                            {cardData.name}
-                                          </h5>
+                                                transform: "scaleX(1)",
+                                                transformOrigin: "left",
+                                                maxWidth: "180%",
+                                                whiteSpace: "nowrap",
+                                                overflow: "hidden",
+                                              }}
+                                            >
+                                              {cardData.name}
+                                            </h5>
+                                          </div>
                                           <div className="flex items-center gap-1">
                                             <img
                                               src={
