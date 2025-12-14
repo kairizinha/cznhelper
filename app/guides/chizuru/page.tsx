@@ -563,7 +563,7 @@ export default function ChizuruGuidePage() {
                           right: 0,
                           bottom: 0,
                           height: "50%",
-                          width: "350%",
+                          width: "700%",
                         }}
                       />
                       {/* Text */}
@@ -947,7 +947,7 @@ export default function ChizuruGuidePage() {
                                           right: 0,
                                           bottom: 0,
                                           height: "50%",
-                                          width: "350%",
+                                          width: "700%",
                                         }}
                                       />
                                       {/* Text */}
@@ -1157,7 +1157,7 @@ export default function ChizuruGuidePage() {
                                                 right: 0,
                                                 bottom: 0,
                                                 height: "50%",
-                                                width: "350%",
+                                                width: "700%",
                                               }}
                                             />
                                             {/* Text */}
