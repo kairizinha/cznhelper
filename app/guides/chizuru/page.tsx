@@ -17,7 +17,35 @@ import { useState } from "react"
 import { GearTooltip } from "@/components/GearTooltip"; // adjust the path if needed
 import { describe } from "node:test"
 
-
+// Component to render cost using individual cost images
+function CostDisplay({ cost, size = 'md' }: { cost: number; size?: 'sm' | 'md' | 'lg' }) {
+  const costStr = cost.toString()
+  
+  // Size configurations for different contexts
+  const sizeConfig = {
+    sm: 'h-8 sm:h-9', // For epiphany cards
+    md: 'h-9 sm:h-10', // Default
+    lg: 'h-12 sm:h-14', // For base cards
+  }
+  
+  return (
+    <div className="flex items-center justify-start gap-0">
+      {costStr.split('').map((char, index) => {
+        // Map each digit to its corresponding image file
+        const imagePath = `/images/card/cost${char}.png`
+        return (
+          <img
+            key={index}
+            src={imagePath}
+            alt={char}
+            className={`${sizeConfig[size]} object-contain`}
+            style={{ imageRendering: 'auto' }}
+          />
+        )
+      })}
+    </div>
+  )
+}
 
 export default function ChizuruGuidePage() {
   const [expandedEpiphany, setExpandedEpiphany] = useState<string | null>(null)
@@ -29,7 +57,7 @@ export default function ChizuruGuidePage() {
 
   const sections = [
     { id: "overview", title: "1. Overview", level: 1 },
-    { id: "card-epiphany", title: "2. Card Epiphany", level: 1 },
+    { id: "card-epiphany", title: "2. Base Cards", level: 1 },
     { id: "recommended-save-data", title: "3. Recommended Save Data", level: 1 },
     { id: "equipments", title: "3.1. Equipments", level: 2 },
     { id: "memory-fragments", title: "4. Memory Fragments", level: 1 },
@@ -275,7 +303,7 @@ export default function ChizuruGuidePage() {
     
       return {
         id: `epiphany-${ref.replace(/\s+/g, '-')}`,
-        name: epiphany.id,
+        name: baseCard.name,
         image: baseCard.image,
         cost: epiphany.cost,
         type: epiphany.type || baseCard.baseType,
@@ -386,6 +414,11 @@ export default function ChizuruGuidePage() {
   function CardDisplay({ card }: { card: any }) {
     const isPlaceholder = card.name === "Placeholder";
 
+    // Don't render placeholder boxes
+    if (isPlaceholder) {
+      return null;
+    }
+
     return (
       <div className="relative rounded-lg overflow-hidden border-2 border-border hover:border-purple-400/50 transition-all duration-200">
         {/* Void Border */}
@@ -401,41 +434,80 @@ export default function ChizuruGuidePage() {
             </div>
           ) : (
             <>
-              <img
-                src={card.image || "/placeholder.svg"}
-                alt={card.name}
-                className="w-full h-full object-cover scale-125"
-              />
-              <div className="absolute inset-0 flex flex-col">
-                {/* Top Section: Cost + Name + Type */}
-                <div className="p-2 pt-1.5 pl-5">
-                  <div className="flex items-start gap-1.5">
-                    <div className="flex-shrink-0 flex flex-col items-center justify-center">
-                      <span
-                        className="text-white font-bold text-5xl scale-x-80"
-                        style={{
-                          WebkitTextStroke: "1px rgba(0, 0, 0, 0.38)",
-                          textShadow: `-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000`,
-                        }}
-                      >
-                        {card.cost}
-                      </span>
-                      <div className="w-full h-0.5 bg-white mt-0.5 scale-x-80" style={{ backgroundColor: "#ffffff", WebkitBoxShadow: `-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000` }} />
-                    </div>
-                    <div className="flex-1 pt-0.5">
-                      <h5
-                        className="text-white font-bold text-[20px] leading-tight drop-shadow-lg"
-                        style={{
-                          textShadow: `-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000`,
-                          transform: "scaleX(0.65)",
-                          transformOrigin: "left",
-                          maxWidth: "180%",
-                          whiteSpace: "nowrap",
-                          overflow: "hidden",
-                        }}
-                      >
-                        {card.name}
-                      </h5>
+            <img
+              src={card.image || "/placeholder.svg"}
+              alt={card.name}
+              className="w-full h-full object-cover scale-108"
+            />
+            <div className="absolute inset-0 flex flex-col">
+              {/* Top Section: Cost + Name + Type */}
+              <div className="p-2 pt-1.5 pl-3">
+                <div className="flex items-start gap-1.5 relative">
+                  {/* Rarity Image */}
+                  <div className="absolute left-0 top-0 z-20 flex items-center" style={{ transform: 'translateX(-18px)' }}>
+                    <img
+                      src={
+                        card.name?.includes("Oni Hunt")
+                          ? "/images/card/card_rarity_legend.png"
+                          : card.name?.includes("Shadow of the Moon")
+                            ? "/images/card/card_rarity_unique.png"
+                            : "/images/card/card_rarity_rare.png"
+                      }
+                      alt=""
+                      className="h-12 sm:h-14 object-contain"
+                    />
+                  </div>
+                  {/* Cost */}
+                  <div className="flex-shrink-0 flex flex-col items-center justify-center ml-3">
+                    <span
+                      className="text-white font-bold text-4xl scale-x-80"
+                      style={{
+                        WebkitTextStroke: "1px rgba(0, 0, 0, 0.38)",
+                        textShadow: `
+                        -1px -1px 0 #000,
+                         1px -1px 0 #000,
+                        -1px  1px 0 #000,
+                         1px  1px 0 #000
+                      `,
+                      }}
+                    >
+                      {card.cost}
+                    </span>
+                    <div
+                      className="w-full h-0.5 bg-white mt-0.5 scale-x-75"
+                      style={{
+                        backgroundColor: "#ffffff",
+                        WebkitBoxShadow: `
+                        -1px -1px 0 #000,
+                         1px -1px 0 #000,
+                        -1px  1px 0 #000,
+                         1px  1px 0 #000
+                        `,
+                      }}
+                    />
+                  </div>
+                  {/* Name and Type */}
+                  <div className="flex-1 pt-0.5 min-w-0">
+                    <h5
+                      className="text-white font-bold leading-tight drop-shadow-lg"
+                      style={{
+                        fontSize: "clamp(0.75rem, 2.5vw, 1.25rem)",
+                        textShadow: `
+                        -1px -1px 0 #000,
+                         1px -1px 0 #000,
+                        -1px  1px 0 #000,
+                         1px  1px 0 #000
+                      `,
+                        transform: "scaleX(1)",
+                        transformOrigin: "left",
+                        maxWidth: "100%",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                      }}
+                    >
+                      {card.name}
+                    </h5>
                       <div className="flex items-center gap-1">
                         <img
                           src={
@@ -448,7 +520,17 @@ export default function ChizuruGuidePage() {
                           alt={card.type}
                           className="w-5 h-5"
                         />
-                        <span className="text-white/100 text-[14px] font-large capitalize drop-shadow" style={{ textShadow: `-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000` }}>
+                        <span
+                          className="text-white/100 text-[14px] font-large capitalize drop-shadow "
+                          style={{
+                            textShadow: `
+                        -1px -1px 0 #000,
+                         1px -1px 0 #000,
+                        -1px  1px 0 #000,
+                         1px  1px 0 #000
+                      `,
+                          }}
+                        >
                           {card.type}
                         </span>
                       </div>
@@ -459,6 +541,12 @@ export default function ChizuruGuidePage() {
                 {/* Description Section */}
                 {card.description && (
                   <div className="mt-auto p-2.5 pl-3 py-5 bg-gradient-to-t from-black/95 via-black/90 to-transparent flex flex-col items-center justify-center gap-0">
+                    {/* Card Frame Spark */}
+                    <img
+                      src="/images/card/card_frame_spark.png"
+                      alt=""
+                      className="w-1/2 mb-0 drop-shadow-2xl"
+                    />
                     {(() => {
                       const { bracketedText, remainingText } = parseDescription(card.description)
                       return (
@@ -624,7 +712,7 @@ export default function ChizuruGuidePage() {
           {/* Main Content */}
           <div className="flex-1 space-y-8">
             {/* 1. Overview */}
-            <section id="overview" className="rounded-lg border border-border bg-card p-8 scroll-mt-6">
+            <section id="overview" className="hidden lg:block rounded-lg border border-border bg-card p-8 scroll-mt-6">
             <h2 className="text-2xl font-bold mb-6 text-purple-400">1. Overview</h2>
               <div className="space-y-4">
                 <div className="flex flex-wrap gap-3 mb-4">
@@ -651,9 +739,9 @@ export default function ChizuruGuidePage() {
               </div>
             </section>
 
-            {/* 2. Card Epiphany */}
+            {/* 2. Base Cards */}
             <section id="card-epiphany" className="rounded-lg border border-border bg-card p-8 scroll-mt-6">
-            <h2 className="text-2xl font-bold mb-6 text-purple-400">2. Card Epiphany</h2>
+            <h2 className="text-2xl font-bold mb-6 text-purple-400">2. Base Cards</h2>
               <p className="text-muted-foreground mb-6">
               S+ (Best), S (Excellent), A (Strong), B (Average), C (Low Impact), Situational (Niche-use only).
               <br />
@@ -701,12 +789,26 @@ export default function ChizuruGuidePage() {
                             {/* Card Info Overlay */}
                             <div className="absolute inset-0 flex flex-col">
                               {/* Top Section */}
-                              <div className="p-2 pt-1.5 pl-5">
-                                <div className="flex items-start gap-1.5">
+                              <div className="p-2 pt-1.5 pl-3">
+                                <div className="flex items-start gap-1.5 relative">
+                                  {/* Rarity Image */}
+                                  <div className="absolute left-0 top-0 z-20 flex items-center" style={{ transform: 'translateX(-18px)' }}>
+                                    <img
+                                      src={
+                                        cardData.name === "Oni Hunt"
+                                          ? "/images/card/card_rarity_legend.png"
+                                          : cardData.name === "Shadow of the Moon"
+                                            ? "/images/card/card_rarity_unique.png"
+                                            : "/images/card/card_rarity_rare.png"
+                                      }
+                                      alt=""
+                                      className="h-12 sm:h-14 object-contain"
+                                    />
+                                  </div>
                                   {/* Cost */}
-                                  <div className="flex-shrink-0 flex flex-col items-center justify-center">
+                                  <div className="flex-shrink-0 flex flex-col items-center justify-center ml-3">
                                     <span
-                                      className="text-white font-bold text-5xl scale-x-80"
+                                      className="text-white font-bold text-4xl scale-x-80"
                                       style={{
                                         WebkitTextStroke: "1px rgba(0, 0, 0, 0.38)",
                                         textShadow: `
@@ -720,7 +822,7 @@ export default function ChizuruGuidePage() {
                                       {baseCost}
                                     </span>
                                     <div
-                                      className="w-full h-0.5 bg-white mt-0.5 scale-x-80"
+                                      className="w-full h-0.5 bg-white mt-0.5 scale-x-75"
                                       style={{
                                         backgroundColor: "#ffffff",
                                         WebkitBoxShadow: `
@@ -786,6 +888,12 @@ export default function ChizuruGuidePage() {
                               {/* Description Section */}
                               {cardData.baseDescription && (
                                 <div className="mt-auto p-2.5 pl-3 py-5 bg-gradient-to-t from-black/95 via-black/90 to-transparent flex flex-col items-center justify-center gap-0">
+                                  {/* Card Frame Spark Disabled */}
+                                  <img
+                                    src="/images/card/card_frame_spark_dis.png"
+                                    alt=""
+                                    className="w-1/2 mb-0 drop-shadow-2xl"
+                                  />
                                   {(() => {
                                     const { bracketedText, remainingText } = parseDescription(cardData.baseDescription)
                                     return (
@@ -830,24 +938,12 @@ export default function ChizuruGuidePage() {
                           <DialogTitle className="text-xl sm:text-2xl text-purple-400">
                             {cardData.name} - Epiphanies
                           </DialogTitle>
-                          <DialogDescription className="text-xs sm:text-sm text-white/70">
-                            Click an epiphany group for explanation.
-                          </DialogDescription>
                         </DialogHeader>
                         
                         {/* Epiphanies Grid */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6 mt-4 sm:mt-6">
                           {cardData.epiphanies.map((epiphany, index) => (
                             <div key={index} className="flex flex-col gap-2 sm:gap-3">
-                              {/* Tier Badge */}
-                              <div className="flex justify-center">
-                                <span
-                                  className={`px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-bold ${getTierColor(epiphany.tier)}`}
-                                >
-                                  {epiphany.tier} Tier
-                                </span>
-                              </div>
-
                               {/* Card Display */}
                               <div className="relative rounded-lg overflow-hidden border-2 border-border hover:border-purple-400/50 transition-all duration-200 w-full max-w-[200px] sm:max-w-[220px] md:max-w-[250px] mx-auto">
                                 {/* Void Border */}
@@ -870,12 +966,26 @@ export default function ChizuruGuidePage() {
                                   {/* Card Info Overlay */}
                                   <div className="absolute inset-0 flex flex-col justify-end">
                                     {/* Top Section */}
-                                    <div className="p-2 pt-1.5 pl-5">
-                                      <div className="flex items-start gap-1.5">
+                                    <div className="p-2 pt-1.5 pl-3">
+                                      <div className="flex items-start gap-1.5 relative">
+                                        {/* Rarity Image */}
+                                        <div className="absolute left-0 top-0 z-20 flex items-center" style={{ transform: 'translateX(-18px)' }}>
+                                          <img
+                                            src={
+                                              cardData.name === "Oni Hunt"
+                                                ? "/images/card/card_rarity_legend.png"
+                                                : cardData.name === "Shadow of the Moon"
+                                                  ? "/images/card/card_rarity_unique.png"
+                                                  : "/images/card/card_rarity_rare.png"
+                                            }
+                                            alt=""
+                                            className="h-12 sm:h-14 object-contain"
+                                          />
+                                        </div>
                                         {/* Cost */}
-                                        <div className="flex-shrink-0 flex flex-col items-center justify-center">
+                                        <div className="flex-shrink-0 flex flex-col items-center justify-center ml-3">
                                           <span
-                                            className="text-white font-bold text-4xl sm:text-5xl scale-x-80"
+                                            className="text-white font-bold text-3xl sm:text-4xl scale-x-80"
                                             style={{
                                               WebkitTextStroke: "1px rgba(0, 0, 0, 0.38)",
                                               textShadow: `
@@ -889,7 +999,7 @@ export default function ChizuruGuidePage() {
                                             {epiphany.cost}
                                           </span>
                                           <div
-                                            className="w-full h-0.5 bg-white mt-0.5 scale-x-80"
+                                            className="w-full h-0.5 bg-white mt-0.5 scale-x-75"
                                             style={{
                                               backgroundColor: "#ffffff",
                                               WebkitBoxShadow: `
@@ -953,6 +1063,12 @@ export default function ChizuruGuidePage() {
                                     </div>
 
                                     <div className="mt-auto p-2 sm:p-2.5 pl-2 sm:pl-3 py-3 sm:py-5 bg-gradient-to-t from-black/95 via-black/90 to-transparent flex flex-col items-center justify-center gap-0">
+                                      {/* Card Frame Spark */}
+                                      <img
+                                        src="/images/card/card_frame_spark.png"
+                                        alt=""
+                                        className="w-1/2 mb-0 drop-shadow-2xl"
+                                      />
                                       {(() => {
                                         const { bracketedText, remainingText } = parseDescription(epiphany.description)
                                         return (
@@ -1036,19 +1152,29 @@ export default function ChizuruGuidePage() {
                     </span>
                   </div>
 
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    This build focuses on stacking Will-O'-Wisp to unleash a massive Shadow of the Moon for devastating damage.
+                    <br />
+                    <br />
+                    <strong>Card Ratios:</strong> The optimal ratio is 3 Tsukuyomi and 2 Oni Hunt. A 2:3 ratio is also viable, but avoid using 4 of one type as it reduces synergy.
+                    <br />
+                    <br />
+                    <strong>Orlea Options:</strong> Oni Hunt II or Oni Hunt V can be used for Orlea depending on whether you want to spend buffs or not.
+                  </p>
+
                   {(() => {
                     const { topRow, bottomRow } = generateDeckRows("tsukuyomi-oni-mixed");
                     return (
                       <>
                         {/* Top Row */}
-                        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-7xl mx-auto justify-items-center">
                           {topRow.map((card, index) => (
                             <CardDisplay key={card.id || index} card={card} />
                           ))}
                         </div>
 
                         {/* Bottom Row */}
-                        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-7xl mx-auto justify-items-center">
                           {bottomRow.map((card, index) => (
                             <CardDisplay key={card.id || index} card={card} />
                           ))}
@@ -1056,28 +1182,6 @@ export default function ChizuruGuidePage() {
                       </>
                     );
                   })()}
-
-                  <Collapsible>
-                    <CollapsibleTrigger className="w-full px-4 py-2.5 rounded-lg bg-background/50 border border-border hover:bg-background/70 transition-colors flex items-center justify-between group">
-                      <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground">
-                        Save Data Explanation
-                      </span>
-                      <ChevronDown className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-transform group-data-[state=open]:rotate-180" />
-                    </CollapsibleTrigger>
-                    <CollapsibleContent className="mt-3">
-                      <div className="p-4 rounded-lg bg-background/50 border border-border">
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                          Stack up for a huge Shadow of the Moon to Nuke the enemy
-                          <br />
-                          Oni Hunt 2 or Oni Hunt 5 are also options for Orlea, just depends if you wanna spend buffs or not
-                          <br />
-                          3 Tsukuyomi, 2 Oni Hunt is Optimal Ratio,
-                          <br />
-                          2 Tsukuyomi, 3 Oni Hunt is also fine, 4 of one or the other is bad
-                        </p>
-                      </div>
-                    </CollapsibleContent>
-                  </Collapsible>
                 </div>
 
                 {/* Build 2 */}
@@ -1089,19 +1193,23 @@ export default function ChizuruGuidePage() {
                     </span>
                   </div>
 
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    At Ego 2, using Tsukuyomi I and Tsukuyomi V on Shadow of the Moon+ will refund the cost, allowing you to chain 4 Shadow of the Moon+ cards consecutively for massive burst damage.
+                  </p>
+
                   {(() => {
                     const { topRow, bottomRow } = generateDeckRows("e2-moon-spam");
                     return (
                       <>
                         {/* Top Row */}
-                        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-7xl mx-auto justify-items-center">
                           {topRow.map((card, index) => (
                             <CardDisplay key={card.id || index} card={card} />
                           ))}
                         </div>
 
                         {/* Bottom Row */}
-                        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-7xl mx-auto justify-items-center">
                           {bottomRow.map((card, index) => (
                             <CardDisplay key={card.id || index} card={card} />
                           ))}
@@ -1109,22 +1217,6 @@ export default function ChizuruGuidePage() {
                       </>
                     );
                   })()}
-
-                  <Collapsible>
-                    <CollapsibleTrigger className="w-full px-4 py-2.5 rounded-lg bg-background/50 border border-border hover:bg-background/70 transition-colors flex items-center justify-between group">
-                      <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground">
-                        Save Data Explanation
-                      </span>
-                      <ChevronDown className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-transform group-data-[state=open]:rotate-180" />
-                    </CollapsibleTrigger>
-                    <CollapsibleContent className="mt-3">
-                      <div className="p-4 rounded-lg bg-background/50 border border-border">
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                          At E2, Tsukuyomi 1 + Tsukuyomi 5 on a Moon+ will refund itself, and then you can play 4 Moon+ in a row
-                        </p>
-                      </div>
-                    </CollapsibleContent>
-                  </Collapsible>
                 </div>
               </div>
             </section>
@@ -1132,12 +1224,8 @@ export default function ChizuruGuidePage() {
             {/* 3.1. Equipments */}
             <section id="equipments" className="rounded-lg border border-border bg-card p-8 scroll-mt-6">
               <h2 className="text-2xl font-bold mb-6 text-purple-400">3.1. Equipments</h2>
-              <p className="text-muted-foreground mb-6 whitespace-pre-line">
-                These are her best equipment options, only weapon is listed by priority, you usually can't equip them all at once.
-                <br/>
-                Only one unique item per character or they come from different Chaos Manifestations.
-                <br/>
-                Hover over the tooltip to see each item's source.
+              <p className="text-muted-foreground mb-6">
+                These are Chizuru's best equipment options, listed by priority. Only weapons are fully prioritized here, as you typically cannot equip all items simultaneously. Note that only one unique item can be equipped per character, unless they come from different Chaos Manifestations. Hover over the tooltip icon to see each item's source location.
               </p>
 
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -1536,13 +1624,13 @@ export default function ChizuruGuidePage() {
                 </Dialog>
                 </div>
 
-                {/* Acessory Category */}
+                {/* Accessory Category */}
                 <div className="space-y-2">
                   <div className="flex items-center justify-center gap-2 mb-3">
-                    <h3 className="text-lg font-bold text-purple-300">Acessory</h3>
+                    <h3 className="text-lg font-bold text-purple-300">Accessory</h3>
                   </div>
 
-                {/* Best in Slot Acessory */}
+                {/* Best in Slot Accessory */}
                 <div className="relative flex items-start gap-2 p-2 rounded-lg bg-gray-800/30 border border-gray-700/40">
                   <GearTooltip text={`Cthulu Monster`} />
 
@@ -1576,8 +1664,8 @@ export default function ChizuruGuidePage() {
                   </div>
                 </div>
 
-                {/* Show More Acessory Modal */}
-                <Dialog>
+                {/* Show More Accessory Modal */}
+                  <Dialog>
                   <DialogTrigger asChild>
                   <div className="flex justify-center w-full">
                     <button
@@ -1595,7 +1683,7 @@ export default function ChizuruGuidePage() {
                   <DialogContent className="max-w-3xl w-full bg-gray-900 p-6 rounded-lg overflow-y-auto max-h-[80vh] scrollbar-none">
                   <DialogHeader>
                     <DialogTitle className="text-lg font-bold">
-                      Alternative Acessory
+                      Alternative Accessory
                     </DialogTitle>
                     <DialogDescription className="text-sm text-gray-300">
                       Scroll to see more options.
@@ -1739,19 +1827,19 @@ export default function ChizuruGuidePage() {
                         name: "Black Wing",
                         effect: "+12% Attack",
                         icon: "/images/sets/black-wing.webp",
-                        why: "Best 2-Set bonus in general",
+                        why: "Provides the best 2-set bonus for general damage output",
                       },
                       {
                         name: "Executioner's Tool",
                         effect: "+25% Critical Damage",
                         icon: "/images/sets/executioners-tool.webp",
-                        why: "Best 2-Set bonus in general",
+                        why: "Offers the best 2-set bonus for critical damage builds",
                       },
                       {
                         name: "Cursed Corpse",
                         effect: "Increases damage dealt to target inflicted with Agony by 10%",
                         icon: "/images/sets/cursed-corpse.webp",
-                        why: "Optional damage boost if achievable, not required; substats are more important in general"
+                        why: "Optional damage boost if achievable, but not required. Substats are generally more important than this set bonus."
                       },
                     ].map((set) => (
                       <ExpandableSetCard
@@ -1779,14 +1867,14 @@ export default function ChizuruGuidePage() {
                         name: "Orb of Inhibition",
                         effect: "When Hitting 2 times with 1 Attack Card, +10% Damage Amount to <span style=\"color: #a78bfa\">Void</span> Cards for 1 turn (2 times per turn)",
                         icon: "/images/sets/orb-of-inhibition.webp",
-                        why: "Weak and Conditional, but still better then Void set, because this set is Additve Generic."
+                        why: "Weak and conditional, but still better than the Void set because this set bonus is additive and generic."
                       },
 
                       {
                         name: "Executioner's Tool",
                         effect: "+25% Critical Damage",
                         icon: "/images/sets/executioners-tool.webp",
-                        why: "Best 2 set bonus in general.",                      
+                        why: "Provides the best 2-set bonus for general damage output.",                      
                       },
                     ].map((set) => (
                       <ExpandableSetCard
@@ -1854,7 +1942,7 @@ export default function ChizuruGuidePage() {
                   {/* Explanation */}
                   <div className="mt-7.5 mx-auto text-center">
                     <p className="text-[14px] leading-relaxed text-muted-foreground">
-                      <span className="text-muted-foreground">Prioritize Critical Rate and Critical Damage for ideal crit ratio. Then prioritize Flat Attack and Attack % for more damage.<br/>Void Damage% is preferred over Attack% for most cases.</span>
+                      Prioritize Critical Rate and Critical Damage equally to achieve an ideal critical ratio. After that, prioritize Flat Attack and Attack % for additional damage scaling. Void Damage % is generally preferred over Attack % for most cases, as it provides more specialized damage amplification for Void-type attacks.
                     </p>
                   </div>
                 </div>
@@ -1864,8 +1952,8 @@ export default function ChizuruGuidePage() {
             {/* 5. Partners */}
             <section id="partners" className="rounded-lg border border-border bg-card p-8 scroll-mt-24">
               <h2 className="text-2xl font-bold mb-6 text-purple-400">5. Partners</h2>
-              <p className="text-muted-foreground mb-6 whitespace-pre-line">
-                {`Click on the partners below to see more information.`}
+              <p className="text-muted-foreground mb-6">
+                Click on any partner below to view detailed information about their synergy with Chizuru.
               </p>
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                 {[
@@ -1874,35 +1962,35 @@ export default function ChizuruGuidePage() {
                     name: "Itsuku",
                     role: "S+",
                     image: "/images/partners/itsuku.webp",
-                    description: "Signature Partner [BIS]\nPartner Skill can increase one turns damage by alot, fixed damage is largely irrelevant",
+                    description: "Best in Slot - Signature Partner\n\nItsuku's Partner Skill significantly amplifies damage for one turn, making her the optimal choice for maximizing Chizuru's burst potential. The fixed damage component is largely negligible compared to the massive damage multiplier provided.",
                   },
                   {
                     id: 2,
                     name: "Zatera",
                     role: "S",
                     image: "/images/partners/zatera.webp",
-                    description: "Best F2P option as it provides a massive Attack boost.",
+                    description: "Best Free-to-Play Option\n\nZatera provides a substantial Attack boost, making her an excellent alternative to Itsuku for players who don't have access to signature partners. Her consistent damage amplification synergizes well with Chizuru's playstyle.",
                   },
                   {
                     id: 3,
                     name: "Bria",
                     role: "A",
                     image: "/images/partners/bria.webp",
-                    description: "Usable if you need Bria's Partner Skill Utility, otherwise bad.",
+                    description: "Situational Utility Partner\n\nBria can be useful when her Partner Skill's utility effects are specifically needed for certain encounters. However, she offers less damage amplification compared to higher-tier options, making her a niche choice.",
                   },
                   {
                     id: 4,
                     name: "Anteia",
                     role: "C",
                     image: "/images/partners/anteia.webp",
-                    description: "Weaker at E0 than Zatera.",
+                    description: "Suboptimal Choice\n\nAt Ego 0, Anteia provides less value than Zatera. Her damage output and utility don't match the benefits offered by higher-tier partners, making her a weaker option for Chizuru's builds.",
                   },
                   {
                     id: 5,
                     name: "Eloise",
                     role: "Situational",
                     image: "/images/partners/eloise.webp",
-                    description: "Chizuru doesn't have any Exhaust cards at base, so Eloise is not a good option.",
+                    description: "Poor Synergy\n\nEloise's Partner Skill synergizes with Exhaust mechanics, but Chizuru's base deck doesn't include any Exhaust cards. This makes Eloise ineffective for Chizuru, as her primary mechanic cannot be utilized.",
                   },
                 ].map((partner) => (
                   <Dialog
@@ -1957,8 +2045,8 @@ export default function ChizuruGuidePage() {
             {/* 6. Teams */}
             <section id="teams" className="rounded-lg border border-border bg-card p-8 scroll-mt-24">
               <h2 className="text-2xl font-bold mb-6 text-purple-400">6. Teams</h2>
-              <p className="text-muted-foreground mb-6 whitespace-pre-line">
-                Below are 2 example teams for Chizuru DPS
+              <p className="text-muted-foreground mb-6">
+                Below are two example team compositions optimized for Chizuru as the primary damage dealer. Click on any team to view detailed synergy explanations and role breakdowns.
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -2029,7 +2117,7 @@ export default function ChizuruGuidePage() {
                         </div>
                       </div>
                       <div className="flex items-center justify-between text-xs text-muted-foreground">
-                        <span className="font-medium">Rei Helps with Damage Buffs while Veronica helps with Draws</span>
+                        <span className="font-medium">Rei provides damage buffs while Veronica enables card draw</span>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="h-4 w-4 group-hover:translate-x-1 transition-transform"
@@ -2045,12 +2133,12 @@ export default function ChizuruGuidePage() {
                   <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
                     <DialogHeader>
                       <DialogTitle className="text-2xl text-purple-400">Team 1: Chizuru Hypercarry</DialogTitle>
-                      <DialogDescription>Detailed team composition and synergy explanation</DialogDescription>
+                      <DialogDescription>Optimal team composition focusing on card draw and damage amplification</DialogDescription>
                     </DialogHeader>
                     <div className="space-y-4 mt-4">
                       <div className="space-y-4">
                         <div>
-                          <h3 className="text-lg font-semibold text-foreground mb-2">Why This Team Works</h3>
+                          <h3 className="text-lg font-semibold text-foreground mb-2">Team Overview</h3>
                           <p className="text-muted-foreground leading-relaxed">
                             This composition maximizes Chizuru's damage potential by providing the two things she needs most: <strong className="text-red-300">card draw</strong> and <strong className="text-purple-300">damage amplification</strong>. Chizuru's power comes from stacking Will-O'-Wisp (gained through hits) to empower her Shadow of the Moon attacks. Without proper support, she struggles to cycle through her deck and find key cards like Tsukuyomi and Shadow of the Moon.
                           </p>
@@ -2063,7 +2151,7 @@ export default function ChizuruGuidePage() {
                               <strong className="text-purple-300">Rei + Chizuru:</strong> Rei provides damage buffs that multiply Chizuru's Shadow of the Moon damage. Both share Void Ego type, creating natural synergy. Rei's support is especially powerful with Tsukuyomi III (adds 2 hits to Shadow of the Moon), allowing for infinite stacking potential.
                             </div>
                             <div>
-                              <strong className="text-red-300">Veronica</strong> +<strong className="text-purple-300"> Chizuru:</strong> Veronica's Repose (0 cost, Draw 2 other combatant's cards) solves Chizuru's card draw problem. This ensures Chizuru can consistently find her Tsukuyomi cards (which generate 3 Will-O'-Wisp per hit) and Shadow of the Moon cards to unleash her damage.
+                              <strong className="text-red-300">Veronica + Chizuru:</strong> Veronica's Repose (0 cost, Draw 2 other combatant's cards) solves Chizuru's card draw problem. This ensures Chizuru can consistently find her Tsukuyomi cards (which generate 3 Will-O'-Wisp per hit) and Shadow of the Moon cards to unleash her damage.
                             </div>
                             <div>
                               <strong className="text-purple-300">The Combo:</strong> Veronica draws cards → Chizuru finds Tsukuyomi → Chizuru uses attack cards to generate Will-O'-Wisp (3 per hit) → Rei's damage buffs amplify the damage → Chizuru uses Shadow of the Moon with massive Will-O'-Wisp stacks for devastating damage.
@@ -2151,7 +2239,7 @@ export default function ChizuruGuidePage() {
                         </div>
                       </div>
                       <div className="flex items-center justify-between text-xs text-muted-foreground">
-                        <span className="font-medium">Rei's role is the same, however Tressa here helps Chizuru by spamming attack cards to build up  Will-O'-Wisp stacks.</span>
+                        <span className="font-medium">Rei provides damage buffs while Tressa generates attack cards for Will-O'-Wisp stacking</span>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="h-4 w-4 group-hover:translate-x-1 transition-transform"
@@ -2166,15 +2254,15 @@ export default function ChizuruGuidePage() {
                   </DialogTrigger>
                   <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
                     <DialogHeader>
-                      <DialogTitle className="text-2xl text-purple-400">Team 2: Chizuru Hypercarry (Tressa Variant)</DialogTitle>
-                      <DialogDescription>Detailed team composition and synergy explanation</DialogDescription>
+                      <DialogTitle className="text-2xl text-purple-400">Team 2: Mono Void</DialogTitle>
+                      <DialogDescription>Mono Void composition focusing on direct Will-O'-Wisp generation</DialogDescription>
                     </DialogHeader>
                     <div className="space-y-4 mt-4">
                       <div className="space-y-4">
                         <div>
-                          <h3 className="text-lg font-semibold text-foreground mb-2">Why This Team Works</h3>
+                          <h3 className="text-lg font-semibold text-foreground mb-2">Team Overview</h3>
                           <p className="text-muted-foreground leading-relaxed">
-                            This variant replaces Veronica with Tressa, taking a different approach to Will-O'-Wisp generation. Instead of relying on card draw to find Chizuru's cards, Tressa <strong className="text-purple-300">spams attack cards</strong> that Chizuru can use with Tsukuyomi to generate Will-O'-Wisp stacks. All three characters share <strong className="text-purple-300">Void Ego type</strong>, creating strong synergy.
+                            This variant replaces Veronica with Tressa, taking a different approach to Will-O'-Wisp generation. Instead of relying on card draw to find Chizuru's cards, Tressa <strong className="text-purple-300">generates attack cards</strong> that Chizuru can use with Tsukuyomi to generate Will-O'-Wisp stacks. All three characters share <strong className="text-purple-300">Void Ego type</strong>, creating strong synergy and team-wide benefits.
                           </p>
                         </div>
                         
@@ -2188,7 +2276,7 @@ export default function ChizuruGuidePage() {
                               <strong className="text-purple-300">Rei + Chizuru:</strong> Rei's role remains the same - providing damage buffs that amplify Chizuru's Shadow of the Moon attacks. The Void Ego synergy between all three characters enhances their effectiveness.
                             </div>
                             <div>
-                              <strong className="text-purple-300">Triple Void Ego:</strong> Having all three characters share Void Ego type creates natural synergy and likely provides team-wide benefits. This makes the team more cohesive than mixed Ego type compositions.
+                              <strong className="text-purple-300">Triple Void Ego Synergy:</strong> Having all three characters share Void Ego type creates natural synergy and provides team-wide benefits. This makes the team more cohesive than mixed Ego type compositions, enhancing overall effectiveness.
                             </div>
                             <div>
                               <strong className="text-purple-300">The Combo:</strong> Tressa spams attack cards → Chizuru uses Tsukuyomi on those attacks → Generates 3 Will-O'-Wisp per hit → Rei's damage buffs amplify → Chizuru unleashes Shadow of the Moon with massive Will-O'-Wisp stacks.
@@ -2206,9 +2294,9 @@ export default function ChizuruGuidePage() {
                         </div>
 
                         <div>
-                          <h3 className="text-lg font-semibold text-foreground mb-2">Comparison to Team 1</h3>
+                          <h3 className="text-lg font-semibold text-foreground mb-2">Team Comparison</h3>
                           <p className="text-muted-foreground leading-relaxed">
-                            This team trades Veronica's card draw for Tressa's direct attack card generation. It's more consistent for Will-O'-Wisp stacking but may struggle if you need to find specific Chizuru cards. The triple Void Ego synergy is stronger, but you lose Veronica's versatile draw utility.
+                            This team trades Veronica's card draw for Tressa's direct attack card generation. It's more consistent for Will-O'-Wisp stacking but may struggle if you need to find specific Chizuru cards. The triple Void Ego synergy provides stronger team-wide benefits, but you lose Veronica's versatile draw utility. Choose this team when you want more reliable Will-O'-Wisp generation and stronger Ego type synergy.
                           </p>
                         </div>
                       </div>

@@ -24,14 +24,11 @@ export default function VeronicaGuidePage() {
   const [isCardEpiphanyModalOpen, setIsCardEpiphanyModalOpen] = useState(false)
   const [isTeamsModalOpen, setIsTeamsModalOpen] = useState(false)
   const [selectedPartner, setSelectedPartner] = useState<number | null>(null)
+  const [selectedCardForEpiphanies, setSelectedCardForEpiphanies] = useState<typeof uniqueCards[0] | null>(null)
 
   const sections = [
     { id: "overview", title: "1. Overview", level: 1 },
-    { id: "card-epiphany", title: "2. Card Epiphany", level: 1 },
-    { id: "firing-preparation", title: "2.1. Firing Preparation", level: 2 },
-    { id: "repose", title: "2.2. Repose", level: 2 },
-    { id: "pendant-of-resolution", title: "2.4. Pendant of Resolution", level: 2 },
-    { id: "sir-kowalski", title: "2.3. Sir Kowalski", level: 2 },
+    { id: "card-epiphany", title: "2. Base Cards", level: 1 },
     { id: "recommended-save-data", title: "3. Recommended Save Data", level: 1 },
     { id: "equipments", title: "3.1. Equipments", level: 2 },
     { id: "memory-fragments", title: "4. Memory Fragments", level: 1 },
@@ -45,6 +42,7 @@ export default function VeronicaGuidePage() {
       name: "Firing Preparation",
       image: "/images/character/veronica/starter4.png",
       baseType: "upgrade",
+      baseDescription: "[ Unique / Initiation ] Create 1 Ballista card(s).\nAt the start of the turn,\ncreate 1 Ballista card(s)",
       epiphanies: [
         {
           id: "Firing Preparation I",
@@ -93,6 +91,7 @@ export default function VeronicaGuidePage() {
       name: "Repose",
       image: "/images/character/veronica/unique1.png",
       baseType: "skill",
+      baseDescription: "120% Shield \nDraw 2 card(s) from other combatant",
       epiphanies: [
         {
           id: "Repose I",
@@ -107,7 +106,7 @@ export default function VeronicaGuidePage() {
           tier: "A",
           cost: 1,
           type: "skill",
-          description: "150% Shield \nDraw 2 other \nCombatant's card(s) \nIf that card is a Skill Card, \n1 Reload",
+          description: "180% Shield \nDraw 2 other \nCombatant's card(s) \nIf that card is a Skill Card, \n1 Reload",
           reasoning: "A weaker version of Repose III, it still has value since you draw and MIGHT get Reload, but the effect is much lower impact overall, and the other Repose options outperform it",
         },
         {
@@ -116,7 +115,7 @@ export default function VeronicaGuidePage() {
           cost: 1,
           type: "skill",
           description:
-            "150% Shield \nDraw 2 other \nCombatant's card(s) \nDecrease Cost of 1 of those cards by 1 for 1 turn",
+            "180% Shield \nDraw 2 other \nCombatant's card(s) \nDecrease Cost of 1 of those cards by 1 for 1 turn",
           reasoning: "Second best pick, a bit less consistent since it can break some builds. Divine upgrade that makes this 0 cost it might becomes the best option",
         },
         {
@@ -124,7 +123,7 @@ export default function VeronicaGuidePage() {
           tier: "C",
           cost: 1,
           type: "skill",
-          description: "150% Shield \n1 Reload equal to \nnumber of other \nCombatant's skill card(s) \nin hand",
+          description: "180% Shield \n1 Reload equal to \nnumber of other \nCombatant's skill card(s) \nin hand",
           reasoning: "Reload is already covered by the pendant of resolution card, so there's no real reason to pick this",
         },
         {
@@ -132,7 +131,7 @@ export default function VeronicaGuidePage() {
           tier: "C",
           cost: 1,
           type: "skill",
-          description: "150% Shield \nDiscard all other \nCombatant's card(s) in hand \n1 Reload equal to that number",
+          description: "180% Shield \nDiscard all other \nCombatant's card(s) in hand \n1 Reload equal to that number",
           reasoning: "Worst choice. Hand discard is too punishing and the Reload payoff doesn't justify it",
         },
       ],
@@ -142,6 +141,7 @@ export default function VeronicaGuidePage() {
       name: "Pendant of Resolution",
       image: "/images/character/veronica/unique2.png",
       baseType: "upgrade",
+      baseDescription: "When another combatant uses Skill Card, 1 Reload",
       epiphanies: [
         {
           id: "Pendant of Resolution I",
@@ -190,6 +190,7 @@ export default function VeronicaGuidePage() {
       name: "Sir Kowalski",
       image: "/images/character/veronica/unique3.png",
       baseType: "skill",
+      baseDescription: "Choose 1 Ballista card in hand, +100% Damage amount until activated \nDraw 1",
       epiphanies: [
         {
           id: "Sir Kowalski I",
@@ -273,7 +274,7 @@ export default function VeronicaGuidePage() {
     
       return {
         id: `epiphany-${ref.replace(/\s+/g, '-')}`,
-        name: epiphany.id,
+        name: baseCard.name,
         image: baseCard.image,
         cost: epiphany.cost,
         type: epiphany.type || baseCard.baseType,
@@ -401,34 +402,73 @@ function CardDisplay({ card }: { card: any }) {
             <img
               src={card.image || "/placeholder.svg"}
               alt={card.name}
-              className="w-full h-full object-cover scale-125"
+              className="w-full h-full object-cover scale-108"
             />
             <div className="absolute inset-0 flex flex-col">
               {/* Top Section: Cost + Name + Type */}
-              <div className="p-2 pt-1.5 pl-5">
-                <div className="flex items-start gap-1.5">
-                  <div className="flex-shrink-0 flex flex-col items-center justify-center">
+              <div className="p-2 pt-1.5 pl-3">
+                <div className="flex items-start gap-1.5 relative">
+                  {/* Rarity Image */}
+                  <div className="absolute left-0 top-0 z-20 flex items-center" style={{ transform: 'translateX(-18px)' }}>
+                    <img
+                      src={
+                        card.name?.includes("Sir Kowalski")
+                          ? "/images/card/card_rarity_legend.png"
+                          : card.name === "Bombardment Prep"
+                            ? "/images/card/card_rarity_unique.png"
+                            : "/images/card/card_rarity_rare.png"
+                      }
+                      alt=""
+                      className="h-12 sm:h-14 object-contain"
+                    />
+                  </div>
+                  {/* Cost */}
+                  <div className="flex-shrink-0 flex flex-col items-center justify-center ml-3">
                     <span
-                      className="text-white font-bold text-5xl scale-x-80"
+                      className="text-white font-bold text-4xl scale-x-80"
                       style={{
                         WebkitTextStroke: "1px rgba(0, 0, 0, 0.38)",
-                        textShadow: `-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000`,
+                        textShadow: `
+                        -1px -1px 0 #000,
+                         1px -1px 0 #000,
+                        -1px  1px 0 #000,
+                         1px  1px 0 #000
+                      `,
                       }}
                     >
                       {card.cost}
                     </span>
-                    <div className="w-full h-0.5 bg-white mt-0.5 scale-x-80" style={{ backgroundColor: "#ffffff", WebkitBoxShadow: `-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000` }} />
-                  </div>
-                  <div className="flex-1 pt-0.5">
-                    <h5
-                      className="text-white font-bold text-[20px] leading-tight drop-shadow-lg"
+                    <div
+                      className="w-full h-0.5 bg-white mt-0.5 scale-x-75"
                       style={{
-                        textShadow: `-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000`,
-                        transform: "scaleX(0.65)",
+                        backgroundColor: "#ffffff",
+                        WebkitBoxShadow: `
+                        -1px -1px 0 #000,
+                         1px -1px 0 #000,
+                        -1px  1px 0 #000,
+                         1px  1px 0 #000
+                        `,
+                      }}
+                    />
+                  </div>
+                  {/* Name and Type */}
+                  <div className="flex-1 pt-0.5 min-w-0">
+                    <h5
+                      className="text-white font-bold leading-tight drop-shadow-lg"
+                      style={{
+                        fontSize: "clamp(0.7rem, 2.5vw, 1.25rem)",
+                        textShadow: `
+                        -1px -1px 0 #000,
+                         1px -1px 0 #000,
+                        -1px  1px 0 #000,
+                         1px  1px 0 #000
+                      `,
+                        transform: "scaleX(1)",
                         transformOrigin: "left",
-                        maxWidth: "180%",
+                        maxWidth: "100%",
                         whiteSpace: "nowrap",
                         overflow: "hidden",
+                        textOverflow: "ellipsis",
                       }}
                     >
                       {card.name}
@@ -443,9 +483,20 @@ function CardDisplay({ card }: { card: any }) {
                             : "/images/icon-category-card-upgrade.webp"
                         }
                         alt={card.type}
-                        className="w-5 h-5"
+                        className="w-4 h-4 sm:w-5 sm:h-5"
                       />
-                      <span className="text-white/100 text-[14px] font-large capitalize drop-shadow" style={{ textShadow: `-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000` }}>
+                      <span
+                        className="text-white/100 font-large capitalize drop-shadow"
+                        style={{
+                          fontSize: "clamp(0.65rem, 2vw, 0.875rem)",
+                          textShadow: `
+                        -1px -1px 0 #000,
+                         1px -1px 0 #000,
+                        -1px  1px 0 #000,
+                         1px  1px 0 #000
+                      `,
+                        }}
+                      >
                         {card.type}
                       </span>
                     </div>
@@ -453,29 +504,52 @@ function CardDisplay({ card }: { card: any }) {
                 </div>
               </div>
 
-              {/* Description */}
+              {/* Description Section */}
               {card.description && (
-                <div className="mt-auto p-2.5 pl-3 py-5 bg-gradient-to-t from-black/95 via-black/90 to-transparent flex flex-col items-center justify-center gap-0">
+                <div className="mt-auto p-2 sm:p-2.5 pl-2 sm:pl-3 py-3 sm:py-5 bg-gradient-to-t from-black/95 via-black/90 to-transparent flex flex-col items-center justify-center gap-0">
+                  {/* Card Frame Spark */}
+                  <img
+                    src="/images/card/card_frame_spark.png"
+                    alt=""
+                    className="w-1/2 mb-0 drop-shadow-2xl"
+                  />
                   {(() => {
-                    const { bracketedText, remainingText } = parseDescription(card.description);
+                    const { bracketedText, remainingText } = parseDescription(card.description)
                     return (
                       <>
                         {bracketedText && (
-                          <p className="text-center font-medium text-sm leading-snug m-0" style={{ color: "#e3b46c" }}>
+                          <p
+                            className="text-center font-medium leading-snug m-0 px-1"
+                            style={{ 
+                              color: "#e3b46c",
+                              fontSize: "clamp(0.7rem, 2vw, 0.875rem)"
+                            }}
+                          >
                             {bracketedText}
                           </p>
                         )}
                         <p
-                          className="text-white text-center text-sm leading-snug m-0 whitespace-pre-line"
+                          className="text-white text-center leading-snug m-0 whitespace-pre-line px-1"
+                          style={{
+                            fontSize: "clamp(0.7rem, 2vw, 0.875rem)"
+                          }}
                           dangerouslySetInnerHTML={{
                             __html: remainingText
-                              .replace(/(\d+%?)/g, '<span style="color: #7ce2fb">$1</span>')
-                              .replace(/Giant Ballista/gi, '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>')
-                              .replace(/Ballista/gi, '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>')
+                              .replace(
+                                /(\d+%?)/g,
+                                '<span style="color: #7ce2fb">$1</span>',
+                              )
+                              .replace(
+                                /(Piercing\s*Ballista|Enhanced\s*Ballista|Giant\s*Ballista|Shelling\s*Ballista|Micro\s*Ballista)/gi,
+                                '<span style="color: #C8FF2E; text-decoration: underline; text-underline-offset: 2px">$&</span>',
+                              ).replace(
+                                /Ballista/gi,
+                                '<span style="color: #C8FF2E; text-decoration: underline; text-underline-offset: 2px">$&</span>',
+                              ),
                           }}
                         />
                       </>
-                    );
+                    )
                   })()}
                 </div>
               )}
@@ -566,16 +640,16 @@ function CardDisplay({ card }: { card: any }) {
   return (
     <div className="min-h-screen bg-background">
       <header className="border-b border-border bg-card backdrop-blur-sm">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight text-balance bg-gradient-to-r from-red-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+        <div className="container mx-auto px-4 py-4 sm:py-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="flex-1">
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-balance bg-gradient-to-r from-red-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
                 Veronica Guide
               </h1>
             </div>
             <Link
               href="/guides"
-              className="flex items-center gap-2 px-4 py-2 rounded-lg border border-purple-500/20 bg-purple-500/10 text-purple-400 hover:bg-purple-500/20 hover:border-purple-400/40 transition-all duration-200"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg border border-purple-500/20 bg-purple-500/10 text-purple-400 hover:bg-purple-500/20 hover:border-purple-400/40 transition-all duration-200 w-full sm:w-auto justify-center sm:justify-start"
             >
               <ArrowLeft className="w-4 h-4" />
               <span className="text-sm font-medium">Back to Characters</span>
@@ -584,10 +658,10 @@ function CardDisplay({ card }: { card: any }) {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8">
-        <div className="flex gap-6">
+      <main className="container mx-auto px-4 py-6 sm:py-8">
+        <div className="flex flex-col xl:flex-row gap-4 sm:gap-6">
           {/* Sticky Table of Contents */}
-          <aside className="hidden lg:block w-64 shrink-0">
+          <aside className="hidden xl:block w-64 shrink-0">
             <nav className="sticky top-4 rounded-lg border border-border bg-card p-4">
               <h2 className="text-lg font-semibold mb-4">Table of Contents</h2>
               <ul className="space-y-1.5">
@@ -608,25 +682,25 @@ function CardDisplay({ card }: { card: any }) {
           </aside>
 
           {/* Main Content */}
-          <div className="flex-1 space-y-8">
+          <div className="flex-1 space-y-6 sm:space-y-8">
             {/* 1. Overview */}
-            <section id="overview" className="rounded-lg border border-border bg-card p-8 scroll-mt-6">
-            <h2 className="text-2xl font-bold mb-6 text-purple-400">1. Overview</h2>
-              <div className="space-y-4">
-                <div className="flex flex-wrap gap-3 mb-4">
+            <section id="overview" className="hidden md:block rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-6">
+            <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-purple-400">1. Overview</h2>
+              <div className="space-y-3 sm:space-y-4">
+                <div className="flex flex-wrap gap-2 sm:gap-3 mb-3 sm:mb-4">
                   <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/20 border border-red-500/50">
-                    <img src="/images/icon-ego-passion.webp" alt="Passion" className="w-5 h-5" />
-                    <span className="text-red-400 text-sm font-medium">Passion</span>
+                    <img src="/images/icon-ego-passion.webp" alt="Passion" className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <span className="text-red-400 text-xs sm:text-sm font-medium">Passion</span>
                   </div>
                   
                   <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black-500/20 border border-black-500/40">
-                    <img src="/images/icon-job-ranger.webp" alt="Ranger" className="w-5 h-5" />
-                    <span className="text-black-400 text-sm font-medium">Ranger</span>
+                    <img src="/images/icon-job-ranger.webp" alt="Ranger" className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <span className="text-black-400 text-xs sm:text-sm font-medium">Ranger</span>
                   </div>
                 </div>
 
                 <div className="rounded-sm bg-background/50 border border-border">
-                <div className="relative w-full h-[400px] bg-gradient-to-br from-red-500/20 to-black/30 flex items-center justify-center warp">
+                <div className="relative w-full h-[250px] sm:h-[350px] md:h-[400px] bg-gradient-to-br from-red-500/20 to-black/30 flex items-center justify-center warp">
                 <img
                   src={`/images/characters/veronica.webp`}
                   alt={`veronica full artwork`}
@@ -637,36 +711,231 @@ function CardDisplay({ card }: { card: any }) {
               </div>
             </section>
 
-            {/* 2. Card Epiphany */}
-            <section id="card-epiphany" className="rounded-lg border border-border bg-card p-8 scroll-mt-6">
-            <h2 className="text-2xl font-bold mb-6 text-purple-400">2. Card Epiphany</h2>
-              <p className="text-muted-foreground mb-6">
+            {/* 2. Base Cards */}
+            <section id="card-epiphany" className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-6">
+            <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-purple-400">2. Base Cards</h2>
+              <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6">
               S+ (Best), S (Excellent), A (Strong), B (Average), C (Low Impact), Situational (Niche-use only).
               <br />
-              Click a Epiphany group for explanation.
+              Click a base card to view its epiphanies.
               </p>
 
-              <div className="space-y-12">
-                {uniqueCards.map((cardData) => (
-                  <div key={cardData.id} id={cardData.id} className="scroll-mt-6">
-                    <h3 className="text-xl font-bold mb-6 text-purple-300">{cardData.name}</h3>
-
-                    <Dialog>
+              {/* Base Cards Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+                {uniqueCards.map((cardData) => {
+                  // Use first epiphany's cost and type, or fallback to baseType
+                  const baseCost = cardData.epiphanies[0]?.cost ?? 0
+                  const baseType = cardData.epiphanies[0]?.type ?? cardData.baseType
+                  
+                  return (
+                    <Dialog 
+                      key={cardData.id} 
+                      open={selectedCardForEpiphanies?.id === cardData.id} 
+                      onOpenChange={(open) => {
+                        if (open) {
+                          setSelectedCardForEpiphanies(cardData)
+                        } else {
+                          setSelectedCardForEpiphanies(null)
+                        }
+                      }}
+                    >
                       <DialogTrigger asChild>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 cursor-pointer p-4 rounded-xl border-2 border-dashed border-purple-500/30 hover:border-purple-400/60 hover:bg-purple-500/5 transition-all duration-200">
+                        <div className="relative rounded-lg overflow-hidden border-2 border-border hover:border-purple-400/50 transition-all duration-200 cursor-pointer">
+                          {/* Passion Border */}
+                          <div className="absolute left-0 -top-0.5 -bottom-0.5 w-3 z-10">
+                            <img
+                              src="/images/card/passion-border.png"
+                              alt=""
+                              className="h-full w-full object-cover"
+                            />
+                          </div>
+
+                          {/* Card Image */}
+                          <div className="relative aspect-[2/3] bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden rounded-md">
+                            <img
+                              src={cardData.image || "/placeholder.svg"}
+                              alt={cardData.name}
+                              className="w-full h-full object-cover scale-108"
+                            />
+
+                            {/* Card Info Overlay */}
+                            <div className="absolute inset-0 flex flex-col">
+                              {/* Top Section */}
+                              <div className="p-2 pt-1.5 pl-3">
+                                <div className="flex items-start gap-1.5 relative">
+                                  {/* Rarity Image */}
+                                  <div className="absolute left-0 top-0 z-20 flex items-center" style={{ transform: 'translateX(-18px)' }}>
+                                    <img
+                                      src={
+                                        cardData.name === "Sir Kowalski"
+                                          ? "/images/card/card_rarity_legend.png"
+                                          : cardData.name === "Bombardment Prep"
+                                            ? "/images/card/card_rarity_unique.png"
+                                            : "/images/card/card_rarity_rare.png"
+                                      }
+                                      alt=""
+                                      className="h-12 sm:h-14 object-contain"
+                                    />
+                                  </div>
+                                  {/* Cost */}
+                                  <div className="flex-shrink-0 flex flex-col items-center justify-center ml-3">
+                                    <span
+                                      className="text-white font-bold text-4xl scale-x-80"
+                                      style={{
+                                        WebkitTextStroke: "1px rgba(0, 0, 0, 0.38)",
+                                        textShadow: `
+                                        -1px -1px 0 #000,
+                                         1px -1px 0 #000,
+                                        -1px  1px 0 #000,
+                                         1px  1px 0 #000
+                                      `,
+                                      }}
+                                    >
+                                      {baseCost}
+                                    </span>
+                                    <div
+                                      className="w-full h-0.5 bg-white mt-0.5 scale-x-75"
+                                      style={{
+                                        backgroundColor: "#ffffff",
+                                        WebkitBoxShadow: `
+                                        -1px -1px 0 #000,
+                                         1px -1px 0 #000,
+                                        -1px  1px 0 #000,
+                                         1px  1px 0 #000
+                                        `,
+                                      }}
+                                    />
+                                  </div>
+
+                                  {/* Name and Type */}
+                                  <div className="flex-1 pt-0.5 min-w-0">
+                                    <h5
+                                      className="text-white font-bold leading-tight drop-shadow-lg"
+                                      style={{
+                                        fontSize: "clamp(0.7rem, 2.5vw, 1.25rem)",
+                                        textShadow: `
+                                        -1px -1px 0 #000,
+                                         1px -1px 0 #000,
+                                        -1px  1px 0 #000,
+                                         1px  1px 0 #000
+                                      `,
+                                        transform: "scaleX(1)",
+                                        transformOrigin: "left",
+                                        maxWidth: "100%",
+                                        whiteSpace: "nowrap",
+                                        overflow: "hidden",
+                                        textOverflow: "ellipsis",
+                                      }}
+                                    >
+                                      {cardData.name}
+                                    </h5>
+                                    <div className="flex items-center gap-1">
+                                      <img
+                                        src={
+                                          baseType === "attack"
+                                            ? "/images/icon-category-card-attack.webp"
+                                            : baseType === "skill"
+                                            ? "/images/icon-category-card-skill.webp"
+                                            : "/images/icon-category-card-upgrade.webp"
+                                        }
+                                        alt={baseType}
+                                        className="w-4 h-4 sm:w-5 sm:h-5"
+                                      />
+                                      <span
+                                        className="text-white/100 font-large capitalize drop-shadow"
+                                        style={{
+                                          fontSize: "clamp(0.65rem, 2vw, 0.875rem)",
+                                          textShadow: `
+                                        -1px -1px 0 #000,
+                                         1px -1px 0 #000,
+                                        -1px  1px 0 #000,
+                                         1px  1px 0 #000
+                                      `,
+                                        }}
+                                      >
+                                        {baseType}
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              {/* Description Section */}
+                              {cardData.baseDescription && (
+                                <div className="mt-auto p-2 sm:p-2.5 pl-2 sm:pl-3 py-3 sm:py-5 bg-gradient-to-t from-black/95 via-black/90 to-transparent flex flex-col items-center justify-center gap-0">
+                                  {/* Card Frame Spark Disabled */}
+                                  <img
+                                    src="/images/card/card_frame_spark_dis.png"
+                                    alt=""
+                                    className="w-1/2 mb-0 drop-shadow-2xl"
+                                  />
+                                  {(() => {
+                                    const { bracketedText, remainingText } = parseDescription(cardData.baseDescription)
+                                    return (
+                                      <>
+                                        {bracketedText && (
+                                          <p
+                                            className="text-center font-medium leading-snug m-0 px-1"
+                                            style={{ 
+                                              color: "#e3b46c",
+                                              fontSize: "clamp(0.7rem, 2vw, 0.875rem)"
+                                            }}
+                                          >
+                                            {bracketedText}
+                                          </p>
+                                        )}
+                                        <p
+                                          className="text-white text-center leading-snug m-0 whitespace-pre-line px-1"
+                                          style={{
+                                            fontSize: "clamp(0.7rem, 2vw, 0.875rem)"
+                                          }}
+                                          dangerouslySetInnerHTML={{
+                                            __html: remainingText
+                                              .replace(
+                                                /(\d+%?)/g,
+                                                '<span style="color: #7ce2fb">$1</span>',
+                                              )
+                                              .replace(
+                                                /(Piercing\s*Ballista|Enhanced\s*Ballista|Giant\s*Ballista|Shelling\s*Ballista|Micro\s*Ballista)/gi,
+                                                '<span style="color: #C8FF2E; text-decoration: underline; text-underline-offset: 2px">$&</span>',
+                                              ).replace(
+                                                /Ballista/gi,
+                                                '<span style="color: #C8FF2E; text-decoration: underline; text-underline-offset: 2px">$&</span>',
+                                              ),
+                                          }}
+                                        />
+                                      </>
+                                    )
+                                  })()}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </DialogTrigger>
+
+                      <DialogContent className="!w-[95vw] !max-w-6xl max-h-[90vh] overflow-y-auto scrollbar-none p-3 sm:p-4 md:p-6 m-2 sm:m-4">
+                        <DialogHeader>
+                          <DialogTitle className="text-xl sm:text-2xl text-purple-400">
+                            {cardData.name} - Epiphanies
+                          </DialogTitle>
+                        </DialogHeader>
+                        
+                        {/* Epiphanies Grid */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6 mt-4 sm:mt-6">
                           {cardData.epiphanies.map((epiphany, index) => (
-                            <div key={index} className="flex flex-col gap-3">
+                            <div key={index} className="flex flex-col gap-2 sm:gap-3">
                               {/* Tier Badge */}
                               <div className="flex justify-center">
                                 <span
-                                  className={`px-4 py-1.5 rounded-full text-sm font-bold ${getTierColor(epiphany.tier)}`}
+                                  className={`px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-bold ${getTierColor(epiphany.tier)}`}
                                 >
                                   {epiphany.tier} Tier
                                 </span>
                               </div>
 
                               {/* Card Display */}
-                              <div className="relative rounded-lg overflow-hidden border-2 border-border hover:border-purple-400/50 transition-all duration-200 max-w-[250px] mx-auto">
+                              <div className="relative rounded-lg overflow-hidden border-2 border-border hover:border-purple-400/50 transition-all duration-200 w-full max-w-[200px] sm:max-w-[220px] md:max-w-[250px] mx-auto">
                                 {/* Passion Border */}
                                 <div className="absolute left-0 -top-0.5 -bottom-0.5 w-3 z-10">
                                   <img
@@ -681,18 +950,30 @@ function CardDisplay({ card }: { card: any }) {
                                   <img
                                     src={cardData.image || "/placeholder.svg"}
                                     alt={cardData.name}
-                                    className="w-full h-full object-cover scale-125"
+                                    className="w-full h-full object-cover scale-108"
                                   />
 
                                   {/* Card Info Overlay */}
-                                  <div className="absolute inset-0 flex flex-col">
+                                  <div className="absolute inset-0 flex flex-col justify-end">
                                     {/* Top Section */}
-                                    <div className="p-2 pt-1.5 pl-5">
-                                      <div className="flex items-start gap-1.5">
+                                    <div className="p-2 pt-1.5 pl-3">
+                                      <div className="flex items-start gap-1.5 relative">
+                                        {/* Rarity Image */}
+                                        <div className="absolute left-0 top-0 z-20 flex items-center" style={{ transform: 'translateX(-18px)' }}>
+                                          <img
+                                            src={
+                                              cardData.name === "Sir Kowalski"
+                                                ? "/images/card/card_rarity_legend.png"
+                                                : "/images/card/card_rarity_rare.png"
+                                            }
+                                            alt=""
+                                            className="h-12 sm:h-14 object-contain"
+                                          />
+                                        </div>
                                         {/* Cost */}
-                                        <div className="flex-shrink-0 flex flex-col items-center justify-center">
+                                        <div className="flex-shrink-0 flex flex-col items-center justify-center ml-3">
                                           <span
-                                            className="text-white font-bold text-5xl scale-x-80"
+                                            className="text-white font-bold text-3xl sm:text-4xl scale-x-80"
                                             style={{
                                               WebkitTextStroke: "1px rgba(0, 0, 0, 0.38)",
                                               textShadow: `
@@ -706,7 +987,7 @@ function CardDisplay({ card }: { card: any }) {
                                             {epiphany.cost}
                                           </span>
                                           <div
-                                            className="w-full h-0.5 bg-white mt-0.5 scale-x-80"
+                                            className="w-full h-0.5 bg-white mt-0.5 scale-x-75"
                                             style={{
                                               backgroundColor: "#ffffff",
                                               WebkitBoxShadow: `
@@ -722,19 +1003,21 @@ function CardDisplay({ card }: { card: any }) {
                                         {/* Name and Type */}
                                         <div className="flex-1 pt-0.5">
                                           <h5
-                                            className="text-white font-bold text-[20px] leading-tight drop-shadow-lg"
+                                            className="text-white font-bold leading-tight drop-shadow-lg"
                                             style={{
+                                              fontSize: "clamp(0.75rem, 2.5vw, 1.25rem)",
                                               textShadow: `
                                               -1px -1px 0 #000,
                                                1px -1px 0 #000,
                                               -1px  1px 0 #000,
                                                1px  1px 0 #000
                                             `,
-                                              transform: "scaleX(0.65)",
+                                              transform: "scaleX(1)",
                                               transformOrigin: "left",
-                                              maxWidth: "180%",
-                                              whiteSpace: "nowrap",
-                                              overflow: "hidden",
+                                              maxWidth: "100%",
+                                              whiteSpace: "normal",
+                                              overflow: "visible",
+                                              lineHeight: "1.2",
                                             }}
                                           >
                                             {cardData.name}
@@ -749,10 +1032,10 @@ function CardDisplay({ card }: { card: any }) {
                                                     : "/images/icon-category-card-upgrade.webp"
                                               }
                                               alt={epiphany.type}
-                                              className="w-5 h-5"
+                                              className="w-4 h-4 sm:w-5 sm:h-5"
                                             />
                                             <span
-                                              className="text-white/100 text-[14px] font-large capitalize drop-shadow "
+                                              className="text-white/100 text-[12px] sm:text-[13px] md:text-[14px] font-large capitalize drop-shadow "
                                               style={{
                                                 textShadow: `
                                               -1px -1px 0 #000,
@@ -769,37 +1052,42 @@ function CardDisplay({ card }: { card: any }) {
                                       </div>
                                     </div>
 
-                                    <div className="mt-auto p-2.5 pl-3 py-5 bg-gradient-to-t from-black/95 via-black/90 to-transparent flex flex-col items-center justify-center gap-0">
+                                    <div className="mt-auto p-2 sm:p-2.5 pl-2 sm:pl-3 py-3 sm:py-5 bg-gradient-to-t from-black/95 via-black/90 to-transparent flex flex-col items-center justify-center gap-0">
+                                      {/* Card Frame Spark */}
+                                      <img
+                                        src="/images/card/card_frame_spark.png"
+                                        alt=""
+                                        className="w-1/2 mb-0 drop-shadow-2xl"
+                                      />
                                       {(() => {
                                         const { bracketedText, remainingText } = parseDescription(epiphany.description)
                                         return (
                                           <>
                                             {bracketedText && (
                                               <p
-                                                className="text-center font-medium text-sm leading-snug m-0"
+                                                className="text-center font-medium text-xs sm:text-sm leading-snug m-0"
                                                 style={{ color: "#e3b46c" }}
                                               >
                                                 {bracketedText}
                                               </p>
                                             )}
                                             <p
-                                              className="text-white text-center text-sm leading-snug m-0 whitespace-pre-line"
-                                              dangerouslySetInnerHTML={{
-                                                __html: remainingText
-                                                .replace(
-                                                  /(\d+%?)/g,
-                                                  '<span style="color: #7ce2fb">$1</span>',
-                                                )
-                                                .replace(
-                                                  /(Piercing\s*Ballista|Enhanced\s*Ballista|Giant\s*Ballista|Shelling\s*Ballista|Micro\s*Ballista)/gi,
-                                                  '<span style="color: #C8FF2E; text-decoration: underline; text-underline-offset: 2px">$1</span>',
-                                                )
-                                                .replace(
-                                                  /(Ballista)/gi,
-                                                  '<span style="color: #C8FF2E; text-decoration: underline; text-underline-offset: 2px">$1</span>',
-                                                ),
-                                              }}
-                                            />
+                                                    className="text-white text-center text-xs sm:text-sm leading-snug m-0 whitespace-pre-line"
+                                                    dangerouslySetInnerHTML={{
+                                                        __html: remainingText
+                                                            .replace(
+                                                                /(\d+%?)/g,
+                                                                '<span style="color: #7ce2fb">$1</span>',
+                                                            )
+                                                            .replace(
+                                                                /(Piercing\s*Ballista|Enhanced\s*Ballista|Giant\s*Ballista|Shelling\s*Ballista|Micro\s*Ballista)/gi,
+                                                                '<span style="color: #C8FF2E; text-decoration: underline; text-underline-offset: 2px">$&</span>',
+                                                            ).replace(
+                                                                /Ballista/gi,
+                                                                '<span style="color: #C8FF2E; text-decoration: underline; text-underline-offset: 2px">$&</span>',
+                                                            ),
+                                                    }}
+                                                />
                                           </>
                                         )
                                       })()}
@@ -810,56 +1098,46 @@ function CardDisplay({ card }: { card: any }) {
                             </div>
                           ))}
                         </div>
-                      </DialogTrigger>
 
-                      <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto scrollbar-none">
-                        <DialogHeader>
-                          <DialogTitle className="text-2xl text-purple-400">
-                            {cardData.name} - Epiphany Guide
-                          </DialogTitle>
-                          <DialogDescription className="text-[14px] text-white/70">
-                            Detailed explanations for every Epiphany choice.
-                            <br/>
-                            Divine Epiphanies aren't covered here unless they give a major impact.
-                          </DialogDescription>
-                        </DialogHeader>
-                        <div className="space-y-6 mt-4">
+                        {/* Epiphany Explanations */}
+                        <div className="mt-6 sm:mt-8 space-y-3 sm:space-y-4">
+                          <h3 className="text-lg sm:text-xl font-bold text-purple-300">Epiphany Explanations</h3>
                           {cardData.epiphanies.map((epiphany, index) => (
-                            <div key={index} className="p-4 rounded-lg bg-background/50 border border-border">
-                              <div className="flex items-center gap-3 mb-3">
+                            <div key={index} className="p-3 sm:p-4 rounded-lg bg-background/50 border border-border">
+                              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
                                 <span
-                                  className={`px-3 py-1 rounded-full text-xs font-bold ${getTierColor(epiphany.tier)}`}
+                                  className={`px-3 py-1 rounded-full text-xs font-bold w-fit ${getTierColor(epiphany.tier)}`}
                                 >
                                   {epiphany.tier} Tier
                                 </span>
-                                <span className="text-sm font-semibold text-foreground">
+                                <span className="text-xs sm:text-sm font-semibold text-foreground">
                                   {epiphany.id}
                                 </span>
                               </div>
-                              <p className="text-sm text-muted-foreground leading-relaxed">{epiphany.reasoning}</p>
+                              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{epiphany.reasoning}</p>
                             </div>
                           ))}
                         </div>
                       </DialogContent>
                     </Dialog>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
             </section>
 
               {/* 3. Recommended Save Data */}
-              <section id="recommended-save-data" className="rounded-lg border border-border bg-card p-8 scroll-mt-6">
-                <h2 className="text-2xl font-bold mb-6 text-purple-400">3. Recommended Save Data</h2>
-                <p className="text-muted-foreground mb-6">
+              <section id="recommended-save-data" className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-6">
+                <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-purple-400">3. Recommended Save Data</h2>
+                <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6">
                   These are examples - you can change based on your playstyle.
                 </p>
 
-                <div className="space-y-12">
+                <div className="space-y-8 sm:space-y-12">
                   {/* Build 1: Draw Engine */}
-                  <div className="space-y-6">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-xl font-bold text-purple-300">Draw Engine Build</h3>
-                      <span className="px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/40 text-blue-400 text-sm font-bold">
+                  <div className="space-y-4 sm:space-y-6">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4">
+                      <h3 className="text-lg sm:text-xl font-bold text-purple-300">Draw Engine Build</h3>
+                      <span className="px-2 sm:px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/40 text-blue-400 text-xs sm:text-sm font-bold whitespace-nowrap">
                         [140 Faint Memory Cost without Convert Method]
                       </span>
                     </div>
@@ -869,14 +1147,14 @@ function CardDisplay({ card }: { card: any }) {
                       return (
                         <>
                           {/* Top Row */}
-                          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
+                          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4 max-w-7xl mx-auto">
                             {topRow.map((card, index) => (
                               <CardDisplay key={card.id || index} card={card} />
                             ))}
                           </div>
 
                           {/* Bottom Row */}
-                          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
+                          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4 max-w-7xl mx-auto">
                             {bottomRow.map((card, index) => (
                               <CardDisplay key={card.id || index} card={card} />
                             ))}
@@ -907,10 +1185,10 @@ function CardDisplay({ card }: { card: any }) {
                   </div>
 
                   {/* Build 2: Mei Lin Synergy */}
-                  <div className="space-y-6">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-xl font-bold text-purple-300">Mei Lin Passion Build</h3>
-                      <span className="px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/40 text-blue-400 text-sm font-bold">
+                  <div className="space-y-4 sm:space-y-6">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4">
+                      <h3 className="text-lg sm:text-xl font-bold text-purple-300">Mei Lin Passion Build</h3>
+                      <span className="px-2 sm:px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/40 text-blue-400 text-xs sm:text-sm font-bold whitespace-nowrap">
                         [170 Faint Memory Cost with all 3 Base Converted]
                       </span>
                     </div>
@@ -919,13 +1197,13 @@ function CardDisplay({ card }: { card: any }) {
                       const { topRow, bottomRow } = generateDeckRows("mei-lin");
                       return (
                         <>
-                          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
+                          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4 max-w-7xl mx-auto">
                             {topRow.map((card, index) => (
                               <CardDisplay key={card.id || index} card={card} />
                             ))}
                           </div>
 
-                          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-7xl mx-auto">
+                          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4 max-w-7xl mx-auto">
                             {bottomRow.map((card, index) => (
                               <CardDisplay key={card.id || index} card={card} />
                             ))}
@@ -1638,19 +1916,19 @@ function CardDisplay({ card }: { card: any }) {
 
 
             {/* 4. Memory Fragments */}
-            <section id="memory-fragments" className="rounded-lg border border-border bg-card p-8 scroll-mt-6">
-            <h2 className="text-2xl font-bold mb-6 text-purple-400">4. Memory Fragments</h2>
+            <section id="memory-fragments" className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-6">
+            <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-purple-400">4. Memory Fragments</h2>
 
               {/* BEST IN SLOT */}
-              <div className="space-y-12">
+              <div className="space-y-8 sm:space-y-12">
                 <div>
-                  <div className="text-center mb-6">
-                    <span className="px-4 py-1.5 rounded-lg text-sm font-bold uppercase tracking-wider bg-amber-500/20 text-amber-400 border border-amber-500/40 shadow-sm">
+                  <div className="text-center mb-4 sm:mb-6">
+                    <span className="px-3 sm:px-4 py-1 sm:py-1.5 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wider bg-amber-500/20 text-amber-400 border border-amber-500/40 shadow-sm">
                       Best in Slot
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5">
                     {[
                       {
                         name: "Black Wing",
@@ -1684,13 +1962,13 @@ function CardDisplay({ card }: { card: any }) {
 
                 {/* SECONDARY */}
                 <div>
-                  <div className="text-center mb-6">
-                    <span className="px-4 py-1.5 rounded-lg text-sm font-bold uppercase tracking-wider bg-cyan-500/20 text-cyan-400 border border-cyan-500/40">
+                  <div className="text-center mb-4 sm:mb-6">
+                    <span className="px-3 sm:px-4 py-1 sm:py-1.5 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wider bg-cyan-500/20 text-cyan-400 border border-cyan-500/40">
                       Secondary
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
                     {[
                       {
                         name: "Spark of Passion",
@@ -1719,62 +1997,62 @@ function CardDisplay({ card }: { card: any }) {
               </div>
 
               {/* Main Stats + Substat Priority */}
-              <div className="mt-6 space-y-6">
+              <div className="mt-4 sm:mt-6 space-y-4 sm:space-y-6">
                 {/* Main Stats */}
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-3 gap-2 sm:gap-4">
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-purple-400">IV</div>
-                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Ideal</div>
-                    <div className="py-2 px-4 rounded bg-purple-500/10 border border-purple-500/30 text-sm font-medium text-purple-300">
+                    <div className="text-2xl sm:text-3xl font-bold text-purple-400">IV</div>
+                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1 sm:mb-2">Ideal</div>
+                    <div className="py-1.5 sm:py-2 px-2 sm:px-4 rounded bg-purple-500/10 border border-purple-500/30 text-xs sm:text-sm font-medium text-purple-300">
                       Critical Rate
                     </div>
                   </div>
 
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-red-400">V</div>
-                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Desire</div>
-                    <div className="py-2 px-4 rounded bg-red-500/10 border border-red-500/30 text-sm font-medium text-red-300">
+                    <div className="text-2xl sm:text-3xl font-bold text-red-400">V</div>
+                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1 sm:mb-2">Desire</div>
+                    <div className="py-1.5 sm:py-2 px-2 sm:px-4 rounded bg-red-500/10 border border-red-500/30 text-xs sm:text-sm font-medium text-red-300">
                       Passion Damage
                     </div>
                   </div>
 
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-purple-400">IV</div>
-                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Ideal</div>
-                    <div className="py-2 px-4 rounded bg-purple-500/10 border border-purple-500/30 text-sm font-medium text-purple-300">
+                    <div className="text-2xl sm:text-3xl font-bold text-purple-400">IV</div>
+                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1 sm:mb-2">Ideal</div>
+                    <div className="py-1.5 sm:py-2 px-2 sm:px-4 rounded bg-purple-500/10 border border-purple-500/30 text-xs sm:text-sm font-medium text-purple-300">
                       Attack %
                     </div>
                   </div>
                 </div>
 
                 {/* Substat Priority */}
-                <div className="mt-8 text-center justify-center text-[14px]">
+                <div className="mt-6 sm:mt-8 text-center justify-center text-xs sm:text-sm">
                   {/* Priority Chain */}
-                  <div className="flex items-center justify-center gap-4 md:gap-4 flex-wrap">
-                    <div className="px-6 py-3 rounded-full bg-pink-500/20 border-2 border-pink-500/70 font-bold text-pink-300 shadow-lg shadow-pink-500/20">
+                  <div className="flex items-center justify-center gap-2 sm:gap-4 flex-wrap">
+                    <div className="px-3 sm:px-6 py-2 sm:py-3 rounded-full bg-pink-500/20 border-2 border-pink-500/70 font-bold text-pink-300 shadow-lg shadow-pink-500/20 text-xs sm:text-sm">
                       Extra Damage
                     </div>
-                    <span className="text-2xl text-muted-foreground/40">›</span>
-                    <div className="px-4 py-2 rounded-full bg-purple-500/20 border border-purple-500/50 font-semibold text-purple-300">
+                    <span className="text-xl sm:text-2xl text-muted-foreground/40">›</span>
+                    <div className="px-2 sm:px-4 py-1.5 sm:py-2 rounded-full bg-purple-500/20 border border-purple-500/50 font-semibold text-purple-300 text-xs sm:text-sm">
                       Critical Rate
                     </div>
-                    <span className="text-2xl text-muted-foreground/40">=</span>
-                    <div className="px-4 py-2 rounded-full bg-purple-500/20 border border-purple-500/50 font-semibold text-purple-300">
+                    <span className="text-xl sm:text-2xl text-muted-foreground/40">=</span>
+                    <div className="px-2 sm:px-4 py-1.5 sm:py-2 rounded-full bg-purple-500/20 border border-purple-500/50 font-semibold text-purple-300 text-xs sm:text-sm">
                       Critical Damage
                     </div>
-                    <span className="text-2xl text-muted-foreground/40">›</span>
-                    <div className="px-3 py-1 rounded-full bg-muted/70 border border-border text-muted-foreground">
+                    <span className="text-xl sm:text-2xl text-muted-foreground/40">›</span>
+                    <div className="px-2 sm:px-3 py-1 rounded-full bg-muted/70 border border-border text-muted-foreground text-xs sm:text-sm">
                       Attack %
                     </div>
-                    <span className="text-muted-foreground/60">or</span>
-                    <div className="px-3 py-1 rounded-full bg-muted/70 border border-border text-muted-foreground">
+                    <span className="text-xs sm:text-sm text-muted-foreground/60">or</span>
+                    <div className="px-2 sm:px-3 py-1 rounded-full bg-muted/70 border border-border text-muted-foreground text-xs sm:text-sm">
                       Attack +
                     </div>
                   </div>
 
                   {/* Explanation */}
-                  <div className="mt-7.5 mx-auto text-center">
-                  <p className="text-[14px] leading-relaxed text-muted-foreground">
+                  <div className="mt-4 sm:mt-6 mx-auto text-center">
+                  <p className="text-xs sm:text-sm leading-relaxed text-muted-foreground">
                       <span className="text-muted-foreground">Prioritize Extra Damage first, Critical Rate and Critical Damage for ideal crit ratio. Then prioritize Flat Attack and Attack % for more damage.<br/>Passion Damage% is preferred over Attack% for most cases.</span>
                     </p>
                   </div>
@@ -1783,12 +2061,12 @@ function CardDisplay({ card }: { card: any }) {
             </section>
 
             {/* 5. Partners */}
-            <section id="partners" className="rounded-lg border border-border bg-card p-8 scroll-mt-24">
-              <h2 className="text-2xl font-bold mb-6 text-purple-400">5. Partners</h2>
-              <p className="text-muted-foreground mb-6 whitespace-pre-line">
+            <section id="partners" className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-24">
+              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-purple-400">5. Partners</h2>
+              <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6 whitespace-pre-line">
                 {`Click on the partners below to see more information.`}
               </p>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
                 {[
                   {
                     id: 1,
@@ -1859,21 +2137,21 @@ function CardDisplay({ card }: { card: any }) {
                       </div>
                     </DialogTrigger>
               
-                    <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+                    <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto p-4 sm:p-6">
                       <DialogHeader>
-                        <DialogTitle className="text-2xl text-purple-400 text-center">{partner.name}</DialogTitle>
+                        <DialogTitle className="text-xl sm:text-2xl text-purple-400 text-center">{partner.name}</DialogTitle>
                       </DialogHeader>
-                      <div className="space-y-4 mt-4">
+                      <div className="space-y-3 sm:space-y-4 mt-3 sm:mt-4">
                         <div className="flex justify-center">
                           <img
                             src={partner.image || "/placeholder.svg"}
                             alt={partner.name}
-                            className="w-48 h-auto rounded-lg border-2 border-purple-500/50"
+                            className="w-32 sm:w-48 h-auto rounded-lg border-2 border-purple-500/50"
                           />
                         </div>
                         <div>
-                          <h3 className="text-lg font-semibold text-foreground mb-2">Description</h3>
-                          <p className="text-muted-foreground leading-relaxed">{partner.description}</p>
+                          <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">Description</h3>
+                          <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{partner.description}</p>
                         </div>
                       </div>
                     </DialogContent>
@@ -1883,13 +2161,13 @@ function CardDisplay({ card }: { card: any }) {
             </section>
 
             {/* 6. Teams */}
-            <section id="teams" className="rounded-lg border border-border bg-card p-8 scroll-mt-24">
-              <h2 className="text-2xl font-bold mb-6 text-purple-400">6. Teams</h2>
-              <p className="text-muted-foreground mb-6 whitespace-pre-line">
+            <section id="teams" className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-24">
+              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-purple-400">6. Teams</h2>
+              <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6 whitespace-pre-line">
                 Below are 2 example teams for Veronica Support and DPS
               </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 {/* Team 1 */}
                 <Dialog>
                   <DialogTrigger asChild>
@@ -1970,9 +2248,9 @@ function CardDisplay({ card }: { card: any }) {
                       </div>
                     </div>
                   </DialogTrigger>
-                  <DialogContent className="max-w-2xl">
+                  <DialogContent className="max-w-2xl p-4 sm:p-6">
                     <DialogHeader>
-                      <DialogTitle className="text-2xl text-purple-400">Team 1: [Placeholder Name]</DialogTitle>
+                      <DialogTitle className="text-xl sm:text-2xl text-purple-400">Team 1: [Placeholder Name]</DialogTitle>
                       <DialogDescription>Detailed team composition and synergy explanation</DialogDescription>
                     </DialogHeader>
                     <div className="space-y-4 mt-4">
@@ -2065,9 +2343,9 @@ function CardDisplay({ card }: { card: any }) {
                       </div>
                     </div>
                   </DialogTrigger>
-                  <DialogContent className="max-w-2xl">
+                  <DialogContent className="max-w-2xl p-4 sm:p-6">
                     <DialogHeader>
-                      <DialogTitle className="text-2xl text-purple-400">Team 1: [Placeholder Name]</DialogTitle>
+                      <DialogTitle className="text-xl sm:text-2xl text-purple-400">Team 1: [Placeholder Name]</DialogTitle>
                       <DialogDescription>Detailed team composition and synergy explanation</DialogDescription>
                     </DialogHeader>
                     <div className="space-y-4 mt-4">
