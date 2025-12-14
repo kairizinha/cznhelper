@@ -25,14 +25,11 @@ export default function ChizuruGuidePage() {
   const [isCardEpiphanyModalOpen, setIsCardEpiphanyModalOpen] = useState(false)
   const [isTeamsModalOpen, setIsTeamsModalOpen] = useState(false)
   const [selectedPartner, setSelectedPartner] = useState<number | null>(null)
+  const [selectedCardForEpiphanies, setSelectedCardForEpiphanies] = useState<typeof uniqueCards[0] | null>(null)
 
   const sections = [
     { id: "overview", title: "1. Overview", level: 1 },
     { id: "card-epiphany", title: "2. Card Epiphany", level: 1 },
-    { id: "karmic-flames", title: "2.1. Karmic Flames", level: 2 },
-    { id: "tsukuyomi", title: "2.2. Tsukuyomi", level: 2 },
-    { id: "bound-at-dusk", title: "2.3. Bound at Dusk", level: 2 },
-    { id: "oni-hunt", title: "2.4. Oni Hunt", level: 2 },
     { id: "recommended-save-data", title: "3. Recommended Save Data", level: 1 },
     { id: "equipments", title: "3.1. Equipments", level: 2 },
     { id: "memory-fragments", title: "4. Memory Fragments", level: 1 },
@@ -46,6 +43,7 @@ export default function ChizuruGuidePage() {
       name: "Karmic Flames",
       image: "/images/character/chizuru/starter4.png",
       baseType: "attack",
+      baseDescription: "[ Initiation ] 120% Damage\n1 Cursed Shackles\nCursed Shackles: Add 1 Hit",
       epiphanies: [
         {
           id: "Karmic Flames I",
@@ -94,6 +92,7 @@ export default function ChizuruGuidePage() {
       name: "Tsukuyomi",
       image: "/images/character/chizuru/unique1.png",
       baseType: "skill",
+      baseDescription: "2 Will-O'-Wisp for each\nHit of the next Attack\nCard of this unit used",
       epiphanies: [
         {
           id: "Tsukuyomi I",
@@ -143,6 +142,7 @@ export default function ChizuruGuidePage() {
       name: "Bound At Dusk",
       image: "/images/character/chizuru/unique2.png",
       baseType: "upgrade",
+      baseDescription: "[ Initiation / Unique ]\nAt the start of the turn,\ngain Inhibit\nDecrease Cost by 1 until\n1 random card(s) of other\nCombatants are used",
       epiphanies: [
         {
           id: "Bound At Dusk I",
@@ -191,6 +191,7 @@ export default function ChizuruGuidePage() {
       name: "Oni Hunt",
       image: "/images/character/chizuru/unique3.png",
       baseType: "attack",
+      baseDescription: "[ Haste ] 72% Damage x 3\n+30% Damage Amount\nto the next Bind card\nused",
       epiphanies: [
         {
           id: "Oni Hunt I",
@@ -656,30 +657,199 @@ export default function ChizuruGuidePage() {
               <p className="text-muted-foreground mb-6">
               S+ (Best), S (Excellent), A (Strong), B (Average), C (Low Impact), Situational (Niche-use only).
               <br />
-              Click a Epiphany group for explanation.
+              Click a base card to view its epiphanies.
               </p>
 
-              <div className="space-y-12">
-                {uniqueCards.map((cardData) => (
-                  <div key={cardData.id} id={cardData.id} className="scroll-mt-6">
-                    <h3 className="text-xl font-bold mb-6 text-purple-300">{cardData.name}</h3>
-
-                    <Dialog>
+              {/* Base Cards Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {uniqueCards.map((cardData) => {
+                  // Use first epiphany's cost and type, or fallback to baseType
+                  const baseCost = cardData.epiphanies[0]?.cost ?? 0
+                  const baseType = cardData.epiphanies[0]?.type ?? cardData.baseType
+                  
+                  return (
+                    <Dialog 
+                      key={cardData.id} 
+                      open={selectedCardForEpiphanies?.id === cardData.id} 
+                      onOpenChange={(open) => {
+                        if (open) {
+                          setSelectedCardForEpiphanies(cardData)
+                        } else {
+                          setSelectedCardForEpiphanies(null)
+                        }
+                      }}
+                    >
                       <DialogTrigger asChild>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 cursor-pointer p-4 rounded-xl border-2 border-dashed border-purple-500/30 hover:border-purple-400/60 hover:bg-purple-500/5 transition-all duration-200">
+                        <div className="relative rounded-lg overflow-hidden border-2 border-border hover:border-purple-400/50 transition-all duration-200 cursor-pointer">
+                          {/* Void Border */}
+                          <div className="absolute left-0 -top-0.5 -bottom-0.5 w-3 z-10">
+                            <img
+                              src="/images/card/void-border.png"
+                              alt=""
+                              className="h-full w-full object-cover"
+                            />
+                          </div>
+
+                          {/* Card Image */}
+                          <div className="relative aspect-[2/3] bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden rounded-md">
+                            <img
+                              src={cardData.image || "/placeholder.svg"}
+                              alt={cardData.name}
+                              className="w-full h-full object-cover scale-108"
+                            />
+
+                            {/* Card Info Overlay */}
+                            <div className="absolute inset-0 flex flex-col">
+                              {/* Top Section */}
+                              <div className="p-2 pt-1.5 pl-5">
+                                <div className="flex items-start gap-1.5">
+                                  {/* Cost */}
+                                  <div className="flex-shrink-0 flex flex-col items-center justify-center">
+                                    <span
+                                      className="text-white font-bold text-5xl scale-x-80"
+                                      style={{
+                                        WebkitTextStroke: "1px rgba(0, 0, 0, 0.38)",
+                                        textShadow: `
+                                        -1px -1px 0 #000,
+                                         1px -1px 0 #000,
+                                        -1px  1px 0 #000,
+                                         1px  1px 0 #000
+                                      `,
+                                      }}
+                                    >
+                                      {baseCost}
+                                    </span>
+                                    <div
+                                      className="w-full h-0.5 bg-white mt-0.5 scale-x-80"
+                                      style={{
+                                        backgroundColor: "#ffffff",
+                                        WebkitBoxShadow: `
+                                        -1px -1px 0 #000,
+                                         1px -1px 0 #000,
+                                        -1px  1px 0 #000,
+                                         1px  1px 0 #000
+                                        `,
+                                      }}
+                                    />
+                                  </div>
+
+                                  {/* Name and Type */}
+                                  <div className="flex-1 pt-0.5">
+                                    <h5
+                                      className="text-white font-bold text-[20px] leading-tight drop-shadow-lg"
+                                      style={{
+                                        textShadow: `
+                                        -1px -1px 0 #000,
+                                         1px -1px 0 #000,
+                                        -1px  1px 0 #000,
+                                         1px  1px 0 #000
+                                      `,
+                                        transform: "scaleX(1)",
+                                        transformOrigin: "left",
+                                        maxWidth: "180%",
+                                        whiteSpace: "nowrap",
+                                        overflow: "hidden",
+                                      }}
+                                    >
+                                      {cardData.name}
+                                    </h5>
+                                    <div className="flex items-center gap-1">
+                                      <img
+                                        src={
+                                          baseType === "attack"
+                                            ? "/images/icon-category-card-attack.webp"
+                                            : baseType === "skill"
+                                              ? "/images/icon-category-card-skill.webp"
+                                              : "/images/icon-category-card-upgrade.webp"
+                                        }
+                                        alt={baseType}
+                                        className="w-5 h-5"
+                                      />
+                                      <span
+                                        className="text-white/100 text-[14px] font-large capitalize drop-shadow "
+                                        style={{
+                                          textShadow: `
+                                        -1px -1px 0 #000,
+                                         1px -1px 0 #000,
+                                        -1px  1px 0 #000,
+                                         1px  1px 0 #000
+                                      `,
+                                        }}
+                                      >
+                                        {baseType}
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              {/* Description Section */}
+                              {cardData.baseDescription && (
+                                <div className="mt-auto p-2.5 pl-3 py-5 bg-gradient-to-t from-black/95 via-black/90 to-transparent flex flex-col items-center justify-center gap-0">
+                                  {(() => {
+                                    const { bracketedText, remainingText } = parseDescription(cardData.baseDescription)
+                                    return (
+                                      <>
+                                        {bracketedText && (
+                                          <p
+                                            className="text-center font-medium text-sm leading-snug m-0"
+                                            style={{ color: "#e3b46c" }}
+                                          >
+                                            {bracketedText}
+                                          </p>
+                                        )}
+                                        <p
+                                          className="text-white text-center text-sm leading-snug m-0 whitespace-pre-line"
+                                          dangerouslySetInnerHTML={{
+                                            __html: remainingText
+                                              .replace(
+                                                /(\d+%?)/g,
+                                                '<span style="color: #7ce2fb">$1</span>',
+                                              )
+                                              .replace(
+                                                /Shadow of the\s*Moon\+/gi,
+                                                '<span style="color: #C8FF2E; text-decoration: underline; text-underline-offset: 2px">$&</span>',
+                                              ).replace(
+                                                /Moonslash/gi,
+                                                '<span style="color: #C8FF2E; text-decoration: underline; text-underline-offset: 2px">$&</span>',
+                                              ),
+                                          }}
+                                        />
+                                      </>
+                                    )
+                                  })()}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </DialogTrigger>
+
+                      <DialogContent className="!w-[95vw] !max-w-6xl max-h-[90vh] overflow-y-auto scrollbar-none p-3 sm:p-4 md:p-6 m-2 sm:m-4">
+                        <DialogHeader>
+                          <DialogTitle className="text-xl sm:text-2xl text-purple-400">
+                            {cardData.name} - Epiphanies
+                          </DialogTitle>
+                          <DialogDescription className="text-xs sm:text-sm text-white/70">
+                            Click an epiphany group for explanation.
+                          </DialogDescription>
+                        </DialogHeader>
+                        
+                        {/* Epiphanies Grid */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6 mt-4 sm:mt-6">
                           {cardData.epiphanies.map((epiphany, index) => (
-                            <div key={index} className="flex flex-col gap-3">
+                            <div key={index} className="flex flex-col gap-2 sm:gap-3">
                               {/* Tier Badge */}
                               <div className="flex justify-center">
                                 <span
-                                  className={`px-4 py-1.5 rounded-full text-sm font-bold ${getTierColor(epiphany.tier)}`}
+                                  className={`px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-bold ${getTierColor(epiphany.tier)}`}
                                 >
                                   {epiphany.tier} Tier
                                 </span>
                               </div>
 
                               {/* Card Display */}
-                              <div className="relative rounded-lg overflow-hidden border-2 border-border hover:border-purple-400/50 transition-all duration-200 max-w-[250px] mx-auto">
+                              <div className="relative rounded-lg overflow-hidden border-2 border-border hover:border-purple-400/50 transition-all duration-200 w-full max-w-[200px] sm:max-w-[220px] md:max-w-[250px] mx-auto">
                                 {/* Void Border */}
                                 <div className="absolute left-0 -top-0.5 -bottom-0.5 w-3 z-10">
                                   <img
@@ -694,18 +864,18 @@ export default function ChizuruGuidePage() {
                                   <img
                                     src={cardData.image || "/placeholder.svg"}
                                     alt={cardData.name}
-                                    className="w-full h-full object-cover scale-125"
+                                    className="w-full h-full object-cover scale-108"
                                   />
 
                                   {/* Card Info Overlay */}
-                                  <div className="absolute inset-0 flex flex-col">
+                                  <div className="absolute inset-0 flex flex-col justify-end">
                                     {/* Top Section */}
                                     <div className="p-2 pt-1.5 pl-5">
                                       <div className="flex items-start gap-1.5">
                                         {/* Cost */}
                                         <div className="flex-shrink-0 flex flex-col items-center justify-center">
                                           <span
-                                            className="text-white font-bold text-5xl scale-x-80"
+                                            className="text-white font-bold text-4xl sm:text-5xl scale-x-80"
                                             style={{
                                               WebkitTextStroke: "1px rgba(0, 0, 0, 0.38)",
                                               textShadow: `
@@ -735,7 +905,7 @@ export default function ChizuruGuidePage() {
                                         {/* Name and Type */}
                                         <div className="flex-1 pt-0.5">
                                           <h5
-                                            className="text-white font-bold text-[20px] leading-tight drop-shadow-lg"
+                                            className="text-white font-bold text-[16px] sm:text-[18px] md:text-[20px] leading-tight drop-shadow-lg"
                                             style={{
                                               textShadow: `
                                               -1px -1px 0 #000,
@@ -743,7 +913,7 @@ export default function ChizuruGuidePage() {
                                               -1px  1px 0 #000,
                                                1px  1px 0 #000
                                             `,
-                                              transform: "scaleX(0.65)",
+                                              transform: "scaleX(1)",
                                               transformOrigin: "left",
                                               maxWidth: "180%",
                                               whiteSpace: "nowrap",
@@ -762,10 +932,10 @@ export default function ChizuruGuidePage() {
                                                     : "/images/icon-category-card-upgrade.webp"
                                               }
                                               alt={epiphany.type}
-                                              className="w-5 h-5"
+                                              className="w-4 h-4 sm:w-5 sm:h-5"
                                             />
                                             <span
-                                              className="text-white/100 text-[14px] font-large capitalize drop-shadow "
+                                              className="text-white/100 text-[12px] sm:text-[13px] md:text-[14px] font-large capitalize drop-shadow "
                                               style={{
                                                 textShadow: `
                                               -1px -1px 0 #000,
@@ -782,21 +952,21 @@ export default function ChizuruGuidePage() {
                                       </div>
                                     </div>
 
-                                    <div className="mt-auto p-2.5 pl-3 py-5 bg-gradient-to-t from-black/95 via-black/90 to-transparent flex flex-col items-center justify-center gap-0">
+                                    <div className="mt-auto p-2 sm:p-2.5 pl-2 sm:pl-3 py-3 sm:py-5 bg-gradient-to-t from-black/95 via-black/90 to-transparent flex flex-col items-center justify-center gap-0">
                                       {(() => {
                                         const { bracketedText, remainingText } = parseDescription(epiphany.description)
                                         return (
                                           <>
                                             {bracketedText && (
                                               <p
-                                                className="text-center u font-medium text-sm underlineleading-snug m-0"
+                                                className="text-center font-medium text-xs sm:text-sm leading-snug m-0"
                                                 style={{ color: "#e3b46c" }}
                                               >
                                                 {bracketedText}
                                               </p>
                                             )}
                                             <p
-                                                    className="text-white text-center text-sm leading-snug m-0 whitespace-pre-line"
+                                                    className="text-white text-center text-xs sm:text-sm leading-snug m-0 whitespace-pre-line"
                                                     dangerouslySetInnerHTML={{
                                                         __html: remainingText
                                                             .replace(
@@ -822,40 +992,30 @@ export default function ChizuruGuidePage() {
                             </div>
                           ))}
                         </div>
-                      </DialogTrigger>
 
-                      <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto scrollbar-none">
-                        <DialogHeader>
-                          <DialogTitle className="text-2xl text-purple-400">
-                            {cardData.name} - Epiphany Guide
-                          </DialogTitle>
-                          <DialogDescription className="text-[14px] text-white/70">
-                            Detailed explanations for every Epiphany choice.
-                            <br/>
-                            Divine Epiphanies aren't covered here unless they give a major impact.
-                          </DialogDescription>
-                        </DialogHeader>
-                        <div className="space-y-6 mt-4">
+                        {/* Epiphany Explanations */}
+                        <div className="mt-6 sm:mt-8 space-y-3 sm:space-y-4">
+                          <h3 className="text-lg sm:text-xl font-bold text-purple-300">Epiphany Explanations</h3>
                           {cardData.epiphanies.map((epiphany, index) => (
-                            <div key={index} className="p-4 rounded-lg bg-background/50 border border-border">
-                              <div className="flex items-center gap-3 mb-3">
+                            <div key={index} className="p-3 sm:p-4 rounded-lg bg-background/50 border border-border">
+                              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
                                 <span
-                                  className={`px-3 py-1 rounded-full text-xs font-bold ${getTierColor(epiphany.tier)}`}
+                                  className={`px-3 py-1 rounded-full text-xs font-bold w-fit ${getTierColor(epiphany.tier)}`}
                                 >
                                   {epiphany.tier} Tier
                                 </span>
-                                <span className="text-sm font-semibold text-foreground">
+                                <span className="text-xs sm:text-sm font-semibold text-foreground">
                                   {epiphany.id}
                                 </span>
                               </div>
-                              <p className="text-sm text-muted-foreground leading-relaxed">{epiphany.reasoning}</p>
+                              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{epiphany.reasoning}</p>
                             </div>
                           ))}
                         </div>
                       </DialogContent>
                     </Dialog>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
             </section>
 
@@ -1758,7 +1918,7 @@ export default function ChizuruGuidePage() {
                         </span>
               
                         {/* Card Image */}
-                        <div className="relative aspect-[9/16] hover:scale-105 rounded-lg overflow-hidden border-2 border-border hover:border-purple-400 bg-card transition-all">
+                        <div className="relative aspect-[9/16] hover:scale-108 rounded-lg overflow-hidden border-2 border-border hover:border-purple-400 bg-card transition-all">
                           <img
                             src={partner.image || "/placeholder.svg"}
                             alt={partner.name}
