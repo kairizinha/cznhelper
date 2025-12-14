@@ -500,8 +500,8 @@ export default function ChizuruGuidePage() {
                           left: -50,
                           right: 0,
                           bottom: 0,
-                          height: "clamp(0.70rem, 2.5vw, 1.25rem)",
-                          width: "250%",
+                          height: "auto",
+                          width: "350%",
                         }}
                       />
                       {/* Text */}
@@ -528,7 +528,7 @@ export default function ChizuruGuidePage() {
                         {card.name}
                       </h5>
                     </div>
-                      <div className="flex items-center gap-1">
+                      <div className="flex items-center gap-1 -mt-2">
                         <img
                           src={
                             card.type === "attack"
@@ -884,8 +884,8 @@ export default function ChizuruGuidePage() {
                                           left: -50,
                                           right: 0,
                                           bottom: 0,
-                                          height: "50%",
-                                          width: "300%",
+                                          height: "clamp(0.70rem, 2.5vw, 1.25rem)",
+                                          width: "350%",
                                         }}
                                       />
                                       {/* Text */}
@@ -893,7 +893,7 @@ export default function ChizuruGuidePage() {
                                         className="relative font-bold text-[20px] leading-tight drop-shadow-lg"
                                         style={{
                                           color: getRarityColor(cardData.name),
-                                          padding: "2px 4px",
+                                          padding: "3px 4px",
                                           textShadow: `
                                         -1px -1px 0 #000,
                                          1px -1px 0 #000,
@@ -910,7 +910,7 @@ export default function ChizuruGuidePage() {
                                         {cardData.name}
                                       </h5>
                                     </div>
-                                    <div className="flex items-center gap-1">
+                                    <div className="flex items-center gap-1 -mt-2">
                                       <img
                                         src={
                                           baseType === "attack"
@@ -1094,8 +1094,8 @@ export default function ChizuruGuidePage() {
                                                 left: -50,
                                                 right: 0,
                                                 bottom: 0,
-                                                height: "50%",
-                                                width: "300%",
+                                                height: "clamp(0.70rem, 2.5vw, 1.25rem)",
+                                                width: "350%",
                                               }}
                                             />
                                             {/* Text */}
@@ -1120,7 +1120,7 @@ export default function ChizuruGuidePage() {
                                               {cardData.name}
                                             </h5>
                                           </div>
-                                          <div className="flex items-center gap-1">
+                                          <div className="flex items-center gap-1 -mt-2">
                                             <img
                                               src={
                                                 epiphany.type === "attack"
