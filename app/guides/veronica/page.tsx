@@ -3,7 +3,6 @@ import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import { ChevronDown } from "lucide-react"
 import ExpandableSetCard from "@/components/ui/ExpandableSetCard"
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import {
   Dialog,
   DialogContent,
@@ -16,13 +15,8 @@ import {
 import { useState } from "react"
 import { GearTooltip } from "@/components/GearTooltip";
 
-
-
 export default function VeronicaGuidePage() {
-  const [expandedEpiphany, setExpandedEpiphany] = useState<string | null>(null)
   const [expandedMemorySet, setExpandedMemorySet] = useState<string | null>(null)
-  const [isCardEpiphanyModalOpen, setIsCardEpiphanyModalOpen] = useState(false)
-  const [isTeamsModalOpen, setIsTeamsModalOpen] = useState(false)
   const [selectedPartner, setSelectedPartner] = useState<number | null>(null)
   const [selectedCardForEpiphanies, setSelectedCardForEpiphanies] = useState<typeof uniqueCards[0] | null>(null)
 
@@ -351,38 +345,22 @@ function generateDeckRows(deckKey: keyof typeof recommendedDecks): { topRow: any
     }
   });
 
-  // Build top row → exactly 4 cards + 1 empty on the right
-  const topRow: any[] = [];
-  for (let i = 0; i < 4; i++) {
-    topRow.push(deck[i] || createPlaceholder(`top-${i}`));
-  }
-  topRow.push(createPlaceholder("top-right-empty")); // Always empty
+  // Build top row → first 4 cards
+  const topRow: any[] = deck.slice(0, 4).filter(Boolean);
 
-  // Build bottom row → next 4 cards + 1 empty on the right
-  const bottomRow: any[] = [];
-  for (let i = 0; i < 4; i++) {
-    const card = deck[4 + i];
-    bottomRow.push(card || createPlaceholder(`bottom-${i}`));
-  }
-  bottomRow.push(createPlaceholder("bottom-right-empty")); // Always empty
+  // Build bottom row → next 4 cards
+  const bottomRow: any[] = deck.slice(4, 8).filter(Boolean);
 
   return { topRow, bottomRow };
 }
 
-// Helper function to avoid repeating placeholder object
-function createPlaceholder(idSuffix: string) {
-  return {
-    id: `placeholder-${idSuffix}`,
-    name: "Placeholder",
-    image: "/placeholder.svg",
-    cost: 0,
-    type: "skill",
-    description: "",
-  };
-}
-
 function CardDisplay({ card }: { card: any }) {
   const isPlaceholder = card.name === "Placeholder";
+
+  // Don't render placeholder boxes
+  if (isPlaceholder) {
+    return null;
+  }
 
   return (
     <div className="relative rounded-lg overflow-hidden border-2 border-border hover:border-purple-400/50 transition-all duration-200">
@@ -392,19 +370,12 @@ function CardDisplay({ card }: { card: any }) {
       </div>
 
       <div className="relative aspect-[2/3] bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden rounded-md">
-        {isPlaceholder ? (
-          <div className="w-full h-full flex flex-col items-center justify-center">
-            <span className="text-sm text-muted-foreground font-semibold">Placeholder</span>
-            <span className="text-xs text-muted-foreground/70">[Empty Slot]</span>
-          </div>
-        ) : (
-          <>
-            <img
-              src={card.image || "/placeholder.svg"}
-              alt={card.name}
-              className="w-full h-full object-cover scale-108"
-            />
-            <div className="absolute inset-0 flex flex-col">
+        <img
+          src={card.image || "/placeholder.svg"}
+          alt={card.name}
+          className="w-full h-full object-cover scale-108"
+        />
+        <div className="absolute inset-0 flex flex-col">
               {/* Top Section: Cost + Name + Type */}
               <div className="p-2 pt-1.5 pl-3">
                 <div className="flex items-start gap-1.5 relative">
@@ -553,9 +524,7 @@ function CardDisplay({ card }: { card: any }) {
                   })()}
                 </div>
               )}
-            </div>
-          </>
-        )}
+        </div>
       </div>
     </div>
   );
@@ -1142,19 +1111,27 @@ function CardDisplay({ card }: { card: any }) {
                       </span>
                     </div>
 
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      4x Repose I for insane card draw, combined with Sir Kowalski III to generate Ballistas on skill draws.
+                      <br />
+                      Firing Preparation IV gives reliable Giant Ballista AoE every turn.
+                      <br />
+                      Pendant of Resolution I provides consistent Reload on skill use.
+                    </p>
+
                     {(() => {
                       const { topRow, bottomRow } = generateDeckRows("draw-engine");
                       return (
                         <>
                           {/* Top Row */}
-                          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4 max-w-7xl mx-auto">
+                          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 max-w-7xl mx-auto justify-items-center">
                             {topRow.map((card, index) => (
                               <CardDisplay key={card.id || index} card={card} />
                             ))}
                           </div>
 
                           {/* Bottom Row */}
-                          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4 max-w-7xl mx-auto">
+                          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 max-w-7xl mx-auto justify-items-center">
                             {bottomRow.map((card, index) => (
                               <CardDisplay key={card.id || index} card={card} />
                             ))}
@@ -1162,26 +1139,6 @@ function CardDisplay({ card }: { card: any }) {
                         </>
                       );
                     })()}
-
-                    <Collapsible>
-                      <CollapsibleTrigger className="w-full px-4 py-2.5 rounded-lg bg-background/50 border border-border hover:bg-background/70 transition-colors flex items-center justify-between group">
-                        <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground">
-                          Save Data Explanation
-                        </span>
-                        <ChevronDown className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-transform group-data-[state=open]:rotate-180" />
-                      </CollapsibleTrigger>
-                      <CollapsibleContent className="mt-3">
-                        <div className="p-4 rounded-lg bg-background/50 border border-border">
-                          <p className="text-sm text-muted-foreground leading-relaxed">
-                            4x Repose I for insane card draw, combined with Sir Kowalski III to generate Ballistas on skill draws.
-                            <br />
-                            Firing Preparation IV gives reliable Giant Ballista AoE every turn.
-                            <br />
-                            Pendant of Resolution I provides consistent Reload on skill use.
-                          </p>
-                        </div>
-                      </CollapsibleContent>
-                    </Collapsible>
                   </div>
 
                   {/* Build 2: Mei Lin Synergy */}
@@ -1193,17 +1150,25 @@ function CardDisplay({ card }: { card: any }) {
                       </span>
                     </div>
 
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      Optimized for Mei Lin burst. Pendant of Resolution V gives massive Passion stacks for Aromata and Rising Dragon Spire.
+                      <br/>
+                      <strong>Need -1 Cost for that card on Divine Epiphany, otherwise is expensive.</strong>
+                      <br/>
+                      <i>150 Faint Memory cost if removed all 3 base cards without conversion and having -1 less Pendant of Resolution V</i>
+                    </p>
+
                     {(() => {
                       const { topRow, bottomRow } = generateDeckRows("mei-lin");
                       return (
                         <>
-                          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4 max-w-7xl mx-auto">
+                          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 max-w-7xl mx-auto justify-items-center">
                             {topRow.map((card, index) => (
                               <CardDisplay key={card.id || index} card={card} />
                             ))}
                           </div>
 
-                          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4 max-w-7xl mx-auto">
+                          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 max-w-7xl mx-auto justify-items-center">
                             {bottomRow.map((card, index) => (
                               <CardDisplay key={card.id || index} card={card} />
                             ))}
@@ -1211,26 +1176,6 @@ function CardDisplay({ card }: { card: any }) {
                         </>
                       );
                     })()}
-
-                    <Collapsible>
-                      <CollapsibleTrigger className="w-full px-4 py-2.5 rounded-lg bg-background/50 border border-border hover:bg-background/70 transition-colors flex items-center justify-between group">
-                        <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground">
-                          Save Data Explanation
-                        </span>
-                        <ChevronDown className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-transform group-data-[state=open]:rotate-180" />
-                      </CollapsibleTrigger>
-                      <CollapsibleContent className="mt-3">
-                        <div className="p-4 rounded-lg bg-background/50 border border-border">
-                          <p className="text-sm text-muted-foreground leading-relaxed">
-                            Optimized for Mei Lin burst. Pendant of Resolution V gives massive Passion stacks for Aromata and Rising Dragon Spire.
-                            <br/>
-                            <strong>Need -1 Cost for that card on Divine Epiphany, otherwise is expensive.</strong>
-                            <br/>
-                            <i>150 Faint Memory cost if removed all 3 base cards without conversion and having -1 less Pendant of Resolution V</i>
-                          </p>
-                        </div>
-                      </CollapsibleContent>
-                    </Collapsible>
                   </div>
                 </div>
               </section>
@@ -2064,51 +2009,51 @@ function CardDisplay({ card }: { card: any }) {
             <section id="partners" className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-24">
               <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-purple-400">5. Partners</h2>
               <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6 whitespace-pre-line">
-                {`Click on the partners below to see more information.`}
+                Click on any partner below to view detailed information about their synergy with Veronica. Partners are ranked based on their overall effectiveness and specific utility for Veronica's builds.
               </p>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
                 {[
                   {
                     id: 1,
-                    name: "Marin",
-                    role: "S+",
-                    image: "/images/partners/marin.webp",
-                    description: "Placeholder partner explanation",
-                  },
-                  {
-                    id: 2,
                     name: "Rosaria",
                     role: "S+",
                     image: "/images/partners/rosaria.webp",
-                    description: "Placeholder partner explanation",
+                    description: "Goddess Tier - Best Overall Choice\n\nRosaria provides excellent damage output while also granting team Morale buffs, making her incredibly valuable for team-wide benefits. Her Upgrade Tutor Partner skill synergizes perfectly with Veronica's upgrade-focused builds, particularly those utilizing Firing Preparation variants.\n\nRosaria excels in compositions where you want both personal damage amplification and team support, making her the top choice for most Veronica builds.",
+                  },
+                  {
+                    id: 2,
+                    name: "Marin",
+                    role: "S+",
+                    image: "/images/partners/marin.webp",
+                    description: "Best Damage Option\n\nMarin trades Rosaria's team Morale buffing capabilities for significantly higher personal damage output. She offers superior Skill tutor effects compared to Upgrade tutors, making her ideal for Veronica builds that focus heavily on skill-based cards like Repose.\n\nChoose Marin when you prioritize maximum damage potential over team utility, especially in single-target scenarios where raw damage output matters most.",
                   },
                   {
                     id: 3,
                     name: "Nakia",
                     role: "S",
                     image: "/images/partners/nakia.webp",
-                    description: "Placeholder partner explanation",
+                    description: "Solid Raw Damage Alternative\n\nNakia provides better raw damage output than Rosaria, making her an excellent choice when you want pure damage without the team utility. While she lacks Rosaria's Morale buffing and Upgrade tutor benefits, her higher damage ceiling can be valuable in specific scenarios.\n\nConsider Nakia when you already have sufficient team support elsewhere and want to maximize Veronica's personal damage contribution.",
                   },
                   {
                     id: 4,
                     name: "Solia",
-                    role: "A",
+                    role: "C",
                     image: "/images/partners/solia.webp",
-                    description: "Placeholder partner explanation",
+                    description: "Not Worth Using\n\nSolia doesn't offer advantages over higher-tier partners like Nakia or Rosaria. Her damage output and utility fall short compared to the top options, making her an inefficient choice for Veronica builds.\n\nAvoid Solia unless you have no access to better partners, as she provides minimal benefit compared to the superior alternatives available.",
                   },
                   {
                     id: 5,
                     name: "Daisy",
                     role: "C",
                     image: "/images/partners/daisy.webp",
-                    description: "Placeholder partner explanation",
+                    description: "Suboptimal Choice\n\nSimilar to Solia, Daisy doesn't outperform higher-tier partners like Nakia or Rosaria in any meaningful way. Her overall effectiveness is limited, and she fails to provide the damage or utility that makes top-tier partners valuable.\n\nDaisy should only be considered if no other partners are available, as she offers significantly less value than Rosaria, Marin, or Nakia.",
                   },
                   {
                     id: 6,
                     name: "Tina",
                     role: "Situational",
                     image: "/images/partners/tina.webp",
-                    description: "Placeholder partner explanation",
+                    description: "Niche Utility Partner\n\nTina offers specialized utility that may be valuable in specific team compositions or encounter types. While she may not match the consistent value of top-tier partners, her unique effects can provide situational advantages.\n\nConsider Tina when her specific Partner Skill effects align with your team's needs, though she's generally outperformed by Rosaria, Marin, or Nakia in most scenarios.",
                   },
                 ].map((partner) => (
                   <Dialog
@@ -2151,7 +2096,7 @@ function CardDisplay({ card }: { card: any }) {
                         </div>
                         <div>
                           <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">Description</h3>
-                          <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{partner.description}</p>
+                          <p className="text-sm sm:text-base text-muted-foreground leading-relaxed whitespace-pre-line">{partner.description}</p>
                         </div>
                       </div>
                     </DialogContent>
@@ -2164,7 +2109,7 @@ function CardDisplay({ card }: { card: any }) {
             <section id="teams" className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-24">
               <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-purple-400">6. Teams</h2>
               <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6 whitespace-pre-line">
-                Below are 2 example teams for Veronica Support and DPS
+                Below are two example team compositions showcasing Veronica in different roles. Click on any team to view detailed synergy explanations, role breakdowns, and strategic insights.
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
@@ -2235,7 +2180,7 @@ function CardDisplay({ card }: { card: any }) {
                         </div>
                       </div>
                       <div className="flex items-center justify-between text-xs text-muted-foreground">
-                        <span className="font-medium">[Placeholder Name]</span>
+                        <span className="font-medium">Veronica enables Mei Lin's burst through card draw and Passion synergy</span>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="h-4 w-4 group-hover:translate-x-1 transition-transform"
@@ -2248,17 +2193,54 @@ function CardDisplay({ card }: { card: any }) {
                       </div>
                     </div>
                   </DialogTrigger>
-                  <DialogContent className="max-w-2xl p-4 sm:p-6">
+                  <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto p-4 sm:p-6">
                     <DialogHeader>
-                      <DialogTitle className="text-xl sm:text-2xl text-purple-400">Team 1: [Placeholder Name]</DialogTitle>
-                      <DialogDescription>Detailed team composition and synergy explanation</DialogDescription>
+                      <DialogTitle className="text-xl sm:text-2xl text-purple-400">Team 1: Mei Lin Hypercarry</DialogTitle>
+                      <DialogDescription>Optimal team composition focusing on enabling Mei Lin's burst potential</DialogDescription>
                     </DialogHeader>
                     <div className="space-y-4 mt-4">
-                      <p className="text-muted-foreground leading-relaxed">
-                        [Placeholder explanation for Team 1 - why this composition works, synergies between characters,
-                        role distribution (DPS/Support/Control), strengths and weaknesses, ideal use cases and game
-                        modes]
-                      </p>
+                      <div className="space-y-4">
+                        <div>
+                          <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">Team Overview</h3>
+                          <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                            This composition maximizes <strong className="text-red-300">Mei Lin's burst damage potential</strong> by providing the essential support she needs: <strong className="text-red-300">card draw</strong> and <strong className="text-purple-300">Passion synergy</strong>. Veronica serves as a support character, enabling Mei Lin to consistently find and play her key combo cards. Rei provides additional damage amplification through buffs, creating a powerful triple synergy.
+                          </p>
+                        </div>
+                        
+                        <div>
+                          <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">Synergies</h3>
+                          <div className="space-y-3 text-sm sm:text-base text-muted-foreground">
+                            <div>
+                              <strong className="text-red-300">Veronica + Mei Lin:</strong> Veronica's Repose I (0 cost, Draw 2 other combatant's cards) solves Mei Lin's card draw problems, ensuring she can consistently access her powerful combo pieces like Aromata and Rising Dragon Spire. Both share <strong className="text-red-300">Passion type</strong>, creating natural synergy and team-wide benefits.
+                            </div>
+                            <div>
+                              <strong className="text-purple-300">Rei + Mei Lin:</strong> Rei provides damage buffs that amplify Mei Lin's burst damage. These buffs multiply the effectiveness of Mei Lin's high-cost, high-damage attacks, making her burst windows significantly more devastating.
+                            </div>
+                            <div>
+                              <strong className="text-red-300">Passion Synergy:</strong> With both Veronica and Mei Lin sharing Passion type, the team benefits from enhanced Passion stack generation and related buffs. This is especially powerful with Mei Lin's Passion-based mechanics.
+                            </div>
+                            <div>
+                              <strong className="text-purple-300">The Combo:</strong> Veronica draws cards for Mei Lin → Mei Lin finds Aromata and Rising Dragon Spire → Veronica's Pendant of Resolution V (if using Mei Lin Passion Build) provides massive Passion stacks → Rei's damage buffs amplify → Mei Lin unleashes devastating burst damage.
+                            </div>
+                          </div>
+                        </div>
+
+                        <div>
+                          <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">Role Distribution</h3>
+                          <ul className="list-disc list-inside space-y-1 text-sm sm:text-base text-muted-foreground ml-4">
+                            <li><strong className="text-red-300">Mei Lin:</strong> Main DPS - Primary damage dealer focusing on burst windows with Passion stacks</li>
+                            <li><strong className="text-red-300">Veronica:</strong> Support/Draw Engine - Provides card draw and enables Mei Lin's combos</li>
+                            <li><strong className="text-purple-300">Rei:</strong> Support/Damage Buffer - Amplifies Mei Lin's damage through buffs</li>
+                          </ul>
+                        </div>
+
+                        <div>
+                          <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">Strengths & Use Cases</h3>
+                          <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                            This team excels in scenarios where you want to maximize single-target or burst damage. The combination of reliable card draw and damage amplification makes Mei Lin incredibly powerful. Best used in boss fights, single-target encounters, or situations where burst windows matter more than sustained damage. The Passion synergy provides additional benefits that enhance the overall team effectiveness.
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </DialogContent>
                 </Dialog>
@@ -2330,7 +2312,7 @@ function CardDisplay({ card }: { card: any }) {
                         </div>
                       </div>
                       <div className="flex items-center justify-between text-xs text-muted-foreground">
-                        <span className="font-medium">[Placeholder Name]</span>
+                        <span className="font-medium">Veronica as main DPS with Owen providing Passion synergy and Rei buffing damage</span>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="h-4 w-4 group-hover:translate-x-1 transition-transform"
@@ -2343,17 +2325,61 @@ function CardDisplay({ card }: { card: any }) {
                       </div>
                     </div>
                   </DialogTrigger>
-                  <DialogContent className="max-w-2xl p-4 sm:p-6">
+                  <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto p-4 sm:p-6">
                     <DialogHeader>
-                      <DialogTitle className="text-xl sm:text-2xl text-purple-400">Team 1: [Placeholder Name]</DialogTitle>
-                      <DialogDescription>Detailed team composition and synergy explanation</DialogDescription>
+                      <DialogTitle className="text-xl sm:text-2xl text-purple-400">Team 2: Veronica DPS</DialogTitle>
+                      <DialogDescription>Team composition focusing on Veronica as the primary damage dealer</DialogDescription>
                     </DialogHeader>
                     <div className="space-y-4 mt-4">
-                      <p className="text-muted-foreground leading-relaxed">
-                        [Placeholder explanation for Team 1 - why this composition works, synergies between characters,
-                        role distribution (DPS/Support/Control), strengths and weaknesses, ideal use cases and game
-                        modes]
-                      </p>
+                      <div className="space-y-4">
+                        <div>
+                          <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">Team Overview</h3>
+                          <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                            This composition positions <strong className="text-red-300">Veronica as the main DPS</strong>, utilizing her powerful Ballista mechanics and draw engine. Owen provides <strong className="text-red-300">Passion synergy</strong> and additional frontline damage, while Rei offers damage amplification through buffs. This team focuses on sustained damage output through Veronica's consistent Ballista generation and reliable card cycling.
+                          </p>
+                        </div>
+                        
+                        <div>
+                          <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">Synergies</h3>
+                          <div className="space-y-3 text-sm sm:text-base text-muted-foreground">
+                            <div>
+                              <strong className="text-red-300">Veronica + Owen:</strong> Both characters share <strong className="text-red-300">Passion type</strong>, creating natural synergy. Owen provides frontline presence and additional damage, while Veronica's draw engine and Ballista generation create consistent AoE damage output. The Passion synergy enhances both characters' effectiveness.
+                            </div>
+                            <div>
+                              <strong className="text-purple-300">Rei + Veronica:</strong> Rei's damage buffs amplify Veronica's Ballista damage, making her Giant Ballista AoE attacks significantly more powerful. This is especially effective with Veronica's Draw Engine Build that focuses on consistent Ballista generation every turn.
+                            </div>
+                            <div>
+                              <strong className="text-red-300">Self-Sustaining Draw Engine:</strong> Veronica's Repose I (0 cost, Draw 2) combined with Firing Preparation IV creates a self-sustaining engine. She can draw cards, generate Ballistas, and maintain consistent damage output without requiring external card draw support.
+                            </div>
+                            <div>
+                              <strong className="text-purple-300">The Combo:</strong> Veronica uses Repose I to draw cards → Firing Preparation IV generates Giant Ballista every turn → Rei's damage buffs amplify Ballista damage → Owen provides additional frontline pressure → Consistent AoE damage output across multiple enemies.
+                            </div>
+                          </div>
+                        </div>
+
+                        <div>
+                          <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">Role Distribution</h3>
+                          <ul className="list-disc list-inside space-y-1 text-sm sm:text-base text-muted-foreground ml-4">
+                            <li><strong className="text-red-300">Veronica:</strong> Main DPS - Primary damage dealer through Ballista generation and AoE attacks</li>
+                            <li><strong className="text-red-300">Owen:</strong> Secondary DPS/Frontline - Provides Passion synergy and additional damage</li>
+                            <li><strong className="text-purple-300">Rei:</strong> Support/Damage Buffer - Amplifies Veronica's Ballista damage through buffs</li>
+                          </ul>
+                        </div>
+
+                        <div>
+                          <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">Strengths & Use Cases</h3>
+                          <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                            This team excels in scenarios requiring consistent AoE damage and reliable card cycling. Veronica's self-sustaining draw engine means the team doesn't rely heavily on external support, making it versatile across different encounter types. Best used in multi-enemy encounters, wave-based content, or situations where sustained damage output matters more than burst windows. The Passion synergy between Veronica and Owen provides additional team-wide benefits.
+                          </p>
+                        </div>
+
+                        <div>
+                          <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">Team Comparison</h3>
+                          <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                            Compared to the Mei Lin Hypercarry team, this composition trades burst potential for consistency. Veronica's reliable Ballista generation provides steady damage output, while the Mei Lin team focuses on explosive burst windows. Choose this team when you need consistent AoE damage and self-sustaining card draw, or when you want Veronica to be the star of the show rather than supporting another DPS.
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </DialogContent>
                 </Dialog>
