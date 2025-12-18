@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dialog"
 
 import { useState } from "react"
-import { GearTooltip } from "@/components/GearTooltip";
+import { GearTooltip } from "@/components/GearTooltip"; // adjust the path if needed
 
 export default function VeronicaGuidePage() {
   const [expandedMemorySet, setExpandedMemorySet] = useState<string | null>(null)
@@ -81,11 +81,17 @@ export default function VeronicaGuidePage() {
       ],
       divineEpiphanies: [
         {
-          name: "-1 Cost",
-          description: "Decrease Cost by 1",
-          reasoning: "Excellent for cost efficiency, making Firing Preparation more accessible.",
+          name: "Reduce the cost of this card by 1",
+          reasoning: "Excellent for cost efficiency",
           icon: "/images/card/icon_card_battle_expand_vitor.png",
-        }],
+        },
+        {
+          name: "1 Morale, 1 Resolve",
+          reasoning: "Permanent 20% additive buff",
+          icon: "/images/card/icon_card_battle_expand_vitor.png",
+        }
+      
+      ],
     },
     {
       id: "repose",
@@ -175,7 +181,7 @@ export default function VeronicaGuidePage() {
         {
           id: "Pendant of Resolution II",
           tier: "C",
-          cost: 0,
+          cost: 1,
           type: "upgrade",
           description: "[ Unique ] When another combatant uses Skill Card, 1 Reload \nIf 3 are used, at the start of the next turn, create 1 Micro Ballista card(s)",
           reasoning: "Gives some Reload from other Skill Cards, but the Micro Ballista is worthless, not a strong pick compared to other Pendants",
@@ -340,90 +346,140 @@ export default function VeronicaGuidePage() {
     }
   }
 
-// Define the type for a single deck entry
-type DeckEntry = {
-  ref: string;
-  count?: number;
-  cardsArray?: typeof uniqueCards;
-};
+  // Define the type for a single deck entry
+  type DeckEntry = {
+    ref: string;
+    count?: number;
+    cardsArray?: typeof uniqueCards;
+  };
 
-// Define the type for recommendedDecks
-type RecommendedDecks = {
-  [key: string]: DeckEntry[];
-};
+  // Define the type for recommendedDecks
+  type RecommendedDecks = {
+    [key: string]: DeckEntry[];
+  };
 
-// Type your recommendedDecks object
-const recommendedDecks: RecommendedDecks = {
-  "draw-engine": [
-    { ref: "Firing Preparation IV", count: 1 },
-    { ref: "Repose I", count: 4 },
-    { ref: "Pendant of Resolution I", count: 1 },
-    { ref: "Sir Kowalski III", count: 1 },
-    { ref: "Bombardment Prep", count: 1 },
-  ],
-  "mei-lin": [
-    { ref: "Firing Preparation IV", count: 1 },
-    { ref: "Repose I", count: 2 },
-    { ref: "Pendant of Resolution V", count: 3 },
-    { ref: "Sir Kowalski III", count: 1 },
-    { ref: "Bombardment Prep", count: 1 },
-  ],
-};
+  // Type your recommendedDecks object
+  const recommendedDecks: RecommendedDecks = {
+    "draw-engine": [
+      { ref: "Firing Preparation IV", count: 1 },
+      { ref: "Repose I", count: 4 },
+      { ref: "Pendant of Resolution I", count: 1 },
+      { ref: "Sir Kowalski III", count: 1 },
+      { ref: "Bombardment Prep", count: 1 },
+    ],
+    "mei-lin": [
+      { ref: "Firing Preparation IV", count: 1 },
+      { ref: "Repose I", count: 2 },
+      { ref: "Pendant of Resolution V", count: 3 },
+      { ref: "Sir Kowalski III", count: 1 },
+      { ref: "Bombardment Prep", count: 1 },
+    ],
+  };
 
-function generateDeckRows(deckKey: keyof typeof recommendedDecks): { topRow: any[]; bottomRow: any[] } {
-  const spec = recommendedDecks[deckKey] || [];
-  const deck: any[] = [];           // This will hold only the real cards
-  let globalIndex = 0;
+  function generateDeckRows(deckKey: keyof typeof recommendedDecks): { topRow: any[]; bottomRow: any[] } {
+    const spec = recommendedDecks[deckKey] || [];
+    const deck: any[] = [];           // This will hold only the real cards
+    let globalIndex = 0;
 
-  // Add all real cards (with unique IDs)
-  spec.forEach((entry) => {
-    const { ref, count = 1, cardsArray = uniqueCards } = entry;
-    const baseCard = getEpiphanyFromRef(ref, cardsArray);
+    // Add all real cards (with unique IDs)
+    spec.forEach((entry) => {
+      const { ref, count = 1, cardsArray = uniqueCards } = entry;
+      const baseCard = getEpiphanyFromRef(ref, cardsArray);
 
-    if (!baseCard) {
-      console.warn(`Card not found: ${ref}`);
-      return;
+      if (!baseCard) {
+        console.warn(`Card not found: ${ref}`);
+        return;
+      }
+
+      for (let i = 0; i < count; i++) {
+        deck.push({
+          ...baseCard,
+          id: `${baseCard.id}-${globalIndex++}`,
+        });
+      }
+    });
+
+    // Build top row → exactly 4 cards + 1 empty on the right
+    const topRow: any[] = [];
+    for (let i = 0; i < 4; i++) {
+      topRow.push(deck[i] || createPlaceholder(`top-${i}`));
     }
+    topRow.push(createPlaceholder("top-right-empty")); // Always empty
 
-    for (let i = 0; i < count; i++) {
-      deck.push({
-        ...baseCard,
-        id: `${baseCard.id}-${globalIndex++}`,
-      });
+    // Build bottom row → next 4 cards + 1 empty on the right
+    const bottomRow: any[] = [];
+    for (let i = 0; i < 4; i++) {
+      const card = deck[4 + i];
+      bottomRow.push(card || createPlaceholder(`bottom-${i}`));
     }
-  });
+    bottomRow.push(createPlaceholder("bottom-right-empty")); // Always empty
 
-  // Build top row → first 4 cards
-  const topRow: any[] = deck.slice(0, 4).filter(Boolean);
-
-  // Build bottom row → next 4 cards
-  const bottomRow: any[] = deck.slice(4, 8).filter(Boolean);
-
-  return { topRow, bottomRow };
-}
-
-function CardDisplay({ card }: { card: any }) {
-  const isPlaceholder = card.name === "Placeholder";
-
-  // Don't render placeholder boxes
-  if (isPlaceholder) {
-    return null;
+    return { topRow, bottomRow };
   }
 
-  return (
-    <div className="relative rounded-lg overflow-hidden border-2 border-border hover:border-purple-400/50 transition-all duration-200">
-      {/* Passion Border */}
-      <div className="absolute left-0 -top-0.5 -bottom-0.5 w-3 z-10">
-        <img src="/images/card/passion-border.png" alt="" className="h-full w-full object-cover" />
-      </div>
+  // Helper function to avoid repeating placeholder object
+  function createPlaceholder(idSuffix: string) {
+    return {
+      id: `placeholder-${idSuffix}`,
+      name: "Placeholder",
+      image: "/placeholder.svg",
+      cost: 0,
+      type: "skill",
+      description: "",
+    };
+  }
 
-      <div className="relative aspect-[2/3] bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden rounded-md">
-        <img
-          src={card.image || "/placeholder.svg"}
-          alt={card.name}
-          className="w-full h-full object-cover scale-108"
-        />
-        <div className="absolute inset-0 flex flex-col">
+  // Helper function to get rarity color based on card name
+  function getRarityColor(cardName: string): string {
+    if (cardName?.includes("Oni Hunt")) {
+      return "#FFD700"; // Legend - Gold
+    } else if (cardName?.includes("Shadow of the Moon")) {
+      return "#E9A1FC"; // Unique - red
+    } else {
+      return "#6FB0FC"; // Rare - Blue
+    }
+  }
+
+  // Helper function to get rarity background image based on card name
+  function getRarityBackgroundImage(cardName: string): string {
+    if (cardName?.includes("Oni Hunt")) {
+      return "/images/card/card_title_rarity_legend.png";
+    } else if (cardName?.includes("Shadow of the Moon")) {
+      return "/images/card/card_title_rarity_unique.png";
+    } else {
+      return "/images/card/card_title_rarity_rare.png";
+    }
+  }
+
+  function CardDisplay({ card }: { card: any }) {
+    const isPlaceholder = card.name === "Placeholder";
+
+    // Don't render placeholder boxes
+    if (isPlaceholder) {
+      return null;
+    }
+
+    return (
+      <div className="relative rounded-lg overflow-hidden border-2 border-border hover:border-red-400/50 transition-all duration-200">
+        {/* Passion Border */}
+        <div className="absolute left-0 -top-0.5 -bottom-0.5 w-3 z-10">
+          <img src="/images/card/passion-border.png" alt="" className="h-full w-full object-cover" />
+        </div>
+
+        <div className="relative aspect-[2/3] bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden rounded-md">
+          {isPlaceholder ? (
+            <div className="w-full h-full flex flex-col items-center justify-center">
+              <span className="text-sm text-muted-foreground font-semibold">Placeholder</span>
+              <span className="text-xs text-muted-foreground/70">[Empty Slot]</span>
+            </div>
+          ) : (
+            <>
+            <img
+              src={card.image || "/placeholder.svg"}
+              alt={card.name}
+              className="w-full h-full object-cover scale-108"
+            />
+            <div className="absolute inset-0 flex flex-col">
               {/* Top Section: Cost + Name + Type */}
               <div className="p-2 pt-1.5 pl-3">
                 <div className="flex items-start gap-1.5 relative">
@@ -433,7 +489,7 @@ function CardDisplay({ card }: { card: any }) {
                       src={
                         card.name?.includes("Sir Kowalski")
                           ? "/images/card/card_rarity_legend.png"
-                          : card.name === "Bombardment Prep"
+                          : card.name?.includes("Bombardment Prep")
                             ? "/images/card/card_rarity_unique.png"
                             : "/images/card/card_rarity_rare.png"
                       }
@@ -442,141 +498,171 @@ function CardDisplay({ card }: { card: any }) {
                     />
                   </div>
                   {/* Cost */}
-                  <div className="flex-shrink-0 flex flex-col items-center justify-center ml-3">
+                  <div className="flex-shrink-0 flex flex-col items-center justify-center ml-3 relative z-30">
                     <span
-                      className="text-white font-bold text-4xl scale-x-80"
+                      className="font-bold text-4xl scale-100"
                       style={{
-                        WebkitTextStroke: "1px rgba(0, 0, 0, 0.38)",
+                        color: "#FFFFFF",
+                        WebkitTextStroke: "1.3px #2D4CAE",
                         textShadow: `
-                        -1px -1px 0 #000,
-                         1px -1px 0 #000,
-                        -1px  1px 0 #000,
-                         1px  1px 0 #000
+                        0 0 2px #5B91FB,
+                        0 0 4px #5B91FB,
+                        0 0 6px #5B91FB,
+                        0 0 8px #5B91FB,
+                        0 0 12px #5B91FB,
+                        0 0 16px #5B91FB,
+                        -1px -1px 0 #5B91FB,
+                         1px -1px 0 #5B91FB,
+                        -1px  1px 0 #5B91FB,
+                         1px  1px 0 #5B91FB,
+                        -2px -2px 4px rgba(91, 145, 251, 0.8),
+                         2px -2px 4px rgba(91, 145, 251, 0.8),
+                        -2px  2px 4px rgba(91, 145, 251, 0.8),
+                         2px  2px 4px rgba(91, 145, 251, 0.8)
                       `,
                       }}
                     >
                       {card.cost}
                     </span>
                     <div
-                      className="w-full h-0.5 bg-white mt-0.5 scale-x-75"
+                      className="w-full h-0.5 mt-0.5 scale-x-75"
                       style={{
-                        backgroundColor: "#ffffff",
-                        WebkitBoxShadow: `
-                        -1px -1px 0 #000,
-                         1px -1px 0 #000,
-                        -1px  1px 0 #000,
-                         1px  1px 0 #000
+                        backgroundColor: "#B6C4F9",
+                        boxShadow: `
+                          0 0 2px #5B91FB,
+                          0 0 4px #5B91FB,
+                          0 0 6px #5B91FB,
+                          0 0 8px rgba(91, 145, 251, 0.6),
+                          inset 0 1px 0 rgba(255, 255, 255, 0.3)
                         `,
                       }}
                     />
                   </div>
                   {/* Name and Type */}
                   <div className="flex-1 pt-0.5 min-w-0">
-                    <h5
-                      className="text-white font-bold leading-tight drop-shadow-lg"
-                      style={{
-                        fontSize: "clamp(0.7rem, 2.5vw, 1.25rem)",
-                        textShadow: `
-                        -1px -1px 0 #000,
-                         1px -1px 0 #000,
-                        -1px  1px 0 #000,
-                         1px  1px 0 #000
-                      `,
-                        transform: "scaleX(1)",
-                        transformOrigin: "left",
-                        maxWidth: "100%",
-                        whiteSpace: "nowrap",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                      }}
-                    >
-                      {card.name}
-                    </h5>
-                    <div className="flex items-center gap-1">
-                      <img
-                        src={
-                          card.type === "attack"
-                            ? "/images/icon-category-card-attack.webp"
-                            : card.type === "skill"
-                            ? "/images/icon-category-card-skill.webp"
-                            : "/images/icon-category-card-upgrade.webp"
-                        }
-                        alt={card.type}
-                        className="w-4 h-4 sm:w-5 sm:h-5"
-                      />
-                      <span
-                        className="text-white/100 font-large capitalize drop-shadow"
+                    <div className="relative inline-block">
+                      {/* Background Image - can be positioned separately */}
+                      <div
+                        className="absolute"
                         style={{
-                          fontSize: "clamp(0.65rem, 2vw, 0.875rem)",
+                          backgroundImage: `url(${getRarityBackgroundImage(card.name)})`,
+                          backgroundRepeat: "no-repeat",
+                          backgroundPosition: "left center",
+                          backgroundSize: "100%",
+                          top: 10,
+                          left: -50,
+                          right: 0,
+                          bottom: 0,
+                          height: "50%",
+                          width: "700%",
+                        }}
+                      />
+                      {/* Text */}
+                      <h5
+                        className="relative font-bold leading-tight drop-shadow-lg"
+                        style={{
+                          color: getRarityColor(card.name),
+                          fontSize: "clamp(0.70rem, 2.5vw, 1.25rem)",
+                          padding: "5px 0px",
                           textShadow: `
                         -1px -1px 0 #000,
                          1px -1px 0 #000,
                         -1px  1px 0 #000,
                          1px  1px 0 #000
                       `,
+                          transform: "scaleX(1)",
+                          transformOrigin: "left",
+                          maxWidth: "100%",
+                          whiteSpace: "wrap",
+                          overflow: "visible",
+                          textOverflow: "ellipsis",
                         }}
                       >
-                        {card.type}
-                      </span>
+                        {card.name}
+                      </h5>
+                    </div>
+                      <div className="flex items-center gap-1 -mt-1.5">
+                        <img
+                          src={
+                            card.type === "attack"
+                              ? "/images/icon-category-card-attack.webp"
+                              : card.type === "skill"
+                              ? "/images/icon-category-card-skill.webp"
+                              : "/images/icon-category-card-upgrade.webp"
+                          }
+                          alt={card.type}
+                          className="w-4 h-4 sm:w-5 sm:h-5"
+                        />
+                        <span
+                          className="text-white/100 text-[14px] font-large capitalize drop-shadow "
+                          style={{
+                            padding: "0px 0px",
+                            fontSize: "clamp(0.65rem, 2vw, 0.875rem)",
+                            textShadow: `
+                        -1px -1px 0 #000,
+                         1px -1px 0 #000,
+                        -1px  1px 0 #000,
+                         1px  1px 0 #000
+                      `,
+                          }}
+                        >
+                          {card.type}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Description Section */}
-              {card.description && (
-                <div className="mt-auto p-2 sm:p-2.5 pl-2 sm:pl-3 py-3 sm:py-5 bg-gradient-to-t from-black/95 via-black/90 to-transparent flex flex-col items-center justify-center gap-0">
-                  {/* Card Frame Spark */}
-                  <img
-                    src="/images/card/card_frame_spark.png"
-                    alt=""
-                    className="w-1/2 mb-0 drop-shadow-2xl"
-                  />
-                  {(() => {
-                    const { bracketedText, remainingText } = parseDescription(card.description)
-                    return (
-                      <>
-                        {bracketedText && (
+                {/* Description Section */}
+                {card.description && (
+                  <div className="mt-auto p-2.5 pl-3 py-5 bg-gradient-to-t from-black/95 via-black/90 to-transparent flex flex-col items-center justify-center gap-0">
+                    {/* Card Frame Spark */}
+                    <img
+                      src="/images/card/card_frame_spark.png"
+                      alt=""
+                      className="w-1/2 mb-0 drop-shadow-2xl"
+                    />
+                    {(() => {
+                      const { bracketedText, remainingText } = parseDescription(card.description)
+                      return (
+                        <>
+                          {bracketedText && (
+                            <p
+                              className="text-center font-medium text-sm leading-snug m-0"
+                              style={{ color: "#e3b46c" }}
+                            >
+                              {bracketedText}
+                            </p>
+                          )}
                           <p
-                            className="text-center font-medium leading-snug m-0 px-1"
-                            style={{ 
-                              color: "#e3b46c",
-                              fontSize: "clamp(0.7rem, 2vw, 0.875rem)"
+                            className="text-white text-center text-sm leading-snug m-0 whitespace-pre-line"
+                            dangerouslySetInnerHTML={{
+                              __html: remainingText
+                                .replace(
+                                  /(\d+%?)/g,
+                                  '<span style="color: #7ce2fb">$1</span>',
+                                )
+                                .replace(
+                                  /Shadow of the\s*Moon\+/gi,
+                                  '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>',
+                                ).replace(
+                                  /Moonslash/gi,
+                                  '<span style="color: #7ce2fb; text-decoration: underline; text-underline-offset: 2px">$&</span>',
+                                ),
                             }}
-                          >
-                            {bracketedText}
-                          </p>
-                        )}
-                        <p
-                          className="text-white text-center leading-snug m-0 whitespace-pre-line px-1"
-                          style={{
-                            fontSize: "clamp(0.7rem, 2vw, 0.875rem)"
-                          }}
-                          dangerouslySetInnerHTML={{
-                            __html: remainingText
-                              .replace(
-                                /(\d+%?)/g,
-                                '<span style="color: #7ce2fb">$1</span>',
-                              )
-                              .replace(
-                                /(Piercing\s*Ballista|Enhanced\s*Ballista|Giant\s*Ballista|Shelling\s*Ballista|Micro\s*Ballista)/gi,
-                                '<span style="color: #C8FF2E; text-decoration: underline; text-underline-offset: 2px">$&</span>',
-                              ).replace(
-                                /Ballista/gi,
-                                '<span style="color: #C8FF2E; text-decoration: underline; text-underline-offset: 2px">$&</span>',
-                              ),
-                          }}
-                        />
-                      </>
-                    )
-                  })()}
-                </div>
-              )}
+                          />
+                        </>
+                      )
+                    })()}
+                  </div>
+                )}
+              </div>
+            </>
+          )}
         </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 
   const parseDescription = (desc: string) => {
     const bracketMatch = desc.match(/\[([^\]]+)\]/)
@@ -616,11 +702,11 @@ function CardDisplay({ card }: { card: any }) {
       case "A":
         return `
           bg-black/70
-          text-purple-300
+          text-red-300
           font-bold text-xs tracking-wide
-          border border-purple-500/50
-          shadow-md shadow-purple-500/20
-          ring-1 ring-purple-500/20
+          border border-red-500/50
+          shadow-md shadow-red-500/20
+          ring-1 ring-red-500/20
         `
   
       case "B":
@@ -657,16 +743,16 @@ function CardDisplay({ card }: { card: any }) {
   return (
     <div className="min-h-screen bg-background">
       <header className="border-b border-border bg-card backdrop-blur-sm">
-        <div className="container mx-auto px-4 py-4 sm:py-6">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div className="flex-1">
-              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-balance bg-gradient-to-r from-red-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+        <div className="container mx-auto px-4 py-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold tracking-tight text-balance bg-gradient-to-r from-red-400 via-red-400 to-cyan-400 bg-clip-text text-transparent">
                 Veronica Guide
               </h1>
             </div>
             <Link
               href="/guides"
-              className="flex items-center gap-2 px-4 py-2 rounded-lg border border-purple-500/20 bg-purple-500/10 text-purple-400 hover:bg-purple-500/20 hover:border-purple-400/40 transition-all duration-200 w-full sm:w-auto justify-center sm:justify-start"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg border border-red-500/20 bg-red-500/10 text-red-400 hover:bg-red-500/20 hover:border-red-400/40 transition-all duration-200"
             >
               <ArrowLeft className="w-4 h-4" />
               <span className="text-sm font-medium">Back to Characters</span>
@@ -675,10 +761,10 @@ function CardDisplay({ card }: { card: any }) {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-6 sm:py-8">
-        <div className="flex flex-col xl:flex-row gap-4 sm:gap-6">
+      <main className="container mx-auto px-4 py-8">
+        <div className="flex gap-6">
           {/* Sticky Table of Contents */}
-          <aside className="hidden xl:block w-64 shrink-0">
+          <aside className="hidden lg:block w-64 shrink-0">
             <nav className="sticky top-4 rounded-lg border border-border bg-card p-4">
               <h2 className="text-lg font-semibold mb-4">Table of Contents</h2>
               <ul className="space-y-1.5">
@@ -686,7 +772,7 @@ function CardDisplay({ card }: { card: any }) {
                   <li key={section.id}>
                     <a
                       href={`#${section.id}`}
-                      className={`text-sm text-muted-foreground hover:text-purple-400 transition-colors block py-1 ${
+                      className={`text-sm text-muted-foreground hover:text-red-400 transition-colors block py-1 ${
                         section.level === 2 ? "pl-4" : ""
                       }`}
                     >
@@ -699,25 +785,25 @@ function CardDisplay({ card }: { card: any }) {
           </aside>
 
           {/* Main Content */}
-          <div className="flex-1 space-y-6 sm:space-y-8">
+          <div className="flex-1 space-y-8">
             {/* 1. Overview */}
-            <section id="overview" className="hidden md:block rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-6">
-            <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-purple-400">1. Overview</h2>
-              <div className="space-y-3 sm:space-y-4">
-                <div className="flex flex-wrap gap-2 sm:gap-3 mb-3 sm:mb-4">
+            <section id="overview" className="hidden lg:block rounded-lg border border-border bg-card p-8 scroll-mt-6">
+            <h2 className="text-2xl font-bold mb-6 text-red-400">1. Overview</h2>
+              <div className="space-y-4">
+                <div className="flex flex-wrap gap-3 mb-4">
                   <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/20 border border-red-500/50">
-                    <img src="/images/icon-ego-passion.webp" alt="Passion" className="w-4 h-4 sm:w-5 sm:h-5" />
-                    <span className="text-red-400 text-xs sm:text-sm font-medium">Passion</span>
+                    <img src="/images/icon-ego-passion.webp" alt="Passion" className="w-5 h-5" />
+                    <span className="text-red-400 text-sm font-medium">Passion</span>
                   </div>
                   
                   <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black-500/20 border border-black-500/40">
-                    <img src="/images/icon-job-ranger.webp" alt="Ranger" className="w-4 h-4 sm:w-5 sm:h-5" />
-                    <span className="text-black-400 text-xs sm:text-sm font-medium">Ranger</span>
+                    <img src="/images/icon-job-ranger.webp" alt="Ranger" className="w-5 h-5" />
+                    <span className="text-black-400 text-sm font-medium">Ranger</span>
                   </div>
                 </div>
 
                 <div className="rounded-sm bg-background/50 border border-border">
-                <div className="relative w-full h-[250px] sm:h-[350px] md:h-[400px] bg-gradient-to-br from-red-500/20 to-black/30 flex items-center justify-center warp">
+                <div className="relative w-full h-[400px] bg-gradient-to-br from-red-500/20 to-black/30 flex items-center justify-center warp">
                 <img
                   src={`/images/characters/veronica.webp`}
                   alt={`veronica full artwork`}
@@ -729,16 +815,16 @@ function CardDisplay({ card }: { card: any }) {
             </section>
 
             {/* 2. Base Cards */}
-            <section id="card-epiphany" className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-6">
-            <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-purple-400">2. Base Cards</h2>
-              <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6">
+            <section id="card-epiphany" className="rounded-lg border border-border bg-card p-8 scroll-mt-6">
+            <h2 className="text-2xl font-bold mb-6 text-red-400">2. Base Cards</h2>
+              <p className="text-muted-foreground mb-6">
               S+ (Best), S (Excellent), A (Strong), B (Average), C (Low Impact), Situational (Niche-use only).
               <br />
               Click a base card to view its epiphanies.
               </p>
 
               {/* Base Cards Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {uniqueCards.map((cardData) => {
                   // Use first epiphany's cost and type, or fallback to baseType
                   const baseCost = cardData.epiphanies[0]?.cost ?? 0
@@ -757,8 +843,8 @@ function CardDisplay({ card }: { card: any }) {
                       }}
                     >
                       <DialogTrigger asChild>
-                        <div className="relative rounded-lg overflow-hidden border-2 border-border hover:border-purple-400/50 transition-all duration-200 cursor-pointer">
-                          {/* Passion Border */}
+                        <div className="relative rounded-lg overflow-hidden border-2 border-border hover:border-red-400/50 transition-all duration-200 cursor-pointer">
+                          {/* Void Border */}
                           <div className="absolute left-0 -top-0.5 -bottom-0.5 w-3 z-10">
                             <img
                               src="/images/card/passion-border.png"
@@ -784,9 +870,9 @@ function CardDisplay({ card }: { card: any }) {
                                   <div className="absolute left-0 top-0 z-20 flex items-center" style={{ transform: 'translateX(-18px)' }}>
                                     <img
                                       src={
-                                        cardData.name === "Sir Kowalski"
+                                        cardData.name === "Oni Hunt"
                                           ? "/images/card/card_rarity_legend.png"
-                                          : cardData.name === "Bombardment Prep"
+                                          : cardData.name === "Shadow of the Moon"
                                             ? "/images/card/card_rarity_unique.png"
                                             : "/images/card/card_rarity_rare.png"
                                       }
@@ -795,73 +881,103 @@ function CardDisplay({ card }: { card: any }) {
                                     />
                                   </div>
                                   {/* Cost */}
-                                  <div className="flex-shrink-0 flex flex-col items-center justify-center ml-3">
+                                  <div className="flex-shrink-0 flex flex-col items-center justify-center ml-3 relative z-30">
                                     <span
-                                      className="text-white font-bold text-4xl scale-x-80"
+                                      className="font-bold text-4xl scale-100"
                                       style={{
-                                        WebkitTextStroke: "1px rgba(0, 0, 0, 0.38)",
+                                        color: "#FFFFFF",
+                                        WebkitTextStroke: "1.3px #2D4CAE",
                                         textShadow: `
-                                        -1px -1px 0 #000,
-                                         1px -1px 0 #000,
-                                        -1px  1px 0 #000,
-                                         1px  1px 0 #000
+                                        0 0 2px #5B91FB,
+                                        0 0 4px #5B91FB,
+                                        0 0 6px #5B91FB,
+                                        0 0 8px #5B91FB,
+                                        0 0 12px #5B91FB,
+                                        0 0 16px #5B91FB,
+                                        -1px -1px 0 #5B91FB,
+                                         1px -1px 0 #5B91FB,
+                                        -1px  1px 0 #5B91FB,
+                                         1px  1px 0 #5B91FB,
+                                        -2px -2px 4px rgba(91, 145, 251, 0.8),
+                                         2px -2px 4px rgba(91, 145, 251, 0.8),
+                                        -2px  2px 4px rgba(91, 145, 251, 0.8),
+                                         2px  2px 4px rgba(91, 145, 251, 0.8)
                                       `,
                                       }}
                                     >
                                       {baseCost}
                                     </span>
                                     <div
-                                      className="w-full h-0.5 bg-white mt-0.5 scale-x-75"
+                                      className="w-full h-0.5 mt-0.5 scale-x-75"
                                       style={{
-                                        backgroundColor: "#ffffff",
-                                        WebkitBoxShadow: `
-                                        -1px -1px 0 #000,
-                                         1px -1px 0 #000,
-                                        -1px  1px 0 #000,
-                                         1px  1px 0 #000
+                                        backgroundColor: "#B6C4F9",
+                                        boxShadow: `
+                                          0 0 2px #5B91FB,
+                                          0 0 4px #5B91FB,
+                                          0 0 6px #5B91FB,
+                                          0 0 8px rgba(91, 145, 251, 0.6),
+                                          inset 0 1px 0 rgba(255, 255, 255, 0.3)
                                         `,
                                       }}
                                     />
                                   </div>
 
                                   {/* Name and Type */}
-                                  <div className="flex-1 pt-0.5 min-w-0">
-                                    <h5
-                                      className="text-white font-bold leading-tight drop-shadow-lg"
-                                      style={{
-                                        fontSize: "clamp(0.7rem, 2.5vw, 1.25rem)",
-                                        textShadow: `
+                                  <div className="flex-1 pt-0.5">
+                                    <div className="relative w-full">
+                                      {/* Background Image - can be positioned separately */}
+                                      <div
+                                        className="absolute"
+                                        style={{
+                                          backgroundImage: `url(${getRarityBackgroundImage(cardData.name)})`,
+                                          backgroundRepeat: "no-repeat",
+                                          backgroundPosition: "left center",
+                                          backgroundSize: "100%",
+                                          left: -50,
+                                          right: 0, 
+                                          top: 10,
+                                          bottom: 0,
+                                          height: "50%",
+                                          
+                                        }}
+                                      />
+                                      {/* Text */}
+                                      <h5
+                                        className="relative font-bold text-[20px] leading-tight drop-shadow-lg"
+                                        style={{
+                                          color: getRarityColor(cardData.name),
+                                          padding: "3px 4px",
+                                          textShadow: `
                                         -1px -1px 0 #000,
                                          1px -1px 0 #000,
                                         -1px  1px 0 #000,
                                          1px  1px 0 #000
                                       `,
-                                        transform: "scaleX(1)",
-                                        transformOrigin: "left",
-                                        maxWidth: "100%",
-                                        whiteSpace: "nowrap",
-                                        overflow: "hidden",
-                                        textOverflow: "ellipsis",
-                                      }}
-                                    >
-                                      {cardData.name}
-                                    </h5>
-                                    <div className="flex items-center gap-1">
+                                          transform: "scaleX(1)",
+                                          transformOrigin: "left",
+                                          maxWidth: "180%",
+                                          whiteSpace: "nowrap",
+                                          overflow: "hidden",
+                                        }}
+                                      >
+                                        {cardData.name}
+                                      </h5>
+                                    </div>
+                                    <div className="flex items-center gap-1 -mt-2.5">
                                       <img
                                         src={
                                           baseType === "attack"
                                             ? "/images/icon-category-card-attack.webp"
                                             : baseType === "skill"
-                                            ? "/images/icon-category-card-skill.webp"
-                                            : "/images/icon-category-card-upgrade.webp"
+                                              ? "/images/icon-category-card-skill.webp"
+                                              : "/images/icon-category-card-upgrade.webp"
                                         }
                                         alt={baseType}
-                                        className="w-4 h-4 sm:w-5 sm:h-5"
+                                        className="w-5 h-5"
                                       />
                                       <span
-                                        className="text-white/100 font-large capitalize drop-shadow"
+                                        className="text-white/100 text-[14px] font-large capitalize drop-shadow "
                                         style={{
-                                          fontSize: "clamp(0.65rem, 2vw, 0.875rem)",
                                           textShadow: `
                                         -1px -1px 0 #000,
                                          1px -1px 0 #000,
@@ -879,7 +995,7 @@ function CardDisplay({ card }: { card: any }) {
 
                               {/* Description Section */}
                               {cardData.baseDescription && (
-                                <div className="mt-auto p-2 sm:p-2.5 pl-2 sm:pl-3 py-3 sm:py-5 bg-gradient-to-t from-black/95 via-black/90 to-transparent flex flex-col items-center justify-center gap-0">
+                                <div className="mt-auto p-2.5 pl-3 py-5 bg-gradient-to-t from-black/95 via-black/90 to-transparent flex flex-col items-center justify-center gap-0">
                                   {/* Card Frame Spark Disabled */}
                                   <img
                                     src="/images/card/card_frame_spark_dis.png"
@@ -892,20 +1008,14 @@ function CardDisplay({ card }: { card: any }) {
                                       <>
                                         {bracketedText && (
                                           <p
-                                            className="text-center font-medium leading-snug m-0 px-1"
-                                            style={{ 
-                                              color: "#e3b46c",
-                                              fontSize: "clamp(0.7rem, 2vw, 0.875rem)"
-                                            }}
+                                            className="text-center font-medium text-sm leading-snug m-0"
+                                            style={{ color: "#e3b46c" }}
                                           >
                                             {bracketedText}
                                           </p>
                                         )}
                                         <p
-                                          className="text-white text-center leading-snug m-0 whitespace-pre-line px-1"
-                                          style={{
-                                            fontSize: "clamp(0.7rem, 2vw, 0.875rem)"
-                                          }}
+                                          className="text-white text-center text-sm leading-snug m-0 whitespace-pre-line"
                                           dangerouslySetInnerHTML={{
                                             __html: remainingText
                                               .replace(
@@ -913,10 +1023,10 @@ function CardDisplay({ card }: { card: any }) {
                                                 '<span style="color: #7ce2fb">$1</span>',
                                               )
                                               .replace(
-                                                /(Piercing\s*Ballista|Enhanced\s*Ballista|Giant\s*Ballista|Shelling\s*Ballista|Micro\s*Ballista)/gi,
+                                                /Shadow of the\s*Moon\+/gi,
                                                 '<span style="color: #C8FF2E; text-decoration: underline; text-underline-offset: 2px">$&</span>',
                                               ).replace(
-                                                /Ballista/gi,
+                                                /Moonslash/gi,
                                                 '<span style="color: #C8FF2E; text-decoration: underline; text-underline-offset: 2px">$&</span>',
                                               ),
                                           }}
@@ -933,7 +1043,7 @@ function CardDisplay({ card }: { card: any }) {
 
                       <DialogContent className="!w-[95vw] !max-w-6xl max-h-[90vh] overflow-y-auto scrollbar-none p-3 sm:p-4 md:p-6 m-2 sm:m-4">
                         <DialogHeader>
-                          <DialogTitle className="text-xl sm:text-2xl text-purple-400">
+                          <DialogTitle className="text-xl sm:text-2xl text-red-400">
                             {cardData.name} - Epiphanies
                           </DialogTitle>
                         </DialogHeader>
@@ -942,18 +1052,9 @@ function CardDisplay({ card }: { card: any }) {
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6 mt-4 sm:mt-6">
                           {cardData.epiphanies.map((epiphany, index) => (
                             <div key={index} className="flex flex-col gap-2 sm:gap-3">
-                              {/* Tier Badge */}
-                              <div className="flex justify-center">
-                                <span
-                                  className={`px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-bold ${getTierColor(epiphany.tier)}`}
-                                >
-                                  {epiphany.tier} Tier
-                                </span>
-                              </div>
-
                               {/* Card Display */}
-                              <div className="relative rounded-lg overflow-hidden border-2 border-border hover:border-purple-400/50 transition-all duration-200 w-full max-w-[200px] sm:max-w-[220px] md:max-w-[250px] mx-auto">
-                                {/* Passion Border */}
+                              <div className="relative rounded-lg overflow-hidden border-2 border-border hover:border-red-400/50 transition-all duration-200 w-full max-w-[200px] sm:max-w-[220px] md:max-w-[250px] mx-auto">
+                                {/* Void Border */}
                                 <div className="absolute left-0 -top-0.5 -bottom-0.5 w-3 z-10">
                                   <img
                                     src="/images/card/passion-border.png"
@@ -979,39 +1080,53 @@ function CardDisplay({ card }: { card: any }) {
                                         <div className="absolute left-0 top-0 z-20 flex items-center" style={{ transform: 'translateX(-18px)' }}>
                                           <img
                                             src={
-                                              cardData.name === "Sir Kowalski"
+                                              cardData.name === "Oni Hunt"
                                                 ? "/images/card/card_rarity_legend.png"
-                                                : "/images/card/card_rarity_rare.png"
+                                                : cardData.name === "Shadow of the Moon"
+                                                  ? "/images/card/card_rarity_unique.png"
+                                                  : "/images/card/card_rarity_rare.png"
                                             }
                                             alt=""
                                             className="h-12 sm:h-14 object-contain"
                                           />
                                         </div>
                                         {/* Cost */}
-                                        <div className="flex-shrink-0 flex flex-col items-center justify-center ml-3">
+                                        <div className="flex-shrink-0 flex flex-col items-center justify-center ml-3 relative z-30">
                                           <span
-                                            className="text-white font-bold text-3xl sm:text-4xl scale-x-80"
+                                            className="font-bold text-4xl scale-100"
                                             style={{
-                                              WebkitTextStroke: "1px rgba(0, 0, 0, 0.38)",
+                                              color: "#FFFFFF",
+                                              WebkitTextStroke: "1.3px #2D4CAE",
                                               textShadow: `
-                                              -1px -1px 0 #000,
-                                               1px -1px 0 #000,
-                                              -1px  1px 0 #000,
-                                               1px  1px 0 #000
+                                              0 0 2px #5B91FB,
+                                              0 0 4px #5B91FB,
+                                              0 0 6px #5B91FB,
+                                              0 0 8px #5B91FB,
+                                              0 0 12px #5B91FB,
+                                              0 0 16px #5B91FB,
+                                              -1px -1px 0 #5B91FB,
+                                               1px -1px 0 #5B91FB,
+                                              -1px  1px 0 #5B91FB,
+                                               1px  1px 0 #5B91FB,
+                                              -2px -2px 4px rgba(91, 145, 251, 0.8),
+                                               2px -2px 4px rgba(91, 145, 251, 0.8),
+                                              -2px  2px 4px rgba(91, 145, 251, 0.8),
+                                               2px  2px 4px rgba(91, 145, 251, 0.8)
                                             `,
                                             }}
                                           >
                                             {epiphany.cost}
                                           </span>
                                           <div
-                                            className="w-full h-0.5 bg-white mt-0.5 scale-x-75"
+                                            className="w-full h-0.5 mt-0.5 scale-x-75"
                                             style={{
-                                              backgroundColor: "#ffffff",
-                                              WebkitBoxShadow: `
-                                              -1px -1px 0 #000,
-                                               1px -1px 0 #000,
-                                              -1px  1px 0 #000,
-                                               1px  1px 0 #000
+                                              backgroundColor: "#B6C4F9",
+                                              boxShadow: `
+                                                0 0 2px #5B91FB,
+                                                0 0 4px #5B91FB,
+                                                0 0 6px #5B91FB,
+                                                0 0 8px rgba(91, 145, 251, 0.6),
+                                                inset 0 1px 0 rgba(255, 255, 255, 0.3)
                                               `,
                                             }}
                                           />
@@ -1019,27 +1134,46 @@ function CardDisplay({ card }: { card: any }) {
 
                                         {/* Name and Type */}
                                         <div className="flex-1 pt-0.5">
-                                          <h5
-                                            className="text-white font-bold leading-tight drop-shadow-lg"
-                                            style={{
-                                              fontSize: "clamp(0.75rem, 2.5vw, 1.25rem)",
-                                              textShadow: `
+                                          <div className="relative inline-block">
+                                            {/* Background Image - can be positioned separately */}
+                                            <div
+                                              className="absolute"
+                                              style={{
+                                                backgroundImage: `url(${getRarityBackgroundImage(cardData.name)})`,
+                                                backgroundRepeat: "no-repeat",
+                                                backgroundPosition: "left center",
+                                                backgroundSize: "contain",
+                                                top: 10,
+                                                left: -50,
+
+                                                bottom: 0,
+                                                height: "50%",
+                                                width: "700%",
+                                              }}
+                                            />
+                                            {/* Text */}
+                                            <h5
+                                              className="relative font-bold text-[16px] sm:text-[18px] md:text-[20px] leading-tight drop-shadow-lg"
+                                              style={{
+                                                color: getRarityColor(cardData.name),
+                                                padding: "2px 4px",
+                                                textShadow: `
                                               -1px -1px 0 #000,
                                                1px -1px 0 #000,
                                               -1px  1px 0 #000,
                                                1px  1px 0 #000
                                             `,
-                                              transform: "scaleX(1)",
-                                              transformOrigin: "left",
-                                              maxWidth: "100%",
-                                              whiteSpace: "normal",
-                                              overflow: "visible",
-                                              lineHeight: "1.2",
-                                            }}
-                                          >
-                                            {cardData.name}
-                                          </h5>
-                                          <div className="flex items-center gap-1">
+                                                transform: "scaleX(0.7)",
+                                                transformOrigin: "left",
+                                                maxWidth: "180%",
+                                                whiteSpace: "nowrap",
+                                                overflow: "hidden",
+                                              }}
+                                            >
+                                              {cardData.name}
+                                            </h5>
+                                          </div>
+                                          <div className="flex items-center gap-1 -mt-2.5">
                                             <img
                                               src={
                                                 epiphany.type === "attack"
@@ -1097,10 +1231,10 @@ function CardDisplay({ card }: { card: any }) {
                                                                 '<span style="color: #7ce2fb">$1</span>',
                                                             )
                                                             .replace(
-                                                                /(Piercing\s*Ballista|Enhanced\s*Ballista|Giant\s*Ballista|Shelling\s*Ballista|Micro\s*Ballista)/gi,
+                                                                /Shadow of the\s*Moon\+/gi,
                                                                 '<span style="color: #C8FF2E; text-decoration: underline; text-underline-offset: 2px">$&</span>',
                                                             ).replace(
-                                                                /Ballista/gi,
+                                                                /Moonslash/gi,
                                                                 '<span style="color: #C8FF2E; text-decoration: underline; text-underline-offset: 2px">$&</span>',
                                                             ),
                                                     }}
@@ -1118,7 +1252,7 @@ function CardDisplay({ card }: { card: any }) {
 
                         {/* Epiphany Explanations */}
                         <div className="mt-6 sm:mt-8 space-y-3 sm:space-y-4">
-                          <h3 className="text-lg sm:text-xl font-bold text-purple-300">Epiphany Explanations</h3>
+                          <h3 className="text-lg sm:text-xl font-bold text-red-300">Epiphany Explanations</h3>
                           {cardData.epiphanies.map((epiphany, index) => (
                             <div key={index} className="p-3 sm:p-4 rounded-lg bg-background/50 border border-border">
                               <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
@@ -1139,13 +1273,13 @@ function CardDisplay({ card }: { card: any }) {
                         {/* Divine Epiphanies */}
                         {cardData.divineEpiphanies && cardData.divineEpiphanies.length > 0 && (
                           <div className="mt-6 sm:mt-8 space-y-3 sm:space-y-4">
-                            <h3 className="text-lg sm:text-xl font-bold text-purple-300">Divine Epiphanies</h3>
+                            <h3 className="text-lg sm:text-xl font-bold text-red-300">Divine Epiphanies</h3>
                             <p className="text-xs sm:text-sm text-muted-foreground mb-4">
                               Good Divine Epiphanies that this card can roll:
                             </p>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                               {cardData.divineEpiphanies.map((divineEpiphany: any, index: number) => (
-                                <div key={index} className="p-3 sm:p-4 rounded-lg bg-gradient-to-br from-purple-900/30 to-purple-800/20 border border-purple-500/40">
+                                <div key={index} className="p-3 sm:p-4 rounded-lg bg-gradient-to-br from-red-900/30 to-red-800/20 border border-red-500/40">
                                   <div className="flex items-center gap-2 mb-2">
                                     {divineEpiphany.icon && (
                                       <img
@@ -1154,11 +1288,11 @@ function CardDisplay({ card }: { card: any }) {
                                         className="w-8 h-8 sm:w-10 sm:h-10 object-contain flex-shrink-0"
                                       />
                                     )}
-                                    <span className="px-2 py-1 rounded-full text-xs font-bold bg-purple-500/30 text-purple-200 border border-purple-400/50">
+                                    <span className="px-2 py-1 rounded-full text-xs font-bold bg-red-500/30 text-red-200 border border-red-400/50">
                                       Divine
                                     </span>
                                     {divineEpiphany.name && (
-                                      <span className="text-xs sm:text-sm font-semibold text-purple-200">
+                                      <span className="text-xs sm:text-sm font-semibold text-red-200">
                                         {divineEpiphany.name}
                                       </span>
                                     )}
@@ -1167,7 +1301,7 @@ function CardDisplay({ card }: { card: any }) {
                                     {divineEpiphany.description}
                                   </p>
                                   {divineEpiphany.reasoning && (
-                                    <p className="text-xs text-purple-300/80 mt-2 italic leading-relaxed">
+                                    <p className="text-xs text-red-300/80 mt-2 italic leading-relaxed">
                                       {divineEpiphany.reasoning}
                                     </p>
                                   )}
@@ -1183,95 +1317,93 @@ function CardDisplay({ card }: { card: any }) {
               </div>
             </section>
 
-              {/* 3. Recommended Save Data */}
-              <section id="recommended-save-data" className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-6">
-                <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-purple-400">3. Recommended Save Data</h2>
-                <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6">
-                  These are examples - you can change based on your playstyle.
-                </p>
+            {/* 3. Recommended Save Data */}
+            <section id="recommended-save-data" className="rounded-lg border border-border bg-card p-8 scroll-mt-6">
+            <h2 className="text-2xl font-bold mb-6 text-red-400">3. Recommended Save Data</h2>
+              <p className="text-muted-foreground mb-6">
+                These are examples - you can change based on your playstyle.
+              </p>
 
-                <div className="space-y-8 sm:space-y-12">
-                  {/* Build 1: Draw Engine */}
-                  <div className="space-y-4 sm:space-y-6">
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4">
-                      <h3 className="text-lg sm:text-xl font-bold text-purple-300">Draw Engine Build</h3>
-                      <span className="px-2 sm:px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/40 text-blue-400 text-xs sm:text-sm font-bold whitespace-nowrap">
-                        [140 Faint Memory Cost without Convert Method]
-                      </span>
-                    </div>
-
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      4x Repose I for insane card draw, combined with Sir Kowalski III to generate Ballistas on skill draws.
-                      <br />
-                      Firing Preparation IV gives reliable Giant Ballista AoE every turn.
-                      <br />
-                      Pendant of Resolution I provides consistent Reload on skill use.
-                    </p>
-
-                    {(() => {
-                      const { topRow, bottomRow } = generateDeckRows("draw-engine");
-                      return (
-                        <>
-                          {/* Top Row */}
-                          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 max-w-7xl mx-auto justify-items-center">
-                            {topRow.map((card, index) => (
-                              <CardDisplay key={card.id || index} card={card} />
-                            ))}
-                          </div>
-
-                          {/* Bottom Row */}
-                          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 max-w-7xl mx-auto justify-items-center">
-                            {bottomRow.map((card, index) => (
-                              <CardDisplay key={card.id || index} card={card} />
-                            ))}
-                          </div>
-                        </>
-                      );
-                    })()}
+              <div className="space-y-12">
+                {/* Build 1 */}
+                <div className="space-y-6">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-xl font-bold text-red-300">Draw Engine</h3>
+                    <span className="px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/40 text-blue-400 text-sm font-bold">
+                      [XXX]
+                    </span>
                   </div>
 
-                  {/* Build 2: Mei Lin Synergy */}
-                  <div className="space-y-4 sm:space-y-6">
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4">
-                      <h3 className="text-lg sm:text-xl font-bold text-purple-300">Mei Lin Passion Build</h3>
-                      <span className="px-2 sm:px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/40 text-blue-400 text-xs sm:text-sm font-bold whitespace-nowrap">
-                        [170 Faint Memory Cost with all 3 Base Converted]
-                      </span>
-                    </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    
+                    <br />
 
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      Optimized for Mei Lin burst. Pendant of Resolution V gives massive Passion stacks for Aromata and Rising Dragon Spire.
-                      <br/>
-                      <strong>Need -1 Cost for that card on Divine Epiphany, otherwise is expensive.</strong>
-                      <br/>
-                      <i>150 Faint Memory cost if removed all 3 base cards without conversion and having -1 less Pendant of Resolution V</i>
-                    </p>
+                    <br />
+              
+                  </p>
 
-                    {(() => {
-                      const { topRow, bottomRow } = generateDeckRows("mei-lin");
-                      return (
-                        <>
-                          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 max-w-7xl mx-auto justify-items-center">
-                            {topRow.map((card, index) => (
-                              <CardDisplay key={card.id || index} card={card} />
-                            ))}
-                          </div>
+                  {(() => {
+                    const { topRow, bottomRow } = generateDeckRows("draw-engine");
+                    return (
+                      <>
+                        {/* Top Row */}
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-7xl mx-auto justify-items-center">
+                          {topRow.map((card, index) => (
+                            <CardDisplay key={card.id || index} card={card} />
+                          ))}
+                        </div>
 
-                          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 max-w-7xl mx-auto justify-items-center">
-                            {bottomRow.map((card, index) => (
-                              <CardDisplay key={card.id || index} card={card} />
-                            ))}
-                          </div>
-                        </>
-                      );
-                    })()}
-                  </div>
+                        {/* Bottom Row */}
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-7xl mx-auto justify-items-center">
+                          {bottomRow.map((card, index) => (
+                            <CardDisplay key={card.id || index} card={card} />
+                          ))}
+                        </div>
+                      </>
+                    );
+                  })()}
                 </div>
-              </section>
+
+                {/* Build 2 */}
+                <div className="space-y-6">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-xl font-bold text-red-300">Passion Stacking</h3>
+                    <span className="px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/40 text-blue-400 text-sm font-bold">
+                      [XXX]
+                    </span>
+                  </div>
+
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    
+                  </p>
+
+                  {(() => {
+                    const { topRow, bottomRow } = generateDeckRows("mei-lin");
+                    return (
+                      <>
+                        {/* Top Row */}
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-7xl mx-auto justify-items-center">
+                          {topRow.map((card, index) => (
+                            <CardDisplay key={card.id || index} card={card} />
+                          ))}
+                        </div>
+
+                        {/* Bottom Row */}
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-7xl mx-auto justify-items-center">
+                          {bottomRow.map((card, index) => (
+                            <CardDisplay key={card.id || index} card={card} />
+                          ))}
+                        </div>
+                      </>
+                    );
+                  })()}
+                </div>
+              </div>
+            </section>
 
             {/* 3.1. Equipments */}
             <section id="equipments" className="rounded-lg border border-border bg-card p-8 scroll-mt-6">
-              <h2 className="text-2xl font-bold mb-6 text-purple-400">3.1. Equipments</h2>
+              <h2 className="text-2xl font-bold mb-6 text-red-400">3.1. Equipments</h2>
               <p className="text-muted-foreground mb-6 whitespace-pre-line">
                 These are her best equipment options, only weapon is listed by priority, you usually can’t equip them all at once.
                 <br/>
@@ -1328,8 +1460,8 @@ function CardDisplay({ card }: { card: any }) {
                     <button
                       className="flex items-center justify-center gap-2 text-xs w-40
                                 rounded-lg overflow-hidden border border-border bg-card 
-                                hover:border-purple-400 transition-all duration-300 
-                                hover:scale-105 hover:shadow-lg hover:shadow-purple-400/20 py-1 mt-3"
+                                hover:border-red-400 transition-all duration-300 
+                                hover:scale-105 hover:shadow-lg hover:shadow-red-400/20 py-1 mt-3"
                     >
                       Show More
                       <ChevronDown className="h-3 w-3"/>
@@ -1599,8 +1731,8 @@ function CardDisplay({ card }: { card: any }) {
                     <button
                       className="flex items-center justify-center gap-2 text-xs w-40
                                 rounded-lg overflow-hidden border border-border bg-card 
-                                hover:border-purple-400 transition-all duration-300 
-                                hover:scale-105 hover:shadow-lg hover:shadow-purple-400/20 py-1 mt-3"
+                                hover:border-red-400 transition-all duration-300 
+                                hover:scale-105 hover:shadow-lg hover:shadow-red-400/20 py-1 mt-3"
                     >
                       Show More
                       <ChevronDown className="h-3 w-3"/>
@@ -1739,7 +1871,7 @@ function CardDisplay({ card }: { card: any }) {
                 {/* Acessory Category */}
                 <div className="space-y-2">
                   <div className="flex items-center justify-center gap-2 mb-3">
-                    <h3 className="text-lg font-bold text-purple-300">Acessory</h3>
+                    <h3 className="text-lg font-bold text-red-300">Acessory</h3>
                   </div>
 
                 {/* Best in Slot Acessory */}
@@ -1783,8 +1915,8 @@ function CardDisplay({ card }: { card: any }) {
                     <button
                       className="flex items-center justify-center gap-2 text-xs w-40
                                 rounded-lg overflow-hidden border border-border bg-card 
-                                hover:border-purple-400 transition-all duration-300 
-                                hover:scale-105 hover:shadow-lg hover:shadow-purple-400/20 py-1 mt-3"
+                                hover:border-red-400 transition-all duration-300 
+                                hover:scale-105 hover:shadow-lg hover:shadow-red-400/20 py-1 mt-3"
                     >
                       Show More
                       <ChevronDown className="h-3 w-3"/>
@@ -1951,7 +2083,7 @@ function CardDisplay({ card }: { card: any }) {
 
             {/* 4. Memory Fragments */}
             <section id="memory-fragments" className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-6">
-            <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-purple-400">4. Memory Fragments</h2>
+            <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-red-400">4. Memory Fragments</h2>
 
               {/* BEST IN SLOT */}
               <div className="space-y-8 sm:space-y-12">
@@ -2035,9 +2167,9 @@ function CardDisplay({ card }: { card: any }) {
                 {/* Main Stats */}
                 <div className="grid grid-cols-3 gap-2 sm:gap-4">
                   <div className="text-center">
-                    <div className="text-2xl sm:text-3xl font-bold text-purple-400">IV</div>
+                    <div className="text-2xl sm:text-3xl font-bold text-red-400">IV</div>
                     <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1 sm:mb-2">Ideal</div>
-                    <div className="py-1.5 sm:py-2 px-2 sm:px-4 rounded bg-purple-500/10 border border-purple-500/30 text-xs sm:text-sm font-medium text-purple-300">
+                    <div className="py-1.5 sm:py-2 px-2 sm:px-4 rounded bg-red-500/10 border border-red-500/30 text-xs sm:text-sm font-medium text-red-300">
                       Critical Rate
                     </div>
                   </div>
@@ -2051,9 +2183,9 @@ function CardDisplay({ card }: { card: any }) {
                   </div>
 
                   <div className="text-center">
-                    <div className="text-2xl sm:text-3xl font-bold text-purple-400">IV</div>
+                    <div className="text-2xl sm:text-3xl font-bold text-red-400">IV</div>
                     <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1 sm:mb-2">Ideal</div>
-                    <div className="py-1.5 sm:py-2 px-2 sm:px-4 rounded bg-purple-500/10 border border-purple-500/30 text-xs sm:text-sm font-medium text-purple-300">
+                    <div className="py-1.5 sm:py-2 px-2 sm:px-4 rounded bg-red-500/10 border border-red-500/30 text-xs sm:text-sm font-medium text-red-300">
                       Attack %
                     </div>
                   </div>
@@ -2067,11 +2199,11 @@ function CardDisplay({ card }: { card: any }) {
                       Extra Damage
                     </div>
                     <span className="text-xl sm:text-2xl text-muted-foreground/40">›</span>
-                    <div className="px-2 sm:px-4 py-1.5 sm:py-2 rounded-full bg-purple-500/20 border border-purple-500/50 font-semibold text-purple-300 text-xs sm:text-sm">
+                    <div className="px-2 sm:px-4 py-1.5 sm:py-2 rounded-full bg-red-500/20 border border-red-500/50 font-semibold text-red-300 text-xs sm:text-sm">
                       Critical Rate
                     </div>
                     <span className="text-xl sm:text-2xl text-muted-foreground/40">=</span>
-                    <div className="px-2 sm:px-4 py-1.5 sm:py-2 rounded-full bg-purple-500/20 border border-purple-500/50 font-semibold text-purple-300 text-xs sm:text-sm">
+                    <div className="px-2 sm:px-4 py-1.5 sm:py-2 rounded-full bg-red-500/20 border border-red-500/50 font-semibold text-red-300 text-xs sm:text-sm">
                       Critical Damage
                     </div>
                     <span className="text-xl sm:text-2xl text-muted-foreground/40">›</span>
@@ -2096,7 +2228,7 @@ function CardDisplay({ card }: { card: any }) {
 
             {/* 5. Partners */}
             <section id="partners" className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-24">
-              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-purple-400">5. Partners</h2>
+              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-red-400">5. Partners</h2>
               <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6 whitespace-pre-line">
                 Click on any partner below to view detailed information about their synergy with Veronica. Partners are ranked based on their overall effectiveness and specific utility for Veronica's builds.
               </p>
@@ -2158,7 +2290,7 @@ function CardDisplay({ card }: { card: any }) {
                         </span>
               
                         {/* Card Image */}
-                        <div className="relative aspect-[9/16] hover:scale-105 rounded-lg overflow-hidden border-2 border-border hover:border-purple-400 bg-card transition-all">
+                        <div className="relative aspect-[9/16] hover:scale-105 rounded-lg overflow-hidden border-2 border-border hover:border-red-400 bg-card transition-all">
                           <img
                             src={partner.image || "/placeholder.svg"}
                             alt={partner.name}
@@ -2173,14 +2305,14 @@ function CardDisplay({ card }: { card: any }) {
               
                     <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto p-4 sm:p-6">
                       <DialogHeader>
-                        <DialogTitle className="text-xl sm:text-2xl text-purple-400 text-center">{partner.name}</DialogTitle>
+                        <DialogTitle className="text-xl sm:text-2xl text-red-400 text-center">{partner.name}</DialogTitle>
                       </DialogHeader>
                       <div className="space-y-3 sm:space-y-4 mt-3 sm:mt-4">
                         <div className="flex justify-center">
                           <img
                             src={partner.image || "/placeholder.svg"}
                             alt={partner.name}
-                            className="w-32 sm:w-48 h-auto rounded-lg border-2 border-purple-500/50"
+                            className="w-32 sm:w-48 h-auto rounded-lg border-2 border-red-500/50"
                           />
                         </div>
                         <div>
@@ -2196,7 +2328,7 @@ function CardDisplay({ card }: { card: any }) {
 
             {/* 6. Teams */}
             <section id="teams" className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-24">
-              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-purple-400">6. Teams</h2>
+              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-red-400">6. Teams</h2>
               <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6 whitespace-pre-line">
                 Below are two example team compositions showcasing Veronica in different roles. Click on any team to view detailed synergy explanations, role breakdowns, and strategic insights.
               </p>
@@ -2205,7 +2337,7 @@ function CardDisplay({ card }: { card: any }) {
                 {/* Team 1 */}
                 <Dialog>
                   <DialogTrigger asChild>
-                    <div className="group cursor-pointer hover:scale-105 rounded-xl border-2 border-purple-500/30 bg-gradient-to-br from-purple-500/5 to-transparent p-4 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300">
+                    <div className="group cursor-pointer hover:scale-105 rounded-xl border-2 border-red-500/30 bg-gradient-to-br from-red-500/5 to-transparent p-4 hover:border-red-400 hover:shadow-lg hover:shadow-red-500/20 transition-all duration-300">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-2 h-2 rounded-full bg-red-400"></div>
                         <h3 className="text-base font-semibold text-red-400/100">Mei Lin Hypercarry</h3>
@@ -2284,7 +2416,7 @@ function CardDisplay({ card }: { card: any }) {
                   </DialogTrigger>
                   <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto p-4 sm:p-6">
                     <DialogHeader>
-                      <DialogTitle className="text-xl sm:text-2xl text-purple-400">Team 1: Mei Lin Hypercarry</DialogTitle>
+                      <DialogTitle className="text-xl sm:text-2xl text-red-400">Team 1: Mei Lin Hypercarry</DialogTitle>
                       <DialogDescription>Optimal team composition focusing on enabling Mei Lin's burst potential</DialogDescription>
                     </DialogHeader>
                     <div className="space-y-4 mt-4">
@@ -2292,7 +2424,7 @@ function CardDisplay({ card }: { card: any }) {
                         <div>
                           <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">Team Overview</h3>
                           <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-                            This composition maximizes <strong className="text-red-300">Mei Lin's burst damage potential</strong> by providing the essential support she needs: <strong className="text-red-300">card draw</strong> and <strong className="text-purple-300">Passion synergy</strong>. Veronica serves as a support character, enabling Mei Lin to consistently find and play her key combo cards. Rei provides additional damage amplification through buffs, creating a powerful triple synergy.
+                            This composition maximizes <strong className="text-red-300">Mei Lin's burst damage potential</strong> by providing the essential support she needs: <strong className="text-red-300">card draw</strong> and <strong className="text-red-300">Passion synergy</strong>. Veronica serves as a support character, enabling Mei Lin to consistently find and play her key combo cards. Rei provides additional damage amplification through buffs, creating a powerful triple synergy.
                           </p>
                         </div>
                         
@@ -2303,13 +2435,13 @@ function CardDisplay({ card }: { card: any }) {
                               <strong className="text-red-300">Veronica + Mei Lin:</strong> Veronica's Repose I (0 cost, Draw 2 other combatant's cards) solves Mei Lin's card draw problems, ensuring she can consistently access her powerful combo pieces like Aromata and Rising Dragon Spire. Both share <strong className="text-red-300">Passion type</strong>, creating natural synergy and team-wide benefits.
                             </div>
                             <div>
-                              <strong className="text-purple-300">Rei + Mei Lin:</strong> Rei provides damage buffs that amplify Mei Lin's burst damage. These buffs multiply the effectiveness of Mei Lin's high-cost, high-damage attacks, making her burst windows significantly more devastating.
+                              <strong className="text-red-300">Rei + Mei Lin:</strong> Rei provides damage buffs that amplify Mei Lin's burst damage. These buffs multiply the effectiveness of Mei Lin's high-cost, high-damage attacks, making her burst windows significantly more devastating.
                             </div>
                             <div>
                               <strong className="text-red-300">Passion Synergy:</strong> With both Veronica and Mei Lin sharing Passion type, the team benefits from enhanced Passion stack generation and related buffs. This is especially powerful with Mei Lin's Passion-based mechanics.
                             </div>
                             <div>
-                              <strong className="text-purple-300">The Combo:</strong> Veronica draws cards for Mei Lin → Mei Lin finds Aromata and Rising Dragon Spire → Veronica's Pendant of Resolution V (if using Mei Lin Passion Build) provides massive Passion stacks → Rei's damage buffs amplify → Mei Lin unleashes devastating burst damage.
+                              <strong className="text-red-300">The Combo:</strong> Veronica draws cards for Mei Lin → Mei Lin finds Aromata and Rising Dragon Spire → Veronica's Pendant of Resolution V (if using Mei Lin Passion Build) provides massive Passion stacks → Rei's damage buffs amplify → Mei Lin unleashes devastating burst damage.
                             </div>
                           </div>
                         </div>
@@ -2319,7 +2451,7 @@ function CardDisplay({ card }: { card: any }) {
                           <ul className="list-disc list-inside space-y-1 text-sm sm:text-base text-muted-foreground ml-4">
                             <li><strong className="text-red-300">Mei Lin:</strong> Main DPS - Primary damage dealer focusing on burst windows with Passion stacks</li>
                             <li><strong className="text-red-300">Veronica:</strong> Support/Draw Engine - Provides card draw and enables Mei Lin's combos</li>
-                            <li><strong className="text-purple-300">Rei:</strong> Support/Damage Buffer - Amplifies Mei Lin's damage through buffs</li>
+                            <li><strong className="text-red-300">Rei:</strong> Support/Damage Buffer - Amplifies Mei Lin's damage through buffs</li>
                           </ul>
                         </div>
 
@@ -2337,7 +2469,7 @@ function CardDisplay({ card }: { card: any }) {
                 {/* Team 2 */}
                 <Dialog>
                   <DialogTrigger asChild>
-                    <div className="group cursor-pointer hover:scale-105 rounded-xl border-2 border-purple-500/30 bg-gradient-to-br from-purple-500/5 to-transparent p-4 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300">
+                    <div className="group cursor-pointer hover:scale-105 rounded-xl border-2 border-red-500/30 bg-gradient-to-br from-red-500/5 to-transparent p-4 hover:border-red-400 hover:shadow-lg hover:shadow-red-500/20 transition-all duration-300">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-2 h-2 rounded-full bg-red-400"></div>
                         <h3 className="text-base font-semibold text-red-400/100">Veronica DPS</h3>
@@ -2416,7 +2548,7 @@ function CardDisplay({ card }: { card: any }) {
                   </DialogTrigger>
                   <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto p-4 sm:p-6">
                     <DialogHeader>
-                      <DialogTitle className="text-xl sm:text-2xl text-purple-400">Team 2: Veronica DPS</DialogTitle>
+                      <DialogTitle className="text-xl sm:text-2xl text-red-400">Team 2: Veronica DPS</DialogTitle>
                       <DialogDescription>Team composition focusing on Veronica as the primary damage dealer</DialogDescription>
                     </DialogHeader>
                     <div className="space-y-4 mt-4">
@@ -2435,13 +2567,13 @@ function CardDisplay({ card }: { card: any }) {
                               <strong className="text-red-300">Veronica + Owen:</strong> Both characters share <strong className="text-red-300">Passion type</strong>, creating natural synergy. Owen provides frontline presence and additional damage, while Veronica's draw engine and Ballista generation create consistent AoE damage output. The Passion synergy enhances both characters' effectiveness.
                             </div>
                             <div>
-                              <strong className="text-purple-300">Rei + Veronica:</strong> Rei's damage buffs amplify Veronica's Ballista damage, making her Giant Ballista AoE attacks significantly more powerful. This is especially effective with Veronica's Draw Engine Build that focuses on consistent Ballista generation every turn.
+                              <strong className="text-red-300">Rei + Veronica:</strong> Rei's damage buffs amplify Veronica's Ballista damage, making her Giant Ballista AoE attacks significantly more powerful. This is especially effective with Veronica's Draw Engine Build that focuses on consistent Ballista generation every turn.
                             </div>
                             <div>
                               <strong className="text-red-300">Self-Sustaining Draw Engine:</strong> Veronica's Repose I (0 cost, Draw 2) combined with Firing Preparation IV creates a self-sustaining engine. She can draw cards, generate Ballistas, and maintain consistent damage output without requiring external card draw support.
                             </div>
                             <div>
-                              <strong className="text-purple-300">The Combo:</strong> Veronica uses Repose I to draw cards → Firing Preparation IV generates Giant Ballista every turn → Rei's damage buffs amplify Ballista damage → Owen provides additional frontline pressure → Consistent AoE damage output across multiple enemies.
+                              <strong className="text-red-300">The Combo:</strong> Veronica uses Repose I to draw cards → Firing Preparation IV generates Giant Ballista every turn → Rei's damage buffs amplify Ballista damage → Owen provides additional frontline pressure → Consistent AoE damage output across multiple enemies.
                             </div>
                           </div>
                         </div>
@@ -2451,7 +2583,7 @@ function CardDisplay({ card }: { card: any }) {
                           <ul className="list-disc list-inside space-y-1 text-sm sm:text-base text-muted-foreground ml-4">
                             <li><strong className="text-red-300">Veronica:</strong> Main DPS - Primary damage dealer through Ballista generation and AoE attacks</li>
                             <li><strong className="text-red-300">Owen:</strong> Secondary DPS/Frontline - Provides Passion synergy and additional damage</li>
-                            <li><strong className="text-purple-300">Rei:</strong> Support/Damage Buffer - Amplifies Veronica's Ballista damage through buffs</li>
+                            <li><strong className="text-red-300">Rei:</strong> Support/Damage Buffer - Amplifies Veronica's Ballista damage through buffs</li>
                           </ul>
                         </div>
 
