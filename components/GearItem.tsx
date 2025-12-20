@@ -7,7 +7,7 @@ type Rarity = "rare" | "legend" | "unique";
 interface GearItemProps {
   name: string;
   rarity: Rarity;
-  source: string;
+  source: string[];
   atk?: string;
   def?: string;
   health?: string;
@@ -44,7 +44,7 @@ export function GearItem({
 
   return (
     <div className="relative flex items-start gap-4 p-4 rounded-xl bg-gray-800/40 border border-gray-700/60 hover:border-purple-400/100 transition-all duration-200">
-      <GearTooltip text={source} />
+      <GearTooltip sources={source} />
 
       <div className="relative w-24 h-36 flex-shrink-0">
         <img src={bgSrc} alt={`${rarity} Rarity`} className="w-full h-full object-contain" />
@@ -65,14 +65,17 @@ export function GearItem({
         {(atk || def || health) && (
           <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-lg bg-black/30 text-gray-200 mb-3">
             <span className="text-sm font-medium">{atk ? "ATK" : def ? "DEF" : "Health"}</span>
-            <span className="text-white font-bold text-lg">{atk || def || health}</span>
+            <span className="text-foreground font-bold text-sm">{atk || def || health}</span>
           </div>
         )}
 
-        <p
-          className="text-sm text-gray-300 leading-relaxed"
-          dangerouslySetInnerHTML={{ __html: coloredEffect }}
-        />
+        <p className="text-sm text-gray-300 leading-relaxed break-words whitespace-pre-line">
+          {effect.split(/(\d+%?)/g).map((part, i) => 
+            /\d+%?/.test(part) 
+              ? <span key={i} className="text-[#FF8C00]">{part}</span>
+              : part
+          )}
+        </p>
       </div>
     </div>
   );
