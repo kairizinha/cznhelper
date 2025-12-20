@@ -22,7 +22,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["The Blue Pot"],
   atk: "90",
-  imageName: "dark-grips-claws",
+  imageName: "dark-grip's-claws",
   effect: `Increase Damage dealt by all attacks by 25%`,
 },
 {
@@ -49,7 +49,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["The Blue Pot"],
   atk: "82",
-  imageName: "executioners-edge",
+  imageName: "executioner's-edge",
   effect: `Against enemies with HP below 50%, +35% Damage`,
 },
 {
@@ -76,7 +76,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["The Blue Pot", "City of Mist", "Laboratory 0"],
   atk: "82",
-  imageName: "natures-hostility",
+  imageName: "nature's-hostility",
   effect: `When an enemy is defeated, 200% Fixed Damage to all enemies`,
 },
 {
@@ -94,7 +94,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["The Blue Pot"],
   atk: "74",
-  imageName: "steelers-dagger",
+  imageName: "steeler's-dagger",
   effect: `Upon Defeat, +5~10 Credits (1 per battle)`,
 },
 
@@ -123,7 +123,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Twin Star's Shadow"],
   atk: "82",
-  imageName: "formicas-broken-spear",
+  imageName: "formica's-broken-spear",
   effect: `+6% Damage per enemy`,
 },
 {
@@ -132,7 +132,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Twin Star's Shadow"],
   atk: "90",
-  imageName: "formicas-perfect-spear",
+  imageName: "formica's-perfect-spear",
   effect: `+7% Damage per enemy. +10% All-Attack Damage`,
 },
 {
@@ -141,7 +141,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Twin Star's Shadow"],
   atk: "90",
-  imageName: "lepidolas-whip",
+  imageName: "lepidola's-whip",
   effect: `+25% Damage for Attack Cards costing 1 or less`,
 },
 {
@@ -186,7 +186,7 @@ export const weapons: GearData[] = [
   slot: "weapon",
   source: ["Twin Star's Shadow"],
   atk: "82",
-  imageName: "violet-butterflys-whip",
+  imageName: "violet-butterfly's-whip",
   effect: `+20% Damage for Attack Cards costing 1 or less`,
 },
 
@@ -635,7 +635,7 @@ export const armors: GearData[] = [
     slot: "armor",
     source: ["The Blue Pot", "City of Mist", "Laboratory 0"],
     def: "31",
-    imageName: "wolves-banes-spine",
+    imageName: "wolves-bane's-spine",
     effect: `On a Critical Hit, +10% Fixed Shield`,
   },
 
@@ -750,7 +750,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["Swamp of Judgment"],
   def: "31",
-  imageName: "fairy-kings-crown",
+  imageName: "fairy-king's-crown",
   effect: `+6% Critical Chance`,
 },
 {
@@ -929,7 +929,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["Other"],
   def: "28",
-  imageName: "gladiators-helmet",
+  imageName: "gladiator's-helmet",
   effect: `At the start of battle, gain 2 Damage Reduction`,
 },
 {
@@ -947,7 +947,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["Other"],
   def: "28",
-  imageName: "scouts-combat-boots",
+  imageName: "scout's-combat-boots",
   effect: `On enemy defeat, +60% Fixed Shield`,
 },
 {
@@ -975,7 +975,7 @@ export const armors: GearData[] = [
   slot: "armor",
   source: ["Other"],
   def: "28",
-  imageName: "survivors-hood",
+  imageName: "survivor's-hood",
   effect: `At the start of battle, gain 140% Fixed Shield`,
 },
 ];
@@ -1052,7 +1052,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["The Blue Pot"],
     health: "91",
-    imageName: "gloomy-primes-eye",
+    imageName: "gloomy-prime's-eye",
     effect: `At the start of battle, +40% Shield`,
   },
   {
@@ -1061,7 +1061,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["The Blue Pot"],
     health: "83",
-    imageName: "madmans-masterpiece",
+    imageName: "madman's-masterpiece",
     effect: `At the start of an Elite Battle, +50% Damage`,
   },
   {
@@ -1070,7 +1070,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["The Blue Pot", "City of Mist", "Laboratory 0"],
     health: "83",
-    imageName: "natures-gift",
+    imageName: "nature's-gift",
     effect: `Heal 40% at the end of turn`,
   },
   {
@@ -1079,7 +1079,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["The Blue Pot"],
     health: "83",
-    imageName: "orders-emblem",
+    imageName: "order's-emblem",
     effect: `In Chaos Order battles, +15% Defense`,
   },
   {
@@ -1108,7 +1108,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Twin Star's Shadow"],
     health: "83",
-    imageName: "kiraks-core",
+    imageName: "kirak's-core",
     effect: `At the start of the turn, if below 40% of Max HP, Recover 5% of Max HP`,
   },
   {
@@ -1117,7 +1117,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Twin Star's Shadow"],
     health: "83",
-    imageName: "lepidolas-wing",
+    imageName: "lepidola's-wing",
     effect: `At the start of the battle, 1 Evade`,
   },
   {
@@ -1200,7 +1200,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["City of Mist", "Laboratory 0"],
     health: "83",
-    imageName: "palasias-orb",
+    imageName: "palasia's-orb",
     effect: `When Vulnerable is applied by a card, also 1 Weaken to the target`,
   },
   {
@@ -1227,7 +1227,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["City of Mist"],
     health: "75",
-    imageName: "the-famished-ones-belly",
+    imageName: "the-famished-one's-belly",
     effect: `When a card is Exhausted, +25% Damage Amount, Recover 5% of Max HP (1 time per battle)`,
   },
   {
@@ -1292,7 +1292,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Swamp of Judgment"],
     health: "75",
-    imageName: "poachers-pathfinder",
+    imageName: "poacher's-pathfinder",
     effect: `In Sekred battle, +25% Damage, 2 Vulnerable to all enemies`,
   },
   {
@@ -1337,7 +1337,7 @@ export const accessories: GearData[] = [
     slot: "accessory",
     source: ["Swamp of Judgment"],
     health: "83",
-    imageName: "viadeuss-reactor",
+    imageName: "viadeus's-reactor",
     effect: `When an Upgrade Card is used, 1 Damage Reduction`,
   },
 
