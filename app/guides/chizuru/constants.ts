@@ -18,7 +18,7 @@ const recommendedDecks: RecommendedDecks = {
 };
 
 const characterItems = { 
-  WEAPONS: [
+  weapons: [
     "Intellect of Discord",
     "Tentacles of Chaos",
     "Foggy Crystal Ball",
@@ -28,14 +28,14 @@ const characterItems = {
     "Bone Cutter",
     "Obsidian Sword",
   ],
-  ARMORS: [
+  armors: [
     "Wings of Freedom",
     "Fairy King's Crown",
     "Shield of the Watcher",
     "Fragment of the Empty Void",
     "Rocket-Adorned Cape",
   ],
-  ACCESORIES: [
+  accesories: [
     "Emblem of an Exceptional Entity",
     "Eye of the Eyeless",
     "Clover of the Forest",

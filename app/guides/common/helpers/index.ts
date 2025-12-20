@@ -1,5 +1,11 @@
 import type { RecommendedDecks } from "@/@types";
+import type { GearData } from "@/data/gear";
 
+import {
+  weapons as weaponsList,
+  accessories as accessoriesList,
+  armors as armorsList,
+} from "@/data/gear";
 import { uniqueCards, commonCards } from "../constants";
 
 // Helper function to avoid repeating placeholder object
@@ -228,6 +234,44 @@ const generateDeckRows = (
   return { topRow, bottomRow, deck };
 };
 
+const getCharacterGear = ({
+  weapons,
+  armors,
+  accessories,
+}: {
+  weapons?: Array<string>;
+  armors?: Array<string>;
+  accessories?: Array<string>;
+}) => {
+  const characterItems: {
+    weapons: Array<GearData>;
+    armors: Array<GearData>;
+    accessories: Array<GearData>
+  } = {
+    weapons: [],
+    armors: [],
+    accessories: [],
+  };
+
+  const mapItems = (itemsList: Array<string>, gearList: Array<GearData>): Array<GearData> => {
+    return itemsList.map(item => gearList.find(gear => gear.name === item)).filter(Boolean) as Array<GearData>;
+  }
+
+  if (weapons?.length) {
+    characterItems.weapons = mapItems(weapons, weaponsList);
+  }
+
+  if (armors?.length) {
+    characterItems.armors = mapItems(armors, armorsList);
+  }
+
+  if (accessories?.length) {
+    characterItems.accessories = mapItems(accessories, accessoriesList);
+  }
+
+  return characterItems;
+};
+
 export {
   createPlaceholder,
   getRarityBackgroundImage,
@@ -236,4 +280,5 @@ export {
   parseDescription,
   getEpiphanyFromRef,
   generateDeckRows,
+  getCharacterGear,
 };

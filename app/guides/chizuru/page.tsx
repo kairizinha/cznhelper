@@ -11,7 +11,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { weapons, armors, accessories, GearData } from "@/data/gear";
 import { GearItem } from "@/components/GearItem";
 
 import {
@@ -23,6 +22,7 @@ import {
 
 import { sections, uniqueCards } from "../common/constants";
 import {
+  getCharacterGear,
   getRarityBackgroundImage,
   getRarityColor,
   getTierColor,
@@ -33,6 +33,7 @@ import {
   partners,
   recommendedDecks,
   secondaryCardSets,
+  characterItems
 } from "./constants";
 import {
   MemoryFragmentsMainStats,
@@ -46,34 +47,7 @@ export default function ChizuruGuidePage() {
   >(null);
   const [selectedSources, setSelectedSources] = useState<string[]>([]);
 
-  const chizuruWeapons = [
-    weapons.find((g) => g.name === "Intellect of Discord"),
-    weapons.find((g) => g.name === "Tentacles of Chaos"),
-    weapons.find((g) => g.name === "Foggy Crystal Ball"),
-    weapons.find((g) => g.name === "Mutant Predator Spike"),
-    weapons.find((g) => g.name === "Dagger That Tricked the Shadow"),
-    weapons.find((g) => g.name === "RFS-17"),
-    weapons.find((g) => g.name === "Bone Cutter"),
-    weapons.find((g) => g.name === "Obsidian Sword"),
-  ].filter(Boolean) as GearData[];
-
-  const chizuruArmors = [
-    armors.find((g) => g.name === "Wings of Freedom"),
-    armors.find((g) => g.name === "Fairy King's Crown"),
-    armors.find((g) => g.name === "Shield of the Watcher"),
-    armors.find((g) => g.name === "Fragment of the Empty Void"),
-    armors.find((g) => g.name === "Rocket-Adorned Cape"),
-  ].filter(Boolean) as GearData[];
-
-  const chizuruAccessories = [
-    accessories.find((g) => g.name === "Emblem of an Exceptional Entity"),
-    accessories.find((g) => g.name === "Eye of the Eyeless"),
-    accessories.find((g) => g.name === "Clover of the Forest"),
-    accessories.find((g) => g.name === "Verdant Shackles"),
-    accessories.find((g) => g.name === "Dimensional Cube"),
-    accessories.find((g) => g.name === "Nerve Hacking Module"),
-    accessories.find((g) => g.name === "Amorphous Cube"),
-  ].filter(Boolean) as GearData[];
+  const { weapons: chizuruWeapons, armors: chizuruArmors, accessories: chizuruAccessories } = getCharacterGear(characterItems);
 
   const toggleSource = (source: string) => {
     setSelectedSources((prev) =>
