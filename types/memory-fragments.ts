@@ -22,3 +22,17 @@ export enum MemoryFragmentMainStats {
   InstinctDamage = "instinct_damage",
   JusticeDamage = "justice_damage",
 }
+
+export enum MemoryFragmentSubstats {
+  CriticalRate = "critical_chance",
+  CriticalDamage = "critical_damage",
+  AttackFlat = "flat_attack",
+  DefenseFlat = "flat_defense",
+  HPFlat = "flat_hp",
+  DOT = "damage_over_time",
+  EGO = "ego_recovery",
+  Attack = "%attack",
+  Defense = "%defense",
+  HP = "%hp",
+  ExtraDamage = "extra_damage",
+}

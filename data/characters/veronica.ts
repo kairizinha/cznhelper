@@ -2,10 +2,14 @@ import {
   CardRarities,
   CharacterData,
   MemoryFragmentSetRecommendation,
+  MemoryFragmentSubstatPriorities,
   UniqueCard,
 } from "@/types/character-guides";
 import { CardTier } from "@/types/character-guides";
-import { MemoryFragmentMainStats } from "@/types/memory-fragments";
+import {
+  MemoryFragmentMainStats,
+  MemoryFragmentSubstats,
+} from "@/types/memory-fragments";
 import { SaveData } from "@/types/save-data";
 
 const uniqueCards: UniqueCard[] = [
@@ -380,6 +384,23 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
     },
   ],
 };
+
+const memoryFragmentSubstatPriorities: MemoryFragmentSubstatPriorities[] = [
+  {
+    priority: 1,
+    relation: "equal",
+    stats: [
+      MemoryFragmentSubstats.CriticalRate,
+      MemoryFragmentSubstats.CriticalDamage,
+      MemoryFragmentSubstats.ExtraDamage,
+    ],
+  },
+  {
+    priority: 2,
+    relation: "or",
+    stats: [MemoryFragmentSubstats.AttackFlat, MemoryFragmentSubstats.Attack],
+  },
+];
 export const veronicaData: CharacterData = {
   uniqueCards: uniqueCards,
   recommendedSaveData: recommendedVeronicaSaveData,
@@ -394,4 +415,5 @@ export const veronicaData: CharacterData = {
               ideal critical ratio After that, prioritize Flat Attack and
               Attack % for additional damage scaling Void Damage is
               generally preferred over Attack for most cases`,
+  memoryFragmentSubstatPriorities: memoryFragmentSubstatPriorities,
 };

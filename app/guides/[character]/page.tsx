@@ -159,6 +159,9 @@ export default function CharacterGuidePage() {
                     memoryFragmentSubstatsNote={
                       characterData.memoryFragmentSubstatsNote
                     }
+                    memoryFragmentSubstatsPriorities={
+                      characterData.memoryFragmentSubstatPriorities
+                    }
                   />
                 )}
               </div>

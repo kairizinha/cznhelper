@@ -1,6 +1,7 @@
 import {
   MemoryFragmentMainStats,
   MemoryFragmentSet,
+  MemoryFragmentSubstats,
   recommendingFragmentSet,
 } from "./memory-fragments";
 import { SaveData } from "./save-data";
@@ -45,6 +46,11 @@ export type MemoryFragmentSetRecommendation = {
   bestInSlot: recommendingFragmentSet[];
   alternative?: recommendingFragmentSet[];
 };
+export interface MemoryFragmentSubstatPriorities {
+  priority: number;
+  relation: 'equal' | 'or';
+  stats: MemoryFragmentSubstats[];
+}
 export interface CharacterData {
   commonCards?: Card[];
   uniqueCards: UniqueCard[];
@@ -57,6 +63,7 @@ export interface CharacterData {
   memoryFragmentSets?: MemoryFragmentSetRecommendation;
   memoryFragmentMainStats?: MemoryFragmentMainStats[];
   memoryFragmentSubstatsNote?: string;
+  memoryFragmentSubstatPriorities?: MemoryFragmentSubstatPriorities[];
   // Add other character data as needed (overview, partners, etc.)
 }
 
