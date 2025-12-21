@@ -4,6 +4,7 @@ import {
   CharacterData,
   MemoryFragmentSetRecommendation,
   MemoryFragmentSubstatPriorities,
+  PartnersGuide,
   UniqueCard,
 } from "@/types/character-guides";
 import { CardTier } from "@/types/character-guides";
@@ -97,7 +98,7 @@ const uniqueCards: UniqueCard[] = [
     type: "skill",
     cost: 1,
     rarity: CardRarities.Rare,
-    description: "120% Shield \nDraw 2 card(s) from other combatant",
+    description: "120% Shield \nDraw 2 card(s) from\nother combatant",
     epiphanies: [
       {
         id: "Repose I",
@@ -180,7 +181,7 @@ const uniqueCards: UniqueCard[] = [
     type: "upgrade",
     cost: 1,
     rarity: CardRarities.Rare,
-    description: "When another combatant uses Skill Card, 1 Reload",
+    description: "When another\ncombatant uses Skill\nCard, 1 Reload",
     epiphanies: [
       {
         id: "Pendant of Resolution I",
@@ -249,7 +250,7 @@ const uniqueCards: UniqueCard[] = [
     cost: 1,
     rarity: CardRarities.Legendary,
     description:
-      "Choose 1 Ballista card in hand, +100% Damage amount until activated \nDraw 1",
+      "Choose 1 Ballista card\nin hand, +100%\nDamage amount until\nactivated \nDraw 1",
     epiphanies: [
       {
         id: "Sir Kowalski I",
@@ -325,7 +326,7 @@ const uniqueCards: UniqueCard[] = [
     type: "upgrade",
     cost: 1,
     rarity: CardRarities.Unique,
-    description: "[Unique]\n Increase max stack of Reload\nby 1\n 1 Reload",
+    description: "[Unique]\n Increase max stack of\n Reload by 1\n 1 Reload",
   },
 ];
 const recommendedVeronicaSaveData: SaveData[] = [
@@ -402,6 +403,24 @@ const memoryFragmentSubstatPriorities: MemoryFragmentSubstatPriorities[] = [
     stats: [MemoryFragmentSubstats.AttackFlat, MemoryFragmentSubstats.Attack],
   },
 ];
+
+const partnersGuide: PartnersGuide[] = [
+  {
+    id: "marin",
+    description: "IDK 5* Yuck",
+    tier: CardTier.SPlus,
+  },
+  {
+    id: "yuri",
+    description: "16% Attack buff is OP",
+    tier: CardTier.S,
+  },
+  {
+    id: "rosaria",
+    description: "IDK add it yourself",
+    tier: CardTier.S,
+  },
+];
 export const veronicaData: CharacterData = {
   attribute: Attributes.Passion,
   uniqueCards: uniqueCards,
@@ -418,4 +437,5 @@ export const veronicaData: CharacterData = {
               Attack % for additional damage scaling Void Damage is
               generally preferred over Attack for most cases testsssss`,
   memoryFragmentSubstatPriorities: memoryFragmentSubstatPriorities,
+  partnersGuide: partnersGuide,
 };

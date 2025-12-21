@@ -1,4 +1,5 @@
 import { Attributes } from "./card";
+import { Character } from "./character";
 import {
   MemoryFragmentMainStats,
   MemoryFragmentSet,
@@ -51,8 +52,19 @@ export type MemoryFragmentSetRecommendation = {
 };
 export interface MemoryFragmentSubstatPriorities {
   priority: number;
-  relation: 'equal' | 'or';
+  relation: "equal" | "or";
   stats: MemoryFragmentSubstats[];
+}
+export interface PartnersGuide {
+  id: string;
+  description: string;
+  tier: CardTier;
+}
+export interface Team {
+  id: string;
+  name: string;
+  description?: string;
+  characters: Character[];
 }
 export interface CharacterData {
   attribute: Attributes;
@@ -68,7 +80,10 @@ export interface CharacterData {
   memoryFragmentMainStats?: MemoryFragmentMainStats[];
   memoryFragmentSubstatsNote?: string;
   memoryFragmentSubstatPriorities?: MemoryFragmentSubstatPriorities[];
-  // Add other character data as needed (overview, partners, etc.)
+  partnersGuide?: PartnersGuide[];
+  // team?: Team[];
+  // teamGuideDescription?: string;
+  // Dear God I will add teamGuide later
 }
 
 export enum GuideSections {

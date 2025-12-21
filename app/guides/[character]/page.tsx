@@ -15,6 +15,7 @@ import { defaultSections } from "@/constants/character-guides";
 import { RecommendedSaveData } from "@/containers/character-guides/recommended-save-data";
 import { EquipmentSection } from "@/containers/character-guides/equipments";
 import { MemoryFragmentsSection } from "@/containers/character-guides/memory-fragments";
+import { PartnersSection } from "@/containers/character-guides/partners";
 
 const characters = [
   "rin",
@@ -164,6 +165,10 @@ export default function CharacterGuidePage() {
                       characterData.memoryFragmentSubstatPriorities
                     }
                   />
+                )}
+                {/* Partners */}
+                {characterData?.partnersGuide && (
+                  <PartnersSection partnersGuide={characterData.partnersGuide} />
                 )}
               </div>
             </div>
