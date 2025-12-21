@@ -9,7 +9,7 @@ type CardProps = {
 export const CardRender = (props: CardProps) => {
   const { card, isPlaceholder = false, scaleOnHover = false, onClick } = props;
   // Helper function to get rarity background image based on card name
-  function getRarityBackgroundImage(cardRarity: CardRarities): string {
+  function getRarityStripImage(cardRarity: CardRarities): string {
     switch (cardRarity) {
       case CardRarities.Legendary:
         return "/images/card/card_rarity_legend.png";
@@ -46,6 +46,22 @@ export const CardRender = (props: CardProps) => {
     }
     return { bracketedText: null, remainingText: desc };
   };
+
+  // Helper function to get rarity background image based on card name
+  function getRarityBackgroundImage(cardRarity: CardRarities): string {
+    switch (cardRarity) {
+      case CardRarities.Legendary:
+        return "/images/card/card_title_rarity_legend.png";
+      case CardRarities.Unique:
+        return "/images/card/card_title_rarity_unique.png";
+      case CardRarities.Rare:
+        return "/images/card/card_title_rarity_rare.png";
+      case CardRarities.Common:
+        return "/images/card/card_title_rarity_common.png";
+      default:
+        return "";
+    }
+  }
 
   return (
     <div
@@ -91,7 +107,7 @@ export const CardRender = (props: CardProps) => {
                     style={{ transform: "translateX(-18px)" }}
                   >
                     <img
-                      src={getRarityBackgroundImage(card.rarity)}
+                      src={getRarityStripImage(card.rarity)}
                       alt=""
                       className="h-11 sm:h-13 object-contain"
                     />
@@ -152,11 +168,11 @@ export const CardRender = (props: CardProps) => {
                           backgroundRepeat: "no-repeat",
                           backgroundPosition: "left center",
                           backgroundSize: "contain",
-                          left: -50,
+                          left: -30,
                           right: 0,
-                          top: 7,
+                          top: 8,
                           bottom: 0,
-                          height: "70%",
+                          height: "45%",
                           width: "700%",
                         }}
                       />
