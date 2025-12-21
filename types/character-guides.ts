@@ -1,0 +1,91 @@
+import {
+  MemoryFragmentMainStats,
+  MemoryFragmentSet,
+  recommendingFragmentSet,
+} from "./memory-fragments";
+import { SaveData } from "./save-data";
+
+export interface Epiphany {
+  id: string;
+  tier: CardTier;
+  cost: number;
+  type: string;
+  description?: string;
+  reasoning?: string;
+}
+
+export interface DivineEpiphany {
+  name: string;
+  description: string;
+  reasoning: string;
+  icon: string;
+}
+
+export interface UniqueCard extends Card {
+  epiphanies?: Epiphany[];
+  divineEpiphanies?: DivineEpiphany[];
+}
+export enum CardRarities {
+  Common = "common",
+  Rare = "rare",
+  Unique = "unique",
+  Legendary = "legendary",
+}
+
+export interface Card {
+  id: string;
+  name: string;
+  image: string;
+  type: string;
+  cost: number | "X";
+  rarity: CardRarities;
+  description?: string;
+}
+export interface CharacterData {
+  uniqueCards: UniqueCard[];
+  recommendedSaveData?: SaveData[];
+  gears?: {
+    weapons: string[];
+    armors: string[];
+    accessories: string[];
+  };
+  memoryFragmentSets?: {
+    bestInSlot: recommendingFragmentSet[];
+    alternative?: recommendingFragmentSet[];
+  };
+  memoryFragmentMainStats?: MemoryFragmentMainStats[];
+  memoryFragmentSubstatsNote?: string;
+  // Add other character data as needed (overview, partners, etc.)
+}
+
+export enum GuideSections {
+  Infographic = "infographic",
+  CharacterOverview = "character-overview",
+  Profile = "profile",
+  Cards = "cards",
+  Potentials = "potentials",
+  ManifestEgos = "manifest-egos",
+  SaveData = "save-data",
+  MemoryFragments = "memory-fragments",
+  MemoryStats = "memory-stats",
+  MemorySets = "memory-sets",
+  Partners = "partners",
+  Teams = "teams",
+  Credits = "credits",
+}
+
+export type Section = {
+  id: GuideSections;
+  title: string;
+  level: number;
+};
+
+export enum CardTier {
+  SPlus = "S+",
+  S = "S",
+  A = "A",
+  B = "B",
+  C = "C",
+  Niche = "Niche",
+  Bad = "Bad",
+}
