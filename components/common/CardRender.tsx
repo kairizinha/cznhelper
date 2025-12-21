@@ -8,7 +8,6 @@ type CardProps = {
   scaleOnHover?: boolean;
   attribute?: Attributes;
   isEpiphany?: "spark" | "nospark";
-  isBasic?: boolean;
   onClick?: (id: string) => void;
 };
 export const CardRender = (props: CardProps) => {
@@ -18,7 +17,6 @@ export const CardRender = (props: CardProps) => {
     scaleOnHover = false,
     onClick,
     isEpiphany,
-    isBasic,
     attribute,
   } = props;
   // Helper function to get rarity background image based on card name
@@ -254,7 +252,7 @@ export const CardRender = (props: CardProps) => {
               {card.description && (
                 <div className="mt-auto py-5 bg-gradient-to-t from-black/95 via-black/90 to-transparent flex flex-col items-center justify-center gap-1">
                   {/* Card Frame Spark */}
-                  {!isBasic && !(card.rarity === CardRarities.Unique) && (
+                  {![CardRarities.Common, CardRarities.Unique].includes(card.rarity) && (
                     <img
                       src={
                         isEpiphany === "spark"
