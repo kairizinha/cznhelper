@@ -24,7 +24,7 @@ export const SubstatsPriorityRender = (props: Props) => {
               <React.Fragment key={stat}>
                 {statIndex > 0 && (
                   <span className="text-gray-400">
-                    {tier.relation === "equal" ? "=" : "OR"}
+                    {tier.relation === "equal" ? "=" : "or"}
                   </span>
                 )}
                 {tier.priority === 1 ? (

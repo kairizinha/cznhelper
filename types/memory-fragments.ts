@@ -11,11 +11,13 @@ export type recommendingFragmentSet = {
 };
 
 export enum MemoryFragmentMainStats {
-  CriticalRate = "critical_chance",
+  Any = "any",
+  CriticalChance = "critical_chance",
   CriticalDamage = "critical_damage",
   Attack = "%attack",
   Defense = "%defense",
-  HP = "%hp",
+  Health = "%hp",
+  EgoRecovery = "ego_recovery",
   VoidDamage = "void_damage",
   PassionDamage = "passion_damage",
   OrderDamage = "order_damage",
@@ -24,15 +26,15 @@ export enum MemoryFragmentMainStats {
 }
 
 export enum MemoryFragmentSubstats {
-  CriticalRate = "critical_chance",
+  CriticalChance = "critical_chance",
   CriticalDamage = "critical_damage",
   AttackFlat = "flat_attack",
   DefenseFlat = "flat_defense",
-  HPFlat = "flat_hp",
-  DOT = "damage_over_time",
-  EGO = "ego_recovery",
+  HealthFlat = "flat_hp",
+  DamageOverTime = "damage_over_time",
+  EgoRecovery = "ego_recovery",
   Attack = "%attack",
   Defense = "%defense",
-  HP = "%hp",
+  Health = "%hp",
   ExtraDamage = "extra_damage",
 }
