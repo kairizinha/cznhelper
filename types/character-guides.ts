@@ -12,7 +12,7 @@ import { SaveData } from "./save-data";
 export interface Epiphany {
   id: string;
   tier: CardTier;
-  cost: number;
+  cost: number | "X";
   type: string;
   description?: string;
   reasoning?: string;
@@ -112,4 +112,5 @@ export enum CardTier {
   C = "C",
   Niche = "Niche",
   Bad = "Bad",
+  WIP = "WIP",
 }

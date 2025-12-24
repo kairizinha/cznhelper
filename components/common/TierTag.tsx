@@ -67,6 +67,14 @@ export const TierTag = ({ tier }: { tier: CardTier }) => {
           font-medium text-xs
           border border-red-700/50
         `;
+      case CardTier.WIP:
+        return `
+          bg-black/50
+          text-amber-300
+          font-medium text-xs bold
+          border border-amber-600/40
+          shadow shadow-amber-500/10
+        `;
 
       default:
         return `bg-gray-900/70 

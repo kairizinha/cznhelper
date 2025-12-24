@@ -352,6 +352,21 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
       { name: "Absolute Protection", image: "/images/character/khalipe/unique4.png" },
     ],
   },
+    sereniel: {
+    portrait: "/images/character/sereniel/portrait.gif",
+    starter: [
+      { name: "Pulse Fire", image: "/images/character/sereniel/starter1.webp" },
+      { name: "Pulse Fire", image: "/images/character/sereniel/starter2.webp" },
+      { name: "Magnetic Field", image: "/images/character/sereniel/starter3.webp" },
+      { name: "Homing Laser", image: "/images/character/sereniel/starter4.webp" },
+    ],
+    unique: [
+      { name: "Plasma Missile", image: "/images/character/sereniel/unique1.webp" },
+      { name: "Shining Core", image: "/images/character/sereniel/unique2.webp" },
+      { name: "Cobalt Light", image: "/images/character/sereniel/unique3.webp" },
+      { name: "Pale Shooting Star", image: "/images/character/sereniel/unique4.webp" },
+    ],
+  },
   chizuru: {
     portrait: "/images/character/chizuru/portrait.gif",
     starter: [
@@ -1303,7 +1318,7 @@ export function RunTracker() {
                             />
                           )}
 
-                          {["nia", "khalipe", "orlea", "cassius"].includes(character) && ( // Use character state
+                          {["nia", "khalipe", "orlea", "cassius", "sereniel"].includes(character) && ( // Use character state
                             <img
                               src="/images/card/instinct-border.png"
                               alt="Instinct border"

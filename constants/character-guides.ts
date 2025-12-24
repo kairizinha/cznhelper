@@ -15,16 +15,14 @@ export const defaultSections: Section[] = [
 ];
 
 export const CardTiersLabels = [
-  {
-    value: CardTier.SPlus,
-    label: "S+ Tier",
-  },
+  { value: CardTier.SPlus, label: "S+ Tier" },
   { value: CardTier.S, label: "S Tier" },
   { value: CardTier.A, label: "A Tier" },
   { value: CardTier.B, label: "B Tier" },
   { value: CardTier.C, label: "C Tier" },
   { value: CardTier.Niche, label: "Niche Tier" },
   { value: CardTier.Bad, label: "Bad Tier" },
+  { value: CardTier.WIP, label: "Work in Progress" },
 ];
 
 export const MemoryFragmentMainStatLabels = [
