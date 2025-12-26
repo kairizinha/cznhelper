@@ -1,7 +1,7 @@
 // components/Header.tsx
 'use client'
 
-import { House, Info, Users, Calculator } from "lucide-react"
+import { Home, Info, Users, Calculator } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
@@ -10,7 +10,7 @@ const navItems = [
   {
     name: "Home",
     href: "/",
-    icon: House
+    icon: Home
   },
   {
     name: "Guides",
