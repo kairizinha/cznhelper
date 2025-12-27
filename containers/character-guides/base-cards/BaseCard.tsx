@@ -20,7 +20,10 @@ export const BaseCard = ({ uniqueCards, attribute }: Props) => {
   const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
 
   const cardsWithEpiphanies = useMemo(
-    () => uniqueCards.filter((c) => Array.isArray(c.epiphanies) && c.epiphanies.length > 0),
+    () =>
+      uniqueCards.filter(
+        (c) => Array.isArray(c.epiphanies) && c.epiphanies.length > 0
+      ),
     [uniqueCards]
   );
 
@@ -43,10 +46,16 @@ export const BaseCard = ({ uniqueCards, attribute }: Props) => {
           <Dialog
             key={cardData.id}
             open={selectedCardId === cardData.id}
-            onOpenChange={(open) => setSelectedCardId(open ? cardData.id : null)}
+            onOpenChange={(open) =>
+              setSelectedCardId(open ? cardData.id : null)
+            }
           >
             <DialogTrigger asChild>
-              <div role="button" aria-label={`${cardData.name} details`} tabIndex={0}>
+              <div
+                role="button"
+                aria-label={`${cardData.name} details`}
+                tabIndex={0}
+              >
                 <CardRender
                   card={cardData}
                   scaleOnHover
@@ -66,7 +75,10 @@ export const BaseCard = ({ uniqueCards, attribute }: Props) => {
               {/* Epiphanies Grid */}
               <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-5 gap-4 p-4">
                 {cardData.epiphanies!.map((epiphany) => (
-                  <div key={epiphany.id} className="flex flex-col gap-2 sm:gap-3 w-full max-w-[280px] mx-auto">
+                  <div
+                    key={epiphany.id}
+                    className="flex flex-col gap-2 sm:gap-3 w-full max-w-[280px] mx-auto"
+                  >
                     <TierTag tier={epiphany.tier} />
 
                     <CardRender
@@ -85,9 +97,14 @@ export const BaseCard = ({ uniqueCards, attribute }: Props) => {
 
               {/* Epiphany Explanations */}
               <div className="mt-6 space-y-3 sm:space-y-4 p-4">
-                <h3 className="text-lg font-bold text-purple-300">Epiphanies Tier</h3>
+                <h3 className="text-lg font-bold text-purple-300">
+                  Epiphanies Tier
+                </h3>
                 {cardData.epiphanies!.map((epiphany) => (
-                  <div key={epiphany.id} className="p-3 rounded-lg bg-background/50 border border-border">
+                  <div
+                    key={epiphany.id}
+                    className="p-3 rounded-lg bg-background/50 border border-border"
+                  >
                     <div className="flex items-center gap-2 mb-2">
                       <TierTag tier={epiphany.tier} />
                       <span className="text-sm sm:text-base font-semibold text-foreground">
@@ -102,27 +119,49 @@ export const BaseCard = ({ uniqueCards, attribute }: Props) => {
               </div>
 
               {/* Divine Epiphanies */}
-              {cardData.divineEpiphanies && cardData.divineEpiphanies.length > 0 && (
-                <div className="mt-6 space-y-4 p-4">
-                  <h3 className="text-lg font-bold text-purple-300">Divine Epiphanies</h3>
-                  <p className="text-sm text-muted-foreground mb-4">Good Divine Epiphanies that this card can roll</p>
+              {cardData.divineEpiphanies &&
+                cardData.divineEpiphanies.length > 0 && (
+                  <div className="mt-6 space-y-4 p-4">
+                    <h3 className="text-lg font-bold text-purple-300">
+                      Divine Epiphanies
+                    </h3>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      Good Divine Epiphanies that this card can roll
+                    </p>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                    {cardData.divineEpiphanies.map((divine) => (
-                      <div key={divine.name || divine.icon} className="p-3 rounded-lg bg-gradient-to-br from-purple-900/30 to-purple-800/20 border border-purple-500/40">
-                        <div className="flex items-center gap-2 mb-2">
-                          {divine.icon && (
-                            <img src={divine.icon} alt={divine.name ?? "Divine Epiphany"} className="w-8 h-8 object-contain flex-shrink-0" />
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                      {cardData.divineEpiphanies.map((divine) => (
+                        <div
+                          key={divine.name || divine.icon}
+                          className="p-3 rounded-lg bg-gradient-to-br from-purple-900/30 to-purple-800/20 border border-purple-500/40"
+                        >
+                          <div className="flex items-center gap-2 mb-2">
+                            {divine.icon && (
+                              <img
+                                src={divine.icon}
+                                alt={divine.name ?? "Divine Epiphany"}
+                                className="w-8 h-8 object-contain flex-shrink-0"
+                              />
+                            )}
+                            <span className="px-2 py-1 rounded-full text-xs font-bold bg-purple-500/30 text-purple-200 border border-purple-400/50">
+                              Divine
+                            </span>
+                            {divine.name && (
+                              <span className="text-sm font-semibold text-purple-200">
+                                {divine.name}
+                              </span>
+                            )}
+                          </div>
+                          {divine.reasoning && (
+                            <p className="text-sm sm:text-base text-purple-300/80 mt-2 leading-relaxed">
+                              {divine.reasoning}
+                            </p>
                           )}
-                          <span className="px-2 py-1 rounded-full text-xs font-bold bg-purple-500/30 text-purple-200 border border-purple-400/50">Divine</span>
-                          {divine.name && <span className="text-sm font-semibold text-purple-200">{divine.name}</span>}
                         </div>
-                        {divine.reasoning && <p className="text-sm sm:text-base text-purple-300/80 mt-2 leading-relaxed">{divine.reasoning}</p>}
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
             </DialogContent>
           </Dialog>
         ))}

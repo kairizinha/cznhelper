@@ -7,7 +7,12 @@ type Props = {
   job: string;
 };
 
-export const Overview = ({ characterName, characterImage, attribute, job }: Props) => {
+export const Overview = ({
+  characterName,
+  characterImage,
+  attribute,
+  job,
+}: Props) => {
   return (
     <section className="flex items-center gap-4">
       <img

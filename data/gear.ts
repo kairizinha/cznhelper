@@ -17,9 +17,8 @@ export interface GearData {
   effect: string;
 }
 
-
+// prettier-ignore
 export const weapons: GearData[] = [
-
   // THE BLUE POT //
   {
     name: "Dark Grip's Claws",
@@ -560,7 +559,6 @@ export const weapons: GearData[] = [
 ];
 
 export const armors: GearData[] = [
-
   // THE BLUE POT //
   {
     name: "Chains of Obsession",
@@ -986,7 +984,6 @@ export const armors: GearData[] = [
 ];
 
 export const accessories: GearData[] = [
-
   // THE BLUE POT //
   {
     name: "Bloody Pendant",

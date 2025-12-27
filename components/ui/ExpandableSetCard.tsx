@@ -32,7 +32,9 @@ export default function ExpandableSetCard({
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center justify-between">
-                <h3 className="font-bold text-foreground text-lg">{set.name}</h3>
+                <h3 className="font-bold text-foreground text-lg">
+                  {set.name}
+                </h3>
                 <div className="ml-3 transition-transform group-hover:rotate-180">
                   {isExpanded ? (
                     <ChevronUp className="w-6 h-6 text-purple-400" />
@@ -41,7 +43,7 @@ export default function ExpandableSetCard({
                   )}
                 </div>
               </div>
-              <p 
+              <p
                 className="text-sm text-muted-foreground mt-1"
                 dangerouslySetInnerHTML={{ __html: set.effect }}
               />

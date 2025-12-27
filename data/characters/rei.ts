@@ -9,7 +9,11 @@ import {
   UniqueCard,
   PartnersGuide,
 } from "@/types/character-guides";
-import { MemoryFragmentSet, MemoryFragmentMainStats, MemoryFragmentSubstats } from "@/types/memory-fragments";
+import {
+  MemoryFragmentSet,
+  MemoryFragmentMainStats,
+  MemoryFragmentSubstats,
+} from "@/types/memory-fragments";
 import { SaveData } from "@/types/save-data";
 
 const commonCards: Card[] = [
@@ -50,16 +54,17 @@ const uniqueCards: UniqueCard[] = [
         type: "attack",
         description:
           "[ Lead ] 150% Damage\nIncrease Damage\nAmount of Basic Attack\nCards by 150% for 1\nturn",
-        reasoning: "Stronger boost than the IV epiphany but only lasts 1 turn. Great for setting up burst damage windows.",
+        reasoning:
+          "Stronger boost than the IV epiphany but only lasts 1 turn. Great for setting up burst damage windows.",
       },
       {
         id: "Strike of Darkness II",
         tier: CardTier.Bad,
         cost: 1,
         type: "attack",
-        description:
-          "350% Damage\nDecrease Damage\nAmount by 20% for 1\nturn",
-        reasoning: "The 20% damage penalty to ALL your damage isn't worth a slightly higher modifier on one attack. Avoid.",
+        description: "350% Damage\nDecrease Damage\nAmount by 20% for 1\nturn",
+        reasoning:
+          "The 20% damage penalty to ALL your damage isn't worth a slightly higher modifier on one attack. Avoid.",
       },
       {
         id: "Strike of Darkness III",
@@ -68,7 +73,8 @@ const uniqueCards: UniqueCard[] = [
         type: "attack",
         description:
           "[ Lead ] 150% Damage\nDiscard all Basic Cards,\nadd 1 Hit for each",
-        reasoning: "Strictly worse than V epiphany - costs 1 AP, no Retain, and minimal damage scaling. Just pick V instead.",
+        reasoning:
+          "Strictly worse than V epiphany - costs 1 AP, no Retain, and minimal damage scaling. Just pick V instead.",
       },
       {
         id: "Strike of Darkness IV",
@@ -77,16 +83,17 @@ const uniqueCards: UniqueCard[] = [
         type: "upgrade",
         description:
           "[ Unique ] Increase Damage\nAmount of Basic Attack\nCards by 80%",
-        reasoning: "Permanent 80% damage boost to basic attacks. Core pick for Mei Lin and Chizuru Moonslash builds.",
+        reasoning:
+          "Permanent 80% damage boost to basic attacks. Core pick for Mei Lin and Chizuru Moonslash builds.",
       },
       {
         id: "Strike of Darkness V",
         tier: CardTier.SPlus,
         cost: 0,
         type: "skill",
-        description:
-          "[ Retain ] Activate all Basic Cards\nin hand",
-        reasoning: "Free deck thinning with Retain. Can sit in hand or be fodder for discard/exhaust effects. Perfect for save data where you couldn't remove basics.",
+        description: "[ Retain ] Activate all Basic Cards\nin hand",
+        reasoning:
+          "Free deck thinning with Retain. Can sit in hand or be fodder for discard/exhaust effects. Perfect for save data where you couldn't remove basics.",
       },
     ],
     divineEpiphanies: [
@@ -123,26 +130,25 @@ const uniqueCards: UniqueCard[] = [
     type: "upgrade",
     cost: 1,
     rarity: CardRarities.Rare,
-    description:
-      "[ Unique ] +40% Damage Amount\nof cards with Cost 1",
+    description: "[ Unique ] +40% Damage Amount\nof cards with Cost 1",
     epiphanies: [
       {
         id: "Resonating Darkness I",
         tier: CardTier.SPlus,
         cost: 1,
         type: "upgrade",
-        description:
-          "[ Unique ] +60% Damage Amount\nof cards with Cost 1",
-        reasoning: "Direct upgrade from base card with 20% more damage. Solid pick for 1-cost focused decks.",
+        description: "[ Unique ] +60% Damage Amount\nof cards with Cost 1",
+        reasoning:
+          "Direct upgrade from base card with 20% more damage. Solid pick for 1-cost focused decks.",
       },
       {
         id: "Resonating Darkness II",
         tier: CardTier.S,
         cost: 1,
         type: "upgrade",
-        description:
-          "[ Unique ] +40% Damage Amount\nof Void Card",
-        reasoning: "Same damage as base but buffs all Void cards. Best for Kayron and Renoa only, since other Void combatants still prefer the 1-cost option.",
+        description: "[ Unique ] +40% Damage Amount\nof Void Card",
+        reasoning:
+          "Same damage as base but buffs all Void cards. Best for Kayron and Renoa only, since other Void combatants still prefer the 1-cost option.",
       },
       {
         id: "Resonating Darkness III",
@@ -151,7 +157,8 @@ const uniqueCards: UniqueCard[] = [
         type: "upgrade",
         description:
           "[ Unique ] +40% Shield gain,\nDamage Amount, and\nHealing of cards with\nCost 1",
-        reasoning: "Same damage as base with shield/healing bonuses you don't need. Just take base or I instead.",
+        reasoning:
+          "Same damage as base with shield/healing bonuses you don't need. Just take base or I instead.",
       },
       {
         id: "Resonating Darkness IV",
@@ -169,7 +176,8 @@ const uniqueCards: UniqueCard[] = [
         type: "skill",
         description:
           "[ Unique ] For 1 turn, +80%\nDamage Amount of\ncards with Cost 1",
-        reasoning: "Highest damage boost but only 1 turn. Requires high draw support to set up and burst in the same turn.",
+        reasoning:
+          "Highest damage boost but only 1 turn. Requires high draw support to set up and burst in the same turn.",
       },
     ],
     divineEpiphanies: [
@@ -204,16 +212,17 @@ const uniqueCards: UniqueCard[] = [
         type: "skill",
         description:
           "[ Exhaust 2 ] Choose 1 card(s) in\nhand to Exhaust\nHeal 150%\nDraw 1",
-        reasoning: "Base card with Exhaust 2, but forces you to exhaust something to draw.",
+        reasoning:
+          "Base card with Exhaust 2, but forces you to exhaust something to draw.",
       },
       {
         id: "Snack Time II",
         tier: CardTier.SPlus,
         cost: 0,
         type: "skill",
-        description:
-          "[ Retain / Exhaust ] Heal 150%\nDraw 2",
-        reasoning: "Best option - Draw 2 with Retain, only skip if you have excess draw or having too much unwanted cards.",
+        description: "[ Retain / Exhaust ] Heal 150%\nDraw 2",
+        reasoning:
+          "Best option - Draw 2 with Retain, only skip if you have excess draw or having too much unwanted cards.",
       },
       {
         id: "Snack Time III",
@@ -222,7 +231,8 @@ const uniqueCards: UniqueCard[] = [
         type: "skill",
         description:
           "[ Exhaust ] Choose up to 2 card(s)\nin hand to Exhaust,\nthen Draw for each",
-        reasoning: "Flexible deck thinning - exhaust 0-2 cards as needed. Better than II when you have lots of cards to exhaust.",
+        reasoning:
+          "Flexible deck thinning - exhaust 0-2 cards as needed. Better than II when you have lots of cards to exhaust.",
       },
       {
         id: "Snack Time IV",
@@ -231,7 +241,8 @@ const uniqueCards: UniqueCard[] = [
         type: "skill",
         description:
           "[ Exhaust ] Choose up to 1 card(s)\nfrom Draw Pile to\nExhaust, then Draw for\neach.",
-        reasoning: "Worse than II or III, but lets you choose specific cards from your draw pile before they become dead draws.",
+        reasoning:
+          "Worse than II or III, but lets you choose specific cards from your draw pile before they become dead draws.",
       },
       {
         id: "Snack Time V",
@@ -240,7 +251,8 @@ const uniqueCards: UniqueCard[] = [
         type: "skill",
         description:
           "[ Exhaust ] Choose 2 card(s) in\nhand to Exhaust\nChoose 1 Void Card(s)\nto Draw",
-        reasoning: "Nets -1 card, thins by 3, but tutors Void cards. Can chain into itself. Only good in specific Void-heavy decks.",
+        reasoning:
+          "Nets -1 card, thins by 3, but tutors Void cards. Can chain into itself. Only good in specific Void-heavy decks.",
       },
     ],
     divineEpiphanies: [
@@ -265,7 +277,8 @@ const uniqueCards: UniqueCard[] = [
     type: "skill",
     cost: 1,
     rarity: CardRarities.Legendary,
-    description: "Choose 1 Attack\nCard(s) in hand, +100%\nDamage Amount for 1\nturn",
+    description:
+      "Choose 1 Attack\nCard(s) in hand, +100%\nDamage Amount for 1\nturn",
     epiphanies: [
       {
         id: "Dark Condensation I",
@@ -274,7 +287,8 @@ const uniqueCards: UniqueCard[] = [
         type: "skill",
         description:
           "Choose 1 Attack\nCard(s) in hand, +150%\nDamage Amount for 1\nturn",
-        reasoning: "Highest damage buff for 1-cost cards, only lasts 1 turn. Best for burst set up.",
+        reasoning:
+          "Highest damage buff for 1-cost cards, only lasts 1 turn. Best for burst set up.",
       },
       {
         id: "Dark Condensation II",
@@ -283,16 +297,17 @@ const uniqueCards: UniqueCard[] = [
         type: "skill",
         description:
           "Choose 1 card(s) in\nhand, +100% Damage\nAmount, Shield gain\nand Healing for 1 turn",
-        reasoning: "Trades damage for shield/healing buffs you don't need. Skip it.",
+        reasoning:
+          "Trades damage for shield/healing buffs you don't need. Skip it.",
       },
       {
         id: "Dark Condensation III",
         tier: CardTier.S,
         cost: 1,
         type: "skill",
-        description:
-          "For 1 turn, +50% \nDamage Amount of \nVoid Attack Cards",
-        reasoning: "Buffs all Void attacks for the turn. Top pick for Void builds, though dupes only extend duration.",
+        description: "For 1 turn, +50% \nDamage Amount of \nVoid Attack Cards",
+        reasoning:
+          "Buffs all Void attacks for the turn. Top pick for Void builds, though dupes only extend duration.",
       },
       {
         id: "Dark Condensation IV",
@@ -308,8 +323,7 @@ const uniqueCards: UniqueCard[] = [
         tier: CardTier.SPlus,
         cost: 1,
         type: "upgrade",
-        description:
-          "Choose 1 Attack \nCard(s) in hand, +50% \nDamage Amount",
+        description: "Choose 1 Attack \nCard(s) in hand, +50% \nDamage Amount",
         reasoning: "Permanent but lowest multiplier and exhausts.",
       },
     ],
@@ -328,7 +342,8 @@ const uniqueCards: UniqueCard[] = [
       },
       {
         name: "1 Morale, 1 Resolve",
-        reasoning: "Permanent +20% Additive Damage, it makes the Dark Condensation V stronger",
+        reasoning:
+          "Permanent +20% Additive Damage, it makes the Dark Condensation V stronger",
         icon: "/images/card/icon_card_battle_expand_vitor.png",
         description: "",
       },
@@ -341,16 +356,16 @@ const uniqueCards: UniqueCard[] = [
     type: "attack",
     cost: 1,
     rarity: CardRarities.Unique,
-    description:
-      "300% Damage\nFor 1 turn 4 Morale",
-    epiphanies: []
-  }
+    description: "300% Damage\nFor 1 turn 4 Morale",
+    epiphanies: [],
+  },
 ];
 const recommendedSaveData: SaveData[] = [
   {
     id: "draw-focused-build",
     name: "High Draw Support",
-    description: "Strike of Darkness IV and Resonating Darkness IV if running with Mei Lin.",
+    description:
+      "Strike of Darkness IV and Resonating Darkness IV if running with Mei Lin.",
     faintMemoryNote: "140 Faint Memory Cost without Convert Method",
     cards: [
       "Strike of Darkness V",
@@ -382,9 +397,25 @@ const recommendedSaveData: SaveData[] = [
 ];
 
 const gearsData = {
-  weapons: ["Tentacles of Chaos", "Crimson Sword", "Flashbang", "Over Cutter Shocker"],
-  armors: ["Fragment of the Empty Void", "Rocket-Adorned Cape", "Brainwave-Blocking Helmet"],
-  accessories: ["Clover of the Forest", "Sphere of Randomness", "Superconductive Protein", "Source of the Forbidden", "Water Drops of the Goddess", "Multifaceted Parallel Universe Nexus"],
+  weapons: [
+    "Tentacles of Chaos",
+    "Crimson Sword",
+    "Flashbang",
+    "Over Cutter Shocker",
+  ],
+  armors: [
+    "Fragment of the Empty Void",
+    "Rocket-Adorned Cape",
+    "Brainwave-Blocking Helmet",
+  ],
+  accessories: [
+    "Clover of the Forest",
+    "Sphere of Randomness",
+    "Superconductive Protein",
+    "Source of the Forbidden",
+    "Water Drops of the Goddess",
+    "Multifaceted Parallel Universe Nexus",
+  ],
 };
 
 const recommendedSources = ["Laboratory 0", "Swamp of Judgment"];
@@ -393,7 +424,7 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
   bestInSlot: [
     {
       id: "healers-journey",
-      description: ""
+      description: "",
     },
     {
       id: "tetras-authority",
@@ -451,19 +482,23 @@ export const reiData: CharacterData = {
     {
       priority: 1,
       relation: "equal",
-      stats: [MemoryFragmentSubstats.EgoRecovery]
+      stats: [MemoryFragmentSubstats.EgoRecovery],
     },
     {
       priority: 2,
       relation: "or",
-      stats: [MemoryFragmentSubstats.DefenseFlat, MemoryFragmentSubstats.Defense]
+      stats: [
+        MemoryFragmentSubstats.DefenseFlat,
+        MemoryFragmentSubstats.Defense,
+      ],
     },
     {
       priority: 3,
       relation: "equal",
-      stats: [MemoryFragmentSubstats.HealthFlat, MemoryFragmentSubstats.Health]
-    }
+      stats: [MemoryFragmentSubstats.HealthFlat, MemoryFragmentSubstats.Health],
+    },
   ],
-  memoryFragmentSubstatsNote: "Just prioritize Ego Recovery, DEF and HP is not that important.",
+  memoryFragmentSubstatsNote:
+    "Just prioritize Ego Recovery, DEF and HP is not that important.",
   partnersGuide: partnersGuide,
 };

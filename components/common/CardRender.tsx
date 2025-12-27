@@ -252,7 +252,9 @@ export const CardRender = (props: CardProps) => {
               {card.description && (
                 <div className="mt-auto py-5 bg-gradient-to-t from-black/95 via-black/90 to-transparent flex flex-col items-center justify-center gap-1">
                   {/* Card Frame Spark */}
-                  {![CardRarities.Common, CardRarities.Unique].includes(card.rarity) && (
+                  {![CardRarities.Common, CardRarities.Unique].includes(
+                    card.rarity
+                  ) && (
                     <img
                       src={
                         isEpiphany === "spark"

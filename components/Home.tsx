@@ -7,10 +7,7 @@ import { Banner } from "@/components/Banner";
 export function HomePage() {
   return (
     <>
-      <Banner
-        title="CZN HELPER"
-        subtitle="CZN Helper"
-      />
+      <Banner title="CZN HELPER" subtitle="CZN Helper" />
 
       {/* Cards section - gentle overlap */}
       <main className="relative -mt-12 md:-mt-16 lg:-mt-20 z-10">
@@ -32,9 +29,12 @@ export function HomePage() {
                   <div className="w-14 h-14 rounded-full bg-purple-500/10 flex items-center justify-center group-hover:bg-purple-500/20 transition-colors">
                     <Calculator className="w-7 h-7 text-purple-400" />
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground">Save Data Calculator</h3>
+                  <h3 className="text-xl font-semibold text-foreground">
+                    Save Data Calculator
+                  </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Track runs and calculate Faint Memory points for tier progression
+                    Track runs and calculate Faint Memory points for tier
+                    progression
                   </p>
                 </div>
               </Link>
@@ -48,13 +48,18 @@ export function HomePage() {
                   <div className="w-14 h-14 rounded-full bg-cyan-500/10 flex items-center justify-center group-hover:bg-cyan-500/20 transition-colors">
                     <BookOpen className="w-7 h-7 text-cyan-400" />
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground">Character Guides</h3>
+                  <h3 className="text-xl font-semibold text-foreground">
+                    Character Guides
+                  </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Browse builds, strategies, and detailed character information
+                    Browse builds, strategies, and detailed character
+                    information
                   </p>
                   <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-yellow-500/10 border border-yellow-500/30">
                     <AlertTriangle className="w-4 h-4 text-yellow-400" />
-                    <span className="text-xs text-yellow-300">Work in Progress</span>
+                    <span className="text-xs text-yellow-300">
+                      Work in Progress
+                    </span>
                   </div>
                 </div>
               </Link>
@@ -65,13 +70,17 @@ export function HomePage() {
                   <div className="w-14 h-14 rounded-full bg-orange-500/5 flex items-center justify-center">
                     <Calculator className="w-7 h-7 text-orange-400/60" />
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground/70">Damage Calculator</h3>
+                  <h3 className="text-xl font-semibold text-foreground/70">
+                    Damage Calculator
+                  </h3>
                   <p className="text-sm text-muted-foreground/70 leading-relaxed">
                     Calculate damage, synergies, and optimal team compositions
                   </p>
                   <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-yellow-500/5 border border-yellow-500/20">
                     <AlertTriangle className="w-4 h-4 text-yellow-400/60" />
-                    <span className="text-xs text-yellow-300/80">Work in Progress</span>
+                    <span className="text-xs text-yellow-300/80">
+                      Work in Progress
+                    </span>
                   </div>
                 </div>
               </div>

@@ -15,11 +15,31 @@ import { PartnersSection } from "@/containers/character-guides/partners";
 import { RecommendedSaveData } from "@/containers/character-guides/recommended-save-data";
 
 const characters = [
-  "rin", "meilin", "yuki", "sereniel", "haru",
-  "owen", "khalipe", "magna", "amir", "maribell",
-  "veronica", "hugo", "selena", "beryl", "luke",
-  "renoa", "lucas", "kayron", "tressa", "chizuru",
-  "orlea", "mika", "nia", "cassius", "rei",
+  "rin",
+  "meilin",
+  "yuki",
+  "sereniel",
+  "haru",
+  "owen",
+  "khalipe",
+  "magna",
+  "amir",
+  "maribell",
+  "veronica",
+  "hugo",
+  "selena",
+  "beryl",
+  "luke",
+  "renoa",
+  "lucas",
+  "kayron",
+  "tressa",
+  "chizuru",
+  "orlea",
+  "mika",
+  "nia",
+  "cassius",
+  "rei",
 ];
 
 function Loading({ name }: { name: string }) {
@@ -64,7 +84,8 @@ function useCharacterLoader(slug: string | null) {
         if (mounted) setData(maybeData as CharacterData);
       } catch (err) {
         console.error(`Failed to load data for character: ${slug}`, err);
-        if (mounted) setError("Failed to load character data. Please try again later.");
+        if (mounted)
+          setError("Failed to load character data. Please try again later.");
       } finally {
         if (mounted) setLoading(false);
       }
@@ -102,19 +123,16 @@ export default function CharacterGuidePage() {
   if (error) return <ErrorMessage>{error}</ErrorMessage>;
   if (!characterData) return <ErrorMessage>Character not found.</ErrorMessage>;
 
-return (
-  <div className="mx-auto"> 
-    
-    <div className="bg-transparent rounded-xl p-6">
-      <h1 className="text-3xl font-bold text-white -mb-24 bg-gradient-to-r from-red-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
-        {characterName} Guide
-      </h1>
-    </div>
+  return (
+    <div className="mx-auto">
+      <div className="bg-transparent rounded-xl p-6">
+        <h1 className="text-3xl font-bold text-white -mb-24 bg-gradient-to-r from-red-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+          {characterName} Guide
+        </h1>
+      </div>
 
-    <main className="px-4 py-6 sm:py-8"> 
-        
+      <main className="px-4 py-6 sm:py-8">
         <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
-
           {/* Sticky Table of Contents */}
           <aside className="hidden lg:block w-64 shrink-0">
             <nav className="sticky top-28 rounded-lg border border-border bg-card p-4">
@@ -124,8 +142,9 @@ return (
                   <li key={section.id}>
                     <a
                       href={`#${section.id}`}
-                      className={`text-sm text-muted-foreground hover:text-purple-400 transition-colors block py-1 ${section.level === 2 ? "pl-4" : ""
-                        }`}
+                      className={`text-sm text-muted-foreground hover:text-purple-400 transition-colors block py-1 ${
+                        section.level === 2 ? "pl-4" : ""
+                      }`}
                     >
                       {section.title}
                     </a>
@@ -175,15 +194,23 @@ return (
                   <MemoryFragmentsSection
                     bestInSlot={characterData.memoryFragmentSets?.bestInSlot}
                     alternative={characterData.memoryFragmentSets?.alternative}
-                    memoryFragmentMainStats={characterData.memoryFragmentMainStats}
-                    memoryFragmentSubstatsNote={characterData.memoryFragmentSubstatsNote}
-                    memoryFragmentSubstatsPriorities={characterData.memoryFragmentSubstatPriorities}
+                    memoryFragmentMainStats={
+                      characterData.memoryFragmentMainStats
+                    }
+                    memoryFragmentSubstatsNote={
+                      characterData.memoryFragmentSubstatsNote
+                    }
+                    memoryFragmentSubstatsPriorities={
+                      characterData.memoryFragmentSubstatPriorities
+                    }
                   />
                 )}
 
                 {/* Partners */}
                 {characterData.partnersGuide && (
-                  <PartnersSection partnersGuide={characterData.partnersGuide} />
+                  <PartnersSection
+                    partnersGuide={characterData.partnersGuide}
+                  />
                 )}
               </div>
             </div>

@@ -1,13 +1,30 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Label } from "@/components/ui/label"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Plus, HelpCircle, RotateCcw, X, Undo } from "lucide-react"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Tooltip, TooltipProvider, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip"
+import { useState, useEffect } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Plus, HelpCircle, RotateCcw, X, Undo } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Tooltip,
+  TooltipProvider,
+  TooltipTrigger,
+  TooltipContent,
+} from "@/components/ui/tooltip";
 import {
   Dialog,
   DialogContent,
@@ -15,22 +32,33 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
+} from "@/components/ui/dialog";
 
+type CardEntry = { name: string; image?: string };
 
-type CardEntry = { name: string; image?: string }
-
-const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[]; unique: CardEntry[] }> = {
+const CHARACTER_CARDS: Record<
+  string,
+  { portrait?: string; starter: CardEntry[]; unique: CardEntry[] }
+> = {
   rei: {
     portrait: "/images/character/rei/portrait.gif",
     starter: [
       { name: "Dark Blade", image: "/images/character/rei/starter1.png" },
       { name: "Dark Blade", image: "/images/character/rei/starter2.png" },
-      { name: "Material Regeneration", image: "/images/character/rei/starter3.png" },
-      { name: "Strike of Darkness", image: "/images/character/rei/starter4.png" },
+      {
+        name: "Material Regeneration",
+        image: "/images/character/rei/starter3.png",
+      },
+      {
+        name: "Strike of Darkness",
+        image: "/images/character/rei/starter4.png",
+      },
     ],
     unique: [
-      { name: "Resonating Darkness", image: "/images/character/rei/unique1.png" },
+      {
+        name: "Resonating Darkness",
+        image: "/images/character/rei/unique1.png",
+      },
       { name: "Snack Time", image: "/images/character/rei/unique2.png" },
       { name: "Dark Condensation", image: "/images/character/rei/unique3.png" },
       { name: "Predator’s Blade", image: "/images/character/rei/unique4.png" },
@@ -57,7 +85,10 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
       { name: "Cards", image: "/images/character/cassius/starter1.png" },
       { name: "Wild Card", image: "/images/character/cassius/starter2.png" },
       { name: "Mana Field", image: "/images/character/cassius/starter3.png" },
-      { name: "Pop Eyed Popper", image: "/images/character/cassius/starter4.png" },
+      {
+        name: "Pop Eyed Popper",
+        image: "/images/character/cassius/starter4.png",
+      },
     ],
     unique: [
       { name: "Devil Dice", image: "/images/character/cassius/unique1.png" },
@@ -70,15 +101,24 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
     portrait: "/images/character/beryl/portrait.gif",
     starter: [
       { name: "Launcher", image: "/images/character/beryl/starter1.png" },
-      { name: "Charged Launcher", image: "/images/character/beryl/starter2.png" },
+      {
+        name: "Charged Launcher",
+        image: "/images/character/beryl/starter2.png",
+      },
       { name: "Barrier", image: "/images/character/beryl/starter3.png" },
       { name: "Opening Found", image: "/images/character/beryl/starter4.png" },
     ],
     unique: [
       { name: "Charged Shot", image: "/images/character/beryl/unique1.png" },
       { name: "Guilty Pleasure", image: "/images/character/beryl/unique2.png" },
-      { name: "Unlimited Firepower", image: "/images/character/beryl/unique3.png" },
-      { name: "Heavy Weapon Specialist", image: "/images/character/beryl/unique4.png" },
+      {
+        name: "Unlimited Firepower",
+        image: "/images/character/beryl/unique3.png",
+      },
+      {
+        name: "Heavy Weapon Specialist",
+        image: "/images/character/beryl/unique4.png",
+      },
     ],
   },
   mika: {
@@ -90,8 +130,14 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
       { name: "Source of Water", image: "/images/character/mika/starter4.png" },
     ],
     unique: [
-      { name: "Blessing of Waves", image: "/images/character/mika/unique1.png" },
-      { name: "Tactical Analysis", image: "/images/character/mika/unique2.png" },
+      {
+        name: "Blessing of Waves",
+        image: "/images/character/mika/unique1.png",
+      },
+      {
+        name: "Tactical Analysis",
+        image: "/images/character/mika/unique2.png",
+      },
       { name: "Whirpool", image: "/images/character/mika/unique3.png" },
       { name: "Deluge", image: "/images/character/mika/unique4.png" },
     ],
@@ -99,16 +145,34 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
   maribell: {
     portrait: "/images/character/maribell/portrait.gif",
     starter: [
-      { name: "Shelter Kick", image: "/images/character/maribell/starter1.png" },
-      { name: "Shelter Defense", image: "/images/character/maribell/starter2.png" },
-      { name: "Shelter Hold", image: "/images/character/maribell/starter3.png" },
-      { name: "Resolute Blitz", image: "/images/character/maribell/starter4.png" },
+      {
+        name: "Shelter Kick",
+        image: "/images/character/maribell/starter1.png",
+      },
+      {
+        name: "Shelter Defense",
+        image: "/images/character/maribell/starter2.png",
+      },
+      {
+        name: "Shelter Hold",
+        image: "/images/character/maribell/starter3.png",
+      },
+      {
+        name: "Resolute Blitz",
+        image: "/images/character/maribell/starter4.png",
+      },
     ],
     unique: [
-      { name: "Maribell Shelter MK.II", image: "/images/character/maribell/unique1.png" },
+      {
+        name: "Maribell Shelter MK.II",
+        image: "/images/character/maribell/unique1.png",
+      },
       { name: "Wolve’s Dome", image: "/images/character/maribell/unique2.png" },
       { name: "Oh... I See.", image: "/images/character/maribell/unique3.png" },
-      { name: "Shelter Strike", image: "/images/character/maribell/unique4.png" },
+      {
+        name: "Shelter Strike",
+        image: "/images/character/maribell/unique4.png",
+      },
     ],
   },
   lucas: {
@@ -116,8 +180,14 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
     starter: [
       { name: "Machine Gun", image: "/images/character/lucas/starter1.png" },
       { name: "Machine Gun", image: "/images/character/lucas/starter2.png" },
-      { name: "Shielding Incendiary Bomb", image: "/images/character/lucas/starter3.png" },
-      { name: "Extended Magazine", image: "/images/character/lucas/starter4.png" },
+      {
+        name: "Shielding Incendiary Bomb",
+        image: "/images/character/lucas/starter3.png",
+      },
+      {
+        name: "Extended Magazine",
+        image: "/images/character/lucas/starter4.png",
+      },
     ],
     unique: [
       { name: "S.S.S", image: "/images/character/lucas/unique1.png" },
@@ -137,7 +207,10 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
     unique: [
       { name: "Metal Pierce", image: "/images/character/amir/unique1.png" },
       { name: "Metal Extraction", image: "/images/character/amir/unique2.png" },
-      { name: "Full Metal Hurricane", image: "/images/character/amir/unique3.png" },
+      {
+        name: "Full Metal Hurricane",
+        image: "/images/character/amir/unique3.png",
+      },
       { name: "Iron Skin", image: "/images/character/amir/unique4.png" },
     ],
   },
@@ -146,8 +219,14 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
     starter: [
       { name: "Dagger Throw", image: "/images/character/tressa/starter1.png" },
       { name: "Dagger Throw", image: "/images/character/tressa/starter2.png" },
-      { name: "Touch of Darkness", image: "/images/character/tressa/starter3.png" },
-      { name: "Unseathe Dagger", image: "/images/character/tressa/starter4.png" },
+      {
+        name: "Touch of Darkness",
+        image: "/images/character/tressa/starter3.png",
+      },
+      {
+        name: "Unseathe Dagger",
+        image: "/images/character/tressa/starter4.png",
+      },
     ],
     unique: [
       { name: "Curse", image: "/images/character/tressa/unique1.png" },
@@ -159,16 +238,34 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
   selena: {
     portrait: "/images/character/selena/portrait.gif",
     starter: [
-      { name: "Engagament Fire", image: "/images/character/selena/starter1.png" },
-      { name: "Engagament Fire", image: "/images/character/selena/starter2.png" },
-      { name: "Emergency Shielding", image: "/images/character/selena/starter3.png" },
-      { name: "High-Power Scope", image: "/images/character/selena/starter4.png" },
+      {
+        name: "Engagament Fire",
+        image: "/images/character/selena/starter1.png",
+      },
+      {
+        name: "Engagament Fire",
+        image: "/images/character/selena/starter2.png",
+      },
+      {
+        name: "Emergency Shielding",
+        image: "/images/character/selena/starter3.png",
+      },
+      {
+        name: "High-Power Scope",
+        image: "/images/character/selena/starter4.png",
+      },
     ],
     unique: [
       { name: "Target Spotted", image: "/images/character/selena/unique1.png" },
       { name: "Drone Bombing", image: "/images/character/selena/unique2.png" },
-      { name: "Tactical Maneuver", image: "/images/character/selena/unique3.png" },
-      { name: "Sniper’s Domain", image: "/images/character/selena/unique4.png" },
+      {
+        name: "Tactical Maneuver",
+        image: "/images/character/selena/unique3.png",
+      },
+      {
+        name: "Sniper’s Domain",
+        image: "/images/character/selena/unique4.png",
+      },
     ],
   },
   nia: {
@@ -192,13 +289,22 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
       { name: "Elimination", image: "/images/character/kayron/starter1.png" },
       { name: "Elimination", image: "/images/character/kayron/starter2.png" },
       { name: "Sphere", image: "/images/character/kayron/starter3.png" },
-      { name: "Echo of Futility", image: "/images/character/kayron/starter4.png" },
+      {
+        name: "Echo of Futility",
+        image: "/images/character/kayron/starter4.png",
+      },
     ],
     unique: [
-      { name: "Brand of Annihilation", image: "/images/character/kayron/unique1.png" },
+      {
+        name: "Brand of Annihilation",
+        image: "/images/character/kayron/unique1.png",
+      },
       { name: "Black Hole", image: "/images/character/kayron/unique2.png" },
       { name: "Oath of Vanity", image: "/images/character/kayron/unique3.png" },
-      { name: "Echoes of True Abyss", image: "/images/character/kayron/unique4.png" },
+      {
+        name: "Echoes of True Abyss",
+        image: "/images/character/kayron/unique4.png",
+      },
     ],
   },
   haru: {
@@ -222,7 +328,10 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
       { name: "Longsword Slash", image: "/images/character/yuki/starter1.png" },
       { name: "Rapid Slash", image: "/images/character/yuki/starter2.png" },
       { name: "Flowing Parry", image: "/images/character/yuki/starter3.png" },
-      { name: "Prepare to Subdue", image: "/images/character/yuki/starter4.png" },
+      {
+        name: "Prepare to Subdue",
+        image: "/images/character/yuki/starter4.png",
+      },
     ],
     unique: [
       { name: "Flash Slash", image: "/images/character/yuki/unique1.png" },
@@ -237,7 +346,10 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
       { name: "Throw Dagger", image: "/images/character/hugo/starter1.png" },
       { name: "Throw Dagger", image: "/images/character/hugo/starter2.png" },
       { name: "Defense System", image: "/images/character/hugo/starter3.png" },
-      { name: "Hunting Instincts", image: "/images/character/hugo/starter4.png" },
+      {
+        name: "Hunting Instincts",
+        image: "/images/character/hugo/starter4.png",
+      },
     ],
     unique: [
       { name: "Fan of Daggers", image: "/images/character/hugo/unique1.png" },
@@ -249,16 +361,34 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
   renoa: {
     portrait: "/images/character/renoa/portrait.gif",
     starter: [
-      { name: "Annihilation Shot", image: "/images/character/renoa/starter1.png" },
-      { name: "Annihilation Shot", image: "/images/character/renoa/starter2.png" },
+      {
+        name: "Annihilation Shot",
+        image: "/images/character/renoa/starter1.png",
+      },
+      {
+        name: "Annihilation Shot",
+        image: "/images/character/renoa/starter2.png",
+      },
       { name: "Black Veil", image: "/images/character/renoa/starter3.png" },
       { name: "Echo of Sorrow", image: "/images/character/renoa/starter4.png" },
     ],
     unique: [
-      { name: "Instant Judgement", image: "/images/character/renoa/unique1.png" },
-      { name: "Ballad of Pitch Black", image: "/images/character/renoa/unique2.png" },
-      { name: "Flower of Devoured Fate", image: "/images/character/renoa/unique3.png" },
-      { name: "Last-Ditch Assault", image: "/images/character/renoa/unique4.png" },
+      {
+        name: "Instant Judgement",
+        image: "/images/character/renoa/unique1.png",
+      },
+      {
+        name: "Ballad of Pitch Black",
+        image: "/images/character/renoa/unique2.png",
+      },
+      {
+        name: "Flower of Devoured Fate",
+        image: "/images/character/renoa/unique3.png",
+      },
+      {
+        name: "Last-Ditch Assault",
+        image: "/images/character/renoa/unique4.png",
+      },
     ],
   },
   veronica: {
@@ -266,14 +396,26 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
     starter: [
       { name: "Rapid Fire", image: "/images/character/veronica/starter1.png" },
       { name: "Rapid Fire", image: "/images/character/veronica/starter2.png" },
-      { name: "Illusion of Golden Daffodils", image: "/images/character/veronica/starter3.png" },
-      { name: "Firing Preparation", image: "/images/character/veronica/starter4.png" },
+      {
+        name: "Illusion of Golden Daffodils",
+        image: "/images/character/veronica/starter3.png",
+      },
+      {
+        name: "Firing Preparation",
+        image: "/images/character/veronica/starter4.png",
+      },
     ],
     unique: [
       { name: "Repose", image: "/images/character/veronica/unique1.png" },
-      { name: "Pendant of Resolution", image: "/images/character/veronica/unique2.png" },
+      {
+        name: "Pendant of Resolution",
+        image: "/images/character/veronica/unique2.png",
+      },
       { name: "Sir Kowalski", image: "/images/character/veronica/unique3.png" },
-      { name: "Bombardment Prep", image: "/images/character/veronica/unique4.png" },
+      {
+        name: "Bombardment Prep",
+        image: "/images/character/veronica/unique4.png",
+      },
     ],
   },
   "mei-lin": {
@@ -281,44 +423,95 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
     starter: [
       { name: "Strike", image: "/images/character/mei-lin/starter1.png" },
       { name: "Strike", image: "/images/character/mei-lin/starter2.png" },
-      { name: "Flame Dragon Guardian", image: "/images/character/mei-lin/starter3.png" },
-      { name: "Flame Dragon Jewel", image: "/images/character/mei-lin/starter4.png" },
+      {
+        name: "Flame Dragon Guardian",
+        image: "/images/character/mei-lin/starter3.png",
+      },
+      {
+        name: "Flame Dragon Jewel",
+        image: "/images/character/mei-lin/starter4.png",
+      },
     ],
     unique: [
-      { name: "Rising Dragon Spire", image: "/images/character/mei-lin/unique1.png" },
-      { name: "Unity of Attack and Defense", image: "/images/character/mei-lin/unique2.png" },
-      { name: "Spirit of the Aroma", image: "/images/character/mei-lin/unique3.png" },
-      { name: "Flame Dragon’s Sovereighty", image: "/images/character/mei-lin/unique4.png" },
+      {
+        name: "Rising Dragon Spire",
+        image: "/images/character/mei-lin/unique1.png",
+      },
+      {
+        name: "Unity of Attack and Defense",
+        image: "/images/character/mei-lin/unique2.png",
+      },
+      {
+        name: "Spirit of the Aroma",
+        image: "/images/character/mei-lin/unique3.png",
+      },
+      {
+        name: "Flame Dragon’s Sovereighty",
+        image: "/images/character/mei-lin/unique4.png",
+      },
     ],
   },
   orlea: {
     portrait: "/images/character/orlea/portrait.gif",
     starter: [
-      { name: "Attack, My Minions", image: "/images/character/orlea/starter1.png" },
-      { name: "Attack, My Minions", image: "/images/character/orlea/starter2.png" },
-      { name: "Heaven’s Healing", image: "/images/character/orlea/starter3.png" },
+      {
+        name: "Attack, My Minions",
+        image: "/images/character/orlea/starter1.png",
+      },
+      {
+        name: "Attack, My Minions",
+        image: "/images/character/orlea/starter2.png",
+      },
+      {
+        name: "Heaven’s Healing",
+        image: "/images/character/orlea/starter3.png",
+      },
       { name: "Sacred Censer", image: "/images/character/orlea/starter4.png" },
     ],
     unique: [
-      { name: "Growth Acceleration", image: "/images/character/orlea/unique1.png" },
+      {
+        name: "Growth Acceleration",
+        image: "/images/character/orlea/unique1.png",
+      },
       { name: "Annoying", image: "/images/character/orlea/unique2.png" },
-      { name: "Growing Creature", image: "/images/character/orlea/unique3.png" },
+      {
+        name: "Growing Creature",
+        image: "/images/character/orlea/unique3.png",
+      },
       { name: "Will of Light", image: "/images/character/orlea/unique4.png" },
     ],
   },
   rin: {
     portrait: "/images/character/rin/portrait.gif",
     starter: [
-      { name: "Dark Mist Sword: First Form", image: "/images/character/rin/starter1.png" },
-      { name: "Dark Mist Sword: Third Form", image: "/images/character/rin/starter2.png" },
+      {
+        name: "Dark Mist Sword: First Form",
+        image: "/images/character/rin/starter1.png",
+      },
+      {
+        name: "Dark Mist Sword: Third Form",
+        image: "/images/character/rin/starter2.png",
+      },
       { name: "Protection", image: "/images/character/rin/starter3.png" },
       { name: "Drawing Slash", image: "/images/character/rin/starter4.png" },
     ],
     unique: [
-      { name: "Dark Mist Secret Art: Destruction", image: "/images/character/rin/unique1.png" },
-      { name: "Dark Mist Secret Art: Annihilation", image: "/images/character/rin/unique2.png" },
-      { name: "Dark Mist Inner Art", image: "/images/character/rin/unique3.png" },
-      { name: "Dark Mist Secret Art: Black Dance", image: "/images/character/rin/unique4.png" },
+      {
+        name: "Dark Mist Secret Art: Destruction",
+        image: "/images/character/rin/unique1.png",
+      },
+      {
+        name: "Dark Mist Secret Art: Annihilation",
+        image: "/images/character/rin/unique2.png",
+      },
+      {
+        name: "Dark Mist Inner Art",
+        image: "/images/character/rin/unique3.png",
+      },
+      {
+        name: "Dark Mist Secret Art: Black Dance",
+        image: "/images/character/rin/unique4.png",
+      },
     ],
   },
   magna: {
@@ -330,10 +523,16 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
       { name: "Ice Fragment", image: "/images/character/magna/starter4.png" },
     ],
     unique: [
-      { name: "Glacial Iron Fist", image: "/images/character/magna/unique1.png" },
+      {
+        name: "Glacial Iron Fist",
+        image: "/images/character/magna/unique1.png",
+      },
       { name: "Ice Wall", image: "/images/character/magna/unique2.png" },
       { name: "Frost Charge", image: "/images/character/magna/unique3.png" },
-      { name: "Storm of Bitter Cold", image: "/images/character/magna/unique4.png" },
+      {
+        name: "Storm of Bitter Cold",
+        image: "/images/character/magna/unique4.png",
+      },
     ],
   },
   khalipe: {
@@ -342,13 +541,22 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
       { name: "Lashing", image: "/images/character/khalipe/starter1.png" },
       { name: "Upward Slash", image: "/images/character/khalipe/starter2.png" },
       { name: "Tyr’s Vow", image: "/images/character/khalipe/starter3.png" },
-      { name: "Vulture Ejection", image: "/images/character/khalipe/starter4.png" },
+      {
+        name: "Vulture Ejection",
+        image: "/images/character/khalipe/starter4.png",
+      },
     ],
     unique: [
-      { name: "Greatsword Aquila", image: "/images/character/khalipe/unique1.png" },
+      {
+        name: "Greatsword Aquila",
+        image: "/images/character/khalipe/unique1.png",
+      },
       { name: "Overpower", image: "/images/character/khalipe/unique2.png" },
       { name: "Rally", image: "/images/character/khalipe/unique3.png" },
-      { name: "Absolute Protection", image: "/images/character/khalipe/unique4.png" },
+      {
+        name: "Absolute Protection",
+        image: "/images/character/khalipe/unique4.png",
+      },
     ],
   },
   sereniel: {
@@ -356,14 +564,32 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
     starter: [
       { name: "Pulse Fire", image: "/images/character/sereniel/starter1.webp" },
       { name: "Pulse Fire", image: "/images/character/sereniel/starter2.webp" },
-      { name: "Magnetic Field", image: "/images/character/sereniel/starter3.webp" },
-      { name: "Homing Laser", image: "/images/character/sereniel/starter4.webp" },
+      {
+        name: "Magnetic Field",
+        image: "/images/character/sereniel/starter3.webp",
+      },
+      {
+        name: "Homing Laser",
+        image: "/images/character/sereniel/starter4.webp",
+      },
     ],
     unique: [
-      { name: "Plasma Missile", image: "/images/character/sereniel/unique1.webp" },
-      { name: "Shining Core", image: "/images/character/sereniel/unique2.webp" },
-      { name: "Cobalt Light", image: "/images/character/sereniel/unique3.webp" },
-      { name: "Pale Shooting Star", image: "/images/character/sereniel/unique4.webp" },
+      {
+        name: "Plasma Missile",
+        image: "/images/character/sereniel/unique1.webp",
+      },
+      {
+        name: "Shining Core",
+        image: "/images/character/sereniel/unique2.webp",
+      },
+      {
+        name: "Cobalt Light",
+        image: "/images/character/sereniel/unique3.webp",
+      },
+      {
+        name: "Pale Shooting Star",
+        image: "/images/character/sereniel/unique4.webp",
+      },
     ],
   },
   chizuru: {
@@ -371,14 +597,23 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
     starter: [
       { name: "Moonslash", image: "/images/character/chizuru/starter1.png" },
       { name: "Moonslash", image: "/images/character/chizuru/starter2.png" },
-      { name: "Spiritflame’s Ward", image: "/images/character/chizuru/starter3.png" },
-      { name: "Karmic Flames", image: "/images/character/chizuru/starter4.png" },
+      {
+        name: "Spiritflame’s Ward",
+        image: "/images/character/chizuru/starter3.png",
+      },
+      {
+        name: "Karmic Flames",
+        image: "/images/character/chizuru/starter4.png",
+      },
     ],
     unique: [
       { name: "Tsukuyomi", image: "/images/character/chizuru/unique1.png" },
       { name: "Bound At Dusk", image: "/images/character/chizuru/unique2.png" },
       { name: "Oni Hunt", image: "/images/character/chizuru/unique3.png" },
-      { name: "Shadow of the Moon", image: "/images/character/chizuru/unique4.png" },
+      {
+        name: "Shadow of the Moon",
+        image: "/images/character/chizuru/unique4.png",
+      },
     ],
   },
   luke: {
@@ -386,25 +621,37 @@ const CHARACTER_CARDS: Record<string, { portrait?: string; starter: CardEntry[];
     starter: [
       { name: "Single Shot", image: "/images/character/luke/starter1.png" },
       { name: "Single Shot", image: "/images/character/luke/starter2.png" },
-      { name: "Shadow Concealment", image: "/images/character/luke/starter3.png" },
+      {
+        name: "Shadow Concealment",
+        image: "/images/character/luke/starter3.png",
+      },
       { name: "Rapid Fire", image: "/images/character/luke/starter4.png" },
     ],
     unique: [
       { name: "Stealth Reload", image: "/images/character/luke/unique1.png" },
-      { name: "Seize the Opportunity", image: "/images/character/luke/unique2.png" },
-      { name: "Dance of the Demon", image: "/images/character/luke/unique3.png" },
+      {
+        name: "Seize the Opportunity",
+        image: "/images/character/luke/unique2.png",
+      },
+      {
+        name: "Dance of the Demon",
+        image: "/images/character/luke/unique3.png",
+      },
       { name: "Finisher Round", image: "/images/character/luke/unique4.png" },
     ],
   },
-}
+};
 
-const DEFAULT_CARD_IMAGES: Record<"neutral" | "monster" | "forbidden" | "starter" | "placeholder", string> = {
+const DEFAULT_CARD_IMAGES: Record<
+  "neutral" | "monster" | "forbidden" | "starter" | "placeholder",
+  string
+> = {
   neutral: "/images/card/neutral.png",
   monster: "/images/card/monster.png",
   forbidden: "/images/card/forbidden.png",
   starter: "/images/card/starter.png",
   placeholder: "/images/card/placeholder.png",
-}
+};
 
 const TIER_LIMITS: Record<number, number> = {
   1: 30,
@@ -421,71 +668,79 @@ const TIER_LIMITS: Record<number, number> = {
   12: 140,
   13: 150,
   14: 160,
-}
+};
 
-type CardType = "neutral" | "monster" | "forbidden" | "starter"
+type CardType = "neutral" | "monster" | "forbidden" | "starter";
 
 type DeckCard = {
-  id: string
-  name: string
-  image?: string
-  cardType: CardType
-  isStartingCard: boolean
-  hasNormalEpiphany: boolean
-  hasDivineEpiphany: boolean
-  isRemoved: boolean
-  wasConverted: boolean
-  removalCost?: number
-  isMutantSample?: boolean
-  isDuplicated?: boolean
-  duplicationCost?: number
-}
+  id: string;
+  name: string;
+  image?: string;
+  cardType: CardType;
+  isStartingCard: boolean;
+  hasNormalEpiphany: boolean;
+  hasDivineEpiphany: boolean;
+  isRemoved: boolean;
+  wasConverted: boolean;
+  removalCost?: number;
+  isMutantSample?: boolean;
+  isDuplicated?: boolean;
+  duplicationCost?: number;
+};
 
 type Action = {
-  type: "epiphany" | "divine" | "duplicate" | "convert" | "remove" | "add" | "restore" | "mutant"
-  cardId: string
-  previousState?: DeckCard
-  previousDeck?: DeckCard[]
-  previousPoints?: number
-  previousRemovalCount?: number
-  previousDuplicationCount?: number
-  previousConversionCount?: number
-}
+  type:
+    | "epiphany"
+    | "divine"
+    | "duplicate"
+    | "convert"
+    | "remove"
+    | "add"
+    | "restore"
+    | "mutant";
+  cardId: string;
+  previousState?: DeckCard;
+  previousDeck?: DeckCard[];
+  previousPoints?: number;
+  previousRemovalCount?: number;
+  previousDuplicationCount?: number;
+  previousConversionCount?: number;
+};
 
 const formatCharacterName = (key: string) =>
   key
     .split(/[-_ ]+/)
     .map((part) => (part ? part.charAt(0).toUpperCase() + part.slice(1) : ""))
-    .join(" ")
+    .join(" ");
 
 export function RunTracker() {
-  const [character, setCharacter] = useState("none") // Set default character to "none" instead of empty string
-  const [tier, setTier] = useState(1)
-  const [nightmareMode, setNightmareMode] = useState(false)
-  const [selectedCard, setSelectedCard] = useState<string | null>(null)
-  const [showAddCard, setShowAddCard] = useState(false)
-  const [removalCount, setRemovalCount] = useState(0)
-  const [duplicationCount, setDuplicationCount] = useState(0)
-  const [conversionCount, setConversionCount] = useState(0)
-  const [totalPoints, setTotalPoints] = useState(0)
-  const [actionHistory, setActionHistory] = useState<Action[]>([])
-  const [deck, setDeck] = useState<DeckCard[]>([])
+  const [character, setCharacter] = useState("none"); // Set default character to "none" instead of empty string
+  const [tier, setTier] = useState(1);
+  const [nightmareMode, setNightmareMode] = useState(false);
+  const [selectedCard, setSelectedCard] = useState<string | null>(null);
+  const [showAddCard, setShowAddCard] = useState(false);
+  const [removalCount, setRemovalCount] = useState(0);
+  const [duplicationCount, setDuplicationCount] = useState(0);
+  const [conversionCount, setConversionCount] = useState(0);
+  const [totalPoints, setTotalPoints] = useState(0);
+  const [actionHistory, setActionHistory] = useState<Action[]>([]);
+  const [deck, setDeck] = useState<DeckCard[]>([]);
 
   useEffect(() => {
-    const savedState = sessionStorage.getItem("czn-run-tracker")
+    const savedState = sessionStorage.getItem("czn-run-tracker");
     if (savedState) {
       try {
-        const parsed = JSON.parse(savedState)
-        setCharacter(parsed.character || "none")
-        setTier(parsed.tier || 1)
-        setNightmareMode(parsed.isNightmare || false)
-        setDeck(parsed.deck || [])
-        setActionHistory(parsed.actionHistory || [])
-        setRemovalCount(parsed.removalCount || 0)
-        setDuplicationCount(parsed.duplicationCount || 0)
-        setConversionCount(parsed.conversionCount || 0)
+        const parsed = JSON.parse(savedState);
+        setCharacter(parsed.character || "none");
+        setTier(parsed.tier || 1);
+        setNightmareMode(parsed.isNightmare || false);
+        setDeck(parsed.deck || []);
+        setActionHistory(parsed.actionHistory || []);
+        setRemovalCount(parsed.removalCount || 0);
+        setDuplicationCount(parsed.duplicationCount || 0);
+        setConversionCount(parsed.conversionCount || 0);
       } catch (error) {
-        console.error("Failed to parse saved state:", error)
+        console.error("Failed to parse saved state:", error);
       }
     } else {
       const placeholderDeck: DeckCard[] = Array.from({ length: 8 }, (_, i) => ({
@@ -498,10 +753,10 @@ export function RunTracker() {
         hasDivineEpiphany: false,
         isRemoved: false,
         wasConverted: false,
-      }))
-      setDeck(placeholderDeck)
+      }));
+      setDeck(placeholderDeck);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     // Only save if we have some data to save
@@ -515,14 +770,23 @@ export function RunTracker() {
         removalCount,
         duplicationCount,
         conversionCount,
-      }
-      sessionStorage.setItem("czn-run-tracker", JSON.stringify(state))
+      };
+      sessionStorage.setItem("czn-run-tracker", JSON.stringify(state));
     }
-  }, [character, tier, nightmareMode, deck, actionHistory, removalCount, duplicationCount, conversionCount])
+  }, [
+    character,
+    tier,
+    nightmareMode,
+    deck,
+    actionHistory,
+    removalCount,
+    duplicationCount,
+    conversionCount,
+  ]);
 
   const handleCharacterChange = (character: string) => {
-    const actualCharacter = character === "none" ? "" : character
-    setCharacter(character) // Use the passed character string directly
+    const actualCharacter = character === "none" ? "" : character;
+    setCharacter(character); // Use the passed character string directly
 
     if (!actualCharacter) {
       const placeholderDeck: DeckCard[] = Array.from({ length: 8 }, (_, i) => ({
@@ -535,12 +799,12 @@ export function RunTracker() {
         hasDivineEpiphany: false,
         isRemoved: false,
         wasConverted: false,
-      }))
-      setDeck(placeholderDeck)
+      }));
+      setDeck(placeholderDeck);
     } else {
       // Get character data
-      const characterData = CHARACTER_CARDS[actualCharacter]
-      if (!characterData) return
+      const characterData = CHARACTER_CARDS[actualCharacter];
+      if (!characterData) return;
 
       const initialDeck: DeckCard[] = [
         // 4 starter cards
@@ -567,89 +831,92 @@ export function RunTracker() {
           isRemoved: false,
           wasConverted: false,
         })),
-      ]
-      setDeck(initialDeck)
+      ];
+      setDeck(initialDeck);
     }
-  }
+  };
 
-  const limit = TIER_LIMITS[tier] + (nightmareMode ? 10 : 0) // Deep Trauma
+  const limit = TIER_LIMITS[tier] + (nightmareMode ? 10 : 0); // Deep Trauma
 
-  const calculateRemovalCost = (card: DeckCard, currentRemovalCount: number): number => {
-    const count = currentRemovalCount + 1
-    let cost = 0
+  const calculateRemovalCost = (
+    card: DeckCard,
+    currentRemovalCount: number
+  ): number => {
+    const count = currentRemovalCount + 1;
+    let cost = 0;
 
     if (count === 1) {
-      cost = 0
+      cost = 0;
     } else if (count === 2) {
-      cost = 10
+      cost = 10;
     } else if (count === 3) {
-      cost = 30
+      cost = 30;
     } else if (count === 4) {
-      cost = 50
+      cost = 50;
     } else {
-      cost = 70
+      cost = 70;
     }
 
     // +20 if removing a starting card (that wasn't converted) or a card with a normal epiphany
     if ((card.isStartingCard || card.hasNormalEpiphany) && !card.wasConverted) {
-      cost += 20
+      cost += 20;
     }
 
     // Subtract the base value for non-starter neutrals and monsters so removal undoes the original add/convert cost
     if (card.cardType === "neutral" && !card.isStartingCard) {
-      cost -= 20
+      cost -= 20;
     } else if (card.cardType === "monster" && !card.isStartingCard) {
-      cost -= 80
+      cost -= 80;
     }
 
-    return cost
-  }
+    return cost;
+  };
 
   const calculateDuplicationCost = (originalCard: DeckCard): number => {
-    const count = duplicationCount + 1
-    let cost = 0
+    const count = duplicationCount + 1;
+    let cost = 0;
 
     if (count === 1) {
-      cost = 0
+      cost = 0;
     } else if (count === 2) {
-      cost = 10
+      cost = 10;
     } else if (count === 3) {
-      cost = 30
+      cost = 30;
     } else if (count === 4) {
-      cost = 50
+      cost = 50;
     } else {
-      cost = 70
+      cost = 70;
     }
 
-    cost += getCardPointValue(originalCard)
+    cost += getCardPointValue(originalCard);
 
-    return cost
-  }
+    return cost;
+  };
 
   const calculateConversionCost = (card: DeckCard): number => {
-    let cost = 10
+    let cost = 10;
 
     if (card.cardType === "starter") {
-      cost += 20
+      cost += 20;
     }
 
     // Divine conversion cost is 30 for neutral cards, otherwise 20.
     if (card.hasDivineEpiphany) {
-      cost += card.cardType === "neutral" ? 30 : 20
+      cost += card.cardType === "neutral" ? 30 : 20;
     } else if (card.hasNormalEpiphany && card.cardType !== "starter") {
-      cost += 10
+      cost += 10;
     }
 
-    return cost
-  }
+    return cost;
+  };
 
   const toggleNormalEpiphany = (cardId: string) => {
-    const card = deck.find((c) => c.id === cardId)
-    if (!card || card.isRemoved || card.cardType === "forbidden") return
+    const card = deck.find((c) => c.id === cardId);
+    if (!card || card.isRemoved || card.cardType === "forbidden") return;
 
-    if (!card.hasNormalEpiphany && card.hasDivineEpiphany) return
+    if (!card.hasNormalEpiphany && card.hasDivineEpiphany) return;
 
-    const isRemoving = card.hasNormalEpiphany
+    const isRemoving = card.hasNormalEpiphany;
 
     setActionHistory([
       ...actionHistory,
@@ -659,25 +926,27 @@ export function RunTracker() {
         previousDeck: [...deck],
         previousPoints: totalPoints,
       },
-    ])
+    ]);
 
-    const updatedDeck = deck.map((c) => (c.id === cardId ? { ...c, hasNormalEpiphany: !c.hasNormalEpiphany } : c))
-    setDeck(updatedDeck)
+    const updatedDeck = deck.map((c) =>
+      c.id === cardId ? { ...c, hasNormalEpiphany: !c.hasNormalEpiphany } : c
+    );
+    setDeck(updatedDeck);
 
     if (card.cardType !== "starter") {
-      setTotalPoints(totalPoints + (isRemoving ? -10 : 10))
+      setTotalPoints(totalPoints + (isRemoving ? -10 : 10));
     }
 
-    setSelectedCard(null)
-  }
+    setSelectedCard(null);
+  };
 
   const toggleDivineEpiphany = (cardId: string) => {
-    const card = deck.find((c) => c.id === cardId)
-    if (!card || card.isRemoved || card.cardType === "forbidden") return
+    const card = deck.find((c) => c.id === cardId);
+    if (!card || card.isRemoved || card.cardType === "forbidden") return;
 
-    if (!card.hasDivineEpiphany && card.hasNormalEpiphany) return
+    if (!card.hasDivineEpiphany && card.hasNormalEpiphany) return;
 
-    const isRemoving = card.hasDivineEpiphany
+    const isRemoving = card.hasDivineEpiphany;
 
     setActionHistory([
       ...actionHistory,
@@ -687,25 +956,26 @@ export function RunTracker() {
         previousDeck: [...deck],
         previousPoints: totalPoints,
       },
-    ])
+    ]);
 
-    const updatedDeck = deck.map((c) => (c.id === cardId ? { ...c, hasDivineEpiphany: !c.hasDivineEpiphany } : c))
-    setDeck(updatedDeck)
+    const updatedDeck = deck.map((c) =>
+      c.id === cardId ? { ...c, hasDivineEpiphany: !c.hasDivineEpiphany } : c
+    );
+    setDeck(updatedDeck);
 
     // Use 30 points for neutral cards, otherwise 20:
-    const delta = card.cardType === "neutral" ? 30 : 20
-    setTotalPoints(totalPoints + (isRemoving ? -delta : delta))
+    const delta = card.cardType === "neutral" ? 30 : 20;
+    setTotalPoints(totalPoints + (isRemoving ? -delta : delta));
 
-    setSelectedCard(null)
-  }
-
+    setSelectedCard(null);
+  };
 
   const duplicateCard = (cardId: string) => {
-    const card = deck.find((c) => c.id === cardId)
-    if (!card || card.isRemoved) return
+    const card = deck.find((c) => c.id === cardId);
+    if (!card || card.isRemoved) return;
     // if (card.cardType === "forbidden") return
 
-    const cost = calculateDuplicationCost(card)
+    const cost = calculateDuplicationCost(card);
     const newCard: DeckCard = {
       ...card,
       id: Date.now().toString(),
@@ -713,7 +983,7 @@ export function RunTracker() {
       isRemoved: false,
       isDuplicated: true,
       duplicationCost: cost,
-    }
+    };
 
     setActionHistory([
       ...actionHistory,
@@ -724,37 +994,44 @@ export function RunTracker() {
         previousPoints: totalPoints,
         previousDuplicationCount: duplicationCount,
       },
-    ])
+    ]);
 
-    setDeck([...deck, newCard])
-    setDuplicationCount(duplicationCount + 1)
-    setTotalPoints(totalPoints + cost)
-    setSelectedCard(null)
-  }
+    setDeck([...deck, newCard]);
+    setDuplicationCount(duplicationCount + 1);
+    setTotalPoints(totalPoints + cost);
+    setSelectedCard(null);
+  };
 
   const getDuplicationCostForCard = (card: DeckCard): number => {
-    if (!card.isDuplicated) return 0
+    if (!card.isDuplicated) return 0;
 
     // how many duplicates were made BEFORE this one
-    const previousDupes = deck.filter(c =>
-      c.isDuplicated &&
-      c.id !== card.id &&
-      deck.findIndex(dc => dc.id === c.id) < deck.findIndex(dc => dc.id === card.id)
-    ).length
+    const previousDupes = deck.filter(
+      (c) =>
+        c.isDuplicated &&
+        c.id !== card.id &&
+        deck.findIndex((dc) => dc.id === c.id) <
+          deck.findIndex((dc) => dc.id === card.id)
+    ).length;
 
-    if (previousDupes === 0) return 0
-    if (previousDupes === 1) return 10
-    if (previousDupes === 2) return 30
-    if (previousDupes === 3) return 50
-    return 70
-  }
-
+    if (previousDupes === 0) return 0;
+    if (previousDupes === 1) return 10;
+    if (previousDupes === 2) return 30;
+    if (previousDupes === 3) return 50;
+    return 70;
+  };
 
   const convertCard = (cardId: string) => {
-    const card = deck.find((c) => c.id === cardId)
-    if (!card || card.isRemoved || card.wasConverted || card.cardType === "forbidden") return
+    const card = deck.find((c) => c.id === cardId);
+    if (
+      !card ||
+      card.isRemoved ||
+      card.wasConverted ||
+      card.cardType === "forbidden"
+    )
+      return;
 
-    const cost = calculateConversionCost(card)
+    const cost = calculateConversionCost(card);
 
     setActionHistory([
       ...actionHistory,
@@ -765,32 +1042,32 @@ export function RunTracker() {
         previousPoints: totalPoints,
         previousConversionCount: conversionCount,
       },
-    ])
+    ]);
 
     setDeck(
       deck.map((c) =>
         c.id === cardId
           ? {
-            ...c,
-            cardType: "neutral",
-            wasConverted: true,
-            isStartingCard: false,
-            image: DEFAULT_CARD_IMAGES.neutral,
-            name: "Neutral Card",
-          }
+              ...c,
+              cardType: "neutral",
+              wasConverted: true,
+              isStartingCard: false,
+              image: DEFAULT_CARD_IMAGES.neutral,
+              name: "Neutral Card",
+            }
           : c
       )
-    )
+    );
 
-    setConversionCount(conversionCount + 1)
-    setTotalPoints(totalPoints + cost)
-    setSelectedCard(null)
-  }
+    setConversionCount(conversionCount + 1);
+    setTotalPoints(totalPoints + cost);
+    setSelectedCard(null);
+  };
 
   const convertToMutantSample = (cardId: string) => {
-    const card = deck.find((c) => c.id === cardId)
-    if (!card || card.isRemoved) return
-    if (card.cardType === "forbidden") return
+    const card = deck.find((c) => c.id === cardId);
+    if (!card || card.isRemoved) return;
+    if (card.cardType === "forbidden") return;
 
     setActionHistory([
       ...actionHistory,
@@ -800,51 +1077,51 @@ export function RunTracker() {
         previousDeck: [...deck],
         previousPoints: totalPoints,
       },
-    ])
+    ]);
 
     setDeck(
       deck.map((c) =>
         c.id === cardId
           ? {
-            ...c,
-            isRemoved: true,
-            isMutantSample: true,
-            removalCost: 0,
-            image: "/images/card/remove.png",
-          }
-          : c,
-      ),
-    )
+              ...c,
+              isRemoved: true,
+              isMutantSample: true,
+              removalCost: 0,
+              image: "/images/card/remove.png",
+            }
+          : c
+      )
+    );
 
     // No cost and doesn't increase removal count
-    setSelectedCard(null)
-  }
+    setSelectedCard(null);
+  };
 
   const removeCard = (cardId: string) => {
-    const card = deck.find((c) => c.id === cardId)
-    if (!card || card.isRemoved || card.cardType === "forbidden") return
+    const card = deck.find((c) => c.id === cardId);
+    if (!card || card.isRemoved || card.cardType === "forbidden") return;
 
-    const newRemovalCount = removalCount + 1
+    const newRemovalCount = removalCount + 1;
 
     // Scaling cost: 0, 10, 30, 50, 70
-    let scaleCost = 0
-    if (newRemovalCount === 1) scaleCost = 0
-    else if (newRemovalCount === 2) scaleCost = 10
-    else if (newRemovalCount === 3) scaleCost = 30
-    else if (newRemovalCount === 4) scaleCost = 50
-    else scaleCost = 70
+    let scaleCost = 0;
+    if (newRemovalCount === 1) scaleCost = 0;
+    else if (newRemovalCount === 2) scaleCost = 10;
+    else if (newRemovalCount === 3) scaleCost = 30;
+    else if (newRemovalCount === 4) scaleCost = 50;
+    else scaleCost = 70;
 
     // Starter/base card tax (+20) if applicable
-    const starterTax = card.isStartingCard ? 20 : 0
-    // Total points contributed by the card (base + epiphanies) 
-    const totalCardPoints = getCardPointValue(card)
+    const starterTax = card.isStartingCard ? 20 : 0;
+    // Total points contributed by the card (base + epiphanies)
+    const totalCardPoints = getCardPointValue(card);
 
     // Final removal cost = scaleCost + starterTax - totalCardPoints
     // Ensure that any card with normal/divine epiphany is fully removed (neutral/monster cards)
     const removalCost =
       card.cardType === "neutral" || card.cardType === "monster"
         ? -totalCardPoints + starterTax + scaleCost
-        : scaleCost + starterTax - totalCardPoints
+        : scaleCost + starterTax - totalCardPoints;
 
     setActionHistory([
       ...actionHistory,
@@ -855,13 +1132,17 @@ export function RunTracker() {
         previousPoints: totalPoints,
         previousRemovalCount: removalCount,
       },
-    ])
+    ]);
 
-    setDeck(deck.map((c) => (c.id === cardId ? { ...c, isRemoved: true, removalCost } : c)))
-    setRemovalCount(newRemovalCount)
-    setTotalPoints(totalPoints + removalCost)
-    setSelectedCard(null)
-  }
+    setDeck(
+      deck.map((c) =>
+        c.id === cardId ? { ...c, isRemoved: true, removalCost } : c
+      )
+    );
+    setRemovalCount(newRemovalCount);
+    setTotalPoints(totalPoints + removalCost);
+    setSelectedCard(null);
+  };
 
   const addNewCard = (type: CardType) => {
     const nameMap = {
@@ -869,7 +1150,7 @@ export function RunTracker() {
       monster: "Monster Card",
       forbidden: "Forbidden Card",
       starter: "Starter Card", // just in case
-    }
+    };
 
     const newCard: DeckCard = {
       id: Date.now().toString(),
@@ -881,7 +1162,7 @@ export function RunTracker() {
       hasDivineEpiphany: false,
       isRemoved: false,
       wasConverted: false,
-    }
+    };
 
     setActionHistory([
       ...actionHistory,
@@ -891,12 +1172,12 @@ export function RunTracker() {
         previousDeck: [...deck],
         previousPoints: totalPoints,
       },
-    ])
+    ]);
 
-    setDeck([...deck, newCard])
-    setTotalPoints(totalPoints + getCardPointValue(newCard))
-    setShowAddCard(false)
-  }
+    setDeck([...deck, newCard]);
+    setTotalPoints(totalPoints + getCardPointValue(newCard));
+    setShowAddCard(false);
+  };
 
   // const restoreCard = (cardId: string) => {
   //   const card = deck.find((c) => c.id === cardId)
@@ -921,13 +1202,16 @@ export function RunTracker() {
   // }
 
   const resetDeck = () => {
-    const characterData = character !== "none" ? CHARACTER_CARDS[character] : null // Use character state
+    const characterData =
+      character !== "none" ? CHARACTER_CARDS[character] : null; // Use character state
 
     setDeck([
       {
         id: "1",
         name: characterData ? (characterData.starter[0] as CardEntry).name : "",
-        image: characterData ? (characterData.starter[0] as CardEntry).image : undefined,
+        image: characterData
+          ? (characterData.starter[0] as CardEntry).image
+          : undefined,
         cardType: "starter",
         isStartingCard: true,
         hasNormalEpiphany: false,
@@ -938,7 +1222,9 @@ export function RunTracker() {
       {
         id: "2",
         name: characterData ? (characterData.starter[1] as CardEntry).name : "",
-        image: characterData ? (characterData.starter[1] as CardEntry).image : undefined,
+        image: characterData
+          ? (characterData.starter[1] as CardEntry).image
+          : undefined,
         cardType: "starter",
         isStartingCard: true,
         hasNormalEpiphany: false,
@@ -949,7 +1235,9 @@ export function RunTracker() {
       {
         id: "3",
         name: characterData ? (characterData.starter[2] as CardEntry).name : "",
-        image: characterData ? (characterData.starter[2] as CardEntry).image : undefined,
+        image: characterData
+          ? (characterData.starter[2] as CardEntry).image
+          : undefined,
         cardType: "starter",
         isStartingCard: true,
         hasNormalEpiphany: false,
@@ -960,7 +1248,9 @@ export function RunTracker() {
       {
         id: "4",
         name: characterData ? (characterData.starter[3] as CardEntry).name : "",
-        image: characterData ? (characterData.starter[3] as CardEntry).image : undefined,
+        image: characterData
+          ? (characterData.starter[3] as CardEntry).image
+          : undefined,
         cardType: "starter",
         isStartingCard: true,
         hasNormalEpiphany: false,
@@ -971,7 +1261,9 @@ export function RunTracker() {
       {
         id: "5",
         name: characterData ? (characterData.unique[0] as CardEntry).name : "",
-        image: characterData ? (characterData.unique[0] as CardEntry).image : undefined,
+        image: characterData
+          ? (characterData.unique[0] as CardEntry).image
+          : undefined,
         cardType: "starter", // Defaulting to starter
         isStartingCard: true,
         hasNormalEpiphany: false,
@@ -982,7 +1274,9 @@ export function RunTracker() {
       {
         id: "6",
         name: characterData ? (characterData.unique[1] as CardEntry).name : "",
-        image: characterData ? (characterData.unique[1] as CardEntry).image : undefined,
+        image: characterData
+          ? (characterData.unique[1] as CardEntry).image
+          : undefined,
         cardType: "starter", // Defaulting to starter
         isStartingCard: true,
         hasNormalEpiphany: false,
@@ -993,7 +1287,9 @@ export function RunTracker() {
       {
         id: "7",
         name: characterData ? (characterData.unique[2] as CardEntry).name : "",
-        image: characterData ? (characterData.unique[2] as CardEntry).image : undefined,
+        image: characterData
+          ? (characterData.unique[2] as CardEntry).image
+          : undefined,
         cardType: "starter", // Defaulting to starter
         isStartingCard: true,
         hasNormalEpiphany: false,
@@ -1004,7 +1300,9 @@ export function RunTracker() {
       {
         id: "8",
         name: characterData ? (characterData.unique[3] as CardEntry).name : "",
-        image: characterData ? (characterData.unique[3] as CardEntry).image : undefined,
+        image: characterData
+          ? (characterData.unique[3] as CardEntry).image
+          : undefined,
         cardType: "starter", // Defaulting to starter
         isStartingCard: true,
         hasNormalEpiphany: false,
@@ -1012,101 +1310,97 @@ export function RunTracker() {
         isRemoved: false,
         wasConverted: false,
       },
-    ])
-    setRemovalCount(0)
-    setDuplicationCount(0)
-    setConversionCount(0)
-    setTotalPoints(0)
-    setSelectedCard(null)
-    setActionHistory([])
-  }
+    ]);
+    setRemovalCount(0);
+    setDuplicationCount(0);
+    setConversionCount(0);
+    setTotalPoints(0);
+    setSelectedCard(null);
+    setActionHistory([]);
+  };
 
   const deleteCard = (cardId: string) => {
-    setDeck(deck.filter((c) => c.id !== cardId))
-  }
+    setDeck(deck.filter((c) => c.id !== cardId));
+  };
 
   const getCardPointValue = (card: DeckCard): number => {
-    if (card.isRemoved) return 0
+    if (card.isRemoved) return 0;
 
-    let points = 0
+    let points = 0;
 
-    if (card.cardType === "neutral") points += 20
-    if (card.cardType === "monster") points += 80
-    if (card.cardType === "forbidden") points += 20
-    if (card.cardType === "starter") points += 0
+    if (card.cardType === "neutral") points += 20;
+    if (card.cardType === "monster") points += 80;
+    if (card.cardType === "forbidden") points += 20;
+    if (card.cardType === "starter") points += 0;
 
     // Divine gives 30 if the card is neutral, otherwise 20.
     if (card.hasDivineEpiphany) {
-      points += card.cardType === "neutral" ? 30 : 20
+      points += card.cardType === "neutral" ? 30 : 20;
     } else if (card.hasNormalEpiphany && card.cardType !== "starter") {
-      points += 10
+      points += 10;
     }
 
-    return points
-  }
+    return points;
+  };
 
-  const percentage = (totalPoints / limit) * 100
+  const percentage = (totalPoints / limit) * 100;
 
   const undoLastAction = () => {
-    if (actionHistory.length === 0) return
+    if (actionHistory.length === 0) return;
 
-    const lastAction = actionHistory[actionHistory.length - 1]
+    const lastAction = actionHistory[actionHistory.length - 1];
 
     if (lastAction.previousDeck) {
-      setDeck(lastAction.previousDeck)
+      setDeck(lastAction.previousDeck);
     }
     if (lastAction.previousPoints !== undefined) {
-      setTotalPoints(lastAction.previousPoints)
+      setTotalPoints(lastAction.previousPoints);
     }
     if (lastAction.previousRemovalCount !== undefined) {
-      setRemovalCount(lastAction.previousRemovalCount)
+      setRemovalCount(lastAction.previousRemovalCount);
     }
     if (lastAction.previousDuplicationCount !== undefined) {
-      setDuplicationCount(lastAction.previousDuplicationCount)
+      setDuplicationCount(lastAction.previousDuplicationCount);
     }
     if (lastAction.previousConversionCount !== undefined) {
-      setConversionCount(lastAction.previousConversionCount)
+      setConversionCount(lastAction.previousConversionCount);
     }
 
-    setActionHistory(actionHistory.slice(0, -1))
-    setSelectedCard(null)
-  }
-
+    setActionHistory(actionHistory.slice(0, -1));
+    setSelectedCard(null);
+  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as HTMLElement
+      const target = event.target as HTMLElement;
 
-      if (!selectedCard) return
+      if (!selectedCard) return;
 
+      const selectedCardElement = document.getElementById(
+        `card-${selectedCard}`
+      );
+      if (!selectedCardElement) return;
 
-      const selectedCardElement = document.getElementById(`card-${selectedCard}`)
-      if (!selectedCardElement) return
+      if (selectedCardElement.contains(target)) return;
 
+      setSelectedCard(null);
+    };
 
-      if (selectedCardElement.contains(target)) return
-
-
-      setSelectedCard(null)
-    }
-
-
-    document.addEventListener("click", handleClickOutside)
+    document.addEventListener("click", handleClickOutside);
 
     return () => {
-      document.removeEventListener("click", handleClickOutside)
-    }
-  }, [selectedCard]) //
-
-
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [selectedCard]); //
 
   return (
     <TooltipProvider>
       <div className="space-y-6">
-
         <div className="space-y-1">
           <h2 className="text-2xl font-bold">Save Data Calculator</h2>
-          <p className="text-sm text-muted-foreground">Track your current run progress</p>
+          <p className="text-sm text-muted-foreground">
+            Track your current run progress
+          </p>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-3">
@@ -1120,7 +1414,10 @@ export function RunTracker() {
                 <div className="flex items-end gap-4">
                   <div className="flex-1 space-y-2">
                     <Label>Tier</Label>
-                    <Select value={tier.toString()} onValueChange={(val) => setTier(Number.parseInt(val))}>
+                    <Select
+                      value={tier.toString()}
+                      onValueChange={(val) => setTier(Number.parseInt(val))}
+                    >
                       <SelectTrigger>
                         <SelectValue />
                       </SelectTrigger>
@@ -1138,7 +1435,9 @@ export function RunTracker() {
                     <Checkbox
                       id="nightmare"
                       checked={nightmareMode}
-                      onCheckedChange={(checked) => setNightmareMode(checked as boolean)} // Use setNightmareMode
+                      onCheckedChange={(checked) =>
+                        setNightmareMode(checked as boolean)
+                      } // Use setNightmareMode
                     />
                     <Label htmlFor="nightmare" className="cursor-pointer">
                       Nightmare Mode
@@ -1163,15 +1462,18 @@ export function RunTracker() {
                   </div>
                   <div className="h-4 w-full overflow-hidden rounded-full bg-secondary ring-1 ring-border">
                     <div
-                      className={`h-full transition-all ${percentage > 100
+                      className={`h-full transition-all ${
+                        percentage > 100
                           ? "bg-gradient-to-r from-[#C41729] to-[#FF601A]"
                           : "bg-gradient-to-r from-[#5B1FAF] to-[#19F7E1]"
-                        }`}
+                      }`}
                       style={{ width: `${Math.min(percentage, 100)}%` }}
                     />
                   </div>
                   {percentage > 100 && (
-                    <p className="text-xs text-red-400 font-semibold">Over limit by {totalPoints - limit} points!</p>
+                    <p className="text-xs text-red-400 font-semibold">
+                      Over limit by {totalPoints - limit} points!
+                    </p>
                   )}
                 </div>
               </CardContent>
@@ -1182,7 +1484,9 @@ export function RunTracker() {
                 <div className="flex items-center justify-between">
                   <div>
                     <CardTitle>Deck Cards</CardTitle>
-                    <CardDescription>Click a card to apply effects</CardDescription>
+                    <CardDescription>
+                      Click a card to apply effects
+                    </CardDescription>
                   </div>
                   <div className="flex gap-2">
                     <Button
@@ -1216,12 +1520,14 @@ export function RunTracker() {
                     </Button>
                   </div>
                 </div>
-
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
                   <Label>Character</Label>
-                  <Select value={character} onValueChange={handleCharacterChange}>
+                  <Select
+                    value={character}
+                    onValueChange={handleCharacterChange}
+                  >
                     {" "}
                     {/* Use character state */}
                     <SelectTrigger>
@@ -1240,37 +1546,42 @@ export function RunTracker() {
                   </Select>
                 </div>
 
-
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 max-w-[780px] mx-auto">
                   {deck.map((card, index) => (
                     <div
                       key={card.id}
                       id={`card-${card.id}`}
-                      className={`group relative aspect-[2/3] cursor-pointer rounded-lg transition-all hover:scale-105 ${selectedCard === card.id ? "shadow-lg shadow-[#5B1FAF]/20" : ""
-                        } ${card.isRemoved ? "opacity-50 grayscale" : ""} ${card.cardType === "starter"
+                      className={`group relative aspect-[2/3] cursor-pointer rounded-lg transition-all hover:scale-105 ${
+                        selectedCard === card.id
+                          ? "shadow-lg shadow-[#5B1FAF]/20"
+                          : ""
+                      } ${card.isRemoved ? "opacity-50 grayscale" : ""} ${
+                        card.cardType === "starter"
                           ? "bg-gradient-to-br from-[#0A0B0F] to-[#06070A]"
                           : card.cardType === "neutral"
-                            ? "bg-gradient-to-br from-[#0A0B0F] to-[#06070A] shadow-[#19F7E1]/5"
-                            : card.cardType === "monster"
-                              ? "bg-gradient-to-br from-[#0A0B0F] to-[#06070A] shadow-[#5B1FAF]/5"
-                              : "bg-gradient-to-br from-[#0A0B0F] to-[#06070A] shadow-[#C41729]/5"
-                        }`}
+                          ? "bg-gradient-to-br from-[#0A0B0F] to-[#06070A] shadow-[#19F7E1]/5"
+                          : card.cardType === "monster"
+                          ? "bg-gradient-to-br from-[#0A0B0F] to-[#06070A] shadow-[#5B1FAF]/5"
+                          : "bg-gradient-to-br from-[#0A0B0F] to-[#06070A] shadow-[#C41729]/5"
+                      }`}
                       onClick={() => {
                         if (card.isMutantSample) {
-                          return
+                          return;
                         }
                         if (card.isRemoved) {
-                          undoLastAction()
+                          undoLastAction();
                         } else {
-                          setSelectedCard(selectedCard === card.id ? null : card.id)
+                          setSelectedCard(
+                            selectedCard === card.id ? null : card.id
+                          );
                         }
                       }}
                     >
                       {card.isRemoved && (
                         <button
                           onClick={(e) => {
-                            e.stopPropagation()
-                            deleteCard(card.id)
+                            e.stopPropagation();
+                            deleteCard(card.id);
                           }}
                           className="absolute right-2 top-2 z-10 rounded-full bg-[#1A1B20] p-1 text-[#C3C7D0] opacity-0 shadow-lg ring-2 ring-border transition-all hover:bg-[#C41729]/20 hover:ring-[#C41729]/50 group-hover:opacity-100"
                         >
@@ -1287,18 +1598,19 @@ export function RunTracker() {
                               className="absolute inset-0 w-full h-full object-cover object-center [backface-visibility:hidden] [transform:translateZ(0)]"
                               style={{
                                 transform: card.isDuplicated
-                                  ? 'scaleX(-1) scale(1.10)'  // Flip + zoom for duplicated
-                                  : 'scale(1.10)',           // Normal zoom
+                                  ? "scaleX(-1) scale(1.10)" // Flip + zoom for duplicated
+                                  : "scale(1.10)", // Normal zoom
                               }}
                             />
-                          )
-                            : (
-                              <div className="absolute inset-0 flex items-center justify-center bg-card/50 border-2 border-dashed border-border/30 text-xs text-muted-foreground">
-                                No Image
-                              </div>
-                            )}
+                          ) : (
+                            <div className="absolute inset-0 flex items-center justify-center bg-card/50 border-2 border-dashed border-border/30 text-xs text-muted-foreground">
+                              No Image
+                            </div>
+                          )}
 
-                          {["amir", "luke", "hugo", "yuki"].includes(character) && ( // Use character state
+                          {["amir", "luke", "hugo", "yuki"].includes(
+                            character
+                          ) && ( // Use character state
                             <img
                               src="/images/card/order-border.png"
                               alt="Order border"
@@ -1306,7 +1618,14 @@ export function RunTracker() {
                             />
                           )}
 
-                          {["tressa", "rin", "renoa", "rei", "kayron", "chizuru"].includes(character) && ( // Use character state
+                          {[
+                            "tressa",
+                            "rin",
+                            "renoa",
+                            "rei",
+                            "kayron",
+                            "chizuru",
+                          ].includes(character) && ( // Use character state
                             <img
                               src="/images/card/void-border.png"
                               alt="Void border"
@@ -1314,7 +1633,13 @@ export function RunTracker() {
                             />
                           )}
 
-                          {["nia", "khalipe", "orlea", "cassius", "sereniel"].includes(character) && ( // Use character state
+                          {[
+                            "nia",
+                            "khalipe",
+                            "orlea",
+                            "cassius",
+                            "sereniel",
+                          ].includes(character) && ( // Use character state
                             <img
                               src="/images/card/instinct-border.png"
                               alt="Instinct border"
@@ -1322,7 +1647,14 @@ export function RunTracker() {
                             />
                           )}
 
-                          {["selena", "lucas", "mei-lin", "maribell", "veronica", "owen"].includes(character) && ( // Use character state
+                          {[
+                            "selena",
+                            "lucas",
+                            "mei-lin",
+                            "maribell",
+                            "veronica",
+                            "owen",
+                          ].includes(character) && ( // Use character state
                             <img
                               src="/images/card/passion-border.png"
                               alt="Passion border"
@@ -1330,7 +1662,9 @@ export function RunTracker() {
                             />
                           )}
 
-                          {["magna", "mika", "beryl", "haru"].includes(character) && ( // Use character state
+                          {["magna", "mika", "beryl", "haru"].includes(
+                            character
+                          ) && ( // Use character state
                             <img
                               src="/images/card/justice-border.png"
                               alt="Justice border"
@@ -1339,13 +1673,14 @@ export function RunTracker() {
                           )}
 
                           {/* Neutral border */}
-                          {card.cardType === "neutral" && !card.isStartingCard && (
-                            <img
-                              src="/images/card/neutral-border.png"
-                              alt="Neutral border"
-                              className="absolute left-0 top-0.5 h-full w-auto z-[5] pointer-events-none scale-104"
-                            />
-                          )}
+                          {card.cardType === "neutral" &&
+                            !card.isStartingCard && (
+                              <img
+                                src="/images/card/neutral-border.png"
+                                alt="Neutral border"
+                                className="absolute left-0 top-0.5 h-full w-auto z-[5] pointer-events-none scale-104"
+                              />
+                            )}
 
                           {/* Monster border */}
                           {card.cardType === "monster" && (
@@ -1370,7 +1705,11 @@ export function RunTracker() {
                               {!card.isRemoved && (
                                 <div className="flex items-center gap-2">
                                   <div
-                                    className={`text-base font-medium leading-tight break-words ${card.wasConverted ? "text-white" : "text-white"}`}
+                                    className={`text-base font-medium leading-tight break-words ${
+                                      card.wasConverted
+                                        ? "text-white"
+                                        : "text-white"
+                                    }`}
                                   >
                                     {card.name}
                                   </div>
@@ -1412,91 +1751,106 @@ export function RunTracker() {
                             </div>
                             <div className="text-right">
                               <div className="text-2xl font-bold text-gray-300">
-                                {card.duplicationCost !== undefined ? card.duplicationCost : getCardPointValue(card)}
+                                {card.duplicationCost !== undefined
+                                  ? card.duplicationCost
+                                  : getCardPointValue(card)}
                               </div>
                             </div>
                           </div>
-
                         </div>
                       </div>
 
-                      {selectedCard === card.id && !card.isRemoved && !card.isMutantSample && (
-                        <div className="absolute inset-0 z-30 flex flex-col gap-1 rounded-lg bg-[#06070A]/80 p-2 backdrop-blur-sm ring-2 ring-purple-400/100">
-
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            className="h-8 text-xs border-border hover:bg-secondary bg-transparent"
-                            disabled={card.hasDivineEpiphany || card.cardType === "forbidden"}
-                            onClick={(e) => {
-                              e.stopPropagation()
-                              toggleNormalEpiphany(card.id)
-                            }}
-                          >
-                            {card.hasNormalEpiphany ? "Remove Epiphany" : "Epiphany"}
-                          </Button>
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            className="h-8 text-xs border-border hover:bg-secondary bg-transparent"
-                            disabled={card.hasNormalEpiphany || card.cardType === "forbidden"}
-                            onClick={(e) => {
-                              e.stopPropagation()
-                              toggleDivineEpiphany(card.id)
-                            }}
-                          >
-                            {card.hasDivineEpiphany ? "Remove Divine Epiphany" : "Divine Epiphany"}
-                          </Button>
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            className="h-8 text-xs border-border hover:bg-secondary bg-transparent"
-                            // disabled={card.cardType === "forbidden"}
-                            onClick={(e) => {
-                              e.stopPropagation()
-                              duplicateCard(card.id)
-                            }}
-                          >
-                            Duplicate
-                          </Button>
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            className="h-8 text-xs border-border hover:bg-secondary bg-transparent"
-                            disabled={card.wasConverted || card.cardType === "forbidden"}
-                            onClick={(e) => {
-                              e.stopPropagation()
-                              convertCard(card.id)
-                            }}
-                          >
-                            Convert
-                          </Button>
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            className="h-8 text-xs border-purple-400/50 bg-purple-400/10 hover:bg-purple-400/20"
-                            disabled={card.cardType === "forbidden"}
-                            onClick={(e) => {
-                              e.stopPropagation()
-                              convertToMutantSample(card.id)
-                            }}
-                          >
-                            Convert to [Remove]
-                          </Button>
-                          <Button
-                            size="sm"
-                            variant="destructive"
-                            className="h-8 text-xs bg-red-400/20 border-red-400/50 hover:bg-red-400/30"
-                            // disabled={card.cardType === "forbidden"}
-                            onClick={(e) => {
-                              e.stopPropagation()
-                              removeCard(card.id)
-                            }}
-                          >
-                            Remove
-                          </Button>
-                        </div>
-                      )}
+                      {selectedCard === card.id &&
+                        !card.isRemoved &&
+                        !card.isMutantSample && (
+                          <div className="absolute inset-0 z-30 flex flex-col gap-1 rounded-lg bg-[#06070A]/80 p-2 backdrop-blur-sm ring-2 ring-purple-400/100">
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              className="h-8 text-xs border-border hover:bg-secondary bg-transparent"
+                              disabled={
+                                card.hasDivineEpiphany ||
+                                card.cardType === "forbidden"
+                              }
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                toggleNormalEpiphany(card.id);
+                              }}
+                            >
+                              {card.hasNormalEpiphany
+                                ? "Remove Epiphany"
+                                : "Epiphany"}
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              className="h-8 text-xs border-border hover:bg-secondary bg-transparent"
+                              disabled={
+                                card.hasNormalEpiphany ||
+                                card.cardType === "forbidden"
+                              }
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                toggleDivineEpiphany(card.id);
+                              }}
+                            >
+                              {card.hasDivineEpiphany
+                                ? "Remove Divine Epiphany"
+                                : "Divine Epiphany"}
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              className="h-8 text-xs border-border hover:bg-secondary bg-transparent"
+                              // disabled={card.cardType === "forbidden"}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                duplicateCard(card.id);
+                              }}
+                            >
+                              Duplicate
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              className="h-8 text-xs border-border hover:bg-secondary bg-transparent"
+                              disabled={
+                                card.wasConverted ||
+                                card.cardType === "forbidden"
+                              }
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                convertCard(card.id);
+                              }}
+                            >
+                              Convert
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              className="h-8 text-xs border-purple-400/50 bg-purple-400/10 hover:bg-purple-400/20"
+                              disabled={card.cardType === "forbidden"}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                convertToMutantSample(card.id);
+                              }}
+                            >
+                              Convert to [Remove]
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="destructive"
+                              className="h-8 text-xs bg-red-400/20 border-red-400/50 hover:bg-red-400/30"
+                              // disabled={card.cardType === "forbidden"}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                removeCard(card.id);
+                              }}
+                            >
+                              Remove
+                            </Button>
+                          </div>
+                        )}
                     </div>
                   ))}
                 </div>
@@ -1514,7 +1868,9 @@ export function RunTracker() {
                   <DialogContent className="bg-[#0A0B0F] border-[#1F2127]">
                     <DialogHeader>
                       <DialogTitle>Add New Card</DialogTitle>
-                      <DialogDescription>Select the type of card to add to your deck</DialogDescription>
+                      <DialogDescription>
+                        Select the type of card to add to your deck
+                      </DialogDescription>
                     </DialogHeader>
                     <div className="grid gap-3">
                       <Button
@@ -1524,7 +1880,9 @@ export function RunTracker() {
                       >
                         <div className="text-center">
                           <div className="text-lg font-bold">Neutral Card</div>
-                          <div className="text-sm text-muted-foreground">20 points</div>
+                          <div className="text-sm text-muted-foreground">
+                            20 points
+                          </div>
                         </div>
                       </Button>
                       <Button
@@ -1534,7 +1892,9 @@ export function RunTracker() {
                       >
                         <div className="text-center">
                           <div className="text-lg font-bold">Monster Card</div>
-                          <div className="text-sm text-muted-foreground">80 points</div>
+                          <div className="text-sm text-muted-foreground">
+                            80 points
+                          </div>
                         </div>
                       </Button>
                       <Button
@@ -1543,8 +1903,12 @@ export function RunTracker() {
                         onClick={() => addNewCard("forbidden")}
                       >
                         <div className="text-center">
-                          <div className="text-lg font-bold">Forbidden Card</div>
-                          <div className="text-sm text-muted-foreground">20 points</div>
+                          <div className="text-lg font-bold">
+                            Forbidden Card
+                          </div>
+                          <div className="text-sm text-muted-foreground">
+                            20 points
+                          </div>
                         </div>
                       </Button>
                     </div>
@@ -1570,7 +1934,11 @@ export function RunTracker() {
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Points</span>
-                    <span className={`font-bold ${percentage > 100 ? "text-red-400" : "text-cyan-400"}`}>
+                    <span
+                      className={`font-bold ${
+                        percentage > 100 ? "text-red-400" : "text-cyan-400"
+                      }`}
+                    >
                       {totalPoints} / {limit}
                     </span>
                   </div>
@@ -1581,7 +1949,9 @@ export function RunTracker() {
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Active Cards</span>
-                    <span className="font-bold">{deck.filter((c) => !c.isRemoved).length}</span>
+                    <span className="font-bold">
+                      {deck.filter((c) => !c.isRemoved).length}
+                    </span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Total Cards</span>
@@ -1600,20 +1970,32 @@ export function RunTracker() {
                     <span className="font-bold">{removalCount}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Cards Duplicated</span>
+                    <span className="text-muted-foreground">
+                      Cards Duplicated
+                    </span>
                     <span className="font-bold">{duplicationCount}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Cards Converted</span>
+                    <span className="text-muted-foreground">
+                      Cards Converted
+                    </span>
                     <span className="font-bold">{conversionCount}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Normal Epiphanies</span>
-                    <span className="font-bold">{deck.filter((c) => c.hasNormalEpiphany).length}</span>
+                    <span className="text-muted-foreground">
+                      Normal Epiphanies
+                    </span>
+                    <span className="font-bold">
+                      {deck.filter((c) => c.hasNormalEpiphany).length}
+                    </span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Divine Epiphanies</span>
-                    <span className="font-bold">{deck.filter((c) => c.hasDivineEpiphany).length}</span>
+                    <span className="text-muted-foreground">
+                      Divine Epiphanies
+                    </span>
+                    <span className="font-bold">
+                      {deck.filter((c) => c.hasDivineEpiphany).length}
+                    </span>
                   </div>
                   <div className="flex-col flex gap-2">
                     <Button
@@ -1653,5 +2035,5 @@ export function RunTracker() {
         </div>
       </div>
     </TooltipProvider>
-  )
+  );
 }

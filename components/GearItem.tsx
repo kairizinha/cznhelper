@@ -37,7 +37,10 @@ export function GearItem({
   imageName,
   effect,
 }: GearItemProps) {
-  const coloredEffect = effect.replace(/(\d+%?)/g, '<span class="text-[#FF8C00]">$1</span>');
+  const coloredEffect = effect.replace(
+    /(\d+%?)/g,
+    '<span class="text-[#FF8C00]">$1</span>'
+  );
 
   const bgSrc = rarityBg[rarity] || rarityBg.legend;
   const nameColor = rarityColors[rarity] || rarityColors.legend;
@@ -47,7 +50,11 @@ export function GearItem({
       <GearTooltip sources={source} />
 
       <div className="relative w-24 h-36 flex-shrink-0">
-        <img src={bgSrc} alt={`${rarity} Rarity`} className="w-full h-full object-contain" />
+        <img
+          src={bgSrc}
+          alt={`${rarity} Rarity`}
+          className="w-full h-full object-contain"
+        />
         <div className="absolute inset-0 flex items-center justify-center">
           <img
             src={`/images/gear/${imageName}.webp`}
@@ -64,16 +71,24 @@ export function GearItem({
 
         {(atk || def || health) && (
           <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-lg bg-black/30 text-gray-200 mb-3">
-            <span className="text-sm font-medium">{atk ? "ATK" : def ? "DEF" : "Health"}</span>
-            <span className="text-foreground font-bold text-sm">{atk || def || health}</span>
+            <span className="text-sm font-medium">
+              {atk ? "ATK" : def ? "DEF" : "Health"}
+            </span>
+            <span className="text-foreground font-bold text-sm">
+              {atk || def || health}
+            </span>
           </div>
         )}
 
         <p className="text-sm text-gray-300 leading-relaxed break-words whitespace-pre-line">
           {effect.split(/(\d+%?)/g).map((part, i) =>
-            /\d+%?/.test(part)
-              ? <span key={i} className="text-[#FF8C00]">{part}</span>
-              : part
+            /\d+%?/.test(part) ? (
+              <span key={i} className="text-[#FF8C00]">
+                {part}
+              </span>
+            ) : (
+              part
+            )
           )}
         </p>
       </div>

@@ -2,7 +2,7 @@
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
- 
+
 /* Complete redesign based on Sanity Gone color scheme */
 :root {
   --background: #f8f9fa;
@@ -26,7 +26,7 @@
   --ring: #e8485f;
   --radius: 0.25rem;
 }
- 
+
 .dark {
   /* Sanity Gone inspired dark theme */
   --background: #0d1017;
@@ -48,7 +48,7 @@
   --border: #24282f;
   --input: #1b2028;
   --ring: #e8485f;
-  
+
   /* Sanity Gone specific colors */
   --sg-bg-dark: #0d1017;
   --sg-card: #14181e;
@@ -63,14 +63,14 @@
   --sg-orange: #ff8a00;
   --sg-green: #50c878;
   --sg-purple: #a855f7;
-  
+
   /* Rarity colors */
   --rarity-6: #ff8a00;
   --rarity-5: #ffc107;
   --rarity-4: #a855f7;
   --rarity-3: #49b3ff;
 }
- 
+
 /* Scrollbar styling */
 .scrollbar-none::-webkit-scrollbar {
   display: none;
@@ -79,7 +79,7 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
- 
+
 /* Custom scrollbar for dark theme */
 ::-webkit-scrollbar {
   width: 8px;
@@ -95,20 +95,20 @@
 ::-webkit-scrollbar-thumb:hover {
   background: var(--sg-text-secondary, #87888c);
 }
- 
+
 /* Sanity Gone card styles */
 .sg-card {
   background: var(--sg-card);
   border: 1px solid var(--sg-border);
   border-radius: 0.25rem;
 }
- 
+
 .sg-card-elevated {
   background: var(--sg-card-elevated);
   border: 1px solid var(--sg-border);
   border-radius: 0.25rem;
 }
- 
+
 /* Sanity Gone button styles */
 .sg-button {
   background: var(--sg-card-elevated);
@@ -118,23 +118,23 @@
   border-radius: 0.25rem;
   transition: all 0.15s ease;
 }
- 
+
 .sg-button:hover {
   background: var(--sg-border);
   border-color: var(--sg-border-light);
 }
- 
+
 .sg-button-primary {
   background: var(--sg-red);
   border-color: var(--sg-red);
   color: white;
 }
- 
+
 .sg-button-primary:hover {
   background: #d43d52;
   border-color: #d43d52;
 }
- 
+
 /* Sanity Gone section headers */
 .sg-section-header {
   font-size: 1.5rem;
@@ -144,14 +144,14 @@
   border-bottom: 2px solid var(--sg-red);
   margin-bottom: 1.5rem;
 }
- 
+
 /* Sanity Gone tabs */
 .sg-tabs {
   display: flex;
   gap: 0;
   border-bottom: 1px solid var(--sg-border);
 }
- 
+
 .sg-tab {
   padding: 0.75rem 1.5rem;
   color: var(--sg-text-secondary);
@@ -159,16 +159,16 @@
   transition: all 0.15s ease;
   cursor: pointer;
 }
- 
+
 .sg-tab:hover {
   color: var(--sg-text);
 }
- 
+
 .sg-tab.active {
   color: var(--sg-text);
   border-bottom-color: var(--sg-red);
 }
- 
+
 /* Character card grid styles */
 .sg-character-card {
   position: relative;
@@ -178,23 +178,23 @@
   overflow: hidden;
   transition: all 0.2s ease;
 }
- 
+
 .sg-character-card:hover {
   border-color: var(--sg-border-light);
   transform: translateY(-2px);
 }
- 
+
 /* Rarity stars */
 .sg-rarity {
   display: flex;
   gap: 1px;
 }
- 
+
 .sg-rarity-star {
   color: var(--rarity-6);
   font-size: 0.75rem;
 }
- 
+
 /* Badge styles */
 .sg-badge {
   display: inline-flex;
@@ -207,56 +207,60 @@
   color: var(--sg-text-secondary);
   border: 1px solid var(--sg-border);
 }
- 
+
 .sg-badge-red {
   background: rgba(232, 72, 95, 0.15);
   color: var(--sg-red);
   border-color: rgba(232, 72, 95, 0.3);
 }
- 
+
 .sg-badge-blue {
   background: rgba(73, 179, 255, 0.15);
   color: var(--sg-blue);
   border-color: rgba(73, 179, 255, 0.3);
 }
- 
+
 .sg-badge-yellow {
   background: rgba(255, 193, 7, 0.15);
   color: var(--sg-yellow);
   border-color: rgba(255, 193, 7, 0.3);
 }
- 
+
 /* Table styles */
 .sg-table {
   width: 100%;
   border-collapse: collapse;
 }
- 
+
 .sg-table th,
 .sg-table td {
   padding: 0.75rem 1rem;
   text-align: left;
   border-bottom: 1px solid var(--sg-border);
 }
- 
+
 .sg-table th {
   background: var(--sg-card-elevated);
   color: var(--sg-text-secondary);
   font-weight: 500;
   font-size: 0.875rem;
 }
- 
+
 .sg-table tr:hover td {
   background: var(--sg-card-elevated);
 }
- 
+
 /* Guide page specific styles */
 .sg-guide-header {
   position: relative;
-  background: linear-gradient(to bottom, var(--sg-card) 0%, var(--sg-bg-dark) 100%);
+  background: linear-gradient(
+    to bottom,
+    var(--sg-card) 0%,
+    var(--sg-bg-dark) 100%
+  );
   border-bottom: 1px solid var(--sg-border);
 }
- 
+
 .sg-guide-nav {
   position: sticky;
   top: 0;
@@ -264,13 +268,13 @@
   background: var(--sg-card);
   border-bottom: 1px solid var(--sg-border);
 }
- 
+
 .sg-guide-sidebar {
   position: sticky;
   top: 4rem;
   height: fit-content;
 }
- 
+
 /* Stats display */
 .sg-stat-row {
   display: flex;
@@ -278,20 +282,20 @@
   padding: 0.5rem 0;
   border-bottom: 1px solid var(--sg-border);
 }
- 
+
 .sg-stat-label {
   color: var(--sg-text-secondary);
   font-size: 0.875rem;
 }
- 
+
 .sg-stat-value {
   color: var(--sg-text);
   font-weight: 500;
 }
- 
+
 @theme inline {
-  --font-sans: 'Geist', 'Geist Fallback', system-ui, sans-serif;
-  --font-mono: 'Geist Mono', 'Geist Mono Fallback', monospace;
+  --font-sans: "Geist", "Geist Fallback", system-ui, sans-serif;
+  --font-mono: "Geist Mono", "Geist Mono Fallback", monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -316,7 +320,7 @@
   --radius-lg: calc(var(--radius) + 2px);
   --radius-xl: calc(var(--radius) + 4px);
 }
- 
+
 @theme inline {
   /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
   --color-background: var(--background);
@@ -356,7 +360,7 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 }
- 
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

@@ -18,7 +18,7 @@ export const PartnersSection = ({ partnersGuide }: Props) => {
   const [selectedPartner, setSelectedPartner] = useState<string | null>(null);
 
   const partnersMap = useMemo(
-    () => Object.fromEntries(PartnersData.map(p => [p.id, p])),
+    () => Object.fromEntries(PartnersData.map((p) => [p.id, p])),
     []
   );
 

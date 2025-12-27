@@ -24,10 +24,7 @@ type Props = {
   recommendedSources?: string[];
 };
 
-export const EquipmentSection = ({
-  gears,
-  recommendedSources = [],
-}: Props) => {
+export const EquipmentSection = ({ gears, recommendedSources = [] }: Props) => {
   const [selectedSource, setSelectedSource] = useState("all");
 
   const gearMaps = useMemo(() => {
@@ -46,16 +43,18 @@ export const EquipmentSection = ({
 
     const sources = new Set<string>();
 
-    [...gears.weapons, ...gears.armors, ...gears.accessories].forEach((name) => {
-      const item =
-        gearMaps.weapons[name] ??
-        gearMaps.armors[name] ??
-        gearMaps.accessories[name];
+    [...gears.weapons, ...gears.armors, ...gears.accessories].forEach(
+      (name) => {
+        const item =
+          gearMaps.weapons[name] ??
+          gearMaps.armors[name] ??
+          gearMaps.accessories[name];
 
-      if (Array.isArray(item?.source)) {
-        item.source.forEach((s) => sources.add(s));
+        if (Array.isArray(item?.source)) {
+          item.source.forEach((s) => sources.add(s));
+        }
       }
-    });
+    );
 
     return [...sources].sort();
   }, [gears, recommendedSources, gearMaps]);
@@ -63,16 +62,15 @@ export const EquipmentSection = ({
   const matchesSource = (item?: GearData) => {
     if (selectedSource === "all") return true;
     if (!Array.isArray(item?.source)) return false;
-    return item.source.includes("Other") || item.source.includes(selectedSource);
+    return (
+      item.source.includes("Other") || item.source.includes(selectedSource)
+    );
   };
 
   const filterGear = <T extends GearData>(
     names: string[],
     map: Record<string, T>
-  ) =>
-    names
-      .map((n) => map[n])
-      .filter((i): i is T => !!i && matchesSource(i));
+  ) => names.map((n) => map[n]).filter((i): i is T => !!i && matchesSource(i));
 
   const filteredWeapons = useMemo(
     () => filterGear(gears.weapons, gearMaps.weapons),
@@ -149,9 +147,7 @@ export const EquipmentSection = ({
       <p className="text-muted-foreground mb-8 text-sm sm:text-base text-center max-w-3xl mx-auto">
         Only one unique item can be equipped per character.
         <br />
-        <strong>
-          Select a Chaos Manifestation to view its loot pool.
-        </strong>
+        <strong>Select a Chaos Manifestation to view its loot pool.</strong>
       </p>
 
       {/* Dropdown */}
@@ -179,16 +175,8 @@ export const EquipmentSection = ({
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-        {renderGearColumn(
-          "Weapon",
-          filteredWeapons,
-          "Alternative Weapon"
-        )}
-        {renderGearColumn(
-          "Armor",
-          filteredArmors,
-          "Alternative Armor"
-        )}
+        {renderGearColumn("Weapon", filteredWeapons, "Alternative Weapon")}
+        {renderGearColumn("Armor", filteredArmors, "Alternative Armor")}
         {renderGearColumn(
           "Accessory",
           filteredAccessories,

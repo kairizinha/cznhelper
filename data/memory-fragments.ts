@@ -2,6 +2,7 @@
 
 import { MemoryFragmentSet } from "@/types/memory-fragments";
 
+// prettier-ignore
 export const MemoryFragmentSetsData: readonly MemoryFragmentSet[] = [
   {
     id: "black-wing",

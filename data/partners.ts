@@ -5,7 +5,7 @@ export type Partner = {
   name: string;
   image: string;
 };
-
+// prettier-ignore
 export const PartnersData: readonly Partner[] = [
   { id: "akad", name: "Akad", image: "/images/partners/akad.webp" },
   { id: "alyssa", name: "Alyssa", image: "/images/partners/alyssa.webp" },

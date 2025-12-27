@@ -1,280 +1,280 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import Link from 'next/link'
-import { Search, X, AlertTriangle, CheckSquare, Square } from 'lucide-react'
+import { useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Search, X, AlertTriangle, CheckSquare, Square } from "lucide-react";
 
 const jobTypes = [
   {
-    id: 'controller',
-    name: 'Controller',
-    icon: '/images/icon-job-controller.webp',
+    id: "controller",
+    name: "Controller",
+    icon: "/images/icon-job-controller.webp",
   },
-  { id: 'hunter', name: 'Hunter', icon: '/images/icon-job-hunter.webp' },
-  { id: 'psionic', name: 'Psionic', icon: '/images/icon-job-psionic.webp' },
-  { id: 'ranger', name: 'Ranger', icon: '/images/icon-job-ranger.webp' },
-  { id: 'striker', name: 'Striker', icon: '/images/icon-job-striker.webp' },
-  { id: 'vanguard', name: 'Vanguard', icon: '/images/icon-job-vanguard.webp' },
-]
+  { id: "hunter", name: "Hunter", icon: "/images/icon-job-hunter.webp" },
+  { id: "psionic", name: "Psionic", icon: "/images/icon-job-psionic.webp" },
+  { id: "ranger", name: "Ranger", icon: "/images/icon-job-ranger.webp" },
+  { id: "striker", name: "Striker", icon: "/images/icon-job-striker.webp" },
+  { id: "vanguard", name: "Vanguard", icon: "/images/icon-job-vanguard.webp" },
+];
 
 const elementTypes = [
   {
-    id: 'void',
-    name: 'Void',
-    icon: '/images/icon-ego-void.webp',
-    color: 'bg-purple-500/20 border-purple-500/60 text-purple-400',
-    glow: 'shadow-purple-500/30',
+    id: "void",
+    name: "Void",
+    icon: "/images/icon-ego-void.webp",
+    color: "bg-purple-500/20 border-purple-500/60 text-purple-400",
+    glow: "shadow-purple-500/30",
   },
   {
-    id: 'instinct',
-    name: 'Instinct',
-    icon: '/images/icon-ego-instinct.webp',
-    color: 'bg-orange-500/20 border-orange-500/60 text-orange-400',
-    glow: 'shadow-orange-500/30',
+    id: "instinct",
+    name: "Instinct",
+    icon: "/images/icon-ego-instinct.webp",
+    color: "bg-orange-500/20 border-orange-500/60 text-orange-400",
+    glow: "shadow-orange-500/30",
   },
   {
-    id: 'passion',
-    name: 'Passion',
-    icon: '/images/icon-ego-passion.webp',
-    color: 'bg-red-500/20 border-red-500/60 text-red-400',
-    glow: 'shadow-red-500/30',
+    id: "passion",
+    name: "Passion",
+    icon: "/images/icon-ego-passion.webp",
+    color: "bg-red-500/20 border-red-500/60 text-red-400",
+    glow: "shadow-red-500/30",
   },
   {
-    id: 'justice',
-    name: 'Justice',
-    icon: '/images/icon-ego-justice.webp',
-    color: 'bg-blue-500/20 border-blue-500/60 text-blue-400',
-    glow: 'shadow-blue-500/30',
+    id: "justice",
+    name: "Justice",
+    icon: "/images/icon-ego-justice.webp",
+    color: "bg-blue-500/20 border-blue-500/60 text-blue-400",
+    glow: "shadow-blue-500/30",
   },
   {
-    id: 'order',
-    name: 'Order',
-    icon: '/images/icon-ego-order.webp',
-    color: 'bg-green-500/20 border-green-500/60 text-green-400',
-    glow: 'shadow-green-500/30',
+    id: "order",
+    name: "Order",
+    icon: "/images/icon-ego-order.webp",
+    color: "bg-green-500/20 border-green-500/60 text-green-400",
+    glow: "shadow-green-500/30",
   },
-]
+];
 
 const characters = [
   {
-    id: 'amir',
-    name: 'Amir',
-    job: 'vanguard',
-    element: 'order',
+    id: "amir",
+    name: "Amir",
+    job: "vanguard",
+    element: "order",
     rarity: 4,
     hasGuide: false,
   },
   {
-    id: 'beryl',
-    name: 'Beryl',
-    job: 'ranger',
-    element: 'justice',
+    id: "beryl",
+    name: "Beryl",
+    job: "ranger",
+    element: "justice",
     rarity: 4,
     hasGuide: false,
   },
   {
-    id: 'cassius',
-    name: 'Cassius',
-    job: 'controller',
-    element: 'instinct',
+    id: "cassius",
+    name: "Cassius",
+    job: "controller",
+    element: "instinct",
     rarity: 4,
     hasGuide: false,
   },
   {
-    id: 'chizuru',
-    name: 'Chizuru',
-    job: 'psionic',
-    element: 'void',
+    id: "chizuru",
+    name: "Chizuru",
+    job: "psionic",
+    element: "void",
     rarity: 5,
     hasGuide: true,
   },
   {
-    id: 'haru',
-    name: 'Haru',
-    job: 'striker',
-    element: 'justice',
+    id: "haru",
+    name: "Haru",
+    job: "striker",
+    element: "justice",
     rarity: 5,
     hasGuide: false,
   },
   {
-    id: 'hugo',
-    name: 'Hugo',
-    job: 'ranger',
-    element: 'order',
+    id: "hugo",
+    name: "Hugo",
+    job: "ranger",
+    element: "order",
     rarity: 5,
     hasGuide: false,
   },
   {
-    id: 'kayron',
-    name: 'Kayron',
-    job: 'psionic',
-    element: 'void',
-    rarity: 5,
-    hasGuide: true,
-  },
-  {
-    id: 'khalipe',
-    name: 'Khalipe',
-    job: 'vanguard',
-    element: 'instinct',
-    rarity: 5,
-    hasGuide: false,
-  },
-  {
-    id: 'lucas',
-    name: 'Lucas',
-    job: 'hunter',
-    element: 'passion',
-    rarity: 4,
-    hasGuide: false,
-  },
-  {
-    id: 'luke',
-    name: 'Luke',
-    job: 'hunter',
-    element: 'order',
-    rarity: 5,
-    hasGuide: false,
-  },
-  {
-    id: 'magna',
-    name: 'Magna',
-    job: 'vanguard',
-    element: 'justice',
-    rarity: 5,
-    hasGuide: false,
-  },
-  {
-    id: 'maribell',
-    name: 'Maribell',
-    job: 'vanguard',
-    element: 'passion',
-    rarity: 4,
-    hasGuide: false,
-  },
-  {
-    id: 'meilin',
-    name: 'Mei Lin',
-    job: 'striker',
-    element: 'passion',
-    rarity: 5,
-    hasGuide: false,
-  },
-  {
-    id: 'mika',
-    name: 'Mika',
-    job: 'controller',
-    element: 'justice',
-    rarity: 4,
-    hasGuide: false,
-  },
-  {
-    id: 'nia',
-    name: 'Nia',
-    job: 'controller',
-    element: 'instinct',
-    rarity: 4,
-    hasGuide: false,
-  },
-  {
-    id: 'orlea',
-    name: 'Orlea',
-    job: 'controller',
-    element: 'instinct',
-    rarity: 5,
-    hasGuide: false,
-  },
-  {
-    id: 'owen',
-    name: 'Owen',
-    job: 'striker',
-    element: 'passion',
-    rarity: 4,
-    hasGuide: false,
-  },
-  {
-    id: 'rei',
-    name: 'Rei',
-    job: 'controller',
-    element: 'void',
-    rarity: 4,
-    hasGuide: false,
-  },
-  {
-    id: 'renoa',
-    name: 'Renoa',
-    job: 'hunter',
-    element: 'void',
+    id: "kayron",
+    name: "Kayron",
+    job: "psionic",
+    element: "void",
     rarity: 5,
     hasGuide: true,
   },
   {
-    id: 'rin',
-    name: 'Rin',
-    job: 'striker',
-    element: 'void',
+    id: "khalipe",
+    name: "Khalipe",
+    job: "vanguard",
+    element: "instinct",
     rarity: 5,
     hasGuide: false,
   },
   {
-    id: 'selena',
-    name: 'Selena',
-    job: 'ranger',
-    element: 'passion',
+    id: "lucas",
+    name: "Lucas",
+    job: "hunter",
+    element: "passion",
     rarity: 4,
     hasGuide: false,
   },
   {
-    id: 'sereniel',
-    name: 'Sereniel',
-    job: 'hunter',
-    element: 'instinct',
+    id: "luke",
+    name: "Luke",
+    job: "hunter",
+    element: "order",
     rarity: 5,
     hasGuide: false,
   },
   {
-    id: 'tressa',
-    name: 'Tressa',
-    job: 'psionic',
-    element: 'void',
+    id: "magna",
+    name: "Magna",
+    job: "vanguard",
+    element: "justice",
+    rarity: 5,
+    hasGuide: false,
+  },
+  {
+    id: "maribell",
+    name: "Maribell",
+    job: "vanguard",
+    element: "passion",
     rarity: 4,
     hasGuide: false,
   },
   {
-    id: 'veronica',
-    name: 'Veronica',
-    job: 'ranger',
-    element: 'passion',
+    id: "meilin",
+    name: "Mei Lin",
+    job: "striker",
+    element: "passion",
     rarity: 5,
     hasGuide: false,
   },
   {
-    id: 'yuki',
-    name: 'Yuki',
-    job: 'striker',
-    element: 'order',
+    id: "mika",
+    name: "Mika",
+    job: "controller",
+    element: "justice",
+    rarity: 4,
+    hasGuide: false,
+  },
+  {
+    id: "nia",
+    name: "Nia",
+    job: "controller",
+    element: "instinct",
+    rarity: 4,
+    hasGuide: false,
+  },
+  {
+    id: "orlea",
+    name: "Orlea",
+    job: "controller",
+    element: "instinct",
     rarity: 5,
     hasGuide: false,
   },
-]
+  {
+    id: "owen",
+    name: "Owen",
+    job: "striker",
+    element: "passion",
+    rarity: 4,
+    hasGuide: false,
+  },
+  {
+    id: "rei",
+    name: "Rei",
+    job: "controller",
+    element: "void",
+    rarity: 4,
+    hasGuide: false,
+  },
+  {
+    id: "renoa",
+    name: "Renoa",
+    job: "hunter",
+    element: "void",
+    rarity: 5,
+    hasGuide: true,
+  },
+  {
+    id: "rin",
+    name: "Rin",
+    job: "striker",
+    element: "void",
+    rarity: 5,
+    hasGuide: false,
+  },
+  {
+    id: "selena",
+    name: "Selena",
+    job: "ranger",
+    element: "passion",
+    rarity: 4,
+    hasGuide: false,
+  },
+  {
+    id: "sereniel",
+    name: "Sereniel",
+    job: "hunter",
+    element: "instinct",
+    rarity: 5,
+    hasGuide: false,
+  },
+  {
+    id: "tressa",
+    name: "Tressa",
+    job: "psionic",
+    element: "void",
+    rarity: 4,
+    hasGuide: false,
+  },
+  {
+    id: "veronica",
+    name: "Veronica",
+    job: "ranger",
+    element: "passion",
+    rarity: 5,
+    hasGuide: false,
+  },
+  {
+    id: "yuki",
+    name: "Yuki",
+    job: "striker",
+    element: "order",
+    rarity: 5,
+    hasGuide: false,
+  },
+];
 
 export default function CharacterGuidesPage() {
-  const [searchQuery, setSearchQuery] = useState('')
-  const [selectedJob, setSelectedJob] = useState<string | null>(null)
-  const [selectedElement, setSelectedElement] = useState<string | null>(null)
-  const [selectedRarity, setSelectedRarity] = useState<number | null>(null)
-  const [onlyWithGuide, setOnlyWithGuide] = useState(false)
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedJob, setSelectedJob] = useState<string | null>(null);
+  const [selectedElement, setSelectedElement] = useState<string | null>(null);
+  const [selectedRarity, setSelectedRarity] = useState<number | null>(null);
+  const [onlyWithGuide, setOnlyWithGuide] = useState(false);
 
   const filteredCharacters = characters.filter((char) => {
     const matchesSearch = char.name
       .toLowerCase()
-      .includes(searchQuery.toLowerCase())
-    const matchesJob = !selectedJob || char.job === selectedJob
-    const matchesElement = !selectedElement || char.element === selectedElement
-    const matchesRarity = !selectedRarity || char.rarity === selectedRarity
-    const matchesGuide = !onlyWithGuide || char.hasGuide
+      .includes(searchQuery.toLowerCase());
+    const matchesJob = !selectedJob || char.job === selectedJob;
+    const matchesElement = !selectedElement || char.element === selectedElement;
+    const matchesRarity = !selectedRarity || char.rarity === selectedRarity;
+    const matchesGuide = !onlyWithGuide || char.hasGuide;
 
     return (
       matchesSearch &&
@@ -282,34 +282,34 @@ export default function CharacterGuidesPage() {
       matchesElement &&
       matchesRarity &&
       matchesGuide
-    )
-  })
+    );
+  });
 
   const handleJobFilter = (jobId: string) => {
-    setSelectedJob(selectedJob === jobId ? null : jobId)
-  }
+    setSelectedJob(selectedJob === jobId ? null : jobId);
+  };
 
   const handleElementFilter = (elementId: string) => {
-    setSelectedElement(selectedElement === elementId ? null : elementId)
-  }
+    setSelectedElement(selectedElement === elementId ? null : elementId);
+  };
 
   const handleRarityFilter = (rarity: number) => {
-    setSelectedRarity(selectedRarity === rarity ? null : rarity)
-  }
+    setSelectedRarity(selectedRarity === rarity ? null : rarity);
+  };
 
   const handleReset = () => {
-    setSearchQuery('')
-    setSelectedJob(null)
-    setSelectedElement(null)
-    setSelectedRarity(null)
-    setOnlyWithGuide(false)
-  }
+    setSearchQuery("");
+    setSelectedJob(null);
+    setSelectedElement(null);
+    setSelectedRarity(null);
+    setOnlyWithGuide(false);
+  };
   const hasActiveFilters =
-    searchQuery !== '' ||
+    searchQuery !== "" ||
     selectedJob !== null ||
     selectedElement !== null ||
     selectedRarity !== null ||
-    onlyWithGuide
+    onlyWithGuide;
 
   return (
     <div className="min-h-screen">
@@ -330,7 +330,7 @@ export default function CharacterGuidesPage() {
                 />
                 {searchQuery && (
                   <button
-                    onClick={() => setSearchQuery('')}
+                    onClick={() => setSearchQuery("")}
                     className="absolute -translate-x-6 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                   >
                     <X className="h-4 w-4 sm:h-4 sm:w-4" />
@@ -348,8 +348,8 @@ export default function CharacterGuidesPage() {
                     gap-1.5 sm:gap-2 transition-all text-xs sm:text-sm px-3 sm:px-4 h-9 sm:h-10 sm:mr-160
                     ${
                       hasActiveFilters
-                        ? 'bg-purple-500/20 border-purple-500/60 text-purple-400 shadow-md shadow-purple-500/20'
-                        : 'bg-card/80 border-border/50 text-muted-foreground hover:bg-card hover:translate-y-[-2px]'
+                        ? "bg-purple-500/20 border-purple-500/60 text-purple-400 shadow-md shadow-purple-500/20"
+                        : "bg-card/80 border-border/50 text-muted-foreground hover:bg-card hover:translate-y-[-2px]"
                     }`}
                 >
                   <X className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
@@ -363,8 +363,8 @@ export default function CharacterGuidesPage() {
                     gap-1.5 sm:gap-2 transition-all text-xs sm:text-sm px-3 sm:px-4 h-9 sm:h-10 sm:ml-60
                     ${
                       onlyWithGuide
-                        ? 'bg-purple-500/20 border-purple-500/60 text-purple-400 shadow-md shadow-purple-500/20'
-                        : 'bg-card/80 border-border/50 text-muted-foreground hover:bg-card hover:translate-y-[-2px]'
+                        ? "bg-purple-500/20 border-purple-500/60 text-purple-400 shadow-md shadow-purple-500/20"
+                        : "bg-card/80 border-border/50 text-muted-foreground hover:bg-card hover:translate-y-[-2px]"
                     }`}
                 >
                   {onlyWithGuide ? (
@@ -382,12 +382,12 @@ export default function CharacterGuidesPage() {
               {/* Rarity Filter */}
               <div className="flex items-center gap-3 sm:gap-4">
                 {[5, 4].map((rarity) => {
-                  const isFiveStar = rarity === 5
-                  const isActive = selectedRarity === rarity
+                  const isFiveStar = rarity === 5;
+                  const isActive = selectedRarity === rarity;
 
                   const activeClasses = isFiveStar
-                    ? 'bg-purple-500/20 border-purple-500/60 text-purple-400 shadow-md shadow-purple-500/20'
-                    : 'bg-orange-500/20 border-orange-500/60 text-orange-400 shadow-md shadow-orange-500/20'
+                    ? "bg-purple-500/20 border-purple-500/60 text-purple-400 shadow-md shadow-purple-500/20"
+                    : "bg-orange-500/20 border-orange-500/60 text-orange-400 shadow-md shadow-orange-500/20";
 
                   return (
                     <Button
@@ -400,7 +400,7 @@ export default function CharacterGuidesPage() {
                       ${
                         isActive
                           ? `${activeClasses} scale-105`
-                          : 'bg-card/80 backdrop-blur-sm border-border/50 hover:bg-card hover:border-current/40 hover:translate-y-[-2px]'
+                          : "bg-card/80 backdrop-blur-sm border-border/50 hover:bg-card hover:border-current/40 hover:translate-y-[-2px]"
                       }
                       `}
                     >
@@ -413,9 +413,9 @@ export default function CharacterGuidesPage() {
                          ${
                            isActive
                              ? isFiveStar
-                               ? 'text-purple-300'
-                               : 'text-orange-300'
-                             : 'text-foreground'
+                               ? "text-purple-300"
+                               : "text-orange-300"
+                             : "text-foreground"
                          }
                          group-hover:text-white
                         `}
@@ -428,22 +428,22 @@ export default function CharacterGuidesPage() {
                          ${
                            isActive
                              ? isFiveStar
-                               ? 'text-purple-300'
-                               : 'text-orange-300'
-                             : 'text-foreground'
+                               ? "text-purple-300"
+                               : "text-orange-300"
+                             : "text-foreground"
                          }
                          group-hover:text-white`}
                         >
                           <span className="inline sm:hidden">
-                            {isFiveStar ? '★' : '★'}
+                            {isFiveStar ? "★" : "★"}
                           </span>
                           <span className="hidden sm:inline">
-                            {isFiveStar ? '★★★★★' : '★★★★'}
+                            {isFiveStar ? "★★★★★" : "★★★★"}
                           </span>
                         </span>
                       </span>
                     </Button>
-                  )
+                  );
                 })}
               </div>
 
@@ -474,7 +474,7 @@ export default function CharacterGuidesPage() {
                         }`}
                     >
                       <img
-                        src={element.icon || '/placeholder.svg'}
+                        src={element.icon || "/placeholder.svg"}
                         alt={element.name}
                         width={32}
                         height={32}
@@ -500,12 +500,12 @@ export default function CharacterGuidesPage() {
                       className={`
                         gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2  transition-all duration-200 ${
                           selectedJob === job.id
-                            ? 'bg-purple-500/20 border-purple-500/60 text-purple-400 shadow-md shadow-purple-500/20 scale-105'
-                            : 'bg-card/80 backdrop-blur-sm border-border/50 hover:border-purple-500/40 hover:bg-purple-500/5 hover:translate-y-[-2px]'
+                            ? "bg-purple-500/20 border-purple-500/60 text-purple-400 shadow-md shadow-purple-500/20 scale-105"
+                            : "bg-card/80 backdrop-blur-sm border-border/50 hover:border-purple-500/40 hover:bg-purple-500/5 hover:translate-y-[-2px]"
                         }`}
                     >
                       <img
-                        src={job.icon || '/placeholder.svg'}
+                        src={job.icon || "/placeholder.svg"}
                         alt={job.name}
                         width={26}
                         height={26}
@@ -524,27 +524,27 @@ export default function CharacterGuidesPage() {
           {/* Character Grid */}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4 md:gap-5">
             {filteredCharacters.map((character) => {
-              const job = jobTypes.find((j) => j.id === character.job)
+              const job = jobTypes.find((j) => j.id === character.job);
               const element = elementTypes.find(
                 (e) => e.id === character.element
-              )
-              const imagePath = `/images/characters/${character.id}half.webp`
-              const isDisabled = !character.hasGuide && !onlyWithGuide
+              );
+              const imagePath = `/images/characters/${character.id}half.webp`;
+              const isDisabled = !character.hasGuide && !onlyWithGuide;
               return (
                 <Link
                   key={character.id}
-                  href={character.hasGuide ? `/guides/${character.id}` : '#'}
+                  href={character.hasGuide ? `/guides/${character.id}` : "#"}
                   className={`
                     group block rounded-lg sm:rounded-xl overflow-hidden transition-all duration-300
                     ${
                       isDisabled
-                        ? 'opacity-40 grayscale cursor-not-allowed pointer-events-none'
-                        : 'bg-card/80 backdrop-blur-sm border border-border/50 hover:border-purple-500/60 hover:shadow-lg hover:shadow-purple-500/10 hover:-translate-y-1'
+                        ? "opacity-40 grayscale cursor-not-allowed pointer-events-none"
+                        : "bg-card/80 backdrop-blur-sm border border-border/50 hover:border-purple-500/60 hover:shadow-lg hover:shadow-purple-500/10 hover:-translate-y-1"
                     }`}
                 >
                   <div className="relative aspect-[3/4]">
                     <img
-                      src={imagePath || '/placeholder.svg'}
+                      src={imagePath || "/placeholder.svg"}
                       alt={character.name}
                       className="object-cover w-full h-full"
                     />
@@ -609,8 +609,8 @@ export default function CharacterGuidesPage() {
                           <span
                             className={`text-xs sm:text-xs font-bold drop-shadow-2xl ${
                               character.rarity === 5
-                                ? 'text-purple-300'
-                                : 'text-orange-300'
+                                ? "text-purple-300"
+                                : "text-orange-300"
                             }`}
                           >
                             {character.job.charAt(0).toUpperCase() +
@@ -619,8 +619,8 @@ export default function CharacterGuidesPage() {
                           <span
                             className={`text-xs sm:text-xs font-bold drop-shadow-2xl ${
                               character.rarity === 5
-                                ? 'text-purple-300'
-                                : 'text-orange-300'
+                                ? "text-purple-300"
+                                : "text-orange-300"
                             }`}
                           >
                             {character.rarity}
@@ -637,8 +637,8 @@ export default function CharacterGuidesPage() {
                         absolute inset-x-0 bottom-0 transition-all duration-50 ease-out
                          ${
                            character.rarity === 5
-                             ? 'bg-gradient-to-r from-purple-300 via-purple-400 to-purple-500'
-                             : 'bg-gradient-to-r from-orange-300 via-orange-400 to-orange-500'
+                             ? "bg-gradient-to-r from-purple-300 via-purple-400 to-purple-500"
+                             : "bg-gradient-to-r from-orange-300 via-orange-400 to-orange-500"
                          }
                         h-0.5 sm:h-1 group-hover:h-4 sm:group-hover:h-5
                         `}
@@ -664,7 +664,7 @@ export default function CharacterGuidesPage() {
                     </div>
                   </div>
                 </Link>
-              )
+              );
             })}
           </div>
 
@@ -686,5 +686,5 @@ export default function CharacterGuidesPage() {
         </div>
       </main>
     </div>
-  )
+  );
 }

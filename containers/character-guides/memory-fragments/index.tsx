@@ -90,7 +90,9 @@ export const MemoryFragmentsSection = ({
                 isExpanded={expandedMemorySet === `${set.id}-best`}
                 onToggle={() =>
                   setExpandedMemorySet(
-                    expandedMemorySet === `${set.id}-best` ? null : `${set.id}-best`
+                    expandedMemorySet === `${set.id}-best`
+                      ? null
+                      : `${set.id}-best`
                   )
                 }
               />
@@ -115,7 +117,9 @@ export const MemoryFragmentsSection = ({
                 isExpanded={expandedMemorySet === `${set.id}-alt`}
                 onToggle={() =>
                   setExpandedMemorySet(
-                    expandedMemorySet === `${set.id}-alt` ? null : `${set.id}-alt`
+                    expandedMemorySet === `${set.id}-alt`
+                      ? null
+                      : `${set.id}-alt`
                   )
                 }
               />
@@ -129,24 +133,36 @@ export const MemoryFragmentsSection = ({
         {/* Main Stats */}
         <div className="grid grid-cols-3 gap-3 sm:gap-4">
           <div className="text-center">
-            <div className="text-2xl sm:text-3xl font-bold text-purple-400">IV</div>
-            <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1 sm:mb-2">Ideal</div>
+            <div className="text-2xl sm:text-3xl font-bold text-purple-400">
+              IV
+            </div>
+            <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1 sm:mb-2">
+              Ideal
+            </div>
             <div className="py-2 px-3 rounded bg-purple-500/10 border border-purple-500/30 text-xs sm:text-sm font-medium text-purple-300">
               {getMainStatLabel(0)}
             </div>
           </div>
 
           <div className="text-center">
-            <div className="text-2xl sm:text-3xl font-bold text-purple-400">V</div>
-            <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1 sm:mb-2">Desire</div>
+            <div className="text-2xl sm:text-3xl font-bold text-purple-400">
+              V
+            </div>
+            <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1 sm:mb-2">
+              Desire
+            </div>
             <div className="py-2 px-3 rounded bg-purple-500/10 border border-purple-500/30 text-xs sm:text-sm font-medium text-purple-300">
               {getMainStatLabel(1)}
             </div>
           </div>
 
           <div className="text-center">
-            <div className="text-2xl sm:text-3xl font-bold text-purple-400">IV</div>
-            <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1 sm:mb-2">Ideal</div>
+            <div className="text-2xl sm:text-3xl font-bold text-purple-400">
+              IV
+            </div>
+            <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1 sm:mb-2">
+              Ideal
+            </div>
             <div className="py-2 px-3 rounded bg-purple-500/10 border border-purple-500/30 text-xs sm:text-sm font-medium text-purple-300">
               {getMainStatLabel(2)}
             </div>
@@ -155,7 +171,9 @@ export const MemoryFragmentsSection = ({
 
         {/* Substat Priority */}
         <div className="mt-8 text-center">
-          <SubstatsPriorityRender substatsPriorities={memoryFragmentSubstatsPriorities} />
+          <SubstatsPriorityRender
+            substatsPriorities={memoryFragmentSubstatsPriorities}
+          />
 
           <div className="mt-6 mx-auto max-w-3xl">
             <p className="text-xs sm:text-sm leading-relaxed text-muted-foreground text-center px-4">

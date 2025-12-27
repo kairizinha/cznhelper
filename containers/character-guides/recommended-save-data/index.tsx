@@ -11,7 +11,12 @@ type Props = {
   attribute?: Attributes;
 };
 
-export const RecommendedSaveData = ({ recommendedSaveData, uniqueCards, commonCards, attribute }: Props) => {
+export const RecommendedSaveData = ({
+  recommendedSaveData,
+  uniqueCards,
+  commonCards,
+  attribute,
+}: Props) => {
   const { commonMap, uniqueMap, epiphanyMap } = useMemo(() => {
     const common = new Map<string, Card>();
     const unique = new Map<string, UniqueCard>();
@@ -62,11 +67,17 @@ export const RecommendedSaveData = ({ recommendedSaveData, uniqueCards, commonCa
   );
 
   return (
-    <section id="recommended-save-data" className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-6">
-      <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-purple-400 text-center">2. Recommended Save Data</h2>
+    <section
+      id="recommended-save-data"
+      className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-6"
+    >
+      <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-purple-400 text-center">
+        2. Recommended Save Data
+      </h2>
 
       <p className="text-muted-foreground mb-6 sm:mb-8 text-sm sm:text-base text-center px-4 max-w-3xl mx-auto">
-        These are example deck builds. You can adjust based on your playstyle and available cards.
+        These are example deck builds. You can adjust based on your playstyle
+        and available cards.
       </p>
 
       <div className="space-y-12 sm:space-y-16">
@@ -76,7 +87,9 @@ export const RecommendedSaveData = ({ recommendedSaveData, uniqueCards, commonCa
           return (
             <div className="space-y-5" key={saveData.id}>
               <div className="text-center space-y-3">
-                <h3 className="text-lg sm:text-xl font-bold text-purple-300">{saveData.name}</h3>
+                <h3 className="text-lg sm:text-xl font-bold text-purple-300">
+                  {saveData.name}
+                </h3>
                 {saveData.faintMemoryNote && (
                   <span className="inline-block px-4 py-1.5 rounded-full bg-blue-500/20 border border-blue-500/40 text-blue-400 text-xs sm:text-sm font-bold leading-tight whitespace-normal break-words max-w-full">
                     {saveData.faintMemoryNote}
@@ -102,7 +115,9 @@ export const RecommendedSaveData = ({ recommendedSaveData, uniqueCards, commonCa
                         card={card as any}
                         isPlaceholder={false}
                         attribute={attribute}
-                        isEpiphany={(card as any).isEphiphany ? "spark" : "nospark"}
+                        isEpiphany={
+                          (card as any).isEphiphany ? "spark" : "nospark"
+                        }
                       />
                     );
                   })}

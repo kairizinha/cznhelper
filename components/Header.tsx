@@ -1,31 +1,31 @@
 // components/Header.tsx
-'use client'
+"use client";
 
-import { Home, Info, Users, Calculator } from "lucide-react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { cn } from "@/lib/utils"
+import { Home, Info, Users, Calculator } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 const navItems = [
   {
     name: "Home",
     href: "/",
-    icon: Home
+    icon: Home,
   },
   {
     name: "Guides",
     href: "/guides",
-    icon: Users
+    icon: Users,
   },
   {
     name: "Save Data",
     href: "/calculator",
-    icon: Calculator
-  }
-]
+    icon: Calculator,
+  },
+];
 
 export function Header() {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-black/30 backdrop-blur-2xl">
@@ -47,7 +47,7 @@ export function Header() {
           {/* Navigation - Icons only on mobile, text appears on larger screens */}
           <nav className="flex items-center gap-6 sm:gap-3 md:gap-4 lg:gap-6 text-sm">
             {navItems.map((item) => {
-              const isActive = pathname === item.href
+              const isActive = pathname === item.href;
               return (
                 <Link
                   key={item.href}
@@ -65,7 +65,7 @@ export function Header() {
                     {item.name}
                   </span>
                 </Link>
-              )
+              );
             })}
 
             {/* Disabled button */}
@@ -100,5 +100,5 @@ export function Header() {
         </div>
       </div>
     </header>
-  )
+  );
 }

@@ -1,67 +1,68 @@
 // app/layout.tsx
-import { Header } from '@/components/Header'
-import { Footer } from '@/components/Footer'
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 
-import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/next'
-import './globals.css'
+import type { Metadata, Viewport } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import "./globals.css";
 
-const geist = Geist({ subsets: ['latin'] })
-const geistMono = Geist_Mono({ subsets: ['latin'] })
+const geist = Geist({ subsets: ["latin"] });
+const geistMono = Geist_Mono({ subsets: ["latin"] });
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || 'https://cznhelper.vercel.app'
+  process.env.NEXT_PUBLIC_SITE_URL || "https://cznhelper.vercel.app";
 
 export const metadata: Metadata = {
   title: {
-    default: 'CZN Helper',
-    template: '%s | CZN Helper',
+    default: "CZN Helper",
+    template: "%s | CZN Helper",
   },
-description: 'CZN Helper is a community-driven hub for Chaos Zero Nightmare, featuring tools like Save Data Calculator and Damage Calculator, in-depth character guides, and more.',
+  description:
+    "CZN Helper is a community-driven hub for Chaos Zero Nightmare, featuring tools like Save Data Calculator and Damage Calculator, in-depth character guides, and more.",
   metadataBase: new URL(siteUrl),
   openGraph: {
-    siteName: 'CZN Helper',
-    locale: 'en_US',
-    type: 'website',
+    siteName: "CZN Helper",
+    locale: "en_US",
+    type: "website",
     images: [
       {
-        url: '/images/icon.png',
+        url: "/images/icon.png",
         width: 1200,
         height: 630,
-        alt: 'CZN Helper',
+        alt: "CZN Helper",
       },
     ],
   },
   icons: {
     icon: [
       {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
+        url: "/icon-light-32x32.png",
+        media: "(prefers-color-scheme: light)",
       },
       {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
+        url: "/icon-dark-32x32.png",
+        media: "(prefers-color-scheme: dark)",
       },
       {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
+        url: "/icon.svg",
+        type: "image/svg+xml",
       },
     ],
-    apple: '/apple-icon.png',
+    apple: "/apple-icon.png",
   },
-}
+};
 
 export const viewport: Viewport = {
-  themeColor: '#ffffffff',
-  width: 'device-width',
+  themeColor: "#ffffffff",
+  width: "device-width",
   initialScale: 1,
-}
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en" className="dark">
@@ -74,5 +75,5 @@ export default function RootLayout({
         <Analytics />
       </body>
     </html>
-  )
+  );
 }

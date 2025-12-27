@@ -30,7 +30,8 @@ export function GearTooltip({ sources }: GearTooltipProps) {
       </div>
 
       {/* Tooltip */}
-      {open && rect &&
+      {open &&
+        rect &&
         createPortal(
           <div
             style={{
@@ -42,17 +43,17 @@ export function GearTooltip({ sources }: GearTooltipProps) {
             }}
             className="pointer-events-none"
           >
-            <div className="
+            <div
+              className="
               bg-gray-900/95 backdrop-blur-md
               border border-purple-500/50
               rounded-lg px-4 py-3
               text-gray-200 text-sm font-medium
               shadow-2xl shadow-purple-900/40
               min-w-max
-            ">
-              <div className="whitespace-pre-line">
-                {sources.join("\n")}
-              </div>
+            "
+            >
+              <div className="whitespace-pre-line">{sources.join("\n")}</div>
             </div>
           </div>,
           document.body

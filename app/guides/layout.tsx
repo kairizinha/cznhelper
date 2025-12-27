@@ -1,18 +1,19 @@
 // app/guides/layout.tsx
-import { Banner } from "@/components/Banner"
-import ScrollToTop from "@/components/ScrollToTop"
+import { Banner } from "@/components/Banner";
+import ScrollToTop from "@/components/ScrollToTop";
 
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Character Guides',
-  description: 'Find detailed Epiphany guides and Save Data for Chaos Zero Nightmare',
-}
+  title: "Character Guides",
+  description:
+    "Find detailed Epiphany guides and Save Data for Chaos Zero Nightmare",
+};
 
 export default function GuidesLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <div className="min-h-screen flex flex-col relative">
@@ -28,12 +29,22 @@ export default function GuidesLayout({
               strokeWidth={2}
               viewBox="0 0 24 24"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3m0 4h.01" />
-              <path strokeLinecap="round" strokeLinejoin="round" d="M10.29 3.86l-8.3 14.38A1 1 0 002.83 20h18.34a1 1 0 00.86-1.76L13.71 3.86a1 1 0 00-1.72 0z" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 9v3m0 4h.01"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M10.29 3.86l-8.3 14.38A1 1 0 002.83 20h18.34a1 1 0 00.86-1.76L13.71 3.86a1 1 0 00-1.72 0z"
+              />
             </svg>
 
             <div className="text-xs sm:text-sm md:text-base text-yellow-100 leading-relaxed">
-              <strong className="font-semibold text-yellow-300">Work in progress.</strong>{" "}
+              <strong className="font-semibold text-yellow-300">
+                Work in progress.
+              </strong>{" "}
               Character guides are still in development and may be incomplete,
               inaccurate, or subject to change.
             </div>
@@ -41,12 +52,9 @@ export default function GuidesLayout({
         </div>
       </Banner>
 
-
       <main className="flex relative z-10 -mt-24 sm:-mt-24 md:-mt-28 lg:-mt-32">
-        <div className="container mx-auto px-4 sm:px-6">
-          {children}
-        </div>
+        <div className="container mx-auto px-4 sm:px-6">{children}</div>
       </main>
     </div>
-  )
+  );
 }
