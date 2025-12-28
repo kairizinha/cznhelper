@@ -100,7 +100,7 @@ export const CardRender = (props: CardProps) => {
       {/* Attribute Border */}
       <div className="absolute inset-0 w-6 z-10 left-0 scale-103">
         <img
-          src={`/images/card/${attribute ?? "void"}-border.png`}
+          src={`/images/card/${(attribute ?? "none").toLowerCase()}-border.png`}
           alt={`${attribute} Border`}
           className="h-full w-full object-cover"
         />

@@ -163,19 +163,27 @@ export default function CharacterGuidePage() {
                       <div className="text-sky-300 font-medium">
                         {attribute
                           ? attribute.charAt(0).toUpperCase() +
-                            attribute.slice(1)
-                          : "Instinct"}
+                            attribute.slice(1).toLowerCase()
+                          : "None"}
                       </div>
                     </div>
                     <div>
                       <div className="text-gray-400 mb-1">Class</div>
                       <div className="text-gray-200">
-                        {characterClass || "Hunter"}
+                        {characterClass
+                          ? characterClass.charAt(0).toUpperCase() +
+                            characterClass.slice(1).toLowerCase()
+                          : "None"}
                       </div>
                     </div>
                     <div>
                       <div className="text-gray-400 mb-1">Role</div>
-                      <div className="text-gray-200">{role || "Main DPS"}</div>
+                      <div className="text-gray-200">
+                        {role
+                          ? role.charAt(0).toUpperCase() +
+                            role.slice(1).toLowerCase()
+                          : "None"}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -239,7 +247,7 @@ export default function CharacterGuidePage() {
             <h3 className="text-xl sm:text-2xl text-sky-300">Card Epiphany</h3>
             <BaseCard
               uniqueCards={characterData?.uniqueCards || []}
-              attribute={characterData?.attribute || "Instinct"}
+              attribute={characterData?.attribute || "None"}
             />
           </div>
         );
