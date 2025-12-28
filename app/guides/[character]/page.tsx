@@ -248,25 +248,25 @@ export default function CharacterGuidePage() {
         return (
           <div className="space-y-4 sm:space-y-6">
             <h3 className="text-xl sm:text-2xl text-sky-300">Save Data</h3>
-            <div className="bg-slate-800/40 rounded-lg p-6 sm:p-8 border border-slate-700/50 text-center">
+            {/* <div className="bg-slate-800/40 rounded-lg p-6 sm:p-8 border border-slate-700/50 text-center">
               <p className="text-gray-500">Save Data guide coming soon...</p>
               <p className="text-sm text-gray-600 mt-2">
                 This section will contain detailed information about Recommended
                 Save Data and Equipment for {characterName}.
               </p>
-            </div>
-            {/* <RecommendedSaveData
+            </div> */}
+            <RecommendedSaveData
               recommendedSaveData={characterData?.recommendedSaveData || []}
               uniqueCards={characterData?.uniqueCards || []}
               commonCards={characterData?.commonCards || []}
-              attribute={characterData?.attribute || "Instinct"}
+              attribute={characterData?.attribute || "None"}
             />
             {characterData?.gears && (
               <EquipmentSection
                 gears={characterData?.gears}
                 recommendedSources={characterData?.recommendedSources}
               />
-            )} */}
+            )}
           </div>
         );
 
@@ -342,7 +342,7 @@ export default function CharacterGuidePage() {
 
   return (
     <div className="min-h-screen bg-transparent text-gray-100 -mt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-6 sm:py-8">
         {/* Breadcrumb */}
         <div className="mb-4 sm:mb-6 flex items-center gap-2 text-xs sm:text-sm text-gray-500">
           <a href="/guides" className="hover:text-sky-300 transition-colors">

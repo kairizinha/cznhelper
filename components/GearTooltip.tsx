@@ -1,3 +1,4 @@
+// components/GearTooltip.tsx
 "use client";
 
 import React, { useState, useRef } from "react";
@@ -20,11 +21,10 @@ export function GearTooltip({ sources }: GearTooltipProps) {
       {/* ? Button */}
       <div
         ref={btnRef}
-        className="absolute top-2 right-2 z-10"
         onMouseEnter={() => setOpen(true)}
         onMouseLeave={() => setOpen(false)}
       >
-        <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-800/70 border border-purple-600/40 text-purple-300 text-xs font-bold hover:bg-purple-900/50 hover:border-purple-500 transition-all">
+        <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-800/90 border border-purple-600/50 text-purple-300 text-xs font-bold hover:bg-purple-900/60 hover:border-purple-500 transition-all cursor-help shadow-lg">
           ?
         </div>
       </div>
@@ -36,9 +36,8 @@ export function GearTooltip({ sources }: GearTooltipProps) {
           <div
             style={{
               position: "fixed",
-              top: rect.top - 5,
-              left: rect.right,
-              transform: "translate(-100%, -100%)",
+              top: rect.top - 8,
+              left: rect.right + 8,
               zIndex: 9999,
             }}
             className="pointer-events-none"

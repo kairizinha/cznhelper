@@ -7,6 +7,10 @@ export default function CalculatorPage() {
       <main className="container mx-auto">
         <h1 className="text-2xl font-bold">CZN Save Data Helper</h1>
         <Tabs defaultValue="tracker" className="space-y-4 sm:space-y-6">
+          <TabsList className="grid w-full grid-cols-2 max-w-md">
+            <TabsTrigger value="tracker">Run Tracker</TabsTrigger>
+            <TabsTrigger value="helper">Helper Guide</TabsTrigger>
+          </TabsList>
           <TabsContent value="tracker" className="space-y-6">
             <RunTracker />
           </TabsContent>

@@ -28,8 +28,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/images/icon.png",
-        width: 1200,
-        height: 630,
+        width: 300,
+        height: 300,
         alt: "CZN Helper",
       },
     ],

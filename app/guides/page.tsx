@@ -265,7 +265,7 @@ export default function CharacterGuidesPage() {
   const [selectedJob, setSelectedJob] = useState<string | null>(null);
   const [selectedElement, setSelectedElement] = useState<string | null>(null);
   const [selectedRarity, setSelectedRarity] = useState<number | null>(null);
-  const [onlyWithGuide, setOnlyWithGuide] = useState(false);
+  const [onlyWithGuide, setOnlyWithGuide] = useState(true);
 
   const filteredCharacters = characters.filter((char) => {
     const matchesSearch = char.name
@@ -302,14 +302,14 @@ export default function CharacterGuidesPage() {
     setSelectedJob(null);
     setSelectedElement(null);
     setSelectedRarity(null);
-    setOnlyWithGuide(false);
+    setOnlyWithGuide(true);
   };
   const hasActiveFilters =
     searchQuery !== "" ||
     selectedJob !== null ||
     selectedElement !== null ||
     selectedRarity !== null ||
-    onlyWithGuide;
+    onlyWithGuide !== true;
 
   return (
     <div className="min-h-screen">

@@ -46,10 +46,8 @@ export function GearItem({
   const nameColor = rarityColors[rarity] || rarityColors.legend;
 
   return (
-    <div className="relative flex items-start gap-4 p-4 rounded-xl bg-gray-800/40 border border-gray-700/60 hover:border-purple-400/100 transition-all duration-200">
-      <GearTooltip sources={source} />
-
-      <div className="relative w-24 h-36 flex-shrink-0">
+    <div className="relative flex items-start gap-6 p-6 rounded-xl bg-gray-800/40 border border-gray-700/60 hover:border-gray-400/100 transition-all duration-200 min-h-[240px] w-full">
+      <div className="relative w-36 h-48 flex-shrink-0">
         <img
           src={bgSrc}
           alt={`${rarity} Rarity`}
@@ -64,33 +62,38 @@ export function GearItem({
         </div>
       </div>
 
-      <div className="flex-1 min-w-0">
+      <div className="flex-1 min-w-0 flex flex-col">
         <h4 className="text-lg font-bold mb-2" style={{ color: nameColor }}>
           {name}
         </h4>
 
         {(atk || def || health) && (
-          <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-lg bg-black/30 text-gray-200 mb-3">
-            <span className="text-sm font-medium">
-              {atk ? "ATK" : def ? "DEF" : "Health"}
-            </span>
-            <span className="text-foreground font-bold text-sm">
-              {atk || def || health}
-            </span>
+          <div className="flex items-center gap-2 mb-3">
+            <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-lg bg-black/30 text-gray-200">
+              <span className="text-sm font-medium">
+                {atk ? "ATK" : def ? "DEF" : "Health"}
+              </span>
+              <span className="text-foreground font-bold text-sm">
+                {atk || def || health}
+              </span>
+            </div>
+            <GearTooltip sources={source} />
           </div>
         )}
 
-        <p className="text-sm text-gray-300 leading-relaxed break-words whitespace-pre-line">
-          {effect.split(/(\d+%?)/g).map((part, i) =>
-            /\d+%?/.test(part) ? (
-              <span key={i} className="text-[#FF8C00]">
-                {part}
-              </span>
-            ) : (
-              part
-            )
-          )}
-        </p>
+        <div className="flex-1 min-h-[80px]">
+          <p className="text-sm text-gray-300 leading-relaxed break-words whitespace-pre-line">
+            {effect.split(/(\d+%?)/g).map((part, i) =>
+              /\d+%?/.test(part) ? (
+                <span key={i} className="text-[#FF8C00]">
+                  {part}
+                </span>
+              ) : (
+                part
+              )
+            )}
+          </p>
+        </div>
       </div>
     </div>
   );

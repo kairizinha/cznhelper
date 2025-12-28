@@ -301,59 +301,59 @@ const gearsData = {
   accessories: [],
 };
 
-const recommendedSources = ["Laboratory 0"];
+const recommendedSources = ["", ""];
 
 const memoryFragmentSets: MemoryFragmentSetRecommendation = {
   bestInSlot: [
-    {
-      id: "judgments-flames",
-      description:
-        "+50% Damage Amount to Instinct Cards used against Ravaged targets",
-    },
-    { id: "executioners-tool", description: "+25% Critical Damage" },
+    { id: "", description: "" },
+    { id: "", description: "" },
   ],
   alternative: [
-    { id: "black-wing", description: "+12% Attack" },
-    { id: "executioners-tool", description: "+25% Critical Damage" },
-    {
-      id: "cursed-corpse",
-      description:
-        "Increase damage dealth to targets inflicted with Agony by 10%",
-    },
+    { id: "", description: "" },
+    { id: "", description: "" },
+    { id: "", description: "" },
   ],
 };
 
 const partnersGuide: PartnersGuide[] = [
   {
-    id: "peko",
+    id: "",
     description: "",
-    tier: CardTier.SPlus,
+    tier: CardTier.WIP,
   },
   {
-    id: "yuri",
+    id: "",
     description: "",
-    tier: CardTier.S,
+    tier: CardTier.WIP,
   },
   {
-    id: "serithea",
+    id: "",
     description: "",
-    tier: CardTier.A,
+    tier: CardTier.WIP,
   },
 ];
 
 export const serenielData: CharacterData = {
-  attribute: Attributes.Instinct,
-  job: CharacterClass.Hunter,
-  role: CharacterRole.MainDPS,
+  attribute: Attributes.Passion,
+  job: CharacterClass.Ranger,
+  role: CharacterRole.SubDPS,
   // bannerUrl: "",
   // avatarUrl: "",
 
   overview: `
   
   `.trim(),
-  strengths: [""],
 
-  weaknesses: [""],
+  strengths: [
+    `
+    
+    `,
+  ],
+
+  weaknesses: [
+    `
+    `,
+  ],
 
   commonCards: commonCards,
   uniqueCards: uniqueCards,

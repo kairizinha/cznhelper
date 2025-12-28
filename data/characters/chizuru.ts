@@ -1,5 +1,6 @@
 // data/characters/chizuru.ts
-import { Attributes } from "@/types/card"
+import { Attributes } from "@/types/card";
+import { CharacterClass, CharacterRole } from "@/types/character";
 import {
   Card,
   CardRarities,
@@ -8,13 +9,13 @@ import {
   MemoryFragmentSetRecommendation,
   UniqueCard,
   PartnersGuide,
-} from "@/types/character-guides"
+} from "@/types/character-guides";
 import {
   MemoryFragmentSet,
   MemoryFragmentMainStats,
   MemoryFragmentSubstats,
-} from "@/types/memory-fragments"
-import { SaveData } from "@/types/save-data"
+} from "@/types/memory-fragments";
+import { SaveData } from "@/types/save-data";
 
 const commonCards: Card[] = [
   {
@@ -35,7 +36,7 @@ const commonCards: Card[] = [
     rarity: CardRarities.Common,
     description: "100% Shield",
   },
-]
+];
 
 const uniqueCards: UniqueCard[] = [
   {
@@ -306,7 +307,7 @@ const uniqueCards: UniqueCard[] = [
       "[ Bind 1 / Retain ] 50% Damage\n20% Damage Amount\nfor each Bind stack",
     epiphanies: [],
   },
-]
+];
 
 const recommendedSaveData: SaveData[] = [
   {
@@ -343,7 +344,7 @@ const recommendedSaveData: SaveData[] = [
       "Shadow of the Moon",
     ],
   },
-]
+];
 
 const gearsData = {
   weapons: [
@@ -368,9 +369,9 @@ const gearsData = {
     "Eye of the Eyeless",
     "Dimensional Cube",
   ],
-}
+};
 
-const recommendedSources = ["Laboratory 0"]
+const recommendedSources = ["Laboratory 0"];
 
 const memoryFragmentSets: MemoryFragmentSetRecommendation = {
   bestInSlot: [
@@ -401,7 +402,7 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
       description: "Best 2 piece set to along with Conqueror's Aspect.",
     },
   ],
-}
+};
 
 const partnersGuide: PartnersGuide[] = [
   {
@@ -431,20 +432,20 @@ const partnersGuide: PartnersGuide[] = [
     description: "Same as Anteia, but can be used for funny Weaken spamming.",
     tier: CardTier.Bad,
   },
-]
+];
 
 export const chizuruData: CharacterData = {
   attribute: Attributes.Void,
-  job: "Psionic",
-  role: "Main DPS",
-  // bannerUrl: "https://blog.emptyblue.it/uploads/3572fe7b-b2fd-4887-ab3f-59bf74f9f420_sereniel_past.webp",
-  // avatarUrl: "/images/characters/sereniel/avatar.webp",
+  job: CharacterClass.Psionic,
+  role: CharacterRole.MainDPS,
+  // bannerUrl: "",
+  // avatarUrl: "",
 
   overview: `
-TBA
+
   `.trim(),
-  strengths: ["TBA"],
-  weaknesses: ["TBA"],
+  strengths: [""],
+  weaknesses: [""],
 
   commonCards: commonCards,
   uniqueCards: uniqueCards,
@@ -474,4 +475,4 @@ TBA
   ],
   memoryFragmentSubstatsNote: "",
   partnersGuide: partnersGuide,
-}
+};

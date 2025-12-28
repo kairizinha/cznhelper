@@ -26,8 +26,8 @@ export const CardRender = (props: CardProps) => {
   const isSmall = size === "small";
 
   const costSize = isSmall
-    ? "text-4xl sm:text-4xl md:text-6xl lg:text-3xl xl:text-3xl"
-    : "text-4xl sm:text-4xl md:text-6xl lg:text-3xl xl:text-6xl";
+    ? "text-4xl sm:text-3xl md:text-4xl lg:text-2xl xl:text-3xl"
+    : "text-4xl sm:text-3xl md:text-4xl lg:text-2xl xl:text-5xl";
 
   const nameSize = isSmall
     ? "text-base sm:text-sm md:text-xl lg:text-base xl:text-sm"
@@ -95,7 +95,9 @@ export const CardRender = (props: CardProps) => {
   return (
     <div
       onClick={() => onClick?.(card.id)}
-      className={`relative overflow-hidden rounded-xl shadow-xl`}
+      className={`
+        relative overflow-hidden rounded-xl shadow-xl
+        `}
     >
       {/* Attribute Border */}
       <div className="absolute inset-0 w-6 z-10 left-0 scale-103">
@@ -122,9 +124,9 @@ export const CardRender = (props: CardProps) => {
 
             <div className="absolute inset-0 flex flex-col">
               {/* Top Section */}
-              <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/60 via-black/30 to-transparent pointer-events-none z-0" />
+              <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-black/60 via-black/30 to-transparent pointer-events-none z-0" />
               <div className="p-4 pt-4 pl-3">
-                <div className="flex items-start gap-2 relative">
+                <div className="flex items-start gap-4 relative">
                   {/* Rarity Image */}
                   <div
                     className="absolute left-0 top-0 z-10"
@@ -166,7 +168,7 @@ export const CardRender = (props: CardProps) => {
                       }}
                     />
                   </div>
-                  <div className="flex-0 pt-2">
+                  <div className="flex-1 min-w-0 pt-2">
                     {/* Background Image */}
                     <div className="w-full h-full overflow-hidden">
                       {/* Title Background Stripe - FIXED ALIGNMENT */}
@@ -183,13 +185,16 @@ export const CardRender = (props: CardProps) => {
                         />
                       </div>
                       {/* Card Name */}
-                      <div
-                        className={`relative z-10 ${
-                          isSmall ? "pl-1 pt-0.5" : "pl-2 pt-0"
-                        }`}
-                      >
+                      <div className={`relative z-10`}>
                         <h5
-                          className={`font-bold leading-tight drop-shadow-lg overflow-hidden text-ellipsis whitespace-nowrap ${nameSize}`}
+                          className={`
+                            font-bold
+                            leading-tight
+                            drop-shadow-lg
+                            overflow-hidden
+                            truncate
+                            ${nameSize}
+                            `}
                           style={{
                             color: getRarityColor(card.rarity),
                             textShadow: `
@@ -199,6 +204,7 @@ export const CardRender = (props: CardProps) => {
                               0.6px 0.6px 0 #000
                             `,
                           }}
+                          title={card.name}
                         >
                           {card.name}
                         </h5>
@@ -208,7 +214,7 @@ export const CardRender = (props: CardProps) => {
                     <div
                       className="flex items-center gap-1 -mt-1"
                       style={{
-                        padding: "4px 6px",
+                        padding: "6px 0px",
                       }}
                     >
                       <img
@@ -245,12 +251,12 @@ export const CardRender = (props: CardProps) => {
               </div>
               <div
                 className={`absolute inset-x-0 bottom-0 pointer-events-none z-0 ${
-                  isSmall ? "h-44" : "h-48"
+                  isSmall ? "h-48" : "h-64"
                 } bg-gradient-to-t from-black/85 via-black/70 to-transparent`}
               />
               {/* Description Section */}
               {card.description && (
-                <div className="mt-auto relative z-20 py-8 flex flex-col items-center justify-center gap-2">
+                <div className="mt-auto relative z-20 pb-6 px-4 flex flex-col items-center justify-center gap-2">
                   {/* Card Frame Spark */}
                   {![CardRarities.Common, CardRarities.Unique].includes(
                     card.rarity
@@ -265,32 +271,41 @@ export const CardRender = (props: CardProps) => {
                       className="w-1/2 -mb-1 drop-shadow-2xl"
                     />
                   )}
-                  {(() => {
-                    const { bracketedText, remainingText } = parseDescription(
-                      card.description
-                    );
-                    return (
-                      <>
-                        {bracketedText && (
+                  <div className="w-full max-w-xs px-4">
+                    {(() => {
+                      const { bracketedText, remainingText } = parseDescription(
+                        card.description
+                      );
+                      return (
+                        <>
+                          {bracketedText && (
+                            <p
+                              className={`
+                                text-center font-semibold leading-snug
+                                ${isSmall ? "text-xs" : "text-lg"}
+                              `}
+                              style={{ color: "#e9bc7eff" }}
+                            >
+                              {bracketedText}
+                            </p>
+                          )}
                           <p
-                            className="text-center font-semibold text-xs sm:text-sm leading-snug -mb-1"
-                            style={{ color: "#dda95cff" }}
-                          >
-                            {bracketedText}
-                          </p>
-                        )}
-                        <p
-                          className={`text-white text-center leading-snug -mb-4 whitespace-pre-line ${descSize}`}
-                          dangerouslySetInnerHTML={{
-                            __html: remainingText.replace(
-                              /(\d+%?)/g,
-                              '<span style="color: #7ce2fb; font-weight: bold;">$1</span>'
-                            ),
-                          }}
-                        />
-                      </>
-                    );
-                  })()}
+                            className={`text-white text-center leading-snug whitespace-pre-line break-words ${descSize}`}
+                            style={{
+                              wordBreak: "break-word",
+                              overflowWrap: "break-word",
+                            }}
+                            dangerouslySetInnerHTML={{
+                              __html: remainingText.replace(
+                                /(\d+%?)/g,
+                                '<span style="color: #7ce2fb; font-weight: bold;">$1</span>'
+                              ),
+                            }}
+                          />
+                        </>
+                      );
+                    })()}
+                  </div>
                 </div>
               )}
             </div>

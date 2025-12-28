@@ -67,31 +67,30 @@ export const RecommendedSaveData = ({
   );
 
   return (
-    <section
-      id="recommended-save-data"
-      className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-6"
-    >
-      <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-purple-400 text-center">
-        2. Recommended Save Data
-      </h2>
-
-      <p className="text-muted-foreground mb-6 sm:mb-8 text-sm sm:text-base text-center px-4 max-w-3xl mx-auto">
-        These are example deck builds. You can adjust based on your playstyle
+    <div className="space-y-8">
+      <p className="text-base text-gray-400 text-center">
+        These are optimal EXAMPLES ONLY. You can adjust based on your playstyle
         and available cards.
       </p>
 
-      <div className="space-y-12 sm:space-y-16">
+      {/* Save Data Grid */}
+      <div className="space-y-8 sm:space-y-12">
         {recommendedSaveData.map((saveData) => {
           const cards = generateSaveData(saveData.cards);
 
           return (
             <div className="space-y-5" key={saveData.id}>
               <div className="text-center space-y-3">
-                <h3 className="text-lg sm:text-xl font-bold text-purple-300">
+                <h3 className="text-lg sm:text-xl font-bold">
                   {saveData.name}
                 </h3>
                 {saveData.faintMemoryNote && (
-                  <span className="inline-block px-4 py-1.5 rounded-full bg-blue-500/20 border border-blue-500/40 text-blue-400 text-xs sm:text-sm font-bold leading-tight whitespace-normal break-words max-w-full">
+                  <span
+                    className="
+                  inline-block px-4 py-1.5 rounded-full border border-gray-500 bg-gray-500
+                  text-xs sm:text-sm font-bold 
+                  leading-tight whitespace-normal break-words max-w-full"
+                  >
                     {saveData.faintMemoryNote}
                   </span>
                 )}
@@ -110,15 +109,65 @@ export const RecommendedSaveData = ({
                     if (!card) return null;
                     const key = `${(card as any).id ?? "unknown"}-${cardIndex}`;
                     return (
-                      <CardRender
+                      <div
                         key={key}
-                        card={card as any}
-                        isPlaceholder={false}
-                        attribute={attribute}
-                        isEpiphany={
-                          (card as any).isEphiphany ? "spark" : "nospark"
-                        }
-                      />
+                        role="button"
+                        tabIndex={0}
+                        className="
+                        hover:scale-100
+                        group
+                        relative
+                        overflow-hidden
+                        cursor-pointer
+                        transition-all duration-300
+                        rounded-lg
+                        "
+                        onMouseMove={(e) => {
+                          const rect = e.currentTarget.getBoundingClientRect();
+                          const x = e.clientX - rect.left;
+                          const y = e.clientY - rect.top;
+                          e.currentTarget.style.setProperty(
+                            "--mouse-x",
+                            `${x}px`
+                          );
+                          e.currentTarget.style.setProperty(
+                            "--mouse-y",
+                            `${y}px`
+                          );
+                        }}
+                      >
+                        <CardRender
+                          card={card as any}
+                          isPlaceholder={false}
+                          scaleOnHover={false}
+                          attribute={attribute}
+                          isEpiphany={
+                            (card as any).isEphiphany ? "spark" : "nospark"
+                          }
+                        />
+                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-700">
+                          <div className="absolute inset-0 bg-gradient-to-t from-transparent via-white/10 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-1000" />
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/8 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1200 delay-75" />
+                          <div
+                            className="absolute inset-0 mix-blend-screen"
+                            style={{
+                              background:
+                                "radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.3) 0%, transparent 50%)",
+                            }}
+                          />
+                          <div
+                            className="absolute inset-0 mix-blend-screen opacity-90"
+                            style={{
+                              background:
+                                "conic-gradient(from 0deg at var(--mouse-x, 50%) var(--mouse-y, 50%), #ff00de30, #00ffff30, #a8ff0030, #ffff0030, #00ff8830, #ff006630, #ff00de30)",
+                              maskImage:
+                                "radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), black 15%, transparent 65%)",
+                              WebkitMaskImage:
+                                "radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), black 15%, transparent 65%)",
+                            }}
+                          />
+                        </div>
+                      </div>
                     );
                   })}
                 </div>
@@ -127,6 +176,6 @@ export const RecommendedSaveData = ({
           );
         })}
       </div>
-    </section>
+    </div>
   );
 };

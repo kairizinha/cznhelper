@@ -1,5 +1,6 @@
 // data/characters/kayron.ts
-import { Attributes } from "@/types/card"
+import { Attributes } from "@/types/card";
+import { CharacterClass, CharacterRole } from "@/types/character";
 import {
   Card,
   CardRarities,
@@ -8,13 +9,13 @@ import {
   MemoryFragmentSetRecommendation,
   UniqueCard,
   PartnersGuide,
-} from "@/types/character-guides"
+} from "@/types/character-guides";
 import {
   MemoryFragmentSet,
   MemoryFragmentMainStats,
   MemoryFragmentSubstats,
-} from "@/types/memory-fragments"
-import { SaveData } from "@/types/save-data"
+} from "@/types/memory-fragments";
+import { SaveData } from "@/types/save-data";
 
 const commonCards: Card[] = [
   {
@@ -35,7 +36,7 @@ const commonCards: Card[] = [
     rarity: CardRarities.Common,
     description: "100% Shield",
   },
-]
+];
 
 const uniqueCards: UniqueCard[] = [
   {
@@ -296,25 +297,33 @@ const uniqueCards: UniqueCard[] = [
       "240% Damage\nCreate 3 Futility Cards\n+40% Damage Amount\nfor each",
     epiphanies: [],
   },
-]
+];
 
 const recommendedSaveData: SaveData[] = [
   {
     id: "deck-1",
-    name: "deck-1",
-    description: "",
-    faintMemoryNote:
-      "Make sure to reach out to us on Discord: _zyla or lilyium.box to help us build this website for everyone to take advantage of!",
-    cards: [],
+    name: "Kayron's Best Deck",
+    description: "This is the best deck for Kayron",
+    faintMemoryNote: "140 Faint Memory Cost without Convert Method(s)",
+    cards: [
+      "Echoes of True Abyss",
+      "Echoes of True Abyss",
+      "Echoes of True Abyss",
+      "Brand of Annihilation I",
+      "Brand of Annihilation II",
+      "Brand of Annihilation III",
+      "Brand of Annihilation IV",
+      "Brand of Annihilation V",
+    ],
   },
   {
-    id: "deck-2",
-    name: "deck-2",
+    id: "",
+    name: "",
     description: "",
-    faintMemoryNote: "X Faint Memory Cost without Convert Method(s)",
+    faintMemoryNote: "",
     cards: [],
   },
-]
+];
 
 const gearsData = {
   weapons: [
@@ -347,9 +356,9 @@ const gearsData = {
     "Multifaceted Parallel Universe Nexus",
     "Water Drops of the Goddess",
   ],
-}
+};
 
-const recommendedSources = ["Laboratory 0"]
+const recommendedSources = ["Laboratory 0"];
 
 const memoryFragmentSets: MemoryFragmentSetRecommendation = {
   bestInSlot: [
@@ -381,7 +390,7 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
         "If Agony uptime is near 100%, you get free damage bonus, which makes this set better than other options.",
     },
   ],
-}
+};
 
 const partnersGuide: PartnersGuide[] = [
   {
@@ -412,21 +421,21 @@ const partnersGuide: PartnersGuide[] = [
     description: "Just don't.",
     tier: CardTier.Bad,
   },
-]
+];
 
 export const kayronData: CharacterData = {
   attribute: Attributes.Void,
-  job: "Psionic",
-  role: "Main DPS",
-  // bannerUrl: "https://blog.emptyblue.it/uploads/3572fe7b-b2fd-4887-ab3f-59bf74f9f420_sereniel_past.webp",
-  // avatarUrl: "/images/characters/sereniel/avatar.webp",
+  job: CharacterClass.Psionic,
+  role: CharacterRole.MainDPS,
+  // bannerUrl: "",
+  // avatarUrl: "",
 
   overview: `
-TBA
+  
   `.trim(),
-  strengths: ["TBA"],
+  strengths: [""],
 
-  weaknesses: ["TBA"],
+  weaknesses: [""],
 
   commonCards: commonCards,
   uniqueCards: uniqueCards,
@@ -456,4 +465,4 @@ TBA
   ],
   memoryFragmentSubstatsNote: "",
   partnersGuide: partnersGuide,
-}
+};

@@ -1,4 +1,5 @@
-import { Attributes } from "@/types/card"
+import { Attributes } from "@/types/card";
+import { CharacterClass, CharacterRole } from "@/types/character";
 import {
   CardRarities,
   CharacterData,
@@ -6,13 +7,13 @@ import {
   MemoryFragmentSubstatPriorities,
   PartnersGuide,
   UniqueCard,
-} from "@/types/character-guides"
-import { CardTier } from "@/types/character-guides"
+} from "@/types/character-guides";
+import { CardTier } from "@/types/character-guides";
 import {
   MemoryFragmentMainStats,
   MemoryFragmentSubstats,
-} from "@/types/memory-fragments"
-import { SaveData } from "@/types/save-data"
+} from "@/types/memory-fragments";
+import { SaveData } from "@/types/save-data";
 
 const uniqueCards: UniqueCard[] = [
   {
@@ -328,7 +329,7 @@ const uniqueCards: UniqueCard[] = [
     rarity: CardRarities.Unique,
     description: "[Unique]\n Increase max stack of\n Reload by 1\n 1 Reload",
   },
-]
+];
 const recommendedVeronicaSaveData: SaveData[] = [
   {
     id: "veronica-recommended-deck-1",
@@ -364,12 +365,12 @@ const recommendedVeronicaSaveData: SaveData[] = [
       "Bombardment Prep",
     ],
   },
-]
+];
 const gearsData = {
   weapons: ["Second Method", "Obsidian Sword", "Mutant Predator Spike"],
   armors: ["Shield of the Watcher"],
   accessories: [],
-}
+};
 
 const memoryFragmentSets: MemoryFragmentSetRecommendation = {
   bestInSlot: [
@@ -386,7 +387,7 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
       description: "Provides the best 2-set bonus for critical damage builds",
     },
   ],
-}
+};
 
 const memoryFragmentSubstatPriorities: MemoryFragmentSubstatPriorities[] = [
   {
@@ -403,7 +404,7 @@ const memoryFragmentSubstatPriorities: MemoryFragmentSubstatPriorities[] = [
     relation: "or",
     stats: [MemoryFragmentSubstats.AttackFlat, MemoryFragmentSubstats.Attack],
   },
-]
+];
 
 const partnersGuide: PartnersGuide[] = [
   {
@@ -421,20 +422,20 @@ const partnersGuide: PartnersGuide[] = [
     description: "IDK add it yourself",
     tier: CardTier.S,
   },
-]
+];
 export const veronicaData: CharacterData = {
   attribute: Attributes.Passion,
-  job: "Ranger",
-  role: "Sub DPS / Draw Engine",
-  // bannerUrl: "https://blog.emptyblue.it/uploads/3572fe7b-b2fd-4887-ab3f-59bf74f9f420_sereniel_past.webp",
-  // avatarUrl: "/images/characters/sereniel/avatar.webp",
+  job: CharacterClass.Ranger,
+  role: CharacterRole.Support,
+  // bannerUrl: "",
+  // avatarUrl: "",
 
   overview: `
-TBA
+  
   `.trim(),
-  strengths: ["TBA"],
+  strengths: [""],
 
-  weaknesses: ["TBA"],
+  weaknesses: [""],
   uniqueCards: uniqueCards,
   recommendedSaveData: recommendedVeronicaSaveData,
   gears: gearsData,
@@ -450,4 +451,4 @@ TBA
               generally preferred over Attack for most cases testsssss`,
   memoryFragmentSubstatPriorities: memoryFragmentSubstatPriorities,
   partnersGuide: partnersGuide,
-}
+};

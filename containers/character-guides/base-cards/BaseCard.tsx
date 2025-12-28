@@ -40,6 +40,7 @@ export const BaseCard = ({ uniqueCards, attribute }: Props) => {
       <p className="text-base text-gray-400 text-center">
         Click a Base Card to view the Tier List
       </p>
+
       {/* Base Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4 sm:gap-6">
         {cardsWithEpiphanies.map((cardData) => (
@@ -55,17 +56,13 @@ export const BaseCard = ({ uniqueCards, attribute }: Props) => {
                 role="button"
                 tabIndex={0}
                 className="
-                hover:scale-103
+                hover:scale-100
                 group
                 relative
                 overflow-hidden
                 cursor-pointer
                 transition-all duration-300
-                focus:ring-2
-                focus:ring-sky-400/50
                 rounded-lg
-                border border-white/10
-                hover:border-white/30
                 "
                 onMouseMove={(e) => {
                   const rect = e.currentTarget.getBoundingClientRect();
@@ -73,10 +70,6 @@ export const BaseCard = ({ uniqueCards, attribute }: Props) => {
                   const y = e.clientY - rect.top;
                   e.currentTarget.style.setProperty("--mouse-x", `${x}px`);
                   e.currentTarget.style.setProperty("--mouse-y", `${y}px`);
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.removeProperty("--mouse-x");
-                  e.currentTarget.style.removeProperty("--mouse-y");
                 }}
               >
                 <CardRender
@@ -92,7 +85,7 @@ export const BaseCard = ({ uniqueCards, attribute }: Props) => {
                     className="absolute inset-0 mix-blend-screen"
                     style={{
                       background:
-                        "radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.3) 0%, transparent 50%)",
+                        "radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.3) 0%, transparent 50%)",
                     }}
                   />
                   <div
@@ -112,7 +105,7 @@ export const BaseCard = ({ uniqueCards, attribute }: Props) => {
 
             <DialogContent className="!w-[95vw] !max-w-6xl max-h-[90vh] overflow-y-auto scrollbar-none bg-gray-900/95 border border-gray-800 rounded-xl">
               <DialogHeader className="bg-gray-900 border-b border-gray-800 px-6 py-4 pr-12">
-                <DialogTitle className="text-xl sm:text-2xl font-bold text-purple-300">
+                <DialogTitle className="text-xl sm:text-2xl font-bold text-gray-300">
                   {cardData.name} - Epiphanies
                 </DialogTitle>
               </DialogHeader>
@@ -129,8 +122,6 @@ export const BaseCard = ({ uniqueCards, attribute }: Props) => {
                       rounded-lg
                       cursor-pointer
                       transition-all duration-500
-                      border border-white/10
-                      hover:border-white/30
                       "
                       onMouseMove={(e) => {
                         const rect = e.currentTarget.getBoundingClientRect();
@@ -144,10 +135,6 @@ export const BaseCard = ({ uniqueCards, attribute }: Props) => {
                           "--mouse-y",
                           `${y}px`
                         );
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.removeProperty("--mouse-x");
-                        e.currentTarget.style.removeProperty("--mouse-y");
                       }}
                     >
                       <CardRender
@@ -168,7 +155,7 @@ export const BaseCard = ({ uniqueCards, attribute }: Props) => {
                           className="absolute inset-0 mix-blend-screen"
                           style={{
                             background:
-                              "radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.35) 0%, transparent 50%)",
+                              "radial-gradient(200px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.35) 0%, transparent 50%)",
                           }}
                         />
                         <div
@@ -190,7 +177,7 @@ export const BaseCard = ({ uniqueCards, attribute }: Props) => {
 
               {/* Epiphany Explanations */}
               <div className="mt-6 space-y-4 px-4 sm:px-6 pb-6">
-                <h3 className="text-lg font-bold text-purple-300">
+                <h3 className="text-lg font-bold text-gray-300">
                   Epiphanies Tier Explanation
                 </h3>
                 {cardData.epiphanies!.map((epiphany) => (
@@ -215,7 +202,7 @@ export const BaseCard = ({ uniqueCards, attribute }: Props) => {
               {cardData.divineEpiphanies &&
                 cardData.divineEpiphanies.length > 0 && (
                   <div className="mt-6 space-y-4 px-4 sm:px-6 pb-6">
-                    <h3 className="text-lg font-bold text-purple-300">
+                    <h3 className="text-lg font-bold text-gray-300">
                       Divine Epiphanies
                     </h3>
                     <p className="text-sm text-gray-400 mb-4">
@@ -225,7 +212,7 @@ export const BaseCard = ({ uniqueCards, attribute }: Props) => {
                       {cardData.divineEpiphanies.map((divine) => (
                         <div
                           key={divine.name || divine.icon}
-                          className="p-4 rounded-lg bg-gradient-to-br from-purple-900/30 to-purple-800/20 border border-purple-500/40"
+                          className="p-4 rounded-lg bg-gradient-to-br from-gray-900/30 to-gray-800/20 border border-gray-500/40"
                         >
                           <div className="flex items-center gap-3 mb-3">
                             {divine.icon && (
@@ -235,17 +222,17 @@ export const BaseCard = ({ uniqueCards, attribute }: Props) => {
                                 className="w-10 h-10 object-contain"
                               />
                             )}
-                            <span className="px-3 py-1 rounded-full text-xs font-bold bg-purple-500/30 text-purple-200 border border-purple-400/50">
+                            <span className="px-3 py-1 rounded-full text-xs font-bold bg-gray-500/30 text-gray-200 border border-gray-400/50">
                               Divine
                             </span>
                           </div>
                           {divine.name && (
-                            <h4 className="font-semibold text-purple-200 mb-2">
+                            <h4 className="font-semibold text-gray-200 mb-2">
                               {divine.name}
                             </h4>
                           )}
                           {divine.reasoning && (
-                            <p className="text-sm text-purple-300/80 leading-relaxed">
+                            <p className="text-sm text-gray-300/80 leading-relaxed">
                               {divine.reasoning}
                             </p>
                           )}
