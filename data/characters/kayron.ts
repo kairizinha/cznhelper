@@ -250,7 +250,7 @@ const uniqueCards: UniqueCard[] = [
       {
         name: "2 Vulnerable to the target",
         reasoning: "",
-        icon: "/images/card/icon_card_battle_expand_sacred.png",
+        icon: "/images/card/icon_card_battle_expand_secred.png",
         description: "",
       },
     ],
