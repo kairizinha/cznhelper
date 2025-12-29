@@ -50,16 +50,15 @@ const uniqueCards: UniqueCard[] = [
     epiphanies: [
       {
         id: "Echo of Futility I",
-        tier: CardTier.WIP,
+        tier: CardTier.SPlus,
         cost: 1,
         type: "attack",
         description: "360% Damage\nCreate 3 Futility\nCard(s)",
-        reasoning:
-          "[ For All Epiphanies ] To Be Determined by the Community, for the Community.\nMake sure to reach out to us on Discord: _zyla or lilyium.box to help us build this website for everyone to take advantage of!",
+        reasoning: "",
       },
       {
         id: "Echo of Futility II",
-        tier: CardTier.WIP,
+        tier: CardTier.C,
         cost: 1,
         type: "attack",
         description:
@@ -68,7 +67,7 @@ const uniqueCards: UniqueCard[] = [
       },
       {
         id: "Echo of Futility III",
-        tier: CardTier.WIP,
+        tier: CardTier.A,
         cost: 1,
         type: "attack",
         description:
@@ -77,7 +76,7 @@ const uniqueCards: UniqueCard[] = [
       },
       {
         id: "Echo of Futility IV",
-        tier: CardTier.WIP,
+        tier: CardTier.Bad,
         cost: "X",
         type: "attack",
         description:
@@ -86,7 +85,7 @@ const uniqueCards: UniqueCard[] = [
       },
       {
         id: "Echo of Futility V",
-        tier: CardTier.WIP,
+        tier: CardTier.SPlus,
         cost: 0,
         type: "attack",
         description:
@@ -94,7 +93,26 @@ const uniqueCards: UniqueCard[] = [
         reasoning: "",
       },
     ],
-    divineEpiphanies: [],
+    divineEpiphanies: [
+      {
+        name: "2 Vulnerable to the target",
+        reasoning: "",
+        icon: "/images/card/icon_card_battle_expand_vitor.png",
+        description: "",
+      },
+      {
+        name: "1 AP",
+        reasoning: "",
+        icon: "/images/card/icon_card_battle_expand_circen.png",
+        description: "",
+      },
+      {
+        name: "Increase this card’s Damage by 30%",
+        reasoning: "",
+        icon: "/images/card/icon_card_battle_expand_diallos.png",
+        description: "",
+      },
+    ],
   },
   {
     id: "brand-of-annihilation",
@@ -108,17 +126,16 @@ const uniqueCards: UniqueCard[] = [
     epiphanies: [
       {
         id: "Brand of Annihilation I",
-        tier: CardTier.WIP,
+        tier: CardTier.S,
         cost: 3,
         type: "attack",
         description:
           "450% Damage to all enemies\nWhen a card is\nExhausted,\ndecrease Cost of this\ncard by 1 for 1 turn",
-        reasoning:
-          "[ For All Epiphanies ] To Be Determined by the Community, for the Community.\nMake sure to reach out to us on Discord: _zyla or lilyium.box to help us build this website for everyone to take advantage of!",
+        reasoning: "",
       },
       {
         id: "Brand of Annihilation II",
-        tier: CardTier.WIP,
+        tier: CardTier.S,
         cost: 3,
         type: "attack",
         description:
@@ -127,7 +144,7 @@ const uniqueCards: UniqueCard[] = [
       },
       {
         id: "Brand of Annihilation III",
-        tier: CardTier.WIP,
+        tier: CardTier.SPlus,
         cost: 7,
         type: "attack",
         description:
@@ -136,7 +153,7 @@ const uniqueCards: UniqueCard[] = [
       },
       {
         id: "Brand of Annihilation IV",
-        tier: CardTier.WIP,
+        tier: CardTier.Niche,
         cost: 1,
         type: "attack",
         description:
@@ -145,7 +162,7 @@ const uniqueCards: UniqueCard[] = [
       },
       {
         id: "Brand of Annihilation V",
-        tier: CardTier.WIP,
+        tier: CardTier.C,
         cost: 2,
         type: "attack",
         description:
@@ -155,9 +172,15 @@ const uniqueCards: UniqueCard[] = [
     ],
     divineEpiphanies: [
       {
-        name: "Increase this card's Damage by 30%.",
-        reasoning: "Self explanatory, even more damage.",
-        icon: "/images/card/icon_card_battle_expand_vitor.png",
+        name: "2 Vulnerable to the target",
+        reasoning: "",
+        icon: "/images/card/icon_card_battle_expand_circen.png",
+        description: "",
+      },
+      {
+        name: "Increase this card’s Damage by 30%",
+        reasoning: "",
+        icon: "/images/card/icon_card_battle_expand_secred.png",
         description: "",
       },
     ],
@@ -174,16 +197,15 @@ const uniqueCards: UniqueCard[] = [
     epiphanies: [
       {
         id: "Black Hole I",
-        tier: CardTier.WIP,
+        tier: CardTier.C,
         cost: 2,
         type: "attack",
         description: "360% Damage\nActivate 2 Futility\nCard(s) from hand",
-        reasoning:
-          "[ For All Epiphanies ] To Be Determined by the Community, for the Community.\nMake sure to reach out to us on Discord: _zyla or lilyium.box to help us build this website for everyone to take advantage of!",
+        reasoning: "",
       },
       {
         id: "Black Hole II",
-        tier: CardTier.WIP,
+        tier: CardTier.SPlus,
         cost: 2,
         type: "attack",
         description:
@@ -192,7 +214,7 @@ const uniqueCards: UniqueCard[] = [
       },
       {
         id: "Black Hole III",
-        tier: CardTier.WIP,
+        tier: CardTier.C,
         cost: 2,
         type: "attack",
         description:
@@ -201,7 +223,7 @@ const uniqueCards: UniqueCard[] = [
       },
       {
         id: "Black Hole IV",
-        tier: CardTier.WIP,
+        tier: CardTier.B,
         cost: 2,
         type: "attack",
         description:
@@ -210,7 +232,7 @@ const uniqueCards: UniqueCard[] = [
       },
       {
         id: "Black Hole V",
-        tier: CardTier.WIP,
+        tier: CardTier.S,
         cost: 1,
         type: "upgrade",
         description:
@@ -220,9 +242,15 @@ const uniqueCards: UniqueCard[] = [
     ],
     divineEpiphanies: [
       {
-        name: "Increase this card's Damage by 30%.",
-        reasoning: "Self explanatory, even more damage.",
+        name: "Increase this card’s Damage by 30%",
+        reasoning: "",
         icon: "/images/card/icon_card_battle_expand_vitor.png",
+        description: "",
+      },
+      {
+        name: "2 Vulnerable to the target",
+        reasoning: "",
+        icon: "/images/card/icon_card_battle_expand_sacred.png",
         description: "",
       },
     ],
@@ -239,7 +267,7 @@ const uniqueCards: UniqueCard[] = [
     epiphanies: [
       {
         id: "Oath of Vanity I",
-        tier: CardTier.WIP,
+        tier: CardTier.SPlus,
         cost: 1,
         type: "upgrade",
         description:
@@ -249,7 +277,7 @@ const uniqueCards: UniqueCard[] = [
       },
       {
         id: "Oath of Vanity II",
-        tier: CardTier.WIP,
+        tier: CardTier.SPlus,
         cost: 0,
         type: "upgrade",
         description:
@@ -258,7 +286,7 @@ const uniqueCards: UniqueCard[] = [
       },
       {
         id: "Oath of Vanity III",
-        tier: CardTier.WIP,
+        tier: CardTier.SPlus,
         cost: 1,
         type: "upgrade",
         description:
@@ -267,7 +295,7 @@ const uniqueCards: UniqueCard[] = [
       },
       {
         id: "Oath of Vanity IV",
-        tier: CardTier.WIP,
+        tier: CardTier.SPlus,
         cost: 0,
         type: "skill",
         description:
@@ -276,7 +304,7 @@ const uniqueCards: UniqueCard[] = [
       },
       {
         id: "Oath of Vanity V",
-        tier: CardTier.WIP,
+        tier: CardTier.Bad,
         cost: 0,
         type: "upgrade",
         description:
@@ -284,7 +312,32 @@ const uniqueCards: UniqueCard[] = [
         reasoning: "",
       },
     ],
-    divineEpiphanies: [],
+    divineEpiphanies: [
+      {
+        name: "1 Morale, 1 Resolve",
+        reasoning: "",
+        icon: "/images/card/icon_card_battle_expand_nihilum.png",
+        description: "",
+      },
+      {
+        name: "Reduce the cost of this card by 1",
+        reasoning: "",
+        icon: "/images/card/icon_card_battle_expand_secred.png",
+        description: "",
+      },
+      {
+        name: "1 AP",
+        reasoning: "",
+        icon: "/images/card/icon_card_battle_expand_circen.png",
+        description: "",
+      },
+      {
+        name: "Draw 1",
+        reasoning: "",
+        icon: "/images/card/icon_card_battle_expand_vitor.png",
+        description: "",
+      },
+    ],
   },
   {
     id: "Echoes of True Abyss",

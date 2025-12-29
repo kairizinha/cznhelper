@@ -207,7 +207,7 @@ export const BaseCard = ({ uniqueCards, attribute }: Props) => {
                     <p className="text-sm text-gray-400 mb-4">
                       Good Divine Epiphanies that this card can roll
                     </p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
                       {cardData.divineEpiphanies.map((divine) => (
                         <div
                           key={divine.name || divine.icon}
@@ -218,7 +218,7 @@ export const BaseCard = ({ uniqueCards, attribute }: Props) => {
                               <img
                                 src={divine.icon}
                                 alt={divine.name ?? "Divine Epiphany"}
-                                className="w-10 h-10 object-contain"
+                                className="w-16 h-16 object-contain"
                               />
                             )}
                             {divine.name && (
@@ -227,16 +227,16 @@ export const BaseCard = ({ uniqueCards, attribute }: Props) => {
                               </h4>
                             )}
                           </div>
-                          {divine.name && (
-                            <h4 className="font-semibold text-gray-200 mb-2">
-                              {divine.name}
-                            </h4>
-                          )}
                           {divine.reasoning && (
                             <p className="text-sm text-gray-300/80 leading-relaxed">
                               {divine.reasoning}
                             </p>
                           )}
+                          {/* {divine.description && (
+                            <p className="text-xs text-gray-300/80 leading-relaxed">
+                              {divine.description}
+                            </p>
+                          )} */}
                         </div>
                       ))}
                     </div>
