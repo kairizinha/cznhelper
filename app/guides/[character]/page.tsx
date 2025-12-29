@@ -276,15 +276,15 @@ export default function CharacterGuidePage() {
             <h3 className="text-xl sm:text-2xl text-sky-300">
               Memory Fragment
             </h3>
-            {/* <div className="bg-slate-800/40 rounded-lg p-6 sm:p-8 border border-slate-700/50 text-center">
+            <div className="bg-slate-800/40 rounded-lg p-6 sm:p-8 border border-slate-700/50 text-center">
               <p className="text-gray-500">
-                Memory Fragment guide coming soon...
+                THIS SECTION NEED DESIGN UPDATE, ILL DO LATER
               </p>
               <p className="text-sm text-gray-600 mt-2">
                 This section will contain detailed information about which
                 Memory Fragments to use on {characterName}.
               </p>
-            </div> */}
+            </div>
             {characterData?.memoryFragmentSets && (
               <MemoryFragmentsSection
                 bestInSlot={characterData.memoryFragmentSets?.bestInSlot}
@@ -305,13 +305,15 @@ export default function CharacterGuidePage() {
         return (
           <div className="space-y-4 sm:space-y-6">
             <h3 className="text-xl sm:text-2xl text-sky-300">Partner</h3>
-            {/* <div className="bg-slate-800/40 rounded-lg p-6 sm:p-8 border border-slate-700/50 text-center">
-              <p className="text-gray-500">Partner guide coming soon...</p>
+            <div className="bg-slate-800/40 rounded-lg p-6 sm:p-8 border border-slate-700/50 text-center">
+              <p className="text-gray-500">
+                THIS SECTION NEED DESIGN UPDATE, ILL DO LATER
+              </p>
               <p className="text-sm text-gray-600 mt-2">
                 This section will contain detailed information about optimal
                 partners for {characterName}.
               </p>
-            </div> */}
+            </div>
             {characterData?.partnersGuide && (
               <PartnersSection partnersGuide={characterData.partnersGuide} />
             )}
