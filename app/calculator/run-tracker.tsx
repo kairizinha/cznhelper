@@ -999,20 +999,22 @@ export function RunTracker() {
       previousConversionCount: conversionCount,
     });
 
-    setDeck((prev) =>
-      prev.map((c) =>
-        c.id === cardId
-          ? {
-              ...c,
-              cardType: "neutral",
-              wasConverted: true,
-              isStartingCard: false,
-              name: "Neutral Card",
-              image: DEFAULT_CARD_IMAGES.neutral,
-            }
-          : c
-      )
-    );
+    // Create the new neutral card
+    const newNeutralCard: DeckCard = {
+      ...card,
+      id: `converted-${card.id}-${Date.now()}`,
+      cardType: "neutral" as const,
+      name: "Neutral Card",
+      image: DEFAULT_CARD_IMAGES.neutral,
+      wasConverted: false,
+      isStartingCard: false,
+      isAdded: true,
+    };
+
+    setDeck((prev) => [
+      ...prev.map((c) => (c.id === cardId ? { ...c, wasConverted: true } : c)),
+      newNeutralCard,
+    ]);
 
     setConversionCount((c) => c + 1);
     setTotalPoints((p) => p + cost);
@@ -1072,6 +1074,7 @@ export function RunTracker() {
               ...c,
               isRemoved: true,
               isMutantSample: true,
+              name: "Mutant Sample",
               image: DEFAULT_CARD_IMAGES.remove,
             }
           : c
@@ -1165,30 +1168,18 @@ export function RunTracker() {
       <div
         key={card.id}
         id={`card-${card.id}`}
-        className={`group relative aspect-[2/3] cursor-pointer rounded-md overflow-hidden transition-all hover:scale-105 ${
-          isSelected ? "ring-1 ring-purple-400" : ""
-        } ${
-          card.isRemoved ? "opacity-50" : ""
-        } bg-black/40 backdrop-blur-sm border border-white/10`}
+        className={`group relative aspect-[2/3] cursor-pointer rounded-xl overflow-hidden transition-all hover:scale-102 ${
+          isSelected ? "" : ""
+        } ${card.isRemoved ? "opacity-20" : ""} ${
+          card.wasConverted && isBase ? "opacity-20" : ""
+        } bg-black/40 border border-white/10`}
         onClick={() => {
-          if (card.isMutantSample) return;
+          if (card.isMutantSample || (card.wasConverted && isBase)) return;
           card.isRemoved
-            ? undoLastAction()
+            ? setSelectedCard(null)
             : setSelectedCard(isSelected ? null : card.id);
         }}
       >
-        {card.isRemoved && (
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              deleteCard(card.id);
-            }}
-            className="absolute top-1 right-1 z-20 p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-          >
-            <X className="h-4 w-4 text-white" />
-          </button>
-        )}
-
         {card.image ? (
           <img
             src={card.image}
@@ -1211,57 +1202,55 @@ export function RunTracker() {
           <img
             src={factionBorder}
             alt="Faction border"
-            className="z-10 scale-105 absolute left-0 top-0 bottom-0 w-auto h-full object-cover object-left pointer-events-none opacity-90"
+            className="z-10 scale-105 absolute left-0 top-0 bottom-0 w-auto h-full object-cover object-left pointer-events-none opacity-100"
           />
         )}
         {card.cardType === "neutral" && !card.isStartingCard && (
           <img
             src="/images/card/neutral-border.png"
-            className="z-10 scale-105 absolute left-0 top-0 bottom-0 w-auto h-full object-cover object-left pointer-events-none opacity-90"
+            className="z-10 scale-105 absolute left-0 top-0 bottom-0 w-auto h-full object-cover object-left pointer-events-none opacity-100"
           />
         )}
         {card.cardType === "monster" && (
           <img
             src="/images/card/monster-border.png"
-            className="z-10 scale-105 absolute left-0 top-0 bottom-0 w-auto h-full object-cover object-left pointer-events-none opacity-90"
+            className="z-10 scale-105 absolute left-0 top-0 bottom-0 w-auto h-full object-cover object-left pointer-events-none opacity-100"
           />
         )}
         {card.isDuplicated && (
           <img
             src="/images/card/deco_card_copy.png"
-            className="z-10 scale-105 absolute right-0 top-0 bottom-0 w-auto h-full object-cover object-left pointer-events-none opacity-90"
+            className="z-10 scale-100 absolute right-0 top-0 bottom-0 w-auto h-full object-cover pointer-events-none opacity-100"
           />
         )}
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/70 p-2 flex flex-col justify-between text-xs text-white">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/40 p-2 flex flex-col justify-between">
           <div>
-            {!card.isRemoved && (
-              <span className="font-sm pl-1">{card.name}</span>
-            )}
+            {/* <span className="font-bold text-sm pl-2">{card.name}</span> */}
             <div className="flex gap-1 mt-1 pl-2">
               {card.hasDivineEpiphany && (
                 <img
-                  src="/images/card/icon_card_battle_expand_circen.png"
+                  src="/images/card/icon_card_battle_expand_nihilum.png"
                   alt="Divine"
-                  className="h-12 w-8"
+                  className="h-16 w-10"
                 />
               )}
               {card.hasNormalEpiphany && (
                 <img
                   src="/images/card/icon_card_battle_expand_default.png"
                   alt="Epiphany"
-                  className="h-12 w-12"
+                  className="h-14 w-14"
                 />
               )}
             </div>
           </div>
-          <div className="text-right font-bold drop-shadow-md">
+          <div className="text-right font-bold drop-shadow-md pr-1">
             {card.duplicationCost ?? getCardPointValue(card)}
           </div>
         </div>
 
         {isSelected && !card.isRemoved && !card.isMutantSample && (
-          <div className="absolute inset-0 flex flex-col justify-center gap-1 p-2 z-30 bg-black/60 backdrop-blur-sm rounded-md">
+          <div className="absolute inset-0 flex flex-col justify-center gap-1 p-2 z-30 bg-black/60 rounded-md">
             {/* Card Actions Modal */}
             <Dialog
               open={!!selectedCard}
@@ -1373,14 +1362,10 @@ export function RunTracker() {
 
   const baseCards = deck.filter((c) => {
     const id = parseInt(c.id);
-    return (
-      !isNaN(id) && id >= 1 && id <= 8 && !c.wasConverted && !c.isDuplicated
-    );
+    return !isNaN(id) && id >= 1 && id <= 8 && !c.isDuplicated;
   });
 
-  const addedCards = deck.filter(
-    (c) => c.isDuplicated || c.wasConverted || c.isAdded || c.isMutantSample
-  );
+  const addedCards = deck.filter((c) => c.isDuplicated || c.isAdded);
 
   return (
     <TooltipProvider>
@@ -1442,27 +1427,25 @@ export function RunTracker() {
                       size="sm"
                       onClick={() => setTier(t)}
                       className={`
-        group relative overflow-hidden font-medium transition-colors duration-150
-        ${
-          tier === t
-            ? "bg-gradient-to-r from-purple-500 to-cyan-500 text-white border-transparent"
-            : "hover:border-purple-400"
-        }
-      `}
+                      group relative overflow-hidden font-medium transition-colors duration-150
+                      ${
+                        tier === t
+                          ? "bg-gradient-to-r from-purple-500 to-cyan-500 text-white border-transparent"
+                          : "hover:border-purple-400"
+                      }
+                      `}
                     >
                       <div className="pointer-events-none absolute inset-0">
                         <div
                           className="
-            absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent
-            -translate-x-[150%] skew-x-12
-            transition-transform duration-0 group-hover:duration-1000
-            group-hover:translate-x-[120%] ease-out
-          "
+                          absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent
+                          -translate-x-[150%] skew-x-12
+                          transition-transform duration-0 group-hover:duration-1000
+                          group-hover:translate-x-[120%] ease-out
+                        "
                         />
                       </div>
-
                       {tier === t && <div className="" />}
-
                       <span className="relative z-10">{t}</span>
                     </Button>
                   ))}
