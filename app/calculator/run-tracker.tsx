@@ -1399,46 +1399,74 @@ export function RunTracker() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-8">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
               <div className="flex-1 space-y-3 w-full">
-                <Label className="text-base font-medium">
-                  Faint Memory Tier
-                </Label>
+                <div className="flex items-center justify-between">
+                  {/* Tier Label */}
+                  <Label className="text-base font-medium">
+                    Faint Memory Tier
+                  </Label>
+
+                  <div className="flex items-center gap-4">
+                    <Checkbox
+                      id="nightmare"
+                      checked={nightmareMode}
+                      onCheckedChange={(v) => setNightmareMode(!!v)}
+                      className="w-5 h-5 rounded border-1 "
+                    />
+                    <Label
+                      htmlFor="nightmare"
+                      className="text-lg font-bold cursor-pointer select-none text-foreground"
+                    >
+                      Deep Trauma
+                    </Label>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <button className="rounded-full p-1 hover:bg-accent/50 transition-colors">
+                          <HelpCircle className="h-5 w-5 text-muted-foreground hover:text-foreground" />
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>+10 points to Faint Memory Limit</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </div>
+                </div>
+
+                {/* Tier Buttons */}
                 <div className="grid grid-cols-4 sm:grid-cols-7 gap-2">
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map((t) => (
                     <Button
                       key={t}
-                      variant={tier === t ? "default" : "outline"}
+                      variant="outline"
                       size="sm"
                       onClick={() => setTier(t)}
-                      className={
-                        tier === t
-                          ? "bg-gradient-to-r from-purple-500 to-cyan-500 text-white hover:from-purple-600 hover:to-cyan-600"
-                          : ""
-                      }
+                      className={`
+        group relative overflow-hidden font-medium transition-colors duration-150
+        ${
+          tier === t
+            ? "bg-gradient-to-r from-purple-500 to-cyan-500 text-white border-transparent"
+            : "hover:border-purple-400"
+        }
+      `}
                     >
-                      {t}
+                      <div className="pointer-events-none absolute inset-0">
+                        <div
+                          className="
+            absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent
+            -translate-x-[150%] skew-x-12
+            transition-transform duration-0 group-hover:duration-1000
+            group-hover:translate-x-[120%] ease-out
+          "
+                        />
+                      </div>
+
+                      {tier === t && <div className="" />}
+
+                      <span className="relative z-10">{t}</span>
                     </Button>
                   ))}
                 </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <Checkbox
-                  id="nightmare"
-                  checked={nightmareMode}
-                  onCheckedChange={(v) => setNightmareMode(!!v)}
-                />
-                <Label htmlFor="nightmare" className="cursor-pointer">
-                  Nightmare Mode
-                </Label>
-                <Tooltip>
-                  <TooltipTrigger>
-                    <HelpCircle className="h-5 w-5" />
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>+10 points to Faint Memory Limit</p>
-                  </TooltipContent>
-                </Tooltip>
               </div>
             </div>
 
