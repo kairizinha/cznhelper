@@ -36,13 +36,19 @@ export const BaseCard = ({ uniqueCards, attribute }: Props) => {
   }
 
   return (
-    <div className="space-y-8">
-      <p className="text-base text-gray-400 text-center">
-        Click a Base Card to view the Tier List
-      </p>
+    <div className="space-y-10 py-8">
+      <div className="text-center px-4">
+        <p className="text-lg text-gray-300 leading-relaxed">
+          Click a Base Card to see Tier Analysis
+        </p>
+        <p className="text-sm text-gray-500 mt-2">
+          Ranked based on community data and expert review for the specific
+          character
+        </p>
+      </div>
 
       {/* Base Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4 sm:gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-6 max-w-7xl mx-auto px-4">
         {cardsWithEpiphanies.map((cardData) => (
           <Dialog
             key={cardData.id}
@@ -56,20 +62,21 @@ export const BaseCard = ({ uniqueCards, attribute }: Props) => {
                 role="button"
                 tabIndex={0}
                 className="
-                hover:scale-100
-                group
-                relative
-                overflow-hidden
-                cursor-pointer
-                transition-all duration-300
-                rounded-xl
+                  group relative overflow-hidden rounded-2xl
+                  bg-gradient-to-br from-gray-900/50 to-gray-950/70
+                  border border-gray-800
+                  transition-all duration-300 ease-out
+                  hover:border-gray-700 hover:shadow-2xl hover:shadow-purple-900/20
+                  hover:-translate-y-1 cursor-pointer
                 "
                 onMouseMove={(e) => {
-                  const rect = e.currentTarget.getBoundingClientRect();
-                  const x = e.clientX - rect.left;
-                  const y = e.clientY - rect.top;
-                  e.currentTarget.style.setProperty("--mouse-x", `${x}px`);
-                  e.currentTarget.style.setProperty("--mouse-y", `${y}px`);
+                  if (window.matchMedia("(hover: hover)").matches) {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    e.currentTarget.style.setProperty("--mouse-x", `${x}px`);
+                    e.currentTarget.style.setProperty("--mouse-y", `${y}px`);
+                  }
                 }}
               >
                 <CardRender
@@ -78,170 +85,149 @@ export const BaseCard = ({ uniqueCards, attribute }: Props) => {
                   attribute={attribute}
                   isEpiphany="nospark"
                 />
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-700">
-                  <div className="absolute inset-0 bg-gradient-to-t from-transparent via-white/10 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-1000" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/8 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1200 delay-75" />
-                  <div
-                    className="absolute inset-0 mix-blend-screen"
-                    style={{
-                      background:
-                        "radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.3) 0%, transparent 50%)",
-                    }}
-                  />
-                  <div
-                    className="absolute inset-0 mix-blend-screen opacity-90"
-                    style={{
-                      background:
-                        "conic-gradient(from 0deg at var(--mouse-x, 50%) var(--mouse-y, 50%), #ff00de30, #00ffff30, #a8ff0030, #ffff0030, #00ff8830, #ff006630, #ff00de30)",
-                      maskImage:
-                        "radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), black 15%, transparent 65%)",
-                      WebkitMaskImage:
-                        "radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), black 15%, transparent 65%)",
-                    }}
-                  />
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 via-transparent to-cyan-600/10" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                 </div>
               </div>
             </DialogTrigger>
 
-            <DialogContent className="!w-[95vw] !max-w-6xl max-h-[90vh] overflow-y-auto scrollbar-none bg-gray-900/95 border border-gray-800 rounded-xl">
-              <DialogHeader className="bg-gray-900 border-b border-gray-800 px-6 py-4 pr-12">
-                <DialogTitle className="text-xl sm:text-2xl font-bold text-gray-300">
+            {/* Dialog Content */}
+            <DialogContent
+              className="
+              !w-[95vw] !max-w-7xl max-h-[95vh] overflow-y-auto
+              bg-gray-950/95 backdrop-blur-xl border border-gray-800
+              rounded-2xl p-0
+            "
+            >
+              <DialogHeader className="px-8 pt-8 pb-6 border-b border-gray-800">
+                <DialogTitle className="text-2xl md:text-3xl font-bold text-center text-gray-100">
                   {cardData.name} - Epiphanies
                 </DialogTitle>
               </DialogHeader>
-              {/* Epiphanies Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 p-4 sm:p-6">
-                {cardData.epiphanies!.map((epiphany) => (
-                  <div key={epiphany.id} className="flex flex-col gap-3">
-                    <TierTag tier={epiphany.tier} />
-                    <div
-                      className="
-                      group
-                      relative
-                      overflow-hidden
-                      rounded-xl
-                      transition-all duration-500
-                      "
-                      onMouseMove={(e) => {
-                        const rect = e.currentTarget.getBoundingClientRect();
-                        const x = e.clientX - rect.left;
-                        const y = e.clientY - rect.top;
-                        e.currentTarget.style.setProperty(
-                          "--mouse-x",
-                          `${x}px`
-                        );
-                        e.currentTarget.style.setProperty(
-                          "--mouse-y",
-                          `${y}px`
-                        );
-                      }}
-                    >
-                      <CardRender
-                        card={{
-                          ...epiphany,
-                          name: cardData.name,
-                          image: cardData.image,
-                          rarity: cardData.rarity,
+
+              <div className="px-8 py-8 space-y-10">
+                {/* Epiphanies Grid */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                  {cardData.epiphanies!.map((epiphany) => (
+                    <div key={epiphany.id} className="flex flex-col gap-3">
+                      <TierTag tier={epiphany.tier} />
+                      <div
+                        className="
+                          group relative overflow-hidden rounded-xl
+                          transition-all duration-300
+                        "
+                        onMouseMove={(e) => {
+                          if (window.matchMedia("(hover: hover)").matches) {
+                            const rect =
+                              e.currentTarget.getBoundingClientRect();
+                            const x = e.clientX - rect.left;
+                            const y = e.clientY - rect.top;
+                            e.currentTarget.style.setProperty(
+                              "--mouse-x",
+                              `${x}px`
+                            );
+                            e.currentTarget.style.setProperty(
+                              "--mouse-y",
+                              `${y}px`
+                            );
+                          }
                         }}
-                        attribute={attribute}
-                        isEpiphany="spark"
-                        size="small"
-                      />
-                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-700">
-                        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-white/12 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-1000" />
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1200 delay-75" />
-                        <div
-                          className="absolute inset-0 mix-blend-screen"
-                          style={{
-                            background:
-                              "radial-gradient(200px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.35) 0%, transparent 50%)",
+                      >
+                        <CardRender
+                          card={{
+                            ...epiphany,
+                            name: cardData.name,
+                            image: cardData.image,
+                            rarity: cardData.rarity,
                           }}
+                          attribute={attribute}
+                          isEpiphany="spark"
+                          size="small"
                         />
-                        <div
-                          className="absolute inset-0 mix-blend-screen opacity-90"
-                          style={{
-                            background:
-                              "conic-gradient(from 0deg at var(--mouse-x, 50%) var(--mouse-y, 50%), #ff00de40, #00ffff40, #a8ff0040, #ffff0040, #00ff8840, #ff006640, #ff00de40)",
-                            maskImage:
-                              "radial-gradient(300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), black 20%, transparent 70%)",
-                            WebkitMaskImage:
-                              "radial-gradient(300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), black 20%, transparent 70%)",
-                          }}
-                        />
+                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-500">
+                          <div className="absolute inset-0 bg-gradient-to-t from-purple-600/20 via-transparent to-cyan-500/20" />
+                          <div
+                            className="absolute inset-0 mix-blend-screen"
+                            style={{
+                              background:
+                                "radial-gradient(300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(168, 85, 247, 0.3) 0%, transparent 60%)",
+                            }}
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
 
-              {/* Epiphany Explanations */}
-              <div className="mt-2 space-y-4 px-4 sm:px-6 pb-4 sm:pb-6">
-                <h3 className="text-lg font-bold text-gray-300">
-                  Epiphanies Tier Explanation
-                </h3>
-                {cardData.epiphanies!.map((epiphany) => (
-                  <div
-                    key={epiphany.id}
-                    className="p-4 rounded-lg bg-slate-800/40 border border-slate-700/50"
-                  >
-                    <div className="flex items-center gap-3 mb-2">
-                      <TierTag tier={epiphany.tier} />
-                      <span className="font-semibold text-foreground">
-                        {epiphany.id}
-                      </span>
-                    </div>
-                    <p className="text-sm text-gray-300 leading-relaxed">
-                      {epiphany.reasoning || "No reasoning provided yet."}
-                    </p>
+                {/* Tier Explanations */}
+                <div className="space-y-6">
+                  <h3 className="text-xl font-bold text-gray-100">
+                    Epiphanies Tier Explanation
+                  </h3>
+                  <div className="space-y-4">
+                    {cardData.epiphanies!.map((epiphany) => (
+                      <div
+                        key={epiphany.id}
+                        className="p-5 rounded-xl bg-gray-900/50 border border-gray-800 text-gray-300"
+                      >
+                        <div className="flex items-center gap-3 mb-3">
+                          <TierTag tier={epiphany.tier} />
+                          <span className="font-semibold text-gray-100">
+                            {epiphany.id}
+                          </span>
+                        </div>
+                        <p className="text-sm leading-relaxed">
+                          {epiphany.reasoning || "No reasoning provided yet."}
+                        </p>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </div>
 
-              {/* Divine Epiphanies */}
-              {cardData.divineEpiphanies &&
-                cardData.divineEpiphanies.length > 0 && (
-                  <div className="mt-6 space-y-4 px-4 sm:px-6 pb-6 sm:pb-12">
-                    <h3 className="text-lg font-bold text-gray-300">
-                      Divine Epiphanies
-                    </h3>
-                    <p className="text-sm text-gray-400 mb-4">
-                      Good Divine Epiphanies that this card can roll
-                    </p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
-                      {cardData.divineEpiphanies.map((divine) => (
-                        <div
-                          key={divine.name || divine.icon}
-                          className="p-4 bg-gradient-to-br from-gray-900/30 to-gray-800/20 border border-gray-500/40 rounded-lg"
-                        >
-                          <div className="flex items-center gap-3 mb-3">
-                            {divine.icon && (
-                              <img
-                                src={divine.icon}
-                                alt={divine.name ?? "Divine Epiphany"}
-                                className="w-16 h-16 object-contain"
-                              />
-                            )}
-                            {divine.name && (
-                              <h4 className="font-semibold text-gray-200 mb-2">
-                                {divine.name}
-                              </h4>
+                {/* Divine Epiphanies */}
+                {cardData.divineEpiphanies &&
+                  cardData.divineEpiphanies.length > 0 && (
+                    <div className="space-y-6">
+                      <div>
+                        <h3 className="text-xl font-bold text-gray-100">
+                          Divine Epiphanies
+                        </h3>
+                        <p className="text-sm text-gray-400 mt-2">
+                          Good Divine Epiphanies that this card can roll
+                        </p>
+                      </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                        {cardData.divineEpiphanies.map((divine) => (
+                          <div
+                            key={divine.name || divine.icon}
+                            className="p-5 rounded-xl bg-gray-900/50 border border-gray-800"
+                          >
+                            <div className="flex items-center gap-4 mb-3">
+                              {divine.icon && (
+                                <img
+                                  src={divine.icon}
+                                  alt={divine.name ?? "Divine Epiphany"}
+                                  className="w-16 h-16 object-contain"
+                                />
+                              )}
+                              {divine.name && (
+                                <h4 className="font-semibold text-gray-200">
+                                  {divine.name}
+                                </h4>
+                              )}
+                            </div>
+                            {divine.reasoning && (
+                              <p className="text-sm text-gray-300/90 leading-relaxed">
+                                {divine.reasoning}
+                              </p>
                             )}
                           </div>
-                          {divine.reasoning && (
-                            <p className="text-sm text-gray-300/80 leading-relaxed">
-                              {divine.reasoning}
-                            </p>
-                          )}
-                          {/* {divine.description && (
-                            <p className="text-xs text-gray-300/80 leading-relaxed">
-                              {divine.description}
-                            </p>
-                          )} */}
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
+              </div>
             </DialogContent>
           </Dialog>
         ))}

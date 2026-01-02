@@ -88,7 +88,7 @@ const characters = [
     job: "psionic",
     element: "void",
     rarity: 5,
-    hasGuide: true,
+    hasGuide: false,
   },
   {
     id: "haru",

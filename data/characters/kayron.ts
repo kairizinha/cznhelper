@@ -107,7 +107,7 @@ const uniqueCards: UniqueCard[] = [
         description: "",
       },
       {
-        name: "Increase this card’s Damage by 30%",
+        name: "Increase Damage by 30%",
         reasoning: "",
         icon: "/images/card/icon_card_battle_expand_diallos.png",
         description: "",
@@ -178,7 +178,7 @@ const uniqueCards: UniqueCard[] = [
         description: "",
       },
       {
-        name: "Increase this card’s Damage by 30%",
+        name: "Increase Damage by 30%",
         reasoning: "",
         icon: "/images/card/icon_card_battle_expand_secred.png",
         description: "",
@@ -242,7 +242,7 @@ const uniqueCards: UniqueCard[] = [
     ],
     divineEpiphanies: [
       {
-        name: "Increase this card’s Damage by 30%",
+        name: "Increase Damage by 30%",
         reasoning: "",
         icon: "/images/card/icon_card_battle_expand_vitor.png",
         description: "",
@@ -355,10 +355,10 @@ const uniqueCards: UniqueCard[] = [
 const recommendedSaveData: SaveData[] = [
   {
     id: "deck-1",
-    name: "Extended Fight",
-    description: `Oath of Vanity II (Initiation) if you don't have Bria or Manifest Ego 3
-    Brand of Annihilation I or II can also be used.`,
-    faintMemoryNote: "140 Faint Memory Cost without Convert Method(s)",
+    name: "Standard",
+    shortDescription: "Balanced build for most encounters",
+    description: ``,
+    faintMemoryNote: "140 Faint Memory Cost",
     cards: [
       "Echo of Futility V",
       "Echo of Futility V",
@@ -372,9 +372,10 @@ const recommendedSaveData: SaveData[] = [
   },
   {
     id: "deck-2",
-    name: "Burst Build",
+    name: "Burst",
+    shortDescription: "High burst damage",
     description: ``,
-    faintMemoryNote: "140 Faint Memory Cost without Convert Method(s)",
+    faintMemoryNote: "140 Faint Memory Cost",
     cards: [
       "Echo of Futility I",
       "Brand of Annihilation III",
@@ -388,9 +389,10 @@ const recommendedSaveData: SaveData[] = [
   },
   {
     id: "deck-3",
-    name: "Kayron OTK",
-    description: `Niche Build`,
-    faintMemoryNote: "140 Faint Memory Cost without Convert Method(s)",
+    name: "One Turn Kill",
+    shortDescription: "Niche OTK Build",
+    description: ``,
+    faintMemoryNote: "140 Faint Memory Cost",
     cards: [
       "Echo of Futility I",
       "Brand of Annihilation IV",
@@ -440,7 +442,7 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
     },
     {
       id: "executioners-tool",
-      description: "",
+      description: "Standard Critical Damage build with high crit scaling.",
     },
   ],
   alternative: [
@@ -450,12 +452,12 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
     },
     {
       id: "executioners-tool",
-      description: "Standard Critical Damage set for crit-focused builds.",
+      description: "Standard Critical Damage build with high crit scaling.",
     },
     {
       id: "cursed-corpse",
       description:
-        "Alternative to 4/2 that can outperform with consistent Agony uptime.",
+        "Alternative that can outperform with consistent Agony uptime.",
     },
   ],
 };

@@ -1251,14 +1251,13 @@ export function RunTracker() {
 
         {isSelected && !card.isRemoved && !card.isMutantSample && (
           <div className="absolute inset-0 flex flex-col justify-center gap-1 p-2 z-30 bg-black/60 rounded-md">
-            {/* Card Actions Modal */}
             <Dialog
               open={!!selectedCard}
               onOpenChange={(open) => !open && setSelectedCard(null)}
             >
-              <DialogContent className="sm:max-w-xs">
+              <DialogContent className="sm:max-w-xs bg-card/95 backdrop-blur-md border border-border/60">
                 <DialogHeader>
-                  <DialogTitle className="text-xl text-center">
+                  <DialogTitle className="text-xl text-center font-semibold text-foreground">
                     {selectedCard &&
                       deck.find((c) => c.id === selectedCard)?.name}
                   </DialogTitle>
@@ -1275,80 +1274,128 @@ export function RunTracker() {
                       (cardPosition <= 3 || cardPosition === 8);
 
                     const isForbidden = card.cardType === "forbidden";
-                    if (isForbidden) {
-                      return (
-                        <div className="grid gap-3 py-4">
-                          <Button
-                            variant="outline"
-                            onClick={() => duplicateCard(card.id)}
-                          >
-                            Duplicate Card
-                          </Button>
-                        </div>
-                      );
-                    }
 
                     return (
                       <div className="grid gap-3 py-4">
-                        {!isProtectedBaseCard && (
-                          <>
-                            <Button
-                              variant={
-                                card.hasNormalEpiphany ? "destructive" : "ghost"
-                              }
-                              disabled={card.hasDivineEpiphany}
-                              onClick={() => toggleEpiphany(card.id, "normal")}
-                            >
-                              {card.hasNormalEpiphany
-                                ? "Remove Epiphany"
-                                : "Add Epiphany"}
-                            </Button>
-
-                            <Button
-                              variant={
-                                card.hasDivineEpiphany ? "destructive" : "ghost"
-                              }
-                              disabled={card.hasNormalEpiphany}
-                              onClick={() => toggleEpiphany(card.id, "divine")}
-                            >
-                              {card.hasDivineEpiphany
-                                ? "Remove Divine Epiphany"
-                                : "Add Divine Epiphany"}
-                            </Button>
-                          </>
+                        {/* Forbidden Card Special Case */}
+                        {isForbidden && (
+                          <Button
+                            variant="outline"
+                            onClick={() => duplicateCard(card.id)}
+                            className="w-full justify-center gap-2 bg-card/80 border-border/50 hover:bg-purple-500/10 hover:border-purple-500/50 hover:translate-y-[-2px] transition-all"
+                          >
+                            <span className="text-sm font-medium">
+                              Duplicate Card
+                            </span>
+                          </Button>
                         )}
 
-                        <Button
-                          variant="outline"
-                          onClick={() => duplicateCard(card.id)}
-                        >
-                          Duplicate Card
-                        </Button>
+                        {/* Regular Card Actions */}
+                        {!isForbidden && (
+                          <>
+                            {/* Epiphany Buttons - Only if not protected base card */}
+                            {!isProtectedBaseCard && (
+                              <div className="grid grid-cols-2 gap-3">
+                                <Button
+                                  variant={
+                                    card.hasNormalEpiphany
+                                      ? "destructive"
+                                      : "outline"
+                                  }
+                                  disabled={card.hasDivineEpiphany}
+                                  onClick={() =>
+                                    toggleEpiphany(card.id, "normal")
+                                  }
+                                  className={`
+                            w-full justify-center transition-all
+                            ${
+                              card.hasNormalEpiphany
+                                ? "bg-red-500/20 border-red-500/50 text-white hover:bg-red-500/30"
+                                : "bg-card/80 border-border/50 hover:bg-purple-500/10 hover:border-purple-500/50 hover:translate-y-[-2px]"
+                            }
+                          `}
+                                >
+                                  <span className="text-sm font-medium">
+                                    {card.hasNormalEpiphany ? "Remove" : "Add"}{" "}
+                                    Epiphany
+                                  </span>
+                                </Button>
 
-                        <Button
-                          variant="outline"
-                          disabled={card.wasConverted}
-                          onClick={() => convertCard(card.id)}
-                        >
-                          Convert to Neutral
-                        </Button>
+                                <Button
+                                  variant={
+                                    card.hasDivineEpiphany
+                                      ? "destructive"
+                                      : "outline"
+                                  }
+                                  disabled={card.hasNormalEpiphany}
+                                  onClick={() =>
+                                    toggleEpiphany(card.id, "divine")
+                                  }
+                                  className={`
+                            w-full justify-center transition-all
+                            ${
+                              card.hasDivineEpiphany
+                                ? "bg-red-500/20 border-red-500/50 text-white hover:bg-red-500/30"
+                                : "bg-card/80 border-border/50 hover:bg-purple-500/10 hover:border-purple-500/50 hover:translate-y-[-2px]"
+                            }
+                          `}
+                                >
+                                  <span className="text-sm font-medium">
+                                    {card.hasDivineEpiphany ? "Remove" : "Add"}{" "}
+                                    Divine
+                                  </span>
+                                </Button>
+                              </div>
+                            )}
 
-                        <Button
-                          variant="outline"
-                          onClick={() => convertToMutantSample(card.id)}
-                        >
-                          To Mutant Sample
-                        </Button>
+                            {/* Standard Actions */}
+                            <div className="grid gap-3">
+                              <Button
+                                variant="outline"
+                                onClick={() => duplicateCard(card.id)}
+                                className="w-full justify-center gap-2 bg-card/80 border-border/50 hover:bg-purple-500/10 hover:border-purple-500/50 hover:translate-y-[-2px] transition-all"
+                              >
+                                <span className="text-sm font-medium">
+                                  Duplicate Card
+                                </span>
+                              </Button>
 
-                        <Button
-                          variant="destructive"
-                          onClick={() => {
-                            removeCard(card.id);
-                            setSelectedCard(null);
-                          }}
-                        >
-                          Remove Card
-                        </Button>
+                              <Button
+                                variant="outline"
+                                disabled={card.wasConverted}
+                                onClick={() => convertCard(card.id)}
+                                className="w-full justify-center gap-2 bg-card/80 border-border/50 disabled:opacity-50 hover:bg-purple-500/10 hover:border-purple-500/50 hover:translate-y-[-2px] transition-all disabled:hover:translate-y-0"
+                              >
+                                <span className="text-sm font-medium">
+                                  Convert to Neutral
+                                </span>
+                              </Button>
+
+                              <Button
+                                variant="outline"
+                                onClick={() => convertToMutantSample(card.id)}
+                                className="w-full justify-center gap-2 bg-card/80 border-border/50 hover:bg-purple-500/10 hover:border-purple-500/50 hover:translate-y-[-2px] transition-all"
+                              >
+                                <span className="text-sm font-medium">
+                                  To Mutant Sample
+                                </span>
+                              </Button>
+
+                              <Button
+                                variant="destructive"
+                                onClick={() => {
+                                  removeCard(card.id);
+                                  setSelectedCard(null);
+                                }}
+                                className="w-full justify-center bg-red-500/20 border-red-500/50 text-white hover:bg-red-500/30 hover:border-red-500/60 hover:translate-y-[-2px] transition-all"
+                              >
+                                <span className="text-sm font-medium">
+                                  Remove Card
+                                </span>
+                              </Button>
+                            </div>
+                          </>
+                        )}
                       </div>
                     );
                   })()}

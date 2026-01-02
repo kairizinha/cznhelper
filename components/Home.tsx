@@ -76,9 +76,9 @@ export function HomePage() {
                   <p className="text-sm text-muted-foreground/70 leading-relaxed">
                     Calculate damage, synergies, and optimal team compositions
                   </p>
-                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-yellow-500/5 border border-yellow-500/20">
-                    <AlertTriangle className="w-4 h-4 text-yellow-400/60" />
-                    <span className="text-xs text-yellow-300/80">
+                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/5 border border-red-500/20">
+                    <AlertTriangle className="w-4 h-4 text-red-400/60" />
+                    <span className="text-xs text-red-300/80">
                       Work in Progress
                     </span>
                   </div>

@@ -23,78 +23,112 @@ export const PartnersSection = ({ partnersGuide }: Props) => {
   );
 
   return (
-    <section
-      id="partners"
-      className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-24"
-    >
-      <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 text-purple-400 text-center">
-        4. Partners
-      </h2>
+    <section className="space-y-10 py-8">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="text-center px-4">
+          <p className="text-lg text-gray-300 leading-relaxed">
+            Click on any partner below to view detailed synergy information.
+          </p>
+        </div>
 
-      <p className="text-muted-foreground mb-6 text-xs sm:text-sm md:text-base text-center px-4">
-        Click on any partner below to view detailed information.
-      </p>
+        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6 mt-14">
+          {partnersGuide.map((partner) => {
+            const partnerData = partnersMap[partner.id];
+            if (!partnerData) return null;
 
-      <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
-        {partnersGuide.map((partner) => {
-          const partnerData = partnersMap[partner.id];
-
-          if (!partnerData) return null;
-
-          return (
-            <div key={partner.id} className="flex flex-col items-center gap-3">
-              <TierTag tier={partner.tier} />
-
-              <Dialog
-                open={selectedPartner === partner.id}
-                onOpenChange={(open) =>
-                  setSelectedPartner(open ? partner.id : null)
-                }
+            return (
+              <div
+                key={partner.id}
+                className="flex flex-col items-center gap-4"
               >
-                <DialogTrigger asChild>
-                  <div className="relative aspect-[9/16] w-full max-w-[180px] rounded-lg overflow-hidden border-2 border-border bg-card cursor-pointer transition-all duration-300 hover:border-purple-400 hover:scale-105 hover:shadow-lg hover:shadow-purple-400/20">
-                    <img
-                      src={partnerData.image}
-                      alt={partnerData.name}
-                      className="object-cover w-full h-full"
-                    />
-                    <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-3 pt-8">
-                      <p className="text-sm sm:text-base font-semibold text-white text-center">
-                        {partnerData.name}
-                      </p>
-                    </div>
-                  </div>
-                </DialogTrigger>
+                <TierTag tier={partner.tier} />
 
-                <DialogContent className="max-w-xl sm:max-w-2xl w-[95vw] max-h-[85vh] overflow-y-auto bg-gray-900/95 border border-gray-800 p-4 sm:p-6 rounded-xl">
-                  <DialogHeader className="text-center pb-4">
-                    <DialogTitle className="text-xl sm:text-2xl font-bold text-purple-300">
-                      {partnerData.name}
-                    </DialogTitle>
-                  </DialogHeader>
+                <Dialog
+                  open={selectedPartner === partner.id}
+                  onOpenChange={(open) =>
+                    setSelectedPartner(open ? partner.id : null)
+                  }
+                >
+                  <DialogTrigger asChild>
+                    <div
+                      className="
+                      relative overflow-hidden rounded-2xl
+                      bg-gradient-to-br from-gray-900/50 to-gray-950/70
+                      border border-gray-800 backdrop-blur-sm
+                      cursor-pointer transition-all duration-300 ease-out
+                      hover:border-gray-700 hover:shadow-2xl hover:shadow-purple-900/30
+                      w-full aspect-[4/7] min-w-0
+                      max-w-lg mx-auto
+                    "
+                    >
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                        <div className="absolute inset-0 bg-gradient-to-br from-purple-600/15 via-transparent to-cyan-600/15" />
+                      </div>
 
-                  <div className="space-y-5">
-                    <div className="flex justify-center">
                       <img
                         src={partnerData.image}
                         alt={partnerData.name}
-                        className="w-40 sm:w-48 rounded-lg border-4 border-purple-500/50 shadow-2xl"
+                        className="w-full h-full object-cover hover:scale-105 duration-400"
                       />
-                    </div>
 
-                    <TierTag tier={partner.tier} />
+                      <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
+                        <p className="text-lg font-bold text-gray-100 text-center tracking-tight">
+                          {partnerData.name}
+                        </p>
+                      </div>
 
-                    <div className="bg-gray-800/50 rounded-lg p-4 sm:p-6 border border-gray-700/60">
-                      <p className="text-sm sm:text-base text-muted-foreground leading-relaxed text-center whitespace-pre-line">
-                        {partner.description}
-                      </p>
+                      <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                      </div>
                     </div>
-                  </div>
-                </DialogContent>
-              </Dialog>
-            </div>
-          );
-        })}
+                  </DialogTrigger>
+
+                  <DialogContent
+                    className="
+                    max-w-2xl w-[95vw] max-h-[90vh] overflow-y-auto
+                    bg-gray-950/95 backdrop-blur-xl
+                    border border-gray-800 rounded-2xl p-0
+                  "
+                  >
+                    <DialogHeader className="px-8 pt-8 pb-6 border-b border-gray-800 text-center">
+                      <DialogTitle className="text-3xl font-bold text-gray-100">
+                        {partnerData.name}
+                      </DialogTitle>
+                    </DialogHeader>
+
+                    <div className="px-8 py-8 space-y-8">
+                      <div className="flex justify-center">
+                        <div className="relative rounded-2xl overflow-hidden border border-purple-700/40 shadow-2xl">
+                          <img
+                            src={partnerData.image}
+                            alt={partnerData.name}
+                            className="w-full max-w-md object-cover"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="flex justify-center">
+                        <TierTag tier={partner.tier} />
+                      </div>
+
+                      <div
+                        className="
+                          rounded-2xl bg-gradient-to-br from-gray-900/50 to-gray-950/70
+                          border border-gray-800 backdrop-blur-sm
+                          p-6 text-center
+                        "
+                      >
+                        <p className="text-gray-300 text-base leading-relaxed whitespace-pre-line">
+                          {partner.description}
+                        </p>
+                      </div>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

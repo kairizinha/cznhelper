@@ -1,5 +1,4 @@
 // src/components/GearItem.tsx
-import React from "react";
 import { GearTooltip } from "@/components/GearTooltip";
 
 type Rarity = "rare" | "legend" | "unique";
@@ -15,16 +14,16 @@ interface GearItemProps {
   effect: string;
 }
 
-const rarityColors: Record<Rarity, string> = {
-  rare: "rgb(51, 160, 243)",
-  unique: "rgb(163, 96, 255)",
-  legend: "rgb(255, 150, 0)",
-};
-
 const rarityBg: Record<Rarity, string> = {
   rare: "/images/bg_equipment_rarity_rare.webp",
   legend: "/images/bg_equipment_rarity_legend.webp",
   unique: "/images/bg_equipment_rarity_unique.webp",
+};
+
+const rarityNameColor: Record<Rarity, string> = {
+  rare: "#60A5FA",
+  legend: "#FBBF24",
+  unique: "#C084FC",
 };
 
 export function GearItem({
@@ -37,65 +36,85 @@ export function GearItem({
   imageName,
   effect,
 }: GearItemProps) {
-  const coloredEffect = effect.replace(
-    /(\d+%?)/g,
-    '<span class="text-[#FF8C00]">$1</span>'
+  const bgSrc = rarityBg[rarity] || rarityBg.legend;
+  const nameColor = rarityNameColor[rarity] || rarityNameColor.legend;
+  const highlightedEffect = effect.split(/(\d+%?)/g).map((part, i) =>
+    /\d+%?/.test(part) ? (
+      <span key={i} className="text-orange-400 font-bold">
+        {part}
+      </span>
+    ) : (
+      part
+    )
   );
 
-  const bgSrc = rarityBg[rarity] || rarityBg.legend;
-  const nameColor = rarityColors[rarity] || rarityColors.legend;
+  const mainStat = atk || def || health;
+  const statLabel = atk ? "ATK" : def ? "DEF" : "HP";
 
   return (
-    <div className="relative flex items-start gap-6 p-6 rounded-xl bg-gray-800/40 border border-gray-700/60 hover:border-gray-400/100 transition-all duration-200 min-h-[240px] w-full">
-      <div className="relative w-36 h-48 flex-shrink-0">
-        <img
-          src={bgSrc}
-          alt={`${rarity} Rarity`}
-          className="w-full h-full object-contain"
-        />
-        <div className="absolute inset-0 flex items-center justify-center">
+    <div
+      className="
+        relative overflow-hidden rounded-2xl border border-gray-800
+        bg-gradient-to-br from-gray-900/50 to-gray-950/70
+        p-6 backdrop-blur-sm
+        transition-all duration-300 ease-out
+        hover:border-gray-700 hover:shadow-2xl hover:shadow-purple-900/20
+        hover:-translate-y-1 group
+        min-h-[400px]
+      "
+    >
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 via-transparent to-cyan-600/10" />
+      </div>
+
+      <div className="relative flex flex-col items-center text-center space-y-4">
+        <div className="relative w-36 h-36">
           <img
-            src={`/images/gear/${imageName}.webp`}
-            alt={name}
-            className="w-20 h-20 object-contain relative z-10 drop-shadow-2xl"
+            src={bgSrc}
+            alt={`${rarity} frame`}
+            className="absolute inset-0 w-full h-full object-contain drop-shadow-2xl"
           />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <img
+              src={`/images/gear/${imageName}.webp`}
+              alt={name}
+              className="w-22 h-22 object-contain drop-shadow-2xl z-10"
+            />
+          </div>
         </div>
-      </div>
 
-      <div className="absolute top-3 right-3">
-        <GearTooltip sources={source} />
-      </div>
-      <div className="relative flex-1 min-w-0 flex flex-col">
-        <h4 className="text-lg font-bold mb-2" style={{ color: nameColor }}>
+        {/* Tooltip (top-right) */}
+        <div className="absolute top-4 right-4">
+          <GearTooltip sources={source} />
+        </div>
+
+        {/* Name */}
+        <h3
+          className="text-xl font-bold tracking-tight px-4"
+          style={{ color: nameColor }}
+        >
           {name}
-        </h4>
+        </h3>
 
-        {(atk || def || health) && (
-          <div className="flex items-center gap-2 mb-3">
-            <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-lg bg-black/30 text-gray-200">
-              <span className="text-sm font-medium">
-                {atk ? "ATK" : def ? "DEF" : "Health"}
-              </span>
-              <span className="text-foreground font-bold text-sm">
-                {atk || def || health}
-              </span>
-            </div>
+        {/* Main Stat Badge */}
+        {mainStat && (
+          <div className="inline-flex items-center gap-4 px-6 py-2.5 rounded-xl bg-gray-930/90 border border-gray-700">
+            <span className="text-sm font-semibold uppercase tracking-wider text-gray-400">
+              {statLabel}
+            </span>
+            <span className="text-sm font-bold text-gray-100">{mainStat}</span>
           </div>
         )}
 
-        <div className="flex-1 min-h-[80px]">
-          <p className="text-sm text-gray-300 leading-relaxed break-words whitespace-pre-line">
-            {effect.split(/(\d+%?)/g).map((part, i) =>
-              /\d+%?/.test(part) ? (
-                <span key={i} className="text-[#FF8C00]">
-                  {part}
-                </span>
-              ) : (
-                part
-              )
-            )}
-          </p>
-        </div>
+        {/* Effect Text */}
+        <p className="text-sm text-gray-300 leading-relaxed px-6">
+          {highlightedEffect}
+        </p>
+      </div>
+
+      {/* Shine sweep on hover */}
+      <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ import { EquipmentSection } from "@/containers/character-guides/equipments";
 import { MemoryFragmentsSection } from "@/containers/character-guides/memory-fragments";
 import { PartnersSection } from "@/containers/character-guides/partners";
 import { RecommendedSaveData } from "@/containers/character-guides/recommended-save-data";
+import { ATTRIBUTE_COLORS } from "@/lib/attribute-colors";
 
 import type { CharacterData } from "@/types/character-guides";
 
@@ -93,26 +94,44 @@ export default function CharacterGuidePage() {
     loading,
     error,
   } = useCharacterLoader(characterSlug);
+
+  const colors = useMemo(() => {
+    if (!characterData?.attribute)
+      return {
+        gradientFrom: "from-gray-400",
+        gradientTo: "to-gray-600",
+        accent: "purple-500",
+        accentLight: "purple-400",
+      };
+    const attr = ATTRIBUTE_COLORS[characterData.attribute];
+    return {
+      gradientFrom: attr.gradientFrom,
+      gradientTo: attr.gradientTo,
+      accent: attr.accent || "purple-500",
+      accentLight: attr.accentLight || "purple-400",
+    };
+  }, [characterData?.attribute]);
+
   const [activeSection, setActiveSection] = useState("overview");
 
   const characterName = useMemo(
     () => formatCharacterName(characterSlug),
     [characterSlug]
   );
-
   const attribute = characterData?.attribute;
   const characterClass = characterData?.job;
   const role = characterData?.role;
 
   if (loading)
     return (
-      <div className="flex items-center justify-center min-h-screen text-gray-400 px-4">
+      <div className="flex items-center justify-center min-h-screen text-gray-400">
         Loading {characterName}...
       </div>
     );
+
   if (error || !characterData)
     return (
-      <div className="flex items-center justify-center min-h-screen text-gray-400 px-4">
+      <div className="flex items-center justify-center min-h-screen text-gray-400">
         Character not found.
       </div>
     );
@@ -130,52 +149,59 @@ export default function CharacterGuidePage() {
     switch (activeSection) {
       case "overview":
         return (
-          <div className="space-y-4 sm:space-y-6">
-            {/* Character Header */}
-            <div className="bg-gradient-to-br from-sky-500/10 via-purple-500/10 to-pink-500/10 rounded-lg p-4 sm:p-6 border border-sky-400/30">
-              <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
-                {/* Avatar */}
-                <div className="flex-shrink-0 mx-auto sm:mx-0">
-                  <div className="w-20 h-20 sm:w-28 sm:h-28 rounded-lg bg-gradient-to-br from-sky-400/20 to-purple-500/20 border border-sky-300/40 flex items-center justify-center">
-                    <span className="text-3xl sm:text-4xl font-bold text-sky-300/60">
-                      {characterName.charAt(0)}
-                    </span>
+          <div className="space-y-8">
+            {/* Character Header Card */}
+            <div className="relative overflow-hidden rounded-2xl border border-gray-800 bg-gradient-to-br from-gray-900/50 to-gray-950/70 p-6 md:p-8 backdrop-blur-sm">
+              <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
+                {/* Portrait */}
+                <div className="flex-shrink-0">
+                  <div className="w-24 h-24 rounded-2xl overflow-hidden border-2 border-gray-700 shadow-2xl">
+                    <img
+                      src={`/images/characters/${characterSlug}portrait.webp`}
+                      alt={`${characterName} portrait`}
+                      className="w-full h-full object-contain"
+                    />
                   </div>
                 </div>
 
                 {/* Info */}
-                <div className="flex-1 w-full text-center sm:text-left">
-                  <h3 className="text-2xl sm:text-3xl font-bold">
+                <div className="flex-1 text-center md:text-left space-y-4">
+                  <h1 className="text-3xl md:text-4xl font-bold text-gray-100">
                     {characterName.toUpperCase()}
-                  </h3>
-                  <div className="flex gap-0.5 mt-2 justify-center sm:justify-start">
+                  </h1>
+
+                  <div className="flex justify-center md:justify-start gap-1">
                     {[...Array(5)].map((_, i) => (
                       <Star
                         key={i}
-                        className="w-4 h-4 sm:w-5 sm:h-5 fill-sky-300 text-sky-300"
+                        className="w-6 h-6 fill-yellow-400 text-yellow-400"
                       />
                     ))}
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6 text-sm mt-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-sm">
                     <div>
-                      <div className="text-gray-400 mb-1">Attribute Type</div>
-                      <div className="text-sky-300 font-medium">
+                      <div className="text-gray-500 mb-1">Attribute</div>
+                      <div
+                        className={`font-semibold text-${colors.accentLight}`}
+                      >
                         {attribute
                           ? attribute.charAt(0).toUpperCase() +
-                            attribute.slice(1).toLowerCase()
-                          : "None"}
+                            attribute.slice(1)
+                          : "Unknown"}
                       </div>
                     </div>
                     <div>
-                      <div className="text-gray-400 mb-1">Class</div>
-                      <div className="text-gray-200">
-                        {characterClass ?? "None"}
+                      <div className="text-gray-500 mb-1">Class</div>
+                      <div className="text-gray-200 font-medium">
+                        {characterClass || "—"}
                       </div>
                     </div>
                     <div>
-                      <div className="text-gray-400 mb-1">Role</div>
-                      <div className="text-gray-200">{role ?? "None"}</div>
+                      <div className="text-gray-500 mb-1">Role</div>
+                      <div className="text-gray-200 font-medium">
+                        {role || "—"}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -183,28 +209,29 @@ export default function CharacterGuidePage() {
             </div>
 
             {/* Overview Text */}
-            <div className="bg-slate-800/40 rounded-lg p-4 sm:p-6 border border-slate-700/50">
-              <h4 className="text-base sm:text-lg mb-3 text-sky-300">
+            <div className="rounded-2xl bg-gray-900/50 border border-gray-800 p-6 md:p-8">
+              <h3
+                className={`text-xl font-bold mb-4 text-${colors.accentLight}`}
+              >
                 Overview
-              </h4>
-              <p className="text-gray-400 leading-relaxed text-sm whitespace-pre-line">
-                {characterData?.overview || "Detailed guide coming soon..."}
+              </h3>
+              <p className="text-gray-300 leading-relaxed whitespace-pre-line">
+                {characterData.overview || "Detailed guide coming soon..."}
               </p>
             </div>
 
             {/* Strengths & Weaknesses */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Strengths */}
-              <div className="bg-slate-800/40 rounded-lg p-4 sm:p-5 border border-slate-700/50">
-                <h5 className="flex items-center gap-2 mb-3 sm:mb-4 text-emerald-400 text-base sm:text-lg">
-                  <Zap className="w-4 h-4 sm:w-5 sm:h-5" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="rounded-2xl bg-gray-900/50 border border-gray-800 p-6 md:p-8">
+                <h4 className="flex items-center gap-3 text-xl font-bold text-emerald-400 mb-5">
+                  <Zap className="w-6 h-6" />
                   Strengths
-                </h5>
-                <ul className="space-y-2 sm:space-y-2.5 text-sm text-gray-400">
-                  {(characterData?.strengths || ["TBA", "TBA", "TBA"]).map(
+                </h4>
+                <ul className="space-y-3 text-gray-300">
+                  {(characterData.strengths || ["TBA", "TBA", "TBA"]).map(
                     (s, i) => (
-                      <li key={i} className="flex gap-2">
-                        <span className="text-emerald-400 mt-0.5">•</span>
+                      <li key={i} className="flex gap-3">
+                        <span className="text-emerald-400 mt-1">•</span>
                         <span>{s}</span>
                       </li>
                     )
@@ -212,17 +239,16 @@ export default function CharacterGuidePage() {
                 </ul>
               </div>
 
-              {/* Weaknesses */}
-              <div className="bg-slate-800/40 rounded-lg p-4 sm:p-5 border border-slate-700/50">
-                <h5 className="flex items-center gap-2 mb-3 sm:mb-4 text-rose-400 text-base sm:text-lg">
-                  <Shield className="w-4 h-4 sm:w-5 sm:h-5" />
+              <div className="rounded-2xl bg-gray-900/50 border border-gray-800 p-6 md:p-8">
+                <h4 className="flex items-center gap-3 text-xl font-bold text-rose-400 mb-5">
+                  <Shield className="w-6 h-6" />
                   Weaknesses
-                </h5>
-                <ul className="space-y-2 sm:space-y-2.5 text-sm text-gray-400">
-                  {(characterData?.weaknesses || ["TBA", "TBA", "TBA"]).map(
+                </h4>
+                <ul className="space-y-3 text-gray-300">
+                  {(characterData.weaknesses || ["TBA", "TBA", "TBA"]).map(
                     (w, i) => (
-                      <li key={i} className="flex gap-2">
-                        <span className="text-rose-400 mt-0.5">•</span>
+                      <li key={i} className="flex gap-3">
+                        <span className="text-rose-400 mt-1">•</span>
                         <span>{w}</span>
                       </li>
                     )
@@ -235,105 +261,62 @@ export default function CharacterGuidePage() {
 
       case "card":
         return (
-          <div className="space-y-4 sm:space-y-6">
-            <h3 className="text-xl sm:text-2xl text-sky-300">Card Epiphany</h3>
-            <BaseCard
-              uniqueCards={characterData?.uniqueCards || []}
-              attribute={characterData?.attribute || "None"}
-            />
-          </div>
+          <BaseCard
+            uniqueCards={characterData.uniqueCards || []}
+            attribute={characterData.attribute}
+          />
         );
 
       case "savedata":
         return (
-          <div className="space-y-4 sm:space-y-6">
-            <h3 className="text-xl sm:text-2xl text-sky-300">Save Data</h3>
-            {/* <div className="bg-slate-800/40 rounded-lg p-6 sm:p-8 border border-slate-700/50 text-center">
-              <p className="text-gray-500">Save Data guide coming soon...</p>
-              <p className="text-sm text-gray-600 mt-2">
-                This section will contain detailed information about Recommended
-                Save Data and Equipment for {characterName}.
-              </p>
-            </div> */}
+          <div className="space-y-10">
             <RecommendedSaveData
-              recommendedSaveData={characterData?.recommendedSaveData || []}
-              uniqueCards={characterData?.uniqueCards || []}
-              commonCards={characterData?.commonCards || []}
-              attribute={characterData?.attribute || "None"}
+              recommendedSaveData={characterData.recommendedSaveData || []}
+              uniqueCards={characterData.uniqueCards || []}
+              commonCards={characterData.commonCards || []}
+              attribute={characterData.attribute}
             />
-            {characterData?.gears && (
+            {characterData.gears && (
               <EquipmentSection
-                gears={characterData?.gears}
-                recommendedSources={characterData?.recommendedSources}
+                gears={characterData.gears}
+                recommendedSources={characterData.recommendedSources}
               />
             )}
           </div>
         );
 
       case "memory":
-        return (
-          <div className="space-y-4 sm:space-y-6">
-            <h3 className="text-xl sm:text-2xl text-sky-300">
-              Memory Fragment
-            </h3>
-            <div className="bg-slate-800/40 rounded-lg p-6 sm:p-8 border border-slate-700/50 text-center">
-              <p className="text-gray-500">
-                THIS SECTION NEED DESIGN UPDATE, ILL DO LATER
-              </p>
-              <p className="text-sm text-gray-600 mt-2">
-                This section will contain detailed information about which
-                Memory Fragments to use on {characterName}.
-              </p>
-            </div>
-            {characterData?.memoryFragmentSets && (
-              <MemoryFragmentsSection
-                bestInSlot={characterData.memoryFragmentSets?.bestInSlot}
-                alternative={characterData.memoryFragmentSets?.alternative}
-                memoryFragmentMainStats={characterData.memoryFragmentMainStats}
-                memoryFragmentSubstatsNote={
-                  characterData.memoryFragmentSubstatsNote
-                }
-                memoryFragmentSubstatsPriorities={
-                  characterData.memoryFragmentSubstatPriorities
-                }
-              />
-            )}
+        return characterData?.memoryFragmentSets ? (
+          <MemoryFragmentsSection
+            bestInSlot={characterData.memoryFragmentSets.bestInSlot}
+            alternative={characterData.memoryFragmentSets.alternative}
+            memoryFragmentMainStats={characterData.memoryFragmentMainStats}
+            memoryFragmentSubstatsNote={
+              characterData.memoryFragmentSubstatsNote
+            }
+            memoryFragmentSubstatsPriorities={
+              characterData.memoryFragmentSubstatPriorities
+            }
+          />
+        ) : (
+          <div className="text-center py-12 text-gray-500">
+            Memory Fragment guide coming soon...
           </div>
         );
 
       case "partner":
-        return (
-          <div className="space-y-4 sm:space-y-6">
-            <h3 className="text-xl sm:text-2xl text-sky-300">Partner</h3>
-            <div className="bg-slate-800/40 rounded-lg p-6 sm:p-8 border border-slate-700/50 text-center">
-              <p className="text-gray-500">
-                THIS SECTION NEED DESIGN UPDATE, ILL DO LATER
-              </p>
-              <p className="text-sm text-gray-600 mt-2">
-                This section will contain detailed information about optimal
-                partners for {characterName}.
-              </p>
-            </div>
-            {characterData?.partnersGuide && (
-              <PartnersSection partnersGuide={characterData.partnersGuide} />
-            )}
+        return characterData?.partnersGuide ? (
+          <PartnersSection partnersGuide={characterData.partnersGuide} />
+        ) : (
+          <div className="text-center py-12 text-gray-500">
+            Partner guide coming soon...
           </div>
         );
 
       case "ego":
         return (
-          <div className="space-y-4 sm:space-y-6">
-            <h3 className="text-xl sm:text-2xl text-sky-300">Manifest Ego</h3>
-            <div className="bg-slate-800/40 rounded-lg p-6 sm:p-8 border border-slate-700/50 text-center">
-              <p className="text-gray-500">Manifest Ego guide coming soon...</p>
-              <p className="text-sm text-gray-600 mt-2">
-                This section will contain detailed information about Manifest
-                Egos for {characterName}.
-              </p>
-            </div>
-            {/* {characterData?.manifestEgoGuide && (
-              <ManifestEgoSection manifestEgoGuide={characterData.manifestEgoGuide} />
-            )} */}
+          <div className="text-center py-12 text-gray-500">
+            Manifest Ego guide coming soon...
           </div>
         );
 
@@ -343,61 +326,62 @@ export default function CharacterGuidePage() {
   };
 
   return (
-    <div className="min-h-screen bg-transparent text-gray-100 -mt-20">
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-6 sm:py-8">
+    <div className="min-h-screen bg-transparent text-gray-100 -mt-25">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Breadcrumb */}
-        <div className="mb-4 sm:mb-6 flex items-center gap-2 text-xs sm:text-sm text-gray-500">
-          <a href="/guides" className="hover:text-sky-300 transition-colors">
+        <div className="mb-6 text-sm text-gray-500">
+          <a href="/guides" className="hover:text-gray-300 transition-colors">
             Guides
           </a>
-          <span>/</span>
-          <span className="text-gray-400 truncate">{characterName}</span>
+          <span className="mx-2">/</span>
+          <span className="text-gray-400">{characterName}</span>
         </div>
 
-        {/* Title */}
-        <h2 className="text-2xl sm:text-3xl md:text-4xl mb-6 sm:mb-8 bg-gradient-to-r from-sky-200 via-purple-200 to-pink-200 bg-clip-text text-transparent font-bold">
+        {/* Page Title */}
+        <h1
+          className={`text-4xl md:text-5xl font-bold mb-10 bg-gradient-to-r ${colors.gradientFrom} via-white ${colors.gradientTo} bg-clip-text text-transparent`}
+        >
           {characterName.toUpperCase()}
-        </h2>
+        </h1>
 
-        {/* Tabs - Dropdown on mobile, tabs on desktop */}
-        <div className="mb-4 sm:mb-6">
+        {/* Tabs */}
+        <div className="mb-10">
           {/* Mobile Dropdown */}
-          <div className="md:hidden">
-            <select
-              value={activeSection}
-              onChange={(e) => setActiveSection(e.target.value)}
-              className="w-full bg-slate-800/60 border border-slate-700 rounded-lg px-4 py-3 text-gray-200 font-medium focus:outline-none focus:ring-2 focus:ring-sky-400/50 focus:border-sky-400"
-            >
-              {tabs.map((tab) => (
-                <option key={tab.id} value={tab.id}>
-                  {tab.label}
-                </option>
-              ))}
-            </select>
-          </div>
+          <select
+            value={activeSection}
+            onChange={(e) => setActiveSection(e.target.value)}
+            className="md:hidden w-full bg-gray-900/70 border border-gray-800 rounded-xl px-5 py-4 text-gray-200 font-medium focus:outline-none focus:ring-2 focus:ring-purple-500/50"
+          >
+            {tabs.map((tab) => (
+              <option key={tab.id} value={tab.id}>
+                {tab.label}
+              </option>
+            ))}
+          </select>
 
           {/* Desktop Tabs */}
-          <div className="hidden md:block border-b border-slate-800">
-            <div className="flex gap-1">
-              {tabs.map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveSection(tab.id)}
-                  className={`px-6 py-3 transition-colors whitespace-nowrap border-b-2 font-medium ${
+          <div className="hidden md:flex gap-1 border-b border-gray-800">
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveSection(tab.id)}
+                className={`
+                  px-6 py-4 font-medium transition-all duration-200
+                  ${
                     activeSection === tab.id
-                      ? "border-sky-400 text-sky-300"
-                      : "border-transparent text-gray-400 hover:text-gray-200"
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
+                      ? `text-${colors.accentLight} border-b-2 border-${colors.accent}`
+                      : "text-gray-500 hover:text-gray-300"
+                  }
+                `}
+              >
+                {tab.label}
+              </button>
+            ))}
           </div>
         </div>
 
-        {/* Content */}
-        <div className="mb-6 sm:mb-8">{renderContent()}</div>
+        {/* Main Content */}
+        <div className="animate-in fade-in duration-500">{renderContent()}</div>
       </div>
     </div>
   );

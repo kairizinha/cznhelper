@@ -64,24 +64,28 @@ export const MemoryFragmentsSection = ({
     )?.label ?? "N/A";
 
   return (
-    <section
-      id="memory-fragments"
-      className="rounded-lg border border-border bg-card p-4 sm:p-6 md:p-8 scroll-mt-6"
-    >
-      <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 text-purple-400 text-center">
-        3. Memory Fragments
-      </h2>
-
-      <div className="space-y-8 sm:space-y-12">
+    <section className="space-y-16 py-8">
+      <div className="max-w-7xl mx-auto px-4 space-y-16">
         {/* BEST IN SLOT */}
-        <div>
-          <div className="text-center mb-4 sm:mb-6">
-            <span className="inline-block px-3 py-1.5 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wider bg-amber-500/20 text-amber-400 border border-amber-500/40 shadow-sm">
+        <div className="space-y-8">
+          <div className="text-center">
+            <span
+              className="
+                relative overflow-hidden inline-block px-6 py-3 rounded-2xl
+                bg-gradient-to-br from-amber-600/20 to-amber-800/20
+                border border-amber-700/50 backdrop-blur-sm
+                text-amber-300 font-bold uppercase tracking-wider text-sm
+                shadow-lg shadow-amber-900/30
+              "
+            >
               Best in Slot
+              <div className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 to-transparent" />
+              </div>
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
             {bestInSlotSets.map(({ set, note }) => (
               <ExpandableSetCard
                 key={`${set.id}-best`}
@@ -101,14 +105,25 @@ export const MemoryFragmentsSection = ({
         </div>
 
         {/* ALTERNATIVE */}
-        <div>
-          <div className="text-center mb-4 sm:mb-6">
-            <span className="inline-block px-3 py-1.5 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wider bg-cyan-500/20 text-cyan-400 border border-cyan-500/40">
+        <div className="space-y-8">
+          <div className="text-center">
+            <span
+              className="
+                relative overflow-hidden inline-block px-6 py-3 rounded-2xl
+                bg-gradient-to-br from-cyan-600/20 to-cyan-800/20
+                border border-cyan-700/50 backdrop-blur-sm
+                text-cyan-300 font-bold uppercase tracking-wider text-sm
+                shadow-lg shadow-cyan-900/30
+              "
+            >
               Alternative
+              <div className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-transparent" />
+              </div>
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {alternativeSets.map(({ set, note }) => (
               <ExpandableSetCard
                 key={`${set.id}-alt`}
@@ -126,59 +141,55 @@ export const MemoryFragmentsSection = ({
             ))}
           </div>
         </div>
-      </div>
 
-      {/* Main Stats + Substat Priority */}
-      <div className="mt-8 sm:mt-10 space-y-8">
-        {/* Main Stats */}
-        <div className="grid grid-cols-3 gap-3 sm:gap-4">
-          <div className="text-center">
-            <div className="text-2xl sm:text-3xl font-bold text-purple-400">
-              IV
-            </div>
-            <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1 sm:mb-2">
-              Ideal
-            </div>
-            <div className="py-2 px-3 rounded bg-purple-500/10 border border-purple-500/30 text-xs sm:text-sm font-medium text-purple-300">
-              {getMainStatLabel(0)}
-            </div>
+        {/* Main Stats + Substats Priority */}
+        <div className="space-y-12">
+          {/* Main Stats Grid */}
+          <div className="grid grid-cols-3 gap-8 max-w-4xl mx-auto">
+            {[0, 1, 2].map((index) => (
+              <div
+                key={index}
+                className="
+                  relative overflow-hidden rounded-2xl
+                  bg-gradient-to-br from-gray-900/50 to-gray-950/70
+                  border border-gray-800 backdrop-blur-sm
+                  p-8 text-center space-y-4
+                  transition-all duration-300 hover:shadow-2xl hover:shadow-purple-900/20
+                  hover:-translate-y-1
+                "
+              >
+                <div className="text-4xl font-bold text-cyan-400">
+                  {index === 1 ? "V" : "IV"}
+                </div>
+                <div className="text-xs uppercase tracking-widest text-gray-500">
+                  {index === 1 ? "Desire" : "Ideal"}
+                </div>
+                <div
+                  className="
+                    inline-block px-6 py-3 rounded-xl
+                    bg-cyan-600/20 border border-cyan-700/50
+                    text-cyan-300 font-semibold text-sm
+                  "
+                >
+                  {getMainStatLabel(index)}
+                </div>
+              </div>
+            ))}
           </div>
 
-          <div className="text-center">
-            <div className="text-2xl sm:text-3xl font-bold text-purple-400">
-              V
-            </div>
-            <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1 sm:mb-2">
-              Desire
-            </div>
-            <div className="py-2 px-3 rounded bg-purple-500/10 border border-purple-500/30 text-xs sm:text-sm font-medium text-purple-300">
-              {getMainStatLabel(1)}
-            </div>
-          </div>
+          {/* Substat Priority */}
+          <div className="space-y-6">
+            <SubstatsPriorityRender
+              substatsPriorities={memoryFragmentSubstatsPriorities}
+            />
 
-          <div className="text-center">
-            <div className="text-2xl sm:text-3xl font-bold text-purple-400">
-              IV
-            </div>
-            <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1 sm:mb-2">
-              Ideal
-            </div>
-            <div className="py-2 px-3 rounded bg-purple-500/10 border border-purple-500/30 text-xs sm:text-sm font-medium text-purple-300">
-              {getMainStatLabel(2)}
-            </div>
-          </div>
-        </div>
-
-        {/* Substat Priority */}
-        <div className="mt-8 text-center">
-          <SubstatsPriorityRender
-            substatsPriorities={memoryFragmentSubstatsPriorities}
-          />
-
-          <div className="mt-6 mx-auto max-w-3xl">
-            <p className="text-xs sm:text-sm leading-relaxed text-muted-foreground text-center px-4">
-              {memoryFragmentSubstatsNote}
-            </p>
+            {memoryFragmentSubstatsNote && (
+              <div className="max-w-4xl mx-auto">
+                <p className="text-center text-gray-400 text-sm leading-relaxed px-6">
+                  {memoryFragmentSubstatsNote}
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
