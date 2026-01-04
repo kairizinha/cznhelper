@@ -444,26 +444,25 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
     {
       id: "offering-of-the-void",
       description:
-        "Generally higher raw damage than 2/2/2. Black Wing + Executioner's 2/2 becomes viable at high card multiplier scaling.",
+        "Generally higher raw damage than 2/2/2. Black Wing + Executioner's 2/2 becomes viable at high card multiplier scaling",
     },
     {
       id: "executioners-tool",
-      description: "Standard Critical Damage build with high crit scaling.",
+      description: "Standard Critical Damage build with high crit scaling",
     },
   ],
   alternative: [
     {
       id: "black-wing",
-      description: "Standard Attack set for raw damage scaling.",
+      description: "Standard Attack set for raw damage scaling",
     },
     {
       id: "executioners-tool",
-      description: "Standard Critical Damage build with high crit scaling.",
+      description: "Standard Critical Damage build with high crit scaling",
     },
     {
       id: "cursed-corpse",
-      description:
-        "Alternative that can outperform with consistent Agony uptime.",
+      description: "Alternative that outperforms with consistent Agony uptime",
     },
   ],
 };
@@ -541,15 +540,19 @@ export const kayronData: CharacterData = {
   credits: [
     {
       name: "recluser1",
-      contribution: "Kayron main, testing and feedback",
+      contribution: "Helped with testing and feedback",
     },
     {
       name: "notmiseryfell",
-      contribution: "Kayron main, testing and feedback",
+      contribution: "Helped with testing and feedback",
+    },
+    {
+      name: "Zyla",
+      contribution: "Card Data",
     },
     {
       name: "Lucie",
-      contribution: "Guide author",
+      contribution: "Guide Author",
     },
   ],
 
