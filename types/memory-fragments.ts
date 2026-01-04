@@ -5,6 +5,7 @@ export type MemoryFragmentSet = {
   name: string;
   icon: string;
   effect: string;
+  numbersOfSlots?: number;
 };
 
 export type RecommendingFragmentSet = {

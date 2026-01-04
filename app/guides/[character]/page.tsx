@@ -2,7 +2,7 @@
 "use client";
 
 import { notFound, useParams } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 import { Star, Zap, Shield } from "lucide-react";
 import { BaseCard } from "@/containers/character-guides/base-cards/BaseCard";
 import { EquipmentSection } from "@/containers/character-guides/equipments";
@@ -40,6 +40,21 @@ const characters = [
   "cassius",
   "rei",
 ];
+
+export const ThemeContext = createContext<
+  | {
+      bg: string;
+      border: string;
+      text: string;
+      hover: string;
+      gradientFrom: string;
+      gradientTo: string;
+      accent: string;
+      accentLight: string;
+      shadow: string;
+    }
+  | undefined
+>(ATTRIBUTE_COLORS.Passion);
 
 function useCharacterLoader(slug: string | null) {
   const [data, setData] = useState<CharacterData | null>(null);
@@ -107,6 +122,7 @@ export default function CharacterGuidePage() {
       gradientTo: attr.gradientTo,
       accent: attr.accent,
       accentLight: attr.accentLight,
+      shadow: attr.shadow
     };
   }, [characterData?.attribute]);
 
@@ -382,45 +398,46 @@ export default function CharacterGuidePage() {
 
   return (
     <div className="min-h-screen bg-transparent text-gray-100 -mt-25">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Breadcrumb */}
-        <div className="mb-6 text-sm text-gray-500">
-          <a href="/guides" className="hover:text-gray-300 transition-colors">
-            Guides
-          </a>
-          <span className="mx-2">/</span>
-          <span className="text-gray-400">{characterName}</span>
-        </div>
+      <ThemeContext.Provider value={colors}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          {/* Breadcrumb */}
+          <div className="mb-6 text-sm text-gray-500">
+            <a href="/guides" className="hover:text-gray-300 transition-colors">
+              Guides
+            </a>
+            <span className="mx-2">/</span>
+            <span className="text-gray-400">{characterName}</span>
+          </div>
 
-        {/* Page Title */}
-        <h1
-          className={`text-4xl md:text-5xl font-bold mb-10 bg-gradient-to-r ${colors?.gradientFrom} via-white ${colors?.gradientTo} bg-clip-text text-transparent`}
-        >
-          {characterName.toUpperCase()}
-        </h1>
-
-        {/* Tabs */}
-        <div className="mb-10">
-          {/* Mobile Dropdown */}
-          <select
-            value={activeSection}
-            onChange={(e) => setActiveSection(e.target.value)}
-            className="md:hidden w-full bg-gray-900/70 border border-gray-800 rounded-xl px-5 py-4 text-gray-200 font-medium focus:outline-none focus:ring-2 focus:ring-purple-500/50"
+          {/* Page Title */}
+          <h1
+            className={`text-4xl md:text-5xl font-bold mb-10 bg-gradient-to-r ${colors?.gradientFrom} via-white ${colors?.gradientTo} bg-clip-text text-transparent`}
           >
-            {tabs.map((tab) => (
-              <option key={tab.id} value={tab.id}>
-                {tab.label}
-              </option>
-            ))}
-          </select>
+            {characterName.toUpperCase()}
+          </h1>
 
-          {/* Desktop Tabs */}
-          <div className="hidden md:flex gap-1 border-b border-gray-800">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveSection(tab.id)}
-                className={`
+          {/* Tabs */}
+          <div className="mb-10">
+            {/* Mobile Dropdown */}
+            <select
+              value={activeSection}
+              onChange={(e) => setActiveSection(e.target.value)}
+              className="md:hidden w-full bg-gray-900/70 border border-gray-800 rounded-xl px-5 py-4 text-gray-200 font-medium focus:outline-none focus:ring-2 focus:ring-purple-500/50"
+            >
+              {tabs.map((tab) => (
+                <option key={tab.id} value={tab.id}>
+                  {tab.label}
+                </option>
+              ))}
+            </select>
+
+            {/* Desktop Tabs */}
+            <div className="hidden md:flex gap-1 border-b border-gray-800">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveSection(tab.id)}
+                  className={`
                   px-6 py-4 font-medium transition-all duration-200
                   ${
                     activeSection === tab.id
@@ -428,16 +445,19 @@ export default function CharacterGuidePage() {
                       : "text-gray-500 hover:text-gray-300"
                   }
                 `}
-              >
-                {tab.label}
-              </button>
-            ))}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Main Content */}
+          <div className="animate-in fade-in duration-500">
+            {renderContent()}
           </div>
         </div>
-
-        {/* Main Content */}
-        <div className="animate-in fade-in duration-500">{renderContent()}</div>
-      </div>
+      </ThemeContext.Provider>
     </div>
   );
 }

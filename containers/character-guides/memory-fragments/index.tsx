@@ -3,12 +3,13 @@ import {
   MemoryFragmentSet,
   RecommendingFragmentSet,
 } from "@/types/memory-fragments";
-import { useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import { MemoryFragmentSetsData } from "@/data/memory-fragments";
 import ExpandableSetCard from "@/components/ui/ExpandableSetCard";
 import { MemoryFragmentMainStatLabels } from "@/constants/character-guides";
 import { SubstatsPriorityRender } from "./SubstatsPriorityRender";
 import { MemoryFragmentSubstatPriorities } from "@/types/character-guides";
+import { ThemeContext } from "@/app/guides/[character]/page";
 
 type Props = {
   bestInSlot?: RecommendingFragmentSet[];
@@ -28,6 +29,8 @@ export const MemoryFragmentsSection = ({
   const [expandedMemorySet, setExpandedMemorySet] = useState<string | null>(
     null
   );
+
+  const theme = useContext(ThemeContext);
 
   const setsMap = useMemo<Record<string, MemoryFragmentSet>>(() => {
     return Object.fromEntries(
@@ -70,22 +73,28 @@ export const MemoryFragmentsSection = ({
         <div className="space-y-8">
           <div className="text-center">
             <span
-              className="
+              className={`
                 relative overflow-hidden inline-block px-6 py-3 rounded-2xl
-                bg-gradient-to-br from-amber-600/20 to-amber-800/20
-                border border-amber-700/50 backdrop-blur-sm
-                text-amber-300 font-bold uppercase tracking-wider text-sm
-                shadow-lg shadow-amber-900/30
-              "
+                bg-gradient-to-br ${theme?.gradientFrom} ${theme?.gradientTo}
+                border ${theme?.border} backdrop-blur-sm
+                ${theme?.text} font-bold uppercase tracking-wider text-sm
+                shadow-lg ${theme?.shadow}
+              `}
             >
               Best in Slot
               <div className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 to-transparent" />
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${theme?.gradientFrom} to-transparent`}
+                />
               </div>
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+          <div
+            className={`grid grid-cols-1 sm:grid-cols-2 ${
+              bestInSlotSets.length === 3 ? "lg:grid-cols-3" : "lg:grid-cols-2"
+            } gap-6`}
+          >
             {bestInSlotSets.map(({ set, note }) => (
               <ExpandableSetCard
                 key={`${set.id}-best`}
@@ -108,22 +117,28 @@ export const MemoryFragmentsSection = ({
         <div className="space-y-8">
           <div className="text-center">
             <span
-              className="
+              className={`
                 relative overflow-hidden inline-block px-6 py-3 rounded-2xl
-                bg-gradient-to-br from-cyan-600/20 to-cyan-800/20
-                border border-cyan-700/50 backdrop-blur-sm
-                text-cyan-300 font-bold uppercase tracking-wider text-sm
-                shadow-lg shadow-cyan-900/30
-              "
+                bg-gradient-to-br ${theme?.gradientFrom} ${theme?.gradientTo}
+                border ${theme?.border} backdrop-blur-sm
+                ${theme?.text} font-bold uppercase tracking-wider text-sm
+                shadow-lg ${theme?.shadow}
+              `}
             >
               Alternative
               <div className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-transparent" />
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${theme?.gradientFrom} to-transparent`}
+                />
               </div>
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div
+            className={`grid grid-cols-1 sm:grid-cols-2 ${
+              alternativeSets.length === 3 ? "lg:grid-cols-3" : "lg:grid-cols-2"
+            } gap-6`}
+          >
             {alternativeSets.map(({ set, note }) => (
               <ExpandableSetCard
                 key={`${set.id}-alt`}
@@ -158,18 +173,18 @@ export const MemoryFragmentsSection = ({
                   hover:-translate-y-1
                 "
               >
-                <div className="text-4xl font-bold text-cyan-400">
+                <div className={`text-4xl font-bold ${theme?.text}`}>
                   {index === 1 ? "V" : "IV"}
                 </div>
                 <div className="text-xs uppercase tracking-widest text-gray-500">
                   {index === 1 ? "Desire" : "Ideal"}
                 </div>
                 <div
-                  className="
+                  className={`
                     inline-block px-6 py-3 rounded-xl
-                    bg-cyan-600/20 border border-cyan-700/50
-                    text-cyan-300 font-semibold text-sm
-                  "
+                    ${theme?.bg} border ${theme?.border}
+                    ${theme?.text} font-semibold text-sm
+                  `}
                 >
                   {getMainStatLabel(index)}
                 </div>

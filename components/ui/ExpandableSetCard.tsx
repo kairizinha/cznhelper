@@ -16,7 +16,7 @@ export default function ExpandableSetCard({
   onToggle,
 }: Props) {
   return (
-    <div className="flex flex-col">
+    <div className={`flex flex-col`}>
       <button
         onClick={onToggle}
         className="

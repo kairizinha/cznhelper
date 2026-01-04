@@ -1,6 +1,7 @@
+import { ThemeContext } from "@/app/guides/[character]/page";
 import { MemoryFragmentSubstatLabels } from "@/constants/character-guides";
 import { MemoryFragmentSubstatPriorities } from "@/types/character-guides";
-import React from "react";
+import React, { useContext } from "react";
 
 type Props = {
   substatsPriorities?: MemoryFragmentSubstatPriorities[];
@@ -9,6 +10,7 @@ type Props = {
 export const SubstatsPriorityRender = (props: Props) => {
   const { substatsPriorities } = props;
 
+  const theme = useContext(ThemeContext);
   if (!substatsPriorities || substatsPriorities.length === 0) {
     return null;
   }
@@ -34,21 +36,21 @@ export const SubstatsPriorityRender = (props: Props) => {
 
                 {/* Substat Badge */}
                 <div
-                  className="
+                  className={`
                     relative overflow-hidden inline-block
                     rounded-2xl
-                    bg-gradient-to-br from-cyan-600/20 to-cyan-800/20
-                    border border-cyan-700/50 backdrop-blur-sm
+                    bg-gradient-to-br ${theme?.gradientFrom} ${theme?.gradientTo}
+                    border ${theme?.border} backdrop-blur-sm
                     px-5 py-2.5
-                    text-cyan-300 font-semibold text-sm sm:text-base
+                    ${theme?.text} font-semibold text-sm sm:text-base
                     transition-all duration-300
-                    hover:shadow-lg hover:shadow-cyan-900/30
+                    hover:shadow-lg hover:${theme?.shadow}
                     hover:-translate-y-0.5 group
-                  "
+                  `}
                 >
                   {/* Hover glow overlay */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 via-transparent to-purple-600/10" />
+                    <div className={`absolute inset-0 bg-gradient-to-br ${theme?.gradientFrom} via-transparent to-purple-600/10`} />
                   </div>
 
                   <span className="relative z-10">
