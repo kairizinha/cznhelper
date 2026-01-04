@@ -482,7 +482,7 @@ const partnersGuide: PartnersGuide[] = [
   {
     id: "nyx",
     description: ``,
-    tier: CardTier.WIP,
+    tier: CardTier.SPlus,
   },
   {
     id: "arwen",
@@ -500,9 +500,9 @@ const partnersGuide: PartnersGuide[] = [
     tier: CardTier.WIP,
   },
   {
-    id: "ritochka",
+    id: "noel",
     description: ``,
-    tier: CardTier.WIP,
+    tier: CardTier.Bad,
   },
 ];
 

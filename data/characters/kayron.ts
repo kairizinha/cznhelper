@@ -487,6 +487,11 @@ const partnersGuide: PartnersGuide[] = [
     tier: CardTier.A,
   },
   {
+    id: "itsuku",
+    description: ``,
+    tier: CardTier.A,
+  },
+  {
     id: "anteia",
     description: `Nyx would be a better choice`,
     tier: CardTier.Bad,

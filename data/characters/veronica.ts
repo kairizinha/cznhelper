@@ -434,19 +434,34 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
 
 const partnersGuide: PartnersGuide[] = [
   {
-    id: "rosaria",
-    description: ``,
-    tier: CardTier.SPlus,
-  },
-  {
     id: "marin",
     description: ``,
     tier: CardTier.SPlus,
   },
   {
+    id: "rosaria",
+    description: ``,
+    tier: CardTier.SPlus,
+  },
+  {
+    id: "solia",
+    description: ``,
+    tier: CardTier.S,
+  },
+  {
     id: "nakia",
     description: ``,
     tier: CardTier.S,
+  },
+  {
+    id: "daisy",
+    description: ``,
+    tier: CardTier.C,
+  },
+  {
+    id: "tina",
+    description: ``,
+    tier: CardTier.Bad,
   },
 ];
 
