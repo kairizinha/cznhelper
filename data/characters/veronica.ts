@@ -1,20 +1,24 @@
+// data/characters/veronica.ts
 import { Attributes } from "@/types/card";
 import { CharacterClass, CharacterRole } from "@/types/character";
 import {
+  Card,
   CardRarities,
+  CardTier,
   CharacterData,
   MemoryFragmentSetRecommendation,
-  MemoryFragmentSubstatPriorities,
-  PartnersGuide,
   UniqueCard,
+  PartnersGuide,
   CreditEntry,
 } from "@/types/character-guides";
-import { CardTier } from "@/types/character-guides";
 import {
+  MemoryFragmentSet,
   MemoryFragmentMainStats,
   MemoryFragmentSubstats,
 } from "@/types/memory-fragments";
 import { SaveData } from "@/types/save-data";
+
+const commonCards: Card[] = [];
 
 const uniqueCards: UniqueCard[] = [
   {
@@ -82,7 +86,7 @@ const uniqueCards: UniqueCard[] = [
       {
         name: "Reduce the cost of this card by 1",
         reasoning: "",
-        icon: "/images/card/icon_card_battle_expand_vitor.png",
+        icon: "/images/card/icon_card_battle_expand_nihilum.png",
         description: "",
       },
       {
@@ -133,13 +137,13 @@ const uniqueCards: UniqueCard[] = [
       },
       {
         id: "Repose IV",
-        tier: CardTier.C,
+        tier: CardTier.B,
         cost: 1,
         type: "skill",
         description:
           "180% Shield  1 Reload equal to  number of other  Combatant's skill card(s)  in hand",
         reasoning:
-          "Reload is already covered by the pendant of resolution card, so there's no real reason to pick this",
+          "Reload is already covered by the pendant of resolution card, so there's no real reason to pick this unless running DPS",
       },
       {
         id: "Repose V",
@@ -316,20 +320,22 @@ const uniqueCards: UniqueCard[] = [
     ],
   },
   {
-    id: "Bombardment Prep",
+    id: "bombardment-prep",
     name: "Bombardment Prep",
     image: "/images/character/veronica/unique4.png",
     type: "upgrade",
     cost: 1,
     rarity: CardRarities.Unique,
     description: "[Unique]  Increase max stack of  Reload by 1  1 Reload",
+    epiphanies: [],
   },
 ];
-const recommendedVeronicaSaveData: SaveData[] = [
+
+const recommendedSaveData: SaveData[] = [
   {
     id: "deck-1",
-    name: "Deck 1",
-    shortDescription: "",
+    name: "High Draw Support",
+    shortDescription: "Balanced support build for most encounters",
     description: ``,
     faintMemoryNote: "140 Faint Memory Cost",
     cards: [
@@ -345,27 +351,51 @@ const recommendedVeronicaSaveData: SaveData[] = [
   },
   {
     id: "deck-2",
-    name: "Deck 2",
-    shortDescription: "",
-    description: ``,
+    name: "Mei Lin's Deck",
+    shortDescription: "Specialized high Passion stack build",
+    description: `This deck is Mei Lin's nichest build, it's a high draw deck that uses the Pendant of Resolution V to provide insane passion stacks. PENDANT OF RESOLUTION V NEEDS A -1 COST DIVINE EPIPHANY`,
     faintMemoryNote: "140 Faint Memory Cost",
     cards: [
       "Firing Preparation IV",
       "Repose I",
       "Repose I",
-      "Repose I",
-      "Repose I",
-      "Pendant of Resolution I",
+      "Pendant of Resolution V",
+      "Pendant of Resolution V",
+      "Pendant of Resolution V",
       "Sir Kowalski III",
       "Bombardment Prep",
     ],
   },
 ];
+
 const gearsData = {
-  weapons: ["Tentacles of Chaos"],
-  armors: ["Shield of the Watcher"],
-  accessories: ["Emblem of an Exceptional Entity"],
+  weapons: [
+    "Tentacles of Chaos",
+    "Intellect of Discord",
+    "Foggy Crystal Ball",
+    "W-52 Dopamine Injector",
+    "Mutant Preadtor Spike",
+    "Second Method",
+    "RFS-17",
+    "Obsidian Sword",
+  ],
+  armors: [
+    "Fragment of the Empty Void",
+    "Rocket-Adorned Cape",
+    "Brainwave-Blocking Helmet",
+    "Shield of the Watcher",
+    "Wings of Freedom",
+  ],
+  accessories: [
+    "Sphere of Randomness",
+    "Superconductive Protein",
+    "Source of the Forbidden",
+    "Emblem of an Exceptional Entity",
+    "Amorphous Cube",
+  ],
 };
+
+const recommendedSources = ["Laboratory 0", "City of Mist"];
 
 const memoryFragmentSets: MemoryFragmentSetRecommendation = {
   bestInSlot: [
@@ -385,46 +415,43 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
   alternative: [],
 };
 
-const memoryFragmentSubstatPriorities: MemoryFragmentSubstatPriorities[] = [
+const partnersGuide: PartnersGuide[] = [
   {
-    priority: 1,
-    relation: "equal",
-    stats: [
-      MemoryFragmentSubstats.CriticalChance,
-      MemoryFragmentSubstats.CriticalDamage,
-      MemoryFragmentSubstats.ExtraDamage,
-    ],
+    id: "rosaria",
+    description: ``,
+    tier: CardTier.SPlus,
   },
   {
-    priority: 2,
-    relation: "or",
-    stats: [MemoryFragmentSubstats.AttackFlat, MemoryFragmentSubstats.Attack],
+    id: "marin",
+    description: ``,
+    tier: CardTier.SPlus,
+  },
+  {
+    id: "nakia",
+    description: ``,
+    tier: CardTier.S,
   },
 ];
 
-const partnersGuide: PartnersGuide[] = [
-  {
-    id: "marin",
-    description: "",
-    tier: CardTier.WIP,
-  },
-  {
-    id: "rosaria",
-    description: "",
-    tier: CardTier.WIP,
-  },
-];
 export const veronicaData: CharacterData = {
   attribute: Attributes.Passion,
   job: CharacterClass.Ranger,
   role: CharacterRole.Support,
 
   overview: `
-  
+  Hybrid DPS/Support character who demands minimal AP investment after her core upgrade cards. She deals damage through Ballistas that automatically trigger at end of turn with zero cost. 
+  Her support shines via cheap, high-impact card draw cards, and she can power spike by stacking the Reload buff to massively amplify Ballista damage.
   `.trim(),
-  strengths: [""],
 
-  weaknesses: [""],
+  strengths: [
+    "Insane Card Draw support",
+    "Passively deals ST and AoE damage",
+    "Solo DPS in Chaos",
+    "Heavy Deck thinning",
+    "Easy to play",
+  ],
+
+  weaknesses: ["Ballista Epiphanies are RNG without E2"],
 
   externalResources: [
     {
@@ -441,33 +468,38 @@ export const veronicaData: CharacterData = {
 
   credits: [
     {
-      name: "",
-      contribution: "",
-    },
-    {
-      name: "",
-      contribution: "",
-    },
-
-    {
       name: "Lucie",
       contribution: "Guide Author and Data",
     },
   ],
 
+  commonCards: commonCards,
   uniqueCards: uniqueCards,
-  recommendedSaveData: recommendedVeronicaSaveData,
+  recommendedSaveData: recommendedSaveData,
   gears: gearsData,
+  recommendedSources: recommendedSources,
   memoryFragmentSets: memoryFragmentSets,
   memoryFragmentMainStats: [
     MemoryFragmentMainStats.CriticalChance,
     MemoryFragmentMainStats.PassionDamage,
     MemoryFragmentMainStats.Attack,
   ],
-  memoryFragmentSubstatsNote: `Prioritize Critical Chance and Critical Damage equally to achieve an
-              ideal critical ratio After that, prioritize Flat Attack and
-              Attack % for additional damage scaling Void Damage is
-              generally preferred over Attack for most cases testsssss`,
-  memoryFragmentSubstatPriorities: memoryFragmentSubstatPriorities,
+  memoryFragmentSubstatPriorities: [
+    {
+      priority: 1,
+      relation: "equal",
+      stats: [
+        MemoryFragmentSubstats.CriticalChance,
+        MemoryFragmentSubstats.CriticalDamage,
+        MemoryFragmentSubstats.ExtraDamage,
+      ],
+    },
+    {
+      priority: 2,
+      relation: "or",
+      stats: [MemoryFragmentSubstats.AttackFlat, MemoryFragmentSubstats.Attack],
+    },
+  ],
+  memoryFragmentSubstatsNote: "",
   partnersGuide: partnersGuide,
 };

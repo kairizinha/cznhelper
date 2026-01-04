@@ -51,7 +51,7 @@ const uniqueCards: UniqueCard[] = [
     epiphanies: [
       {
         id: "Echo of Futility I",
-        tier: CardTier.SPlus,
+        tier: CardTier.S,
         cost: 1,
         type: "attack",
         description: "360% Damage Create 3 Futility Card(s)",
@@ -201,7 +201,7 @@ const uniqueCards: UniqueCard[] = [
     epiphanies: [
       {
         id: "Black Hole I",
-        tier: CardTier.C,
+        tier: CardTier.B,
         cost: 2,
         type: "attack",
         description: "360% Damage Activate 2 Futility Card(s) from hand",
@@ -218,7 +218,7 @@ const uniqueCards: UniqueCard[] = [
       },
       {
         id: "Black Hole III",
-        tier: CardTier.C,
+        tier: CardTier.Bad,
         cost: 2,
         type: "attack",
         description:
@@ -227,7 +227,7 @@ const uniqueCards: UniqueCard[] = [
       },
       {
         id: "Black Hole IV",
-        tier: CardTier.B,
+        tier: CardTier.A,
         cost: 2,
         type: "attack",
         description:
@@ -254,7 +254,7 @@ const uniqueCards: UniqueCard[] = [
         description: "",
       },
       {
-        name: "2 Vulnerable to the target",
+        name: "Reduce the cost of this card by 1",
         reasoning: "",
         icon: "/images/card/icon_card_battle_expand_secred.png",
         description: "",
@@ -323,12 +323,6 @@ const uniqueCards: UniqueCard[] = [
         name: "1 Morale, 1 Resolve",
         reasoning: "",
         icon: "/images/card/icon_card_battle_expand_nihilum.png",
-        description: "",
-      },
-      {
-        name: "Reduce the cost of this card by 1",
-        reasoning: "",
-        icon: "/images/card/icon_card_battle_expand_secred.png",
         description: "",
       },
       {
@@ -426,6 +420,7 @@ const gearsData = {
     "Wings of Freedom",
     "Fragment of the Empty Void",
     "Rocket-Adorned Cape",
+    "Psionic Combat Suit",
   ],
   accessories: [
     "Nerve Hacking Module",
@@ -539,7 +534,8 @@ export const kayronData: CharacterData = {
 
   credits: [
     {
-      name: "recluser1",
+      name: "Recluser1",
+      link: "https://www.youtube.com/@Recluser1",
       contribution: "Helped with testing and feedback",
     },
     {
@@ -548,12 +544,8 @@ export const kayronData: CharacterData = {
       contribution: "Helped with testing and feedback",
     },
     {
-      name: "Zyla",
-      contribution: "Card Data",
-    },
-    {
       name: "Lucie",
-      contribution: "Guide Author",
+      contribution: "Guide Author and Data",
     },
   ],
 

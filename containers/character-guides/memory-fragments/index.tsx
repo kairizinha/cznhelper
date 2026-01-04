@@ -200,7 +200,7 @@ export const MemoryFragmentsSection = ({
 
             {memoryFragmentSubstatsNote && (
               <div className="max-w-4xl mx-auto">
-                <p className="text-center text-gray-400 text-sm leading-relaxed px-6">
+                <p className="text-center text-gray-400 text-sm leading-relaxed px-6 whitespace-pre-line">
                   {memoryFragmentSubstatsNote}
                 </p>
               </div>

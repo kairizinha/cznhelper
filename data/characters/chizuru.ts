@@ -57,8 +57,7 @@ const uniqueCards: UniqueCard[] = [
         type: "attack",
         description:
           "[ Initiation ] 150% Damage 1 Cursed Shackles Cursed Shackles: Add 1 Hit",
-        reasoning:
-          "[ For All Epiphanies ] To Be Determined by the Community, for the Community. Make sure to reach out to us on Discord: _zyla or lilyium.box to help us build this website for everyone to take advantage of!",
+        reasoning: "",
       },
       {
         id: "Karmic Flames II",
@@ -97,14 +96,7 @@ const uniqueCards: UniqueCard[] = [
         reasoning: "",
       },
     ],
-    divineEpiphanies: [
-      {
-        name: "Reduce the cost of this card by 1",
-        reasoning: "",
-        icon: "/images/card/icon_card_battle_expand_secred.png",
-        description: "",
-      },
-    ],
+    divineEpiphanies: [],
   },
   {
     id: "tsukuyomi",
@@ -123,8 +115,7 @@ const uniqueCards: UniqueCard[] = [
         type: "skill",
         description:
           "3 Will-O'-Wisp for each Hit of the next Attack Card of this unit used",
-        reasoning:
-          "[ For All Epiphanies ] To Be Determined by the Community, for the Community. Make sure to reach out to us on Discord: _zyla or lilyium.box to help us build this website for everyone to take advantage of!",
+        reasoning: "",
       },
       {
         id: "Tsukuyomi II",
@@ -181,8 +172,7 @@ const uniqueCards: UniqueCard[] = [
         type: "upgrade",
         description:
           "[ Initiation / Unique ] At the start of the turn, gain Inhibit Decrease Cost of 2 random card(s) of other Combatants by 1 until used",
-        reasoning:
-          "[ For All Epiphanies ] To Be Determined by the Community, for the Community. Make sure to reach out to us on Discord: _zyla or lilyium.box to help us build this website for everyone to take advantage of!",
+        reasoning: "",
       },
       {
         id: "Bound At Dusk II",
@@ -221,14 +211,7 @@ const uniqueCards: UniqueCard[] = [
         reasoning: "",
       },
     ],
-    divineEpiphanies: [
-      {
-        name: "Reduce the cost of this card by 1",
-        reasoning: "",
-        icon: "/images/card/icon_card_battle_expand_secred.png",
-        description: "",
-      },
-    ],
+    divineEpiphanies: [],
   },
   {
     id: "oni-hunt",
@@ -247,8 +230,7 @@ const uniqueCards: UniqueCard[] = [
         type: "attack",
         description:
           "[ Haste ] 50% Damage x 4 +40% Damage Amount to the next Bind card used",
-        reasoning:
-          "[ For All Epiphanies ] To Be Determined by the Community, for the Community. Make sure to reach out to us on Discord: _zyla or lilyium.box to help us build this website for everyone to take advantage of!",
+        reasoning: "",
       },
       {
         id: "Oni Hunt II",
@@ -287,14 +269,7 @@ const uniqueCards: UniqueCard[] = [
         reasoning: "",
       },
     ],
-    divineEpiphanies: [
-      {
-        name: "Reduce the cost of this card by 1",
-        reasoning: "",
-        icon: "/images/card/icon_card_battle_expand_secred.png",
-        description: "",
-      },
-    ],
+    divineEpiphanies: [],
   },
   {
     id: "Shadow of the Moon",
@@ -368,19 +343,18 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
     },
     {
       id: "cursed-corpse",
-      description:
-        "If Agony uptime is near 100%, you get free damage bonus, which makes this set better than other options.",
+      description: "Alternative that outperforms with consistent Agony uptime",
     },
   ],
   alternative: [
     {
       id: "conquerors-aspect",
       description:
-        "If using Bound At Dusk III, Conqueror set does not break and its value is kept applied.",
+        "Situational depending on Bound of Dusk Epiphany, since Conqueror Aspect can break and loses value with card cost reduction.",
     },
     {
       id: "executioners-tool",
-      description: "Best 2 piece set to along with Conqueror's Aspect.",
+      description: "Standard Critical Damage build with high crit scaling",
     },
   ],
 };

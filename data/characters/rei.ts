@@ -37,7 +37,17 @@ const commonCards: Card[] = [
     rarity: CardRarities.Common,
     description: "Heal 100%",
   },
+  {
+    id: "Predator's Blade",
+    name: "Predator's Blade",
+    image: "/images/character/rei/unique4.png",
+    type: "attack",
+    cost: 1,
+    rarity: CardRarities.Unique,
+    description: "300% Damage For 1 turn 4 Morale",
+  },
 ];
+
 const uniqueCards: UniqueCard[] = [
   {
     id: "strike-of-darkness",
@@ -51,13 +61,13 @@ const uniqueCards: UniqueCard[] = [
     epiphanies: [
       {
         id: "Strike of Darkness I",
-        tier: CardTier.S,
+        tier: CardTier.SPlus,
         cost: 1,
         type: "attack",
         description:
           "[ Lead ] 150% Damage Increase Damage Amount of Basic Attack Cards by 150% for 1 turn",
         reasoning:
-          "Stronger boost than the IV epiphany but only lasts 1 turn. Great for setting up burst damage windows.",
+          "Higher boost than the IV epiphany but only lasts 1 turn, great for setting up burst damage turns",
       },
       {
         id: "Strike of Darkness II",
@@ -66,17 +76,17 @@ const uniqueCards: UniqueCard[] = [
         type: "attack",
         description: "350% Damage Decrease Damage Amount by 20% for 1 turn",
         reasoning:
-          "The 20% damage penalty to ALL your damage isn't worth a slightly higher modifier on one attack. Avoid.",
+          "The 20% damage penalty to ALL your damage isn't worth a higher modifier on one attack",
       },
       {
         id: "Strike of Darkness III",
-        tier: CardTier.Bad,
+        tier: CardTier.C,
         cost: 1,
         type: "attack",
         description:
           "[ Lead ] 150% Damage Discard all Basic Cards, add 1 Hit for each",
         reasoning:
-          "Strictly worse than V epiphany - costs 1 AP, no Retain, and minimal damage scaling. Just pick V instead.",
+          "Worse than V option - costs 1 AP, no Retain, and minimal damage scaling",
       },
       {
         id: "Strike of Darkness IV",
@@ -85,8 +95,7 @@ const uniqueCards: UniqueCard[] = [
         type: "upgrade",
         description:
           "[ Unique ] Increase Damage Amount of Basic Attack Cards by 80%",
-        reasoning:
-          "Permanent 80% damage boost to basic attacks. Core pick for Mei Lin and Chizuru Moonslash builds.",
+        reasoning: "Permanent basic damage boost, core for basic attack builds",
       },
       {
         id: "Strike of Darkness V",
@@ -94,8 +103,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 0,
         type: "skill",
         description: "[ Retain ] Activate all Basic Cards in hand",
-        reasoning:
-          "Free deck thinning with Retain. Can sit in hand or be fodder for discard/exhaust effects. Perfect for save data where you couldn't remove basics.",
+        reasoning: "Free retain, clears basics, discard or exhaust fodder",
       },
     ],
     divineEpiphanies: [
@@ -117,12 +125,6 @@ const uniqueCards: UniqueCard[] = [
         icon: "/images/card/icon_card_battle_expand_diallos.png",
         description: "",
       },
-      {
-        name: "Draw 1",
-        reasoning: "",
-        icon: "/images/card/icon_card_battle_expand_nihilum.png",
-        description: "",
-      },
     ],
   },
   {
@@ -141,7 +143,7 @@ const uniqueCards: UniqueCard[] = [
         type: "upgrade",
         description: "[ Unique ] +60% Damage Amount of cards with Cost 1",
         reasoning:
-          "Direct upgrade from base card with 20% more damage. Solid pick for 1-cost focused decks.",
+          "Straight upgrade from the base card, more damage for 1 cost cards",
       },
       {
         id: "Resonating Darkness II",
@@ -150,17 +152,17 @@ const uniqueCards: UniqueCard[] = [
         type: "upgrade",
         description: "[ Unique ] +40% Damage Amount of Void Card",
         reasoning:
-          "Same damage as base but buffs all Void cards. Best for Kayron and Renoa only, since other Void combatants still prefer the 1-cost option.",
+          "Same damage as base but buffs all Void cards, best for Kayron and Renoa, since other Void combatants still prefer the 1-cost or 0-cost option",
       },
       {
         id: "Resonating Darkness III",
-        tier: CardTier.C,
+        tier: CardTier.B,
         cost: 1,
         type: "upgrade",
         description:
           "[ Unique ] +40% Shield gain, Damage Amount, and Healing of cards with Cost 1",
         reasoning:
-          "Same damage as base with shield/healing bonuses you don't need. Just take base or I instead.",
+          "Same damage as base with shield/healing bonuses you don't need, just take base or I instead",
       },
       {
         id: "Resonating Darkness IV",
@@ -169,7 +171,7 @@ const uniqueCards: UniqueCard[] = [
         type: "upgrade",
         description:
           "[ Unique ] +40% Damage Amount of cards with Cost 1 or less",
-        reasoning: "Best for 0-cost builds like Mei Lin or Chizuru Moonslash.",
+        reasoning: "Best for 0-cost builds",
       },
       {
         id: "Resonating Darkness V",
@@ -179,7 +181,7 @@ const uniqueCards: UniqueCard[] = [
         description:
           "[ Unique ] For 1 turn, +80% Damage Amount of cards with Cost 1",
         reasoning:
-          "Highest damage boost but only 1 turn. Requires high draw support to set up and burst in the same turn.",
+          "Highest damage boost but only 1 turn, requires high draw support to set up and burst in the same turn",
       },
     ],
     divineEpiphanies: [
@@ -209,13 +211,13 @@ const uniqueCards: UniqueCard[] = [
     epiphanies: [
       {
         id: "Snack Time I",
-        tier: CardTier.C,
+        tier: CardTier.B,
         cost: 0,
         type: "skill",
         description:
           "[ Exhaust 2 ] Choose 1 card(s) in hand to Exhaust Heal 150% Draw 1",
         reasoning:
-          "Base card with Exhaust 2, but forces you to exhaust something to draw.",
+          "Base card with Exhaust 2, but forces you to exhaust something to draw",
       },
       {
         id: "Snack Time II",
@@ -224,7 +226,7 @@ const uniqueCards: UniqueCard[] = [
         type: "skill",
         description: "[ Retain / Exhaust ] Heal 150% Draw 2",
         reasoning:
-          "Best option - Draw 2 with Retain, only skip if you have excess draw or having too much unwanted cards.",
+          "Best option - Draw 2 with Retain, only skip if you have excess draw",
       },
       {
         id: "Snack Time III",
@@ -233,8 +235,7 @@ const uniqueCards: UniqueCard[] = [
         type: "skill",
         description:
           "[ Exhaust ] Choose up to 2 card(s) in hand to Exhaust, then Draw for each",
-        reasoning:
-          "Flexible deck thinning - exhaust 0-2 cards as needed. Better than II when you have lots of cards to exhaust.",
+        reasoning: "Flexible exhaust, scales with trash cards",
       },
       {
         id: "Snack Time IV",
@@ -244,7 +245,7 @@ const uniqueCards: UniqueCard[] = [
         description:
           "[ Exhaust ] Choose up to 1 card(s) from Draw Pile to Exhaust, then Draw for each.",
         reasoning:
-          "Worse than II or III, but lets you choose specific cards from your draw pile before they become dead draws.",
+          "Worse than II or III, but lets you choose specific cards from your draw pile before they become dead draws",
       },
       {
         id: "Snack Time V",
@@ -253,8 +254,7 @@ const uniqueCards: UniqueCard[] = [
         type: "skill",
         description:
           "[ Exhaust ] Choose 2 card(s) in hand to Exhaust Choose 1 Void Card(s) to Draw",
-        reasoning:
-          "Nets -1 card, thins by 3, but tutors Void cards. Can chain into itself. Only good in specific Void-heavy decks.",
+        reasoning: "Void tutor, net negative draw, niche void loops",
       },
     ],
     divineEpiphanies: [
@@ -289,8 +289,7 @@ const uniqueCards: UniqueCard[] = [
         type: "skill",
         description:
           "Choose 1 Attack Card(s) in hand, +150% Damage Amount for 1 turn",
-        reasoning:
-          "Highest damage buff for 1-cost cards, only lasts 1 turn. Best for burst set up.",
+        reasoning: "Highest damage buff for 1-cost cards, only lasts 1 turn",
       },
       {
         id: "Dark Condensation II",
@@ -299,8 +298,7 @@ const uniqueCards: UniqueCard[] = [
         type: "skill",
         description:
           "Choose 1 card(s) in hand, +100% Damage Amount, Shield gain and Healing for 1 turn",
-        reasoning:
-          "Trades damage for shield/healing buffs you don't need. Skip it.",
+        reasoning: "Trades damage for shield/healing buffs you don't need",
       },
       {
         id: "Dark Condensation III",
@@ -309,7 +307,7 @@ const uniqueCards: UniqueCard[] = [
         type: "skill",
         description: "For 1 turn, +50%  Damage Amount of  Void Attack Cards",
         reasoning:
-          "Buffs all Void attacks for the turn. Top pick for Void builds, though dupes only extend duration.",
+          "Buff all Void cards for the turn, though dupes only extend duration",
       },
       {
         id: "Dark Condensation IV",
@@ -318,7 +316,7 @@ const uniqueCards: UniqueCard[] = [
         type: "skill",
         description:
           "Choose 1 Attack  card(s), +100%  Damage Amount until  used",
-        reasoning: "Flexible targeting across zones but lower multiplier.",
+        reasoning: "Flexible targeting across zones but lower multiplier",
       },
       {
         id: "Dark Condensation V",
@@ -326,7 +324,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "upgrade",
         description: "Choose 1 Attack  Card(s) in hand, +50%  Damage Amount",
-        reasoning: "Permanent but lowest multiplier and exhausts.",
+        reasoning: "Permanent but lowest multiplier and exhausts itself",
       },
     ],
     divineEpiphanies: [
@@ -349,16 +347,6 @@ const uniqueCards: UniqueCard[] = [
         description: "",
       },
     ],
-  },
-  {
-    id: "Predator's Blade",
-    name: "Predator's Blade",
-    image: "/images/character/rei/unique4.png",
-    type: "attack",
-    cost: 1,
-    rarity: CardRarities.Unique,
-    description: "300% Damage For 1 turn 4 Morale",
-    epiphanies: [],
   },
 ];
 const recommendedSaveData: SaveData[] = [
