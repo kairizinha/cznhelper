@@ -392,12 +392,12 @@ export const renoaData: CharacterData = {
       contribution: "",
     },
     {
-      name: "",
-      contribution: "",
+      name: "Zyla",
+      contribution: "Card Data",
     },
     {
       name: "Lucie",
-      contribution: "Guide Author and Data",
+      contribution: "Guide Author",
     },
   ],
 

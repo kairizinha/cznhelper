@@ -273,7 +273,7 @@ const uniqueCards: UniqueCard[] = [
     epiphanies: [
       {
         id: "Oath of Vanity I",
-        tier: CardTier.SPlus,
+        tier: CardTier.S,
         cost: 1,
         type: "upgrade",
         description:
@@ -287,7 +287,7 @@ const uniqueCards: UniqueCard[] = [
         type: "upgrade",
         description:
           "[ Unique / Initiation ] When Futility is created, change those cards into a 1-cost Attack Card with 80% Damage and Heal effects",
-        reasoning: "Used mainly for initiation without his E3",
+        reasoning: "Used mainly for initiation without Manifest Ego 3",
       },
       {
         id: "Oath of Vanity III",
@@ -482,14 +482,14 @@ const partnersGuide: PartnersGuide[] = [
     description: `Strong multiplicative damage boost: 20% passive card damage plus 24% multiplicative for 1 turn after exhausting cards. 
     Excellent synergy with Kayron's Exhaust-heavy playstyle.
     `,
-    tier: CardTier.SPlus,
+    tier: CardTier.S,
   },
   {
     id: "zatera",
     description: `Solid F2P option providing 16% ATK—a rare stat that scales well. 
     However, Kayron benefits more from multiplicative card damage (which scales his innate effects).
     `,
-    tier: CardTier.S,
+    tier: CardTier.A,
   },
   {
     id: "anteia",
@@ -543,7 +543,8 @@ export const kayronData: CharacterData = {
       contribution: "Helped with testing and feedback",
     },
     {
-      name: "notmiseryfell",
+      name: "MISERY CZN",
+      link: "https://www.youtube.com/@MISERY_CZN",
       contribution: "Helped with testing and feedback",
     },
     {

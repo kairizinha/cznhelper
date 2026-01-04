@@ -503,7 +503,7 @@ export const reiData: CharacterData = {
     },
     {
       name: "Lucie",
-      contribution: "Guide Author",
+      contribution: "Guide Author and Data",
     },
   ],
 
