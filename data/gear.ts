@@ -405,7 +405,7 @@ export const weapons: GearData[] = [
     source: ["Laboratory 0"],
     atk: "82",
     imageName: "mutant-predator-spike",
-    effect: `When you have 6 or more cards in hand, +30% Damage`,
+    effect: `When you have 4 or more cards in hand, +30% Damage`,
   },
   {
     name: "Overcurrent Shock Unit",
