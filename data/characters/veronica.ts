@@ -18,7 +18,17 @@ import {
 } from "@/types/memory-fragments";
 import { SaveData } from "@/types/save-data";
 
-const commonCards: Card[] = [];
+const commonCards: Card[] = [
+  {
+    id: "Bombardment Prep",
+    name: "Bombardment Prep",
+    image: "/images/character/veronica/unique4.png",
+    type: "upgrade",
+    cost: 1,
+    rarity: CardRarities.Unique,
+    description: "[Unique]  Increase max stack of  Reload by 1  1 Reload",
+  },
+];
 
 const uniqueCards: UniqueCard[] = [
   {
@@ -319,23 +329,13 @@ const uniqueCards: UniqueCard[] = [
       },
     ],
   },
-  {
-    id: "bombardment-prep",
-    name: "Bombardment Prep",
-    image: "/images/character/veronica/unique4.png",
-    type: "upgrade",
-    cost: 1,
-    rarity: CardRarities.Unique,
-    description: "[Unique]  Increase max stack of  Reload by 1  1 Reload",
-    epiphanies: [],
-  },
 ];
 
 const recommendedSaveData: SaveData[] = [
   {
     id: "deck-1",
     name: "High Draw Support",
-    shortDescription: "Balanced support build for most encounters",
+    shortDescription: "",
     description: ``,
     faintMemoryNote: "140 Faint Memory Cost",
     cards: [
@@ -351,9 +351,9 @@ const recommendedSaveData: SaveData[] = [
   },
   {
     id: "deck-2",
-    name: "Mei Lin's Deck",
-    shortDescription: "Specialized high Passion stack build",
-    description: `This deck is Mei Lin's nichest build, it's a high draw deck that uses the Pendant of Resolution V to provide insane passion stacks. PENDANT OF RESOLUTION V NEEDS A -1 COST DIVINE EPIPHANY`,
+    name: "Passion Stacking",
+    shortDescription: "",
+    description: `This deck is Mei Lin's nichest build, it's a high draw deck that uses the Pendant of Resolution V to provide insane passion stacks`,
     faintMemoryNote: "140 Faint Memory Cost",
     cards: [
       "Firing Preparation IV",
@@ -363,6 +363,23 @@ const recommendedSaveData: SaveData[] = [
       "Pendant of Resolution V",
       "Pendant of Resolution V",
       "Sir Kowalski III",
+      "Bombardment Prep",
+    ],
+  },
+  {
+    id: "deck-3",
+    name: "Veronica DPS",
+    shortDescription: "",
+    description: ``,
+    faintMemoryNote: "140 Faint Memory Cost",
+    cards: [
+      "Firing Preparation I",
+      "Repose II",
+      "Pendant of Resolution I",
+      "Sir Kowalski IV",
+      "Sir Kowalski IV",
+      "Sir Kowalski IV",
+      "Sir Kowalski IV",
       "Bombardment Prep",
     ],
   },

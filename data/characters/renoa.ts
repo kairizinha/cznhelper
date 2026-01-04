@@ -284,14 +284,21 @@ const uniqueCards: UniqueCard[] = [
 const recommendedSaveData: SaveData[] = [
   {
     id: "deck-1",
-    name: "deck-1",
+    name: "Deck 1",
     description: "",
     faintMemoryNote: "",
     cards: [],
   },
   {
     id: "deck-2",
-    name: "deck-2",
+    name: "Deck 2",
+    description: "",
+    faintMemoryNote: "",
+    cards: [],
+  },
+  {
+    id: "deck-3",
+    name: "Deck 3",
     description: "",
     faintMemoryNote: "",
     cards: [],
@@ -336,8 +343,8 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
 const partnersGuide: PartnersGuide[] = [
   {
     id: "yuri",
-    description: `Massive damage bonus that also has 2 draw on top of it, perfect Renoa partner and also very F2P friendly.`,
-    tier: CardTier.SPlus,
+    description: ``,
+    tier: CardTier.WIP,
   },
   {
     id: "peko",

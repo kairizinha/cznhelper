@@ -296,6 +296,14 @@ const recommendedSaveData: SaveData[] = [
     faintMemoryNote: "140 Faint Memory Cost",
     cards: [],
   },
+  {
+    id: "deck-3",
+    name: "Deck 3",
+    shortDescription: "",
+    description: ``,
+    faintMemoryNote: "140 Faint Memory Cost",
+    cards: [],
+  },
 ];
 
 const gearsData = {
@@ -337,7 +345,7 @@ const partnersGuide: PartnersGuide[] = [
   {
     id: "peko",
     description: "",
-    tier: CardTier.SPlus,
+    tier: CardTier.WIP,
   },
   {
     id: "yuri",

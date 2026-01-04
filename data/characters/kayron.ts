@@ -355,8 +355,8 @@ const uniqueCards: UniqueCard[] = [
 const recommendedSaveData: SaveData[] = [
   {
     id: "deck-1",
-    name: "Standard",
-    shortDescription: "Balanced build for most encounters",
+    name: "Standard Build",
+    shortDescription: "",
     description: ``,
     faintMemoryNote: "140 Faint Memory Cost",
     cards: [
@@ -372,8 +372,8 @@ const recommendedSaveData: SaveData[] = [
   },
   {
     id: "deck-2",
-    name: "Burst",
-    shortDescription: "High burst damage",
+    name: "Burst Build",
+    shortDescription: "",
     description: ``,
     faintMemoryNote: "140 Faint Memory Cost",
     cards: [
@@ -390,7 +390,7 @@ const recommendedSaveData: SaveData[] = [
   {
     id: "deck-3",
     name: "One Turn Kill",
-    shortDescription: "Niche OTK Build",
+    shortDescription: "",
     description: ``,
     faintMemoryNote: "140 Faint Memory Cost",
     cards: [
