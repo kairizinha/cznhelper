@@ -9,6 +9,7 @@ import {
   MemoryFragmentSetRecommendation,
   UniqueCard,
   PartnersGuide,
+  CreditEntry,
 } from "@/types/character-guides";
 import {
   MemoryFragmentSet,
@@ -47,7 +48,7 @@ const uniqueCards: UniqueCard[] = [
     cost: 1,
     rarity: CardRarities.Rare,
     description:
-      "[ Initiation ] 100% Damage\n1 Cursed Shackles\nCursed Shackles: Add 1 Hit",
+      "[ Initiation ] 100% Damage 1 Cursed Shackles Cursed Shackles: Add 1 Hit",
     epiphanies: [
       {
         id: "Karmic Flames I",
@@ -55,9 +56,9 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description:
-          "[ Initiation ] 150% Damage\n1 Cursed Shackles\nCursed Shackles: Add 1 Hit",
+          "[ Initiation ] 150% Damage 1 Cursed Shackles Cursed Shackles: Add 1 Hit",
         reasoning:
-          "[ For All Epiphanies ] To Be Determined by the Community, for the Community.\nMake sure to reach out to us on Discord: _zyla or lilyium.box to help us build this website for everyone to take advantage of!",
+          "[ For All Epiphanies ] To Be Determined by the Community, for the Community. Make sure to reach out to us on Discord: _zyla or lilyium.box to help us build this website for everyone to take advantage of!",
       },
       {
         id: "Karmic Flames II",
@@ -65,7 +66,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description:
-          "[ Initiation ] 150% Damage\n1 Cursed Shackles\nCursed Shackles: Decrease Cost of the next card of this unit used by 1",
+          "[ Initiation ] 150% Damage 1 Cursed Shackles Cursed Shackles: Decrease Cost of the next card of this unit used by 1",
         reasoning: "",
       },
       {
@@ -74,7 +75,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description:
-          "[ Initiation ] 180% Damage\n1 Cursed Shackles\nCursed Shackles: Increase Damage Amount by 100%",
+          "[ Initiation ] 180% Damage 1 Cursed Shackles Cursed Shackles: Increase Damage Amount by 100%",
         reasoning: "",
       },
       {
@@ -83,7 +84,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 2,
         type: "skill",
         description:
-          "[ Initiation ] 1 Cursed Shackles\nCreate 1 Shadow of the Moon",
+          "[ Initiation ] 1 Cursed Shackles Create 1 Shadow of the Moon",
         reasoning: "",
       },
       {
@@ -92,14 +93,14 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "skill",
         description:
-          "[ Initiation / Exhaust ] 1 Cursed Shackles\nWhen a target inflicted with Cursed Shackles is defeated, create this card",
+          "[ Initiation / Exhaust ] 1 Cursed Shackles When a target inflicted with Cursed Shackles is defeated, create this card",
         reasoning: "",
       },
     ],
     divineEpiphanies: [
       {
         name: "Reduce the cost of this card by 1",
-        reasoning: "Excellent for cost efficiency",
+        reasoning: "",
         icon: "/images/card/icon_card_battle_expand_secred.png",
         description: "",
       },
@@ -113,7 +114,7 @@ const uniqueCards: UniqueCard[] = [
     cost: 0,
     rarity: CardRarities.Rare,
     description:
-      "2 Will-O'-Wisp for each Hit\nof the next Attack Card\nof this unit used",
+      "2 Will-O'-Wisp for each Hit of the next Attack Card of this unit used",
     epiphanies: [
       {
         id: "Tsukuyomi I",
@@ -121,9 +122,9 @@ const uniqueCards: UniqueCard[] = [
         cost: 0,
         type: "skill",
         description:
-          "3 Will-O'-Wisp for each Hit\nof the next Attack Card\nof this unit used",
+          "3 Will-O'-Wisp for each Hit of the next Attack Card of this unit used",
         reasoning:
-          "[ For All Epiphanies ] To Be Determined by the Community, for the Community.\nMake sure to reach out to us on Discord: _zyla or lilyium.box to help us build this website for everyone to take advantage of!",
+          "[ For All Epiphanies ] To Be Determined by the Community, for the Community. Make sure to reach out to us on Discord: _zyla or lilyium.box to help us build this website for everyone to take advantage of!",
       },
       {
         id: "Tsukuyomi II",
@@ -131,7 +132,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 0,
         type: "skill",
         description:
-          "Add 1 Hit(s) to the next\nAttack Card of this unit\nused, 1 Will-O'-Wisp for\neach Hit",
+          "Add 1 Hit(s) to the next Attack Card of this unit used, 1 Will-O'-Wisp for each Hit",
         reasoning: "",
       },
       {
@@ -140,7 +141,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 0,
         type: "skill",
         description:
-          "Add 2 Hit(s) to the next\nShadow of the Moon,\nShadow of the Moon+ used",
+          "Add 2 Hit(s) to the next Shadow of the Moon, Shadow of the Moon+ used",
         reasoning: "",
       },
       {
@@ -148,8 +149,7 @@ const uniqueCards: UniqueCard[] = [
         tier: CardTier.WIP,
         cost: 0,
         type: "skill",
-        description:
-          "3 Will-O'-Wisp for each\nAttack Card of this unit\nin hand",
+        description: "3 Will-O'-Wisp for each Attack Card of this unit in hand",
         reasoning: "",
       },
       {
@@ -158,7 +158,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "upgrade",
         description:
-          "[ Unique / Lead ] When an\nAttack Card of this unit\nis used, 2 Will-O'-Wisp",
+          "[ Unique / Lead ] When an Attack Card of this unit is used, 2 Will-O'-Wisp",
         reasoning: "",
       },
     ],
@@ -172,7 +172,7 @@ const uniqueCards: UniqueCard[] = [
     cost: 1,
     rarity: CardRarities.Rare,
     description:
-      "[ Initiation / Unique ] At the start of the turn, gain\nInhibit\nDecrease Cost of 1 random\ncard(s) of other Combatants\nby 1 until used",
+      "[ Initiation / Unique ] At the start of the turn, gain Inhibit Decrease Cost of 1 random card(s) of other Combatants by 1 until used",
     epiphanies: [
       {
         id: "Bound At Dusk I",
@@ -180,9 +180,9 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "upgrade",
         description:
-          "[ Initiation / Unique ] At the start of the turn, gain\nInhibit\nDecrease Cost of 2 random\ncard(s) of other Combatants\nby 1 until used",
+          "[ Initiation / Unique ] At the start of the turn, gain Inhibit Decrease Cost of 2 random card(s) of other Combatants by 1 until used",
         reasoning:
-          "[ For All Epiphanies ] To Be Determined by the Community, for the Community.\nMake sure to reach out to us on Discord: _zyla or lilyium.box to help us build this website for everyone to take advantage of!",
+          "[ For All Epiphanies ] To Be Determined by the Community, for the Community. Make sure to reach out to us on Discord: _zyla or lilyium.box to help us build this website for everyone to take advantage of!",
       },
       {
         id: "Bound At Dusk II",
@@ -190,7 +190,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "upgrade",
         description:
-          "[ Initiation / Unique ] At the start of the turn, gain\nInhibit\nWhen Shadow of the\nMoon+ is used, decrease\nCost of the\nnext 1 card(s) by 1 until\nused",
+          "[ Initiation / Unique ] At the start of the turn, gain Inhibit When Shadow of the Moon+ is used, decrease Cost of the next 1 card(s) by 1 until used",
         reasoning: "",
       },
       {
@@ -199,7 +199,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "upgrade",
         description:
-          "[ Initiation / Unique ] At the start of the turn, gain\nInhibit\nActivate 2 random\ncard(s) of other\nCombatants",
+          "[ Initiation / Unique ] At the start of the turn, gain Inhibit Activate 2 random card(s) of other Combatants",
         reasoning: "",
       },
       {
@@ -208,7 +208,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "upgrade",
         description:
-          "[ Initiation / Unique ] At the start of the turn, gain\nInhibit\nActivate 2 random\nLead card(s)",
+          "[ Initiation / Unique ] At the start of the turn, gain Inhibit Activate 2 random Lead card(s)",
         reasoning: "",
       },
       {
@@ -217,14 +217,14 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "upgrade",
         description:
-          "[ Initiation / Unique ] At the start of the turn, gain\nInhibit\nDecrease Cost of\n1 card(s) with the\nhighest Cost by 2 until\nused",
+          "[ Initiation / Unique ] At the start of the turn, gain Inhibit Decrease Cost of 1 card(s) with the highest Cost by 2 until used",
         reasoning: "",
       },
     ],
     divineEpiphanies: [
       {
         name: "Reduce the cost of this card by 1",
-        reasoning: "Excellent for cost efficiency",
+        reasoning: "",
         icon: "/images/card/icon_card_battle_expand_secred.png",
         description: "",
       },
@@ -238,7 +238,7 @@ const uniqueCards: UniqueCard[] = [
     cost: 1,
     rarity: CardRarities.Legendary,
     description:
-      "[ Haste ] 60% Damage x 3\n+30% Damage Amount to\nthe next Bind card used",
+      "[ Haste ] 60% Damage x 3 +30% Damage Amount to the next Bind card used",
     epiphanies: [
       {
         id: "Oni Hunt I",
@@ -246,9 +246,9 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description:
-          "[ Haste ] 50% Damage x 4\n+40% Damage Amount to\nthe next Bind card used",
+          "[ Haste ] 50% Damage x 4 +40% Damage Amount to the next Bind card used",
         reasoning:
-          "[ For All Epiphanies ] To Be Determined by the Community, for the Community.\nMake sure to reach out to us on Discord: _zyla or lilyium.box to help us build this website for everyone to take advantage of!",
+          "[ For All Epiphanies ] To Be Determined by the Community, for the Community. Make sure to reach out to us on Discord: _zyla or lilyium.box to help us build this website for everyone to take advantage of!",
       },
       {
         id: "Oni Hunt II",
@@ -256,7 +256,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description:
-          "[ Haste ] 180% Damage\n+60% Damage Amount to\nthe next Bind card used",
+          "[ Haste ] 180% Damage +60% Damage Amount to the next Bind card used",
         reasoning: "",
       },
       {
@@ -265,7 +265,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description:
-          "[ Haste ] 60% Damage x 3\nIf there are no other\nAttack Cards in hand,\nadd 2 Hit(s)",
+          "[ Haste ] 60% Damage x 3 If there are no other Attack Cards in hand, add 2 Hit(s)",
         reasoning: "",
       },
       {
@@ -274,7 +274,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "skill",
         description:
-          "[ Haste ] Create 2 Moonslash\nApply Exhaust to those\ncards, decrease Cost\nby 1 until used",
+          "[ Haste ] Create 2 Moonslash Apply Exhaust to those cards, decrease Cost by 1 until used",
         reasoning: "",
       },
       {
@@ -283,14 +283,14 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "upgrade",
         description:
-          "[ Unique ] +40% Damage Amount\nto Shadow of the\nMoon+\nAt the start of the turn,\n3 Will-O'-Wisp",
+          "[ Unique ] +40% Damage Amount to Shadow of the Moon+ At the start of the turn, 3 Will-O'-Wisp",
         reasoning: "",
       },
     ],
     divineEpiphanies: [
       {
         name: "Reduce the cost of this card by 1",
-        reasoning: "Excellent for cost efficiency",
+        reasoning: "",
         icon: "/images/card/icon_card_battle_expand_secred.png",
         description: "",
       },
@@ -304,18 +304,19 @@ const uniqueCards: UniqueCard[] = [
     cost: 1,
     rarity: CardRarities.Unique,
     description:
-      "[ Bind 1 / Retain ] 50% Damage\n20% Damage Amount\nfor each Bind stack",
+      "[ Bind 1 / Retain ] 50% Damage 20% Damage Amount for each Bind stack",
     epiphanies: [],
   },
 ];
 
 const recommendedSaveData: SaveData[] = [
   {
-    id: "hybrid",
+    id: "deck-1",
     name: "Hybrid",
-    description:
-      "This deck is able to stack Moon+ hits all the while being able to stack up to Bind 3/5, its very strong.\nOptimal Tsukuyomi : Oni Hunt ratio is 3:2, 2:3 is also fine however 4 of one or the other is just bad.",
-    faintMemoryNote: "140 Faint Memory Cost without Convert Method(s)",
+    shortDescription: "",
+    description: `This deck is able to stack Moon+ hits all the while being able to stack up to Bind 3/5, its very strong.
+    Optimal Tsukuyomi : Oni Hunt ratio is 3:2, 2:3 is also fine however 4 of one or the other is just bad.`,
+    faintMemoryNote: "140 Faint Memory Cost",
     cards: [
       "Karmic Flames V",
       "Tsukuyomi III",
@@ -328,47 +329,29 @@ const recommendedSaveData: SaveData[] = [
     ],
   },
   {
-    id: "moonslash",
-    name: "Moonslash Spam",
-    description:
-      "Lower DPS ceiling and higher AP Cost per turn compared to the deck above but still a fun to play build.",
-    faintMemoryNote: "90 Faint Memory Cost without Convert Method(s)",
+    id: "deck-2",
+    name: "Moonslash",
+    shortDescription: "",
+    description: ``,
+    faintMemoryNote: "90 Faint Memory Cost",
     cards: [
+      "Moonslash",
       "Moonslash",
       "Karmic Flames II",
       "Tsukuyomi V",
-      "Oni Hunt V",
-      "Oni Hunt V",
-      "Oni Hunt V",
-      "Oni Hunt V",
+      "Oni Hunt IV",
+      "Oni Hunt IV",
+      "Oni Hunt IV",
+      "Oni Hunt IV",
       "Shadow of the Moon",
     ],
   },
 ];
 
 const gearsData = {
-  weapons: [
-    "Intellect of Discord",
-    "Tentacles of Chaos",
-    "Foggy Crystal Ball",
-    "Mutant Predator Spike",
-    "RFS-17",
-    "Bone Cutter",
-    "Obsidian Sword",
-  ],
-  armors: [
-    "Fragment of the Empty Void",
-    "Wings of Freedom",
-    "Shield of the Watcher",
-    "Rocket-Adorned Cape",
-  ],
-  accessories: [
-    "Emblem of an Exceptional Entity",
-    "Amorphous Cube",
-    "Nerve Hacking Module",
-    "Eye of the Eyeless",
-    "Dimensional Cube",
-  ],
+  weapons: ["Intellect of Discord"],
+  armors: ["Wings of Freedom"],
+  accessories: ["Nerve Hacking Module"],
 };
 
 const recommendedSources = ["Laboratory 0"];
@@ -377,13 +360,11 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
   bestInSlot: [
     {
       id: "black-wing",
-      description:
-        "Attack is a powerhouse of a stat in the game, and considering how bad 4 piece sets are designed, Attack wins over easily.",
+      description: "Standard Attack set for raw damage scaling",
     },
     {
       id: "executioners-tool",
-      description:
-        "If Crit Rate is reliably high, having more Crit Damage results in more damage.",
+      description: "Standard Critical Damage build with high crit scaling",
     },
     {
       id: "cursed-corpse",
@@ -407,30 +388,30 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
 const partnersGuide: PartnersGuide[] = [
   {
     id: "itsuku",
-    description:
-      "[ Best in Slot / Signature Partner ] Ego Skill helps increase one turn damage by a lot.",
-    tier: CardTier.SPlus,
+    description: `[ Best in Slot / Signature ] 
+    
+    `,
+    tier: CardTier.WIP,
   },
   {
     id: "zatera",
-    description: "Best Free To Play option, massive Attack stat stick.",
-    tier: CardTier.S,
+    description: ``,
+    tier: CardTier.WIP,
   },
   {
     id: "bria",
-    description:
-      "If you need to use Bria's Ego Skill go ahead, otherwise she is a bad parter for Chizuru overall.",
-    tier: CardTier.A,
+    description: ``,
+    tier: CardTier.WIP,
   },
   {
     id: "anteia",
-    description: "Weaker than Zatera at E0, you shouldn't use her.",
-    tier: CardTier.Bad,
+    description: ``,
+    tier: CardTier.WIP,
   },
   {
     id: "eloise",
-    description: "Same as Anteia, but can be used for funny Weaken spamming.",
-    tier: CardTier.Bad,
+    description: ``,
+    tier: CardTier.WIP,
   },
 ];
 
@@ -438,14 +419,44 @@ export const chizuruData: CharacterData = {
   attribute: Attributes.Void,
   job: CharacterClass.Psionic,
   role: CharacterRole.MainDPS,
-  // bannerUrl: "",
-  // avatarUrl: "",
 
   overview: `
 
   `.trim(),
   strengths: [""],
   weaknesses: [""],
+
+  externalResources: [
+    {
+      label: "CZN Official Discord",
+      url: "https://discord.gg/chaoszeronightmare",
+      note: "Guide discussion and validation",
+    },
+    {
+      label: "Sproot's Nightmare",
+      url: "https://docs.google.com/spreadsheets/d/1-KkQUFrjD_2Un3zMDmypCwZFVF5VmowswqYdLt9MOw8/edit?gid=1449498302#gid=1449498302",
+      note: "Theorycrafting and math base",
+    },
+  ],
+
+  credits: [
+    {
+      name: "",
+      contribution: "",
+    },
+    {
+      name: "",
+      contribution: "",
+    },
+    {
+      name: "Zyla",
+      contribution: "Card Data",
+    },
+    {
+      name: "Lucie",
+      contribution: "Guide Author",
+    },
+  ],
 
   commonCards: commonCards,
   uniqueCards: uniqueCards,

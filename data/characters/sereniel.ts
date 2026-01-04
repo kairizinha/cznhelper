@@ -9,6 +9,7 @@ import {
   MemoryFragmentSetRecommendation,
   UniqueCard,
   PartnersGuide,
+  CreditEntry,
 } from "@/types/character-guides";
 import {
   MemoryFragmentSet,
@@ -47,7 +48,7 @@ const uniqueCards: UniqueCard[] = [
     cost: 0,
     rarity: CardRarities.Rare,
     description:
-      "100% damage\n2 Afterglow\nOn Ravage, move from\nGraveyard to hand",
+      "100% damage  2 Afterglow  On Ravage, move from  Graveyard to hand",
     epiphanies: [
       {
         id: "Homing Laser I",
@@ -55,7 +56,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description:
-          "150% damage\nOn Ravage, Move to\nhand\nDestroy: Add 1 Hit(s)",
+          "150% damage  On Ravage, Move to  hand  Destroy: Add 1 Hit(s)",
         reasoning: "",
       },
       {
@@ -63,7 +64,7 @@ const uniqueCards: UniqueCard[] = [
         tier: CardTier.WIP,
         cost: 0,
         type: "attack",
-        description: "150% Damage\n3 Afterglow \nOn Ravage, Move to\nhand",
+        description: "150% Damage  3 Afterglow   On Ravage, Move to  hand",
         reasoning: "",
       },
       {
@@ -72,7 +73,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description:
-          "150% Damage\n2 Afterglow\nCreate 2 Homing Laser\nL in Discard Pile",
+          "150% Damage  2 Afterglow  Create 2 Homing Laser  L in Discard Pile",
         reasoning: "",
       },
       {
@@ -81,7 +82,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description:
-          "100% Damage\n1 Afterglow\nOn Ravage or at the\nstart of the turn, Move\nto hand",
+          "100% Damage  1 Afterglow  On Ravage or at the  start of the turn, Move  to hand",
         reasoning: "",
       },
       {
@@ -90,7 +91,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 0,
         type: "attack",
         description:
-          "150% Damage\n2 Afterglow\nMove all Homing Laser L\nin Graveyard to hand",
+          "150% Damage  2 Afterglow  Move all Homing Laser L  in Graveyard to hand",
         reasoning: "",
       },
     ],
@@ -104,7 +105,7 @@ const uniqueCards: UniqueCard[] = [
     cost: 1,
     rarity: CardRarities.Rare,
     description:
-      "120% Damage\n0.5 Tenacity Damage\nIf the taret was not\nRavaged, activate 1\nmore time",
+      "120% Damage  0.5 Tenacity Damage  If the taret was not  Ravaged, activate 1  more time",
     epiphanies: [
       {
         id: "Plasma Missile I",
@@ -112,7 +113,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description:
-          "180% Damage\n1 Tenacity Damage\nIf the taret was not\nRavaged, activate 1\nmore time",
+          "180% Damage  1 Tenacity Damage  If the taret was not  Ravaged, activate 1  more time",
         reasoning: "",
       },
       {
@@ -121,7 +122,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description:
-          "180% Damage\n60% Damage Amount\nfor each decreased\nTenacity of the target\n(max 10)",
+          "180% Damage  60% Damage Amount  for each decreased  Tenacity of the target  (max 10)",
         reasoning: "",
       },
       {
@@ -130,7 +131,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description:
-          "120% Damage\n2 Instinct Weakness\n60% Damage Amount\nto Homing Laser for 1\nturn(s)",
+          "120% Damage  2 Instinct Weakness  60% Damage Amount  to Homing Laser for 1  turn(s)",
         reasoning: "",
       },
       {
@@ -138,7 +139,7 @@ const uniqueCards: UniqueCard[] = [
         tier: CardTier.WIP,
         cost: 1,
         type: "attack",
-        description: "120% Damage\nCreate 3 Homing Laser\nL in Draw Pile",
+        description: "120% Damage  Create 3 Homing Laser  L in Draw Pile",
         reasoning: "",
       },
       {
@@ -147,7 +148,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 0,
         type: "upgrade",
         description:
-          "[ Unique ] At the end of the turn, 50%\nDamage to a random\nenemy\n+30% Damage Amount for\neach Homing Laser Moved\nto hand for 1 turn(s)",
+          "[ Unique ] At the end of the turn, 50%  Damage to a random  enemy  +30% Damage Amount for  each Homing Laser Moved  to hand for 1 turn(s)",
         reasoning: "",
       },
     ],
@@ -160,14 +161,14 @@ const uniqueCards: UniqueCard[] = [
     type: "skill",
     cost: 1,
     rarity: CardRarities.Rare,
-    description: "Create 2 Homing Laser\nL",
+    description: "Create 2 Homing Laser  L",
     epiphanies: [
       {
         id: "Shining Core I",
         tier: CardTier.WIP,
         cost: 1,
         type: "skill",
-        description: "Create 3 Homing Laser\nL",
+        description: "Create 3 Homing Laser  L",
         reasoning: "",
       },
       {
@@ -176,7 +177,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "skill",
         description:
-          "Create 3 Homing Laser\nL, increase Exhaust of\nthose cards by 2",
+          "Create 3 Homing Laser  L, increase Exhaust of  those cards by 2",
         reasoning: "",
       },
       {
@@ -185,7 +186,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "upgrade",
         description:
-          "[ Unique / Initiation ] Create 2 Homing Laser\nL\nOn Ravage, create\n2 Homing Laser L",
+          "[ Unique / Initiation ] Create 2 Homing Laser  L  On Ravage, create  2 Homing Laser L",
         reasoning: "",
       },
       {
@@ -193,7 +194,7 @@ const uniqueCards: UniqueCard[] = [
         tier: CardTier.WIP,
         cost: "X",
         type: "skill",
-        description: "Create X+1 Homing\nLaser L\nApply Haste to  those\ncards",
+        description: "Create X+1 Homing  Laser L  Apply Haste to  those  cards",
         reasoning: "",
       },
       {
@@ -202,7 +203,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "upgrade",
         description:
-          "Select and create\n1 Homing Laser with\ntheir own distinct\nEpiphanies",
+          "Select and create  1 Homing Laser with  their own distinct  Epiphanies",
         reasoning: "",
       },
     ],
@@ -216,7 +217,7 @@ const uniqueCards: UniqueCard[] = [
     cost: 3,
     rarity: CardRarities.Legendary,
     description:
-      "120% Damage x 4 to\n random enemies\n1 Tenacity Damage for\n each Hit",
+      "120% Damage x 4 to   random enemies  1 Tenacity Damage for   each Hit",
     epiphanies: [
       {
         id: "Cobalt Light I",
@@ -224,7 +225,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 3,
         type: "attack",
         description:
-          "180% Damage x 4 to\n random enemies\n1 Tenacity Damage for\n each Hit\nRavage: Decrease Cost\nby 1",
+          "180% Damage x 4 to   random enemies  1 Tenacity Damage for   each Hit  Ravage: Decrease Cost  by 1",
         reasoning: "",
       },
       {
@@ -233,7 +234,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 3,
         type: "attack",
         description:
-          "[ Retain ] 120% Damage x 4 to\n random enemies\n1 Tenacity Damage for\n each Hit\nRetain: Add 1 Hit until use\n(max 5 times)",
+          "[ Retain ] 120% Damage x 4 to   random enemies  1 Tenacity Damage for   each Hit  Retain: Add 1 Hit until use  (max 5 times)",
         reasoning: "",
       },
       {
@@ -242,7 +243,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 2,
         type: "attack",
         description:
-          "120% Damage x 4 to\n random enemies\nCreate 1 Homing Laser\nL for each target Hit",
+          "120% Damage x 4 to   random enemies  Create 1 Homing Laser  L for each target Hit",
         reasoning: "",
       },
       {
@@ -251,7 +252,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description:
-          "120% Damage to\n random enemies\nAdd 1 Hit for\neach Homing Laser in\nhand",
+          "120% Damage to   random enemies  Add 1 Hit for  each Homing Laser in  hand",
         reasoning: "",
       },
       {
@@ -260,7 +261,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 3,
         type: "attack",
         description:
-          "[ Weakness Attack ] 120% Damage x 4\nRavage: Activate 1\nmore time",
+          "[ Weakness Attack ] 120% Damage x 4  Ravage: Activate 1  more time",
         reasoning: "",
       },
     ],
@@ -280,25 +281,27 @@ const uniqueCards: UniqueCard[] = [
 
 const recommendedSaveData: SaveData[] = [
   {
-    id: "standard-1",
-    name: "Standard 1",
-    description: "",
-    faintMemoryNote: "140 Faint Memory Cost without Convert Method",
+    id: "deck-1",
+    name: "Deck 1",
+    shortDescription: "",
+    description: ``,
+    faintMemoryNote: "140 Faint Memory Cost",
     cards: [],
   },
   {
-    id: "standard-2",
-    name: "Standard 2",
-    description: "",
-    faintMemoryNote: "140 Faint Memory Cost without Convert Method",
+    id: "deck-2",
+    name: "Deck 2",
+    shortDescription: "",
+    description: ``,
+    faintMemoryNote: "140 Faint Memory Cost",
     cards: [],
   },
 ];
 
 const gearsData = {
-  weapons: [],
-  armors: [],
-  accessories: [],
+  weapons: ["Intellect of Discord"],
+  armors: ["Wings of Freedom"],
+  accessories: ["Nerve Hacking Module"],
 };
 
 const recommendedSources = ["Laboratory 0"];
@@ -307,18 +310,25 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
   bestInSlot: [
     {
       id: "judgments-flames",
-      description:
-        "+50% Damage Amount to Instinct Cards used against Ravaged targets",
+      description: "",
     },
-    { id: "executioners-tool", description: "+25% Critical Damage" },
+    {
+      id: "executioners-tool",
+      description: "Standard Critical Damage build with high crit scaling",
+    },
   ],
   alternative: [
-    { id: "black-wing", description: "+12% Attack" },
-    { id: "executioners-tool", description: "+25% Critical Damage" },
+    {
+      id: "black-wing",
+      description: "Standard Attack set for raw damage scaling",
+    },
+    {
+      id: "executioners-tool",
+      description: "Standard Critical Damage build with high crit scaling",
+    },
     {
       id: "cursed-corpse",
-      description:
-        "Increase damage dealth to targets inflicted with Agony by 10%",
+      description: "Alternative that outperforms with consistent Agony uptime",
     },
   ],
 };
@@ -332,12 +342,12 @@ const partnersGuide: PartnersGuide[] = [
   {
     id: "yuri",
     description: "",
-    tier: CardTier.S,
+    tier: CardTier.WIP,
   },
   {
     id: "serithea",
     description: "",
-    tier: CardTier.A,
+    tier: CardTier.WIP,
   },
 ];
 
@@ -345,8 +355,6 @@ export const serenielData: CharacterData = {
   attribute: Attributes.Instinct,
   job: CharacterClass.Hunter,
   role: CharacterRole.MainDPS,
-  // bannerUrl: "",
-  // avatarUrl: "",
 
   overview: `
   
@@ -354,6 +362,34 @@ export const serenielData: CharacterData = {
   strengths: [""],
 
   weaknesses: [""],
+
+  externalResources: [
+    {
+      label: "CZN Official Discord",
+      url: "https://discord.gg/chaoszeronightmare",
+      note: "Guide discussion and validation",
+    },
+    {
+      label: "Sproot's Nightmare",
+      url: "https://docs.google.com/spreadsheets/d/1-KkQUFrjD_2Un3zMDmypCwZFVF5VmowswqYdLt9MOw8/edit?gid=79832103#gid=79832103",
+      note: "Theorycrafting and math base",
+    },
+  ],
+
+  credits: [
+    {
+      name: "",
+      contribution: "",
+    },
+    {
+      name: "",
+      contribution: "",
+    },
+    {
+      name: "Lucie",
+      contribution: "Guide Author and Data",
+    },
+  ],
 
   commonCards: commonCards,
   uniqueCards: uniqueCards,

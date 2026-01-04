@@ -9,6 +9,7 @@ import {
   MemoryFragmentSetRecommendation,
   UniqueCard,
   PartnersGuide,
+  CreditEntry,
 } from "@/types/character-guides";
 import {
   MemoryFragmentSet,
@@ -25,7 +26,7 @@ const commonCards: Card[] = [
     cost: 1,
     type: "attack",
     rarity: CardRarities.Common,
-    description: "150% Damage\nCreate 1 Futility\nCard(s)",
+    description: "100% Damage",
   },
   {
     id: "Black Veil",
@@ -46,16 +47,15 @@ const uniqueCards: UniqueCard[] = [
     type: "attack",
     cost: 1,
     rarity: CardRarities.Rare,
-    description: "140% Damage\nCreate 1 Dirge Bullet\nCard(s)",
+    description: "140% Damage Create 1 Dirge Bullet Card(s)",
     epiphanies: [
       {
         id: "Echo of Sorrow I",
         tier: CardTier.WIP,
         cost: 1,
         type: "attack",
-        description: "140% Damage\nCreate 2 Dirge Bullet\nCard(s)",
-        reasoning:
-          "[ For All Epiphanies ] To Be Determined by the Community, for the Community.\nMake sure to reach out to us on Discord: _zyla or lilyium.box to help us build this website for everyone to take advantage of!",
+        description: "140% Damage Create 2 Dirge Bullet Card(s)",
+        reasoning: "",
       },
       {
         id: "Echo of Sorrow II",
@@ -63,7 +63,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description:
-          "140% Damage\nCreate 1 Dirge Bullet\nCard(s), Create 2\nCard(s) in Discard Pile",
+          "140% Damage Create 1 Dirge Bullet Card(s), Create 2 Card(s) in Discard Pile",
         reasoning: "",
       },
       {
@@ -72,7 +72,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description:
-          "140% Damage\nCreate 2 Dirge Bullet\nCard(s), Discard\n2 Dirge Bullet Card(s)\nfrom Draw Pile",
+          "140% Damage Create 2 Dirge Bullet Card(s), Discard 2 Dirge Bullet Card(s) from Draw Pile",
         reasoning: "",
       },
       {
@@ -80,7 +80,7 @@ const uniqueCards: UniqueCard[] = [
         tier: CardTier.WIP,
         cost: 1,
         type: "skill",
-        description: "Create 3 Dirge Bullet\nCard(s)",
+        description: "Create 3 Dirge Bullet Card(s)",
         reasoning: "",
       },
       {
@@ -89,7 +89,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "upgrade",
         description:
-          "[ Initiation ] Create 1 Dirge Bullet\nCard(s)\nAt the start of the turn,\ncreate 1 Dirge Bullet\nCard(s)",
+          "[ Initiation ] Create 1 Dirge Bullet Card(s) At the start of the turn, create 1 Dirge Bullet Card(s)",
         reasoning: "",
       },
     ],
@@ -103,7 +103,7 @@ const uniqueCards: UniqueCard[] = [
     cost: 1,
     rarity: CardRarities.Rare,
     description:
-      "180% Damage\nIf Dirge Bullet is in\nhand, discard 1 and\n+100% Damage\nAmount",
+      "180% Damage If Dirge Bullet is in hand, discard 1 and +100% Damage Amount",
     epiphanies: [
       {
         id: "Instant Judgment I",
@@ -111,9 +111,8 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description:
-          "270% Damage\nIf Dirge Bullet is in\nhand, discard 1 card\nand +150% Damage\nAmount",
-        reasoning:
-          "[ For All Epiphanies ] To Be Determined by the Community, for the Community.\nMake sure to reach out to us on Discord: _zyla or lilyium.box to help us build this website for everyone to take advantage of!",
+          "270% Damage If Dirge Bullet is in hand, discard 1 card and +150% Damage Amount",
+        reasoning: "",
       },
       {
         id: "Instant Judgment II",
@@ -121,7 +120,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description:
-          "220% Damage\nIf Dirge Bullet is in Draw\nPile, discard 1 card and\n+120% Damage\nAmount",
+          "220% Damage If Dirge Bullet is in Draw Pile, discard 1 card and +120% Damage Amount",
         reasoning: "",
       },
       {
@@ -130,7 +129,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description:
-          "220% Damage\nIf Dirge Bullet is in\nGraveyard, Exhaust 1\nand add 1 Hit(s)",
+          "220% Damage If Dirge Bullet is in Graveyard, Exhaust 1 and add 1 Hit(s)",
         reasoning: "",
       },
       {
@@ -139,7 +138,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 2,
         type: "attack",
         description:
-          "180% Damage\nWhen moved to\nDiscard Pile, 250%\nExtra Attack to a\nrandom enemy",
+          "180% Damage When moved to Discard Pile, 250% Extra Attack to a random enemy",
         reasoning: "",
       },
       {
@@ -148,7 +147,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "upgrade",
         description:
-          "At the end of the turn,\n200% Extra Attack to\nthe enemy with lowest\nHP",
+          "At the end of the turn, 200% Extra Attack to the enemy with lowest HP",
         reasoning: "",
       },
     ],
@@ -162,7 +161,7 @@ const uniqueCards: UniqueCard[] = [
     cost: 1,
     rarity: CardRarities.Rare,
     description:
-      "50% Damage x 3\n+20% Damage Amount\nfor each Dirge Bullet in\nhand",
+      "50% Damage x 3 +20% Damage Amount for each Dirge Bullet in hand",
     epiphanies: [
       {
         id: "Ballad of Pitch Black I",
@@ -170,9 +169,8 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description:
-          "75% Damage x 3\n+30% Damage Amount\nfor each Dirge Bullet in\nhand",
-        reasoning:
-          "[ For All Epiphanies ] To Be Determined by the Community, for the Community.\nMake sure to reach out to us on Discord: _zyla or lilyium.box to help us build this website for everyone to take advantage of!",
+          "75% Damage x 3 +30% Damage Amount for each Dirge Bullet in hand",
+        reasoning: "",
       },
       {
         id: "Ballad of Pitch Black II",
@@ -180,7 +178,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "skill",
         description:
-          "Move up to 3 Dirge\nBullet Card(s) from\nDraw Pile and\nGraveyard to hand",
+          "Move up to 3 Dirge Bullet Card(s) from Draw Pile and Graveyard to hand",
         reasoning: "",
       },
       {
@@ -189,7 +187,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description:
-          "50% Damage x 3\n1 Mark to the target for\neach Dirge Bullet in\nhand",
+          "50% Damage x 3 1 Mark to the target for each Dirge Bullet in hand",
         reasoning: "",
       },
       {
@@ -198,7 +196,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description:
-          "50% Damage x 3\nIncrease Damage\nAmount of Dirge\nBullet's Extra Attack by\n100% for 1 turn",
+          "50% Damage x 3 Increase Damage Amount of Dirge Bullet's Extra Attack by 100% for 1 turn",
         reasoning: "",
       },
       {
@@ -207,7 +205,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description:
-          "50% Damage x 3\nExhaust all Dirge\nBullet in the Graveyard,\nincrease Damage\nAmount by 50% for\neach",
+          "50% Damage x 3 Exhaust all Dirge Bullet in the Graveyard, increase Damage Amount by 50% for each",
         reasoning: "",
       },
     ],
@@ -221,7 +219,7 @@ const uniqueCards: UniqueCard[] = [
     cost: 0,
     rarity: CardRarities.Legendary,
     description:
-      "Discard up to 2 Card(s)\nfrom hand\nCreate Dirge Bullet for\neach",
+      "Discard up to 2 Card(s) from hand Create Dirge Bullet for each",
     epiphanies: [
       {
         id: "Flower of Devoured Fate I",
@@ -229,9 +227,8 @@ const uniqueCards: UniqueCard[] = [
         cost: 0,
         type: "skill",
         description:
-          "Discard up to 3 Card(s)\nfrom hand\nCreate Dirge Bullet for\neach",
-        reasoning:
-          "[ For All Epiphanies ] To Be Determined by the Community, for the Community.\nMake sure to reach out to us on Discord: _zyla or lilyium.box to help us build this website for everyone to take advantage of!",
+          "Discard up to 3 Card(s) from hand Create Dirge Bullet for each",
+        reasoning: "",
       },
       {
         id: "Flower of Devoured Fate II",
@@ -239,7 +236,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "skill",
         description:
-          "[ Exhaust ] Discard all other\nCombatants cards from\nhand\nCreate 2 Dirge Bullet\nfor each",
+          "[ Exhaust ] Discard all other Combatants cards from hand Create 2 Dirge Bullet for each",
         reasoning: "",
       },
       {
@@ -248,7 +245,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 0,
         type: "skill",
         description:
-          "Discard up to 2 Card(s)\nfrom hand\nFor each Discarded\nCard with Cost 1, +40%\nDamage Amount of\nnext card",
+          "Discard up to 2 Card(s) from hand For each Discarded Card with Cost 1, +40% Damage Amount of next card",
         reasoning: "",
       },
       {
@@ -257,7 +254,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "skill",
         description:
-          "Draw 2\nIf Dirge Bullet is in\nhand, Draw 1 additional\ncard(s)",
+          "Draw 2 If Dirge Bullet is in hand, Draw 1 additional card(s)",
         reasoning: "",
       },
       {
@@ -265,7 +262,7 @@ const uniqueCards: UniqueCard[] = [
         tier: CardTier.WIP,
         cost: 0,
         type: "skill",
-        description: "Grant Retrieve to all\nDirge Bullet in hand",
+        description: "Grant Retrieve to all Dirge Bullet in hand",
         reasoning: "",
       },
     ],
@@ -279,7 +276,7 @@ const uniqueCards: UniqueCard[] = [
     cost: 1,
     rarity: CardRarities.Unique,
     description:
-      "150% Damage (+0%)\nDiscard all Dirge Bullet,\n+50% Damage Amount for\neach",
+      "150% Damage (+0%) Discard all Dirge Bullet, +50% Damage Amount for each",
     epiphanies: [],
   },
 ];
@@ -289,72 +286,49 @@ const recommendedSaveData: SaveData[] = [
     id: "deck-1",
     name: "deck-1",
     description: "",
-    faintMemoryNote:
-      "Make sure to reach out to us on Discord: _zyla or lilyium.box to help us build this website for everyone to take advantage of!",
+    faintMemoryNote: "",
     cards: [],
   },
   {
     id: "deck-2",
     name: "deck-2",
     description: "",
-    faintMemoryNote: "X Faint Memory Cost without Convert Method(s)",
+    faintMemoryNote: "",
     cards: [],
   },
 ];
 
 const gearsData = {
-  weapons: [
-    "Intellect of Discord",
-    "Tentacles of Chaos",
-    "Mutant Predator Spike",
-    "Dagger That Tricked the Shadow",
-    "Sword Reflected in the Lake",
-  ],
-  armors: [
-    "Fragment of the Empty Void",
-    "Wings of Freedom",
-    "Rocket-Adorned Cape",
-    "Fairy King's Crown",
-  ],
-  accessories: [
-    "Dimensional Cube",
-    "Emblem of an Exceptional Entity",
-    "Amorphous Cube",
-    "Nerve Hacking Module",
-    "Superconductive Protein",
-    "Source of the Forbidden",
-  ],
+  weapons: ["Intellect of Discord"],
+  armors: ["Fragment of the Empty Void"],
+  accessories: ["Dimensional Cube"],
 };
 
-const recommendedSources = ["Laboratory 0", "Swamp of Judgment"];
+const recommendedSources = ["Laboratory 0"];
 
 const memoryFragmentSets: MemoryFragmentSetRecommendation = {
   bestInSlot: [
     {
       id: "conquerors-aspect",
-      description:
-        "THE Best fragment set for Renoa and nothing ever comes close to the power of Conqueror's Aspect.",
+      description: "",
     },
     {
       id: "executioners-tool",
-      description: "Boosts bullet's critical damage even more.",
+      description: "Standard Critical Damage build with high crit scaling",
     },
   ],
   alternative: [
     {
       id: "black-wing",
-      description:
-        "Attack is a powerhouse of a stat in the game, and considering how bad 4 piece sets are designed, Attack wins over easily.",
+      description: "Standard Attack set for raw damage scaling",
     },
     {
       id: "executioners-tool",
-      description:
-        "If Crit Rate is reliably high, having more Crit Damage results in more damage.",
+      description: "Standard Critical Damage build with high crit scaling",
     },
     {
       id: "cursed-corpse",
-      description:
-        "If Agony uptime is near 100%, you get free damage bonus, which makes this set better than other options.",
+      description: "Alternative that outperforms with consistent Agony uptime",
     },
   ],
 };
@@ -362,31 +336,28 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
 const partnersGuide: PartnersGuide[] = [
   {
     id: "yuri",
-    description:
-      "Massive damage bonus that happens to have 2 draw on top of it, perfect Renoa partner and also very F2P friendly.",
+    description: `Massive damage bonus that also has 2 draw on top of it, perfect Renoa partner and also very F2P friendly.`,
     tier: CardTier.SPlus,
   },
   {
     id: "peko",
-    description:
-      "Slightly behind Yuri, could be better if you run a Ravage support.",
-    tier: CardTier.A,
+    description: ``,
+    tier: CardTier.WIP,
   },
   {
     id: "serithea",
-    description: "Outclassed by Yuri",
-    tier: CardTier.B,
+    description: ``,
+    tier: CardTier.WIP,
   },
   {
     id: "akad",
-    description: "Good for bursting but overall loses to Yuri's Draw 2.",
-    tier: CardTier.B,
+    description: ``,
+    tier: CardTier.WIP,
   },
   {
     id: "kiara",
-    description:
-      "[ (NOT) Best in Slot / Signature Partner ] Activation Condition is unreliable and the damage boost is not that great.",
-    tier: CardTier.C,
+    description: ``,
+    tier: CardTier.WIP,
   },
 ];
 
@@ -394,8 +365,6 @@ export const renoaData: CharacterData = {
   attribute: Attributes.Void,
   job: CharacterClass.Hunter,
   role: CharacterRole.MainDPS,
-  // bannerUrl: "",
-  // avatarUrl: "",
 
   overview: `
   
@@ -403,6 +372,35 @@ export const renoaData: CharacterData = {
   strengths: [""],
 
   weaknesses: [""],
+
+  externalResources: [
+    {
+      label: "CZN Official Discord",
+      url: "https://discord.gg/chaoszeronightmare",
+      note: "Guide discussion and validation",
+    },
+    {
+      label: "Sproot's Nightmare",
+      url: "https://docs.google.com/spreadsheets/d/1-KkQUFrjD_2Un3zMDmypCwZFVF5VmowswqYdLt9MOw8/edit?gid=79832103#gid=79832103",
+      note: "Theorycrafting and math base",
+    },
+  ],
+
+  credits: [
+    {
+      name: "",
+      contribution: "",
+    },
+    {
+      name: "",
+      contribution: "",
+    },
+    {
+      name: "Lucie",
+      contribution: "Guide Author and Data",
+    },
+  ],
+
   commonCards: commonCards,
   uniqueCards: uniqueCards,
   recommendedSaveData: recommendedSaveData,

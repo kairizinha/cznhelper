@@ -88,7 +88,7 @@ const characters = [
     job: "psionic",
     element: "void",
     rarity: 5,
-    hasGuide: false,
+    hasGuide: true,
   },
   {
     id: "haru",
@@ -200,7 +200,7 @@ const characters = [
     job: "controller",
     element: "void",
     rarity: 4,
-    hasGuide: false,
+    hasGuide: true,
   },
   {
     id: "renoa",
@@ -232,7 +232,7 @@ const characters = [
     job: "hunter",
     element: "instinct",
     rarity: 5,
-    hasGuide: false,
+    hasGuide: true,
   },
   {
     id: "tressa",
@@ -248,7 +248,7 @@ const characters = [
     job: "ranger",
     element: "passion",
     rarity: 5,
-    hasGuide: false,
+    hasGuide: true,
   },
   {
     id: "yuki",
