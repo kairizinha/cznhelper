@@ -1660,15 +1660,35 @@ export function RunTracker() {
                 </div>
                 <div className="flex gap-2">
                   <Button
-                    variant="outline"
                     size="sm"
                     onClick={undoLastAction}
                     disabled={!actionHistory.length}
+                    variant="outline"
+                    className="
+                    bg-card/80 border-border/50 text-purple-300
+                    hover:bg-purple-500/10 hover:border-purple-400
+                    hover:translate-y-[-2px]
+                    disabled:opacity-40 disabled:hover:translate-y-0
+                    transition-all
+                  "
                   >
                     <Undo className="h-4 w-4" />
+                    Undo
                   </Button>
-                  <Button variant="outline" size="sm" onClick={resetDeck}>
+
+                  <Button
+                    size="sm"
+                    onClick={resetDeck}
+                    variant="outline"
+                    className="
+                    bg-card/80 border-red-500/40 text-red-400
+                    hover:bg-red-500/10 hover:border-red-500/60
+                    hover:translate-y-[-2px]
+                    transition-all
+                  "
+                  >
                     <RotateCcw className="h-4 w-4" />
+                    Reset
                   </Button>
                 </div>
               </div>
