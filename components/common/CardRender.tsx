@@ -282,9 +282,9 @@ export const CardRender = (props: CardProps) => {
                             <p
                               className={`
                                 text-center font-semibold leading-snug
-                                ${isSmall ? "text-xs" : "text-lg"}
+                                ${isSmall ? "text-sm" : "text-lg"}
                               `}
-                              style={{ color: "#e9bc7eff" }}
+                              style={{ color: "#f0c180ff" }}
                             >
                               {bracketedText}
                             </p>

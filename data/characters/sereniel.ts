@@ -322,17 +322,17 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
     },
     {
       id: "executioners-tool",
-      description: "Standard Critical Damage build with high crit scaling",
+      description: "Standard set for critical damage scaling",
     },
   ],
   alternative: [
     {
       id: "black-wing",
-      description: "Standard Attack set for raw damage scaling",
+      description: "Standard set for raw damage scaling",
     },
     {
       id: "executioners-tool",
-      description: "Standard Critical Damage build with high crit scaling",
+      description: "Standard set for critical damage scaling",
     },
     {
       id: "cursed-corpse",

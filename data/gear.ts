@@ -730,7 +730,7 @@ export const armors: GearData[] = [
     name: "Psionic Combat Suit",
     rarity: "legend",
     slot: "armor",
-    source: ["City of Mist"],
+    source: ["Other"],
     def: "31",
     imageName: "psionic-combat-suit",
     effect: `When a card is Exhausted, 30% Fixed Shield`,
@@ -1303,7 +1303,7 @@ export const accessories: GearData[] = [
     source: ["Swamp of Judgment"],
     health: "83",
     imageName: "the-golden-rule",
-    effect: `+20% Damage, +20% Shield at the start of battle`,
+    effect: `+20% Damage Amount, +20% Shield Gain`,
   },
   {
     name: "Verdant Day",
@@ -1471,7 +1471,7 @@ export const accessories: GearData[] = [
     source: ["Other"],
     health: "75",
     imageName: "amorphous-cube",
-    effect: `At the start of battle, +25% Damage`,
+    effect: `+25% Damage Amount`,
   },
   {
     name: "Arc Drive",

@@ -178,8 +178,7 @@ const uniqueCards: UniqueCard[] = [
         tier: CardTier.A,
         cost: 0,
         type: "skill",
-        description:
-          "[ Unique ] For 1 turn, +80% Damage Amount of cards with Cost 1",
+        description: "For 1 turn, +80% Damage Amount of cards with Cost 1",
         reasoning:
           "Highest damage boost but only 1 turn, requires high draw support to set up and burst in the same turn",
       },
@@ -485,24 +484,24 @@ const partnersGuide: PartnersGuide[] = [
     tier: CardTier.SPlus,
   },
   {
+    id: "yuri",
+    description: ``,
+    tier: CardTier.S,
+  },
+  {
     id: "arwen",
     description: ``,
-    tier: CardTier.WIP,
+    tier: CardTier.A,
   },
   {
     id: "alyssa",
     description: ``,
-    tier: CardTier.WIP,
+    tier: CardTier.A,
   },
   {
     id: "yvonne",
     description: ``,
-    tier: CardTier.WIP,
-  },
-  {
-    id: "noel",
-    description: ``,
-    tier: CardTier.Bad,
+    tier: CardTier.C,
   },
 ];
 

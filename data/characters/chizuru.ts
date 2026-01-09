@@ -287,10 +287,9 @@ const uniqueCards: UniqueCard[] = [
 const recommendedSaveData: SaveData[] = [
   {
     id: "deck-1",
-    name: "Hybrid",
+    name: "Shadow of the Moon",
     shortDescription: "",
-    description: `This deck is able to stack Moon+ hits all the while being able to stack up to Bind 3/5, its very strong.
-    Optimal Tsukuyomi : Oni Hunt ratio is 3:2, 2:3 is also fine however 4 of one or the other is just bad.`,
+    description: ``,
     faintMemoryNote: "140 Faint Memory Cost",
     cards: [
       "Karmic Flames V",
@@ -308,9 +307,8 @@ const recommendedSaveData: SaveData[] = [
     name: "Moonslash",
     shortDescription: "",
     description: ``,
-    faintMemoryNote: "90 Faint Memory Cost",
+    faintMemoryNote: "140 Faint Memory Cost",
     cards: [
-      "Moonslash",
       "Moonslash",
       "Karmic Flames II",
       "Tsukuyomi V",
@@ -335,11 +333,11 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
   bestInSlot: [
     {
       id: "black-wing",
-      description: "Standard Attack set for raw damage scaling",
+      description: "Standard set for raw damage scaling",
     },
     {
       id: "executioners-tool",
-      description: "Standard Critical Damage build with high crit scaling",
+      description: "Standard set for critical damage scaling",
     },
     {
       id: "cursed-corpse",
@@ -350,11 +348,11 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
     {
       id: "conquerors-aspect",
       description:
-        "Situational depending on Bound of Dusk Epiphany, since Conqueror Aspect can break and loses value with card cost reduction.",
+        "Situational depending on Bound of Dusk Epiphany, since Conqueror Aspect can break and loses value with card cost reduction",
     },
     {
       id: "executioners-tool",
-      description: "Standard Critical Damage build with high crit scaling",
+      description: "Standard set for critical damage scaling",
     },
   ],
 };
