@@ -80,7 +80,7 @@ const characters = [
     job: "controller",
     element: "instinct",
     rarity: 4,
-    hasGuide: false,
+    hasGuide: true,
   },
   {
     id: "chizuru",
