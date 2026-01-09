@@ -340,17 +340,10 @@ const recommendedSaveData: SaveData[] = [
   {
     id: "deck-1",
     name: "Great Rift",
-    shortDescription: "",
+    shortDescription: "Seasonal Save Data",
     description: ``,
     faintMemoryNote: "140 Faint Memory Cost",
-    cards: [
-      "Pop Eyed Popper III",
-      "Devil Dice V",
-      "Devil Dice V",
-      "Shuffle II",
-      "Dice Trick V",
-      "Joker",
-    ],
+    cards: [],
   },
   {
     id: "deck-2",
