@@ -374,7 +374,7 @@ const recommendedSaveData: SaveData[] = [
     id: "deck-2",
     name: "Burst Build",
     shortDescription: "",
-    description: ``,
+    description: `If you're running with Rei and multiple Snack Time III cards, you can trade one Oath of Vanity IV for one more Brand of Annihilation IV`,
     faintMemoryNote: "140 Faint Memory Cost",
     cards: [
       "Echo of Futility I",
@@ -391,7 +391,7 @@ const recommendedSaveData: SaveData[] = [
     id: "deck-3",
     name: "One Turn Kill",
     shortDescription: "",
-    description: ``,
+    description: `If you're running with Rei and multiple Snack Time III cards, you can trade one Oath of Vanity IV for one more Brand of Annihilation IV`,
     faintMemoryNote: "140 Faint Memory Cost",
     cards: [
       "Echo of Futility I",
@@ -502,17 +502,18 @@ export const kayronData: CharacterData = {
   attribute: Attributes.Void,
   job: CharacterClass.Psionic,
   role: CharacterRole.MainDPS,
+  rarity: 5,
 
   overview: `
-  Kayron's expensive cards generate or consume Futility—a 1-cost Status Ailment that exhausts with no base effect. 
-  His Oath of Vanity Epiphanies define his Futility-centered playstyle.
-  Gameplan: Upgrade Futility via Oath of Vanity to enable his kit, then reduce card costs through Epiphanies, Exhausts, and team synergy to maximize damage output.
+  Kayron's expensive cards generate or consume Futility, a 1-cost Status Ailment that exhausts itself with no base effect. 
+  His Oath of Vanity Epiphanies define his Futility playstyle.
+  Upgrade Futility via Oath of Vanity to enable his kit, then reduce card costs through Epiphanies, Exhausts, and team synergy to maximize damage output.
   `.trim(),
 
   strengths: [
     "Strong at just Manifest Ego 1",
-    "Versatile DPS",
-    "High ST and AoE",
+    "Very Versatile DPS",
+    "High ST and AoE damage",
     "Solo DPS/Sustain in Chaos",
     "Fast Basin/Simulation",
   ],

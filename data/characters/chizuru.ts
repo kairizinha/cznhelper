@@ -391,6 +391,7 @@ export const chizuruData: CharacterData = {
   attribute: Attributes.Void,
   job: CharacterClass.Psionic,
   role: CharacterRole.MainDPS,
+  rarity: 5,
 
   overview: `
 

@@ -507,6 +507,7 @@ export const veronicaData: CharacterData = {
   attribute: Attributes.Passion,
   job: CharacterClass.Ranger,
   role: CharacterRole.Support,
+  rarity: 5,
 
   overview: `
   Hybrid DPS/Support character who demands minimal AP investment after her core upgrade cards. She deals damage through Ballistas that automatically trigger at end of turn with zero cost. 

@@ -373,6 +373,7 @@ export const serenielData: CharacterData = {
   attribute: Attributes.Instinct,
   job: CharacterClass.Hunter,
   role: CharacterRole.MainDPS,
+  rarity: 5,
 
   overview: `
   

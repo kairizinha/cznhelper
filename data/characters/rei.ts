@@ -509,6 +509,7 @@ export const reiData: CharacterData = {
   attribute: Attributes.Void,
   job: CharacterClass.Controller,
   role: CharacterRole.Support,
+  rarity: 4,
 
   overview: `
   

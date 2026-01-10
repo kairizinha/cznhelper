@@ -411,6 +411,7 @@ export const charname: CharacterData = {
   attribute: Attributes.Instinct, // Void, Instinct etc
   job: CharacterClass.Controller, // Ranger, Psionic, etc
   role: CharacterRole.Support, // MainDPS, SubDPS, Support
+  rarity: 5,
 
   overview: ``.trim(),
   strengths: [],

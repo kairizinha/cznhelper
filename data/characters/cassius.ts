@@ -482,6 +482,7 @@ export const cassiusData: CharacterData = {
   attribute: Attributes.Instinct,
   job: CharacterClass.Controller,
   role: CharacterRole.Support,
+  rarity: 4,
 
   overview: ``.trim(),
   strengths: [],

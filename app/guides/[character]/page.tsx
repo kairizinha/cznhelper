@@ -176,10 +176,14 @@ export default function CharacterGuidePage() {
                   </h1>
 
                   <div className="flex justify-center md:justify-start gap-1">
-                    {[...Array(5)].map((_, i) => (
+                    {[...Array(characterData.rarity)].map((_, i) => (
                       <Star
                         key={i}
-                        className="w-6 h-6 fill-yellow-400 text-yellow-400"
+                        className={`w-6 h-6 ${
+                          characterData.rarity === 5
+                            ? "fill-purple-400 text-purple-400"
+                            : "fill-yellow-400 text-yellow-400"
+                        }`}
                       />
                     ))}
                   </div>

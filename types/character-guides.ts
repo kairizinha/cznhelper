@@ -109,6 +109,7 @@ export interface Team {
 
 export interface CharacterData {
   attribute: Attributes;
+  rarity: number;
   job?: string;
   role?: string;
 

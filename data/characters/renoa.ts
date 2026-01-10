@@ -382,6 +382,7 @@ export const renoaData: CharacterData = {
   attribute: Attributes.Void,
   job: CharacterClass.Hunter,
   role: CharacterRole.MainDPS,
+  rarity: 5,
 
   overview: `
   

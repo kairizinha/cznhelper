@@ -1,3 +1,5 @@
+// app/guides/page.tsx
+
 "use client";
 
 import { useState } from "react";
@@ -80,7 +82,7 @@ const characters = [
     job: "controller",
     element: "instinct",
     rarity: 4,
-    hasGuide: true,
+    hasGuide: false,
   },
   {
     id: "chizuru",
