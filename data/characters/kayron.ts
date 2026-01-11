@@ -391,7 +391,7 @@ const recommendedSaveData: SaveData[] = [
     id: "deck-3",
     name: "One Turn Kill",
     shortDescription: "",
-    description: `If you're running with Rei and multiple Snack Time III cards, you can trade one Oath of Vanity IV for one more Brand of Annihilation III`,
+    description: `If you're running with Rei and multiple Snack Time III cards, you can trade one Oath of Vanity IV for one more Brand of Annihilation IV`,
     faintMemoryNote: "140 Faint Memory Cost",
     cards: [
       "Echo of Futility I",
