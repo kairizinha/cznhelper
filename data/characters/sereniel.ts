@@ -289,7 +289,8 @@ const uniqueCards: UniqueCard[] = [
     type: "attack",
     cost: 2,
     rarity: CardRarities.Unique,
-    description: "",
+    description:
+      "150% damage Activate 3 Homing Laser in Draw Pile and Graveyard",
     epiphanies: [],
   },
 ];
