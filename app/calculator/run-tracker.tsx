@@ -321,6 +321,45 @@ const CHARACTER_CARDS: Record<
       },
     ],
   },
+  narja: {
+    portrait: "/images/characters/narjaportrait.webp",
+    starter: [
+      {
+        name: "NA: Attack Response",
+        image: "/images/character/narja/starter1.webp",
+      },
+      {
+        name: "NA: Defense Response",
+        image: "/images/character/narja/starter2.webp",
+      },
+      {
+        name: "NA: Defense Response",
+        image: "/images/character/narja/starter3.webp",
+      },
+      {
+        name: "Shackles of Hunger",
+        image: "/images/character/narja/starter4.webp",
+      },
+    ],
+    unique: [
+      {
+        name: "Bottomless Hunger",
+        image: "/images/character/narja/unique1.webp",
+      },
+      {
+        name: "Voluntary Control",
+        image: "/images/character/narja/unique2.webp",
+      },
+      {
+        name: "Domain of Voracity",
+        image: "/images/character/narja/unique3.webp",
+      },
+      {
+        name: "Mealtime",
+        image: "/images/character/narja/unique4.webp",
+      },
+    ],
+  },
   haru: {
     portrait: "/images/characters/haruportrait.webp",
     starter: [
