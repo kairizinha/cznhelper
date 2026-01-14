@@ -283,7 +283,7 @@ const uniqueCards: UniqueCard[] = [
     divineEpiphanies: [],
   },
   {
-    id: " ShootPaleing Star",
+    id: "Pale Shooting Star",
     name: "Pale Shooting Star",
     image: "/images/character/sereniel/unique4.webp",
     type: "attack",
@@ -300,7 +300,7 @@ const recommendedSaveData: SaveData[] = [
     name: "Standard 1",
     description:
       "Really thin deck. Can trade 1 laser copy for another pale if u can afford the cost, caution to Shining Core III if you go 4 laser, can easily clog ur hand and graveyard",
-    faintMemoryNote: "140 Faint Memory Cost without Convert Method",
+    faintMemoryNote: "140 Faint Memory Cost",
     cards: [
       "Homing Laser IV",
       "Homing Laser IV",
@@ -309,7 +309,7 @@ const recommendedSaveData: SaveData[] = [
       "Plasma Missile III",
       "Cobalt Light IV",
       "Shining Core III",
-      "ShootPaleing Star",
+      "Pale Shooting Star",
     ],
   },
   {
@@ -317,7 +317,7 @@ const recommendedSaveData: SaveData[] = [
     name: "Standard 2",
     description:
       "Can trade 1 laser copy for another pale if u can afford the cost (prefer Shining Core III if so), shining core V for 3after glow laser or anything base on the scenerio, shining core III is still really good",
-    faintMemoryNote: "140 Faint Memory Cost without Convert Method",
+    faintMemoryNote: "140 Faint Memory Cost",
     cards: [
       "Homing Laser I",
       "Homing Laser I",
@@ -326,7 +326,7 @@ const recommendedSaveData: SaveData[] = [
       "Plasma Missile III",
       "Cobalt Light IV",
       "Shining Core V",
-      "ShootPaleing Star",
+      "Pale Shooting Star",
     ],
   },
 ];
@@ -345,7 +345,7 @@ const gearsData = {
     "RFS-17",
   ],
   armors: [
-    "Fairy King’s Crown",
+    "Fairy King's Crown",
     "Wings of Freedom",
     "Fragment of the Empty Void",
   ],
@@ -372,18 +372,16 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
   bestInSlot: [
     {
       id: "judgments-flames",
-      description:
-        "+50% Damage Amount to Instinct Cards used against Ravaged targets",
+      description: "",
     },
-    { id: "executioners-tool", description: "+25% Critical Damage" },
+    { id: "executioners-tool", description: "" },
   ],
   alternative: [
-    { id: "black-wing", description: "+12% Attack" },
-    { id: "executioners-tool", description: "+25% Critical Damage" },
+    { id: "black-wing", description: "" },
+    { id: "executioners-tool", description: "" },
     {
       id: "cursed-corpse",
-      description:
-        "Increase damage dealth to targets inflicted with Agony by 10%",
+      description: "",
     },
   ],
 };
