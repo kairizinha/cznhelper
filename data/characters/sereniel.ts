@@ -57,16 +57,16 @@ const uniqueCards: UniqueCard[] = [
         description:
           "150% damage\nOn Ravage, Move to\nhand\nDestroy: Add 1 Hit(s)",
         reasoning:
-          "Highest damage epi, extra hit benefit from various buff, in exchange for no afterglow and hard ravage with it own",
+          "Highest damage Epiphany, extra hit benefits from various buffs, in exchange for no afterglow and hard ravage condition",
       },
       {
         id: "Homing Laser II",
         tier: CardTier.A,
         cost: 0,
         type: "attack",
-        description: "150% Damage\n3 Afterglow \nOn Ravage, Move to\nhand",
+        description: "150% Damage\n3 Afterglow\nOn Ravage, Move to\nhand",
         reasoning:
-          "Just a small upgrade from base card, back up option if u miss other good epi, 2-3 afterglow on a laser is more than enough ",
+          "Just a small upgrade from base card, good backup if you miss other strong Epiphanies, 2-3 afterglow on a laser is more than enough",
       },
       {
         id: "Homing Laser III",
@@ -74,9 +74,9 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description:
-          "150% Damage\n2 Afterglow\nCreate 2 Homing Laser\nL in Discard Pile",
+          "150% Damage\n2 Afterglow\nCreate 2 Homing Laser L\nin Discard Pile",
         reasoning:
-          "Cost 1 ap, doesnt move to hand when ravage and can easily clog ur deck",
+          "Costs 1 AP, doesnt move to hand on ravage and can easily clog your deck",
       },
       {
         id: "Homing Laser IV",
@@ -84,9 +84,9 @@ const uniqueCards: UniqueCard[] = [
         cost: 0,
         type: "attack",
         description:
-          "100% Damage\n1 Afterglow\nOn Ravage or at the\nstart of the turn, Move\nto hand",
+          "100% Damage\n1 Afterglow\nOn Ravage or at the start of the turn, Move to\nhand",
         reasoning:
-          "Equal to 1 draw, gurentee laser to break everyturn making sereniel deck really thin and easy to play",
+          "Basically equal to 1 draw, guarantees laser every turn to break, makes Sereniel deck really thin and easy to play",
       },
       {
         id: "Homing Laser V",
@@ -96,7 +96,7 @@ const uniqueCards: UniqueCard[] = [
         description:
           "150% Damage\n2 Afterglow\nMove all Homing Laser L\nin Graveyard to hand",
         reasoning:
-          "Also doesnt move to hand when ravage, too niche and inconsistent",
+          "Also doesnt move to hand on ravage, too niche and inconsistent",
       },
     ],
     divineEpiphanies: [],
@@ -109,7 +109,7 @@ const uniqueCards: UniqueCard[] = [
     cost: 1,
     rarity: CardRarities.Rare,
     description:
-      "120% Damage\n0.5 Tenacity Damage\nIf the taret was not\nRavaged, activate 1\nmore time",
+      "120% Damage\n0.5 Tenacity Damage\nIf the target was not\nRavaged, activate 1\nmore time",
     epiphanies: [
       {
         id: "Plasma Missile I",
@@ -117,9 +117,9 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description:
-          "180% Damage\n1 Tenacity Damage\nIf the taret was not\nRavaged, activate 1\nmore time",
+          "180% Damage\n1 Tenacity Damage\nIf the target was not\nRavaged, activate 1\nmore time",
         reasoning:
-          "An upgrade from the base, she dont have hard time ravage anyone at the moment",
+          "Straight upgrade from base, she doesnt have much trouble ravaging anyone anyway",
       },
       {
         id: "Plasma Missile II",
@@ -128,7 +128,7 @@ const uniqueCards: UniqueCard[] = [
         type: "attack",
         description:
           "180% Damage\n60% Damage Amount\nfor each decreased\nTenacity of the target\n(max 10)",
-        reasoning: "It just damage",
+        reasoning: "Just more damage, nothing special",
       },
       {
         id: "Plasma Missile III",
@@ -138,7 +138,7 @@ const uniqueCards: UniqueCard[] = [
         description:
           "120% Damage\n2 Instinct Weakness\n60% Damage Amount\nto Homing Laser for 1\nturn(s)",
         reasoning:
-          "Instinct weakness is really op, 25% multi for 2 turn up time and easy to ravage anyone, also extra 60% damage buff making it really valuable when recycle laser multiple time in a turn",
+          "Instinct weakness is really strong, 25% multiplier for 2-turn uptime and easy to ravage anyone, extra 60% damage buff to laser is very valuable when recycling multiple times in a turn",
       },
       {
         id: "Plasma Missile IV",
@@ -146,7 +146,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description: "120% Damage\nCreate 3 Homing Laser\nL in Draw Pile",
-        reasoning: "Cloging your draw pile, harder time to draw important card",
+        reasoning: "Clogs your draw pile, makes it harder to draw key cards",
       },
       {
         id: "Plasma Missile V",
@@ -156,7 +156,7 @@ const uniqueCards: UniqueCard[] = [
         description:
           "[ Unique ] At the end of the turn, 50%\nDamage to a random\nenemy\n+30% Damage Amount for\neach Homing Laser Moved\nto hand for 1 turn(s)",
         reasoning:
-          "A backup option, upgrade card make sereniel deck really thin",
+          "Solid backup option, upgrade card helps keep deck really thin",
       },
     ],
     divineEpiphanies: [],
@@ -177,7 +177,7 @@ const uniqueCards: UniqueCard[] = [
         type: "skill",
         description: "Create 3 Homing Laser\nL",
         reasoning:
-          "1 ap and not an upgrade card, not worth picking over the other epi",
+          "1 AP and not an upgrade card, not worth picking over the other Epiphanies",
       },
       {
         id: "Shining Core II",
@@ -186,7 +186,7 @@ const uniqueCards: UniqueCard[] = [
         type: "skill",
         description:
           "Create 2 Homing Laser\nL, increase Exhaust of\nthose cards by 2",
-        reasoning: "Not worth picking over other epi",
+        reasoning: "Not worth picking over other Epiphanies",
       },
       {
         id: "Shining Core III",
@@ -196,14 +196,14 @@ const uniqueCards: UniqueCard[] = [
         description:
           "[ Unique / Initiation ] Create 2 Homing Laser\nL\nOn Ravage, create\n2 Homing Laser L",
         reasoning:
-          "The bis epi on shining core, is a upgrade so thiner deck, generate the most Homing Laser L, sometime can be hard to exhaust the laser before reshuffle due to hand size making laser not move to hand",
+          "The BIS Epiphany on Shining Core, is an upgrade so thinner deck, generates the most Homing Laser L, sometimes can be hard to exhaust lasers before reshuffle due to hand size making them not move to hand",
       },
       {
         id: "Shining Core IV",
         tier: CardTier.B,
         cost: "X",
         type: "skill",
-        description: "Create X+1 Homing\nLaser L\nApply Haste to  those\ncards",
+        description: "Create X+1 Homing\nLaser L\nApply Haste to those\ncards",
         reasoning: "Its X",
       },
       {
@@ -214,7 +214,7 @@ const uniqueCards: UniqueCard[] = [
         description:
           "Select and create\n1 Homing Laser with\ntheir own distinct\nEpiphanies",
         reasoning:
-          "Backup option if not Shining Core III, easier time manage hand size and not cloging, drawback is lower laser generate and making her ego useless. Only pick this voluntary if 4 Homing Laser copy unless you know what you're doing",
+          "Backup option if not Shining Core III, easier to manage hand size and avoids clogging, drawback is lower laser generation and makes her ego kinda useless, only pick voluntarily if you have 4 Homing Laser copies unless you know what you're doing",
       },
     ],
     divineEpiphanies: [],
@@ -227,7 +227,7 @@ const uniqueCards: UniqueCard[] = [
     cost: 3,
     rarity: CardRarities.Legendary,
     description:
-      "120% Damage x 4 to\n random enemies\n1 Tenacity Damage for\n each Hit",
+      "120% Damage x 4 to\nrandom enemies\n1 Tenacity Damage for\neach Hit",
     epiphanies: [
       {
         id: "Cobalt Light I",
@@ -235,9 +235,9 @@ const uniqueCards: UniqueCard[] = [
         cost: 3,
         type: "attack",
         description:
-          "180% Damage x 4 to\n random enemies\n1 Tenacity Damage for\n each Hit\nRavage: Decrease Cost\nby 1",
+          "180% Damage x 4 to\nrandom enemies\n1 Tenacity Damage for\neach Hit\nRavage: Decrease Cost\nby 1",
         reasoning:
-          "Higher base damage than other cobalt, fall back option, cost 0 after serveral use but still 3 ap at the begining",
+          "Higher base damage than other cobalts, fallback option, becomes cost 0 after several uses but still 3 AP at the beginning",
       },
       {
         id: "Cobalt Light II",
@@ -245,9 +245,9 @@ const uniqueCards: UniqueCard[] = [
         cost: 3,
         type: "attack",
         description:
-          "[ Retain ] 120% Damage x 4 to\n random enemies\n1 Tenacity Damage for\n each Hit\nRetain: Add 1 Hit until use\n(max 5 times)",
+          "[ Retain ] 120% Damage x 4 to\nrandom enemies\n1 Tenacity Damage for\neach Hit\nRetain: Add 1 Hit until use\n(max 5 times)",
         reasoning:
-          "Always avoid picking this, retain make your hand size thiner and need 3ap to remove it from hand",
+          "Always avoid picking this, retain makes your hand size smaller and needs 3 AP to remove it from hand",
       },
       {
         id: "Cobalt Light III",
@@ -255,9 +255,9 @@ const uniqueCards: UniqueCard[] = [
         cost: 2,
         type: "attack",
         description:
-          "120% Damage x 4 to\n random enemies\nCreate 1 Homing Laser\nL for each target Hit",
+          "120% Damage x 4 to\nrandom enemies\nCreate 1 Homing Laser\nL for each target Hit",
         reasoning:
-          "Only generate per target hit, making it unreliable and really low damage cobalt",
+          "Only generates per target hit, making it unreliable and really low damage cobalt",
       },
       {
         id: "Cobalt Light IV",
@@ -265,9 +265,9 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description:
-          "120% Damage to\n random enemies\nAdd 1 Hit for\neach Homing Laser in\nhand",
+          "120% Damage to\nrandom enemies\nAdd 1 Hit for\neach Homing Laser in\nhand",
         reasoning:
-          "Cheap, high hit count, easy to enable high hit count with her laser mechanic, draw back is low tenacity damage",
+          "Cheap, high hit count, easy to enable big hit numbers with her laser mechanic, drawback is lower tenacity damage",
       },
       {
         id: "Cobalt Light V",
@@ -277,7 +277,7 @@ const uniqueCards: UniqueCard[] = [
         description:
           "[ Weakness Attack ] 120% Damage x 4\nRavage: Activate 1\nmore time",
         reasoning:
-          "High damage cobalt, still cost 3, weakness attack is wtv because instinct weakness, one of the fall back option if miss the good epi",
+          "High damage cobalt, still costs 3, weakness attack is whatever because of instinct weakness, solid fallback if you miss the good Epiphanies",
       },
     ],
     divineEpiphanies: [],
@@ -290,7 +290,7 @@ const uniqueCards: UniqueCard[] = [
     cost: 2,
     rarity: CardRarities.Unique,
     description:
-      "150% damage Activate 3 Homing Laser in Draw Pile and Graveyard",
+      "150% damage\nActivate 3 Homing Laser in Draw Pile and Graveyard",
     epiphanies: [],
   },
 ];
@@ -300,7 +300,7 @@ const recommendedSaveData: SaveData[] = [
     id: "standard-1",
     name: "Standard 1",
     description:
-      "Really thin deck. Can trade 1 laser copy for another pale if u can afford the cost, caution to Shining Core III if you go 4 laser, can easily clog ur hand and graveyard",
+      "Really thin deck. Can trade 1 Homing Laser copy for another Pale if you can afford the cost, be careful with Shining Core III if you run 4 lasers, can easily clog hand and graveyard",
     faintMemoryNote: "140 Faint Memory Cost",
     cards: [
       "Homing Laser IV",
@@ -317,7 +317,7 @@ const recommendedSaveData: SaveData[] = [
     id: "standard-2",
     name: "Standard 2",
     description:
-      "Can trade 1 laser copy for another pale if u can afford the cost (prefer Shining Core III if so), shining core V for 3after glow laser or anything base on the scenerio, shining core III is still really good",
+      "Can trade 1 Homing Laser copy for another Pale Shooting Star if you can afford the cost (prefer Shining Core III if so), Shining Core V for 3 afterglow laser or anything depending on the situation, Shining Core III is still really good",
     faintMemoryNote: "140 Faint Memory Cost",
     cards: [
       "Homing Laser I",
@@ -375,14 +375,20 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
       id: "judgments-flames",
       description: "",
     },
-    { id: "executioners-tool", description: "" },
+    {
+      id: "executioners-tool",
+      description: "Standard Critical Damage build with high crit scaling",
+    },
   ],
   alternative: [
-    { id: "black-wing", description: "" },
-    { id: "executioners-tool", description: "" },
+    { id: "black-wing", description: "Standard set for raw damage scaling" },
+    {
+      id: "executioners-tool",
+      description: "Standard Critical Damage build with high crit scaling",
+    },
     {
       id: "cursed-corpse",
-      description: "",
+      description: "Alternative that outperforms with consistent Agony uptime",
     },
   ],
 };
@@ -391,20 +397,19 @@ const partnersGuide: PartnersGuide[] = [
   {
     id: "peko",
     description: `[ Best in Slot / Signature ]
-    Provide massive stat for sereniel
-    Extra 25% crit chance make her almost gurentee crit every hit while her passive also has good damage buff against ravaged enemies
-    `,
+    Provides massive stats for Sereniel
+    Extra 25% crit chance makes her almost guarantee crit every hit while her passive also gives good damage buff against ravaged enemies`,
     tier: CardTier.SPlus,
   },
   {
     id: "yuri",
     description:
-      "Cheap option, draw 2 is op, passive provide damage buff and atk% which is also really good",
+      "Cheap option, draw 2 is OP, passive provides damage buff and atk% which is also really good",
     tier: CardTier.S,
   },
   {
     id: "serithea",
-    description: "Decent stat buff, should have pick nyx",
+    description: "Decent stat buff, should have picked Nyx instead",
     tier: CardTier.A,
   },
 ];
@@ -416,6 +421,7 @@ export const serenielData: CharacterData = {
   rarity: 5,
   // bannerUrl: "",
   // avatarUrl: "",
+
   externalResources: [
     {
       label: "CZN Official Discord",
@@ -442,19 +448,20 @@ export const serenielData: CharacterData = {
   ],
 
   overview: `
-  Sereniel is a hyper carry dps that rely on her tenacity ravage mechanic with Homing Laser is her main source of damage
-  Her playstyle rely on ravage to cycle her 0 cost homing laser multiple time in a turn, also provide extra ap when ravagemake her deck really cheap
+Sereniel is a hyper carry DPS that relies on her tenacity ravage mechanic with Homing Laser as her main damage source
+Her playstyle revolves around ravaging to cycle 0-cost Homing Lasers multiple times in a turn, also gives extra AP when ravaging and makes her deck really cheap
   `.trim(),
+
   strengths: [
     "Low risk high reward",
     "Easy to play",
-    "Top-tier st damage",
-    "Ap friendly",
-    "Really thin deck with the right epiphany",
+    "Top-tier single target damage",
+    "AP friendly",
+    "Really thin deck with the right Epiphany",
   ],
 
   weaknesses: [
-    "Rely on mobs with tenacity bar",
+    "Relies on mobs with tenacity bar",
     "Is a seasonal limited combatant",
   ],
 
