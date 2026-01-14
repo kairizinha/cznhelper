@@ -417,6 +417,30 @@ export const serenielData: CharacterData = {
   rarity: 5,
   // bannerUrl: "",
   // avatarUrl: "",
+  externalResources: [
+    {
+      label: "CZN Official Discord",
+      url: "https://discord.gg/chaoszeronightmare",
+      note: "Guide discussion and validation",
+    },
+    {
+      label: "Sproot's Nightmare",
+      url: "https://docs.google.com/spreadsheets/d/1-KkQUFrjD_2Un3zMDmypCwZFVF5VmowswqYdLt9MOw8/edit?gid=1855295740#gid=1855295740",
+      note: "Theorycrafting and math base",
+    },
+  ],
+
+  credits: [
+    {
+      name: "Recluser1",
+      link: "https://www.youtube.com/@Recluser1",
+      contribution: "Helped with testing and feedback",
+    },
+    {
+      name: "Lucie",
+      contribution: "Guide Author and Data",
+    },
+  ],
 
   overview: `
   Sereniel is a hyper carry dps that rely on her tenacity ravage mechanic with Homing Laser is her main source of damage
