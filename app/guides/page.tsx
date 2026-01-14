@@ -234,7 +234,7 @@ const characters = [
     job: "hunter",
     element: "instinct",
     rarity: 5,
-    hasGuide: false,
+    hasGuide: true,
   },
   {
     id: "tressa",
