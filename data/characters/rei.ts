@@ -9,7 +9,6 @@ import {
   MemoryFragmentSetRecommendation,
   UniqueCard,
   PartnersGuide,
-  CreditEntry,
 } from "@/types/character-guides";
 import {
   MemoryFragmentSet,
@@ -67,7 +66,7 @@ const uniqueCards: UniqueCard[] = [
         description:
           "[ Lead ] 150% Damage Increase Damage Amount of Basic Attack Cards by 150% for 1 turn",
         reasoning:
-          "Higher boost than the IV epiphany but only lasts 1 turn, great for setting up burst damage turns",
+          "Higher boost than IV but only lasts 1 turn, excellent for setting up big burst turns",
       },
       {
         id: "Strike of Darkness II",
@@ -76,7 +75,7 @@ const uniqueCards: UniqueCard[] = [
         type: "attack",
         description: "350% Damage Decrease Damage Amount by 20% for 1 turn",
         reasoning:
-          "The 20% damage penalty to ALL your damage isn't worth a higher modifier on one attack",
+          "The 20% damage penalty to ALL your damage is way too heavy for one stronger hit",
       },
       {
         id: "Strike of Darkness III",
@@ -86,7 +85,7 @@ const uniqueCards: UniqueCard[] = [
         description:
           "[ Lead ] 150% Damage Discard all Basic Cards, add 1 Hit for each",
         reasoning:
-          "Worse than V option - costs 1 AP, no Retain, and minimal damage scaling",
+          "Worse than V — costs 1 AP, no Retain, and very little actual scaling",
       },
       {
         id: "Strike of Darkness IV",
@@ -95,7 +94,8 @@ const uniqueCards: UniqueCard[] = [
         type: "upgrade",
         description:
           "[ Unique ] Increase Damage Amount of Basic Attack Cards by 80%",
-        reasoning: "Permanent basic damage boost, core for basic attack builds",
+        reasoning:
+          "Permanent basic attack damage boost, core of most basic builds",
       },
       {
         id: "Strike of Darkness V",
@@ -103,7 +103,8 @@ const uniqueCards: UniqueCard[] = [
         cost: 0,
         type: "skill",
         description: "[ Retain ] Activate all Basic Cards in hand",
-        reasoning: "Free retain, clears basics, discard or exhaust fodder",
+        reasoning:
+          "Free Retain, clears basics, turns them into great exhaust/discard fodder",
       },
     ],
     divineEpiphanies: [
@@ -143,7 +144,7 @@ const uniqueCards: UniqueCard[] = [
         type: "upgrade",
         description: "[ Unique ] +60% Damage Amount of cards with Cost 1",
         reasoning:
-          "Straight upgrade from the base card, more damage for 1 cost cards",
+          "Straight upgrade from base, best raw damage for 1-cost cards",
       },
       {
         id: "Resonating Darkness II",
@@ -152,7 +153,7 @@ const uniqueCards: UniqueCard[] = [
         type: "upgrade",
         description: "[ Unique ] +40% Damage Amount of Void Card",
         reasoning:
-          "Same damage as base but buffs all Void cards, best for Kayron and Renoa, since other Void combatants still prefer the 1-cost or 0-cost option",
+          "Same damage as base but buffs all Void cards — best for Kayron/Renoa support, other Void chars usually prefer 1-cost or 0-cost version",
       },
       {
         id: "Resonating Darkness III",
@@ -162,7 +163,7 @@ const uniqueCards: UniqueCard[] = [
         description:
           "[ Unique ] +40% Shield gain, Damage Amount, and Healing of cards with Cost 1",
         reasoning:
-          "Same damage as base with shield/healing bonuses you don't need, just take base or I instead",
+          "Adds shield/healing you usually don't need — just take base or I instead",
       },
       {
         id: "Resonating Darkness IV",
@@ -171,7 +172,7 @@ const uniqueCards: UniqueCard[] = [
         type: "upgrade",
         description:
           "[ Unique ] +40% Damage Amount of cards with Cost 1 or less",
-        reasoning: "Best for 0-cost builds",
+        reasoning: "Best choice for 0-cost heavy builds",
       },
       {
         id: "Resonating Darkness V",
@@ -180,7 +181,7 @@ const uniqueCards: UniqueCard[] = [
         type: "skill",
         description: "For 1 turn, +80% Damage Amount of cards with Cost 1",
         reasoning:
-          "Highest damage boost but only 1 turn, requires high draw support to set up and burst in the same turn",
+          "Highest single-turn boost but needs strong draw to set up and burst same turn",
       },
     ],
     divineEpiphanies: [
@@ -216,7 +217,7 @@ const uniqueCards: UniqueCard[] = [
         description:
           "[ Exhaust 2 ] Choose 1 card(s) in hand to Exhaust Heal 150% Draw 1",
         reasoning:
-          "Base card with Exhaust 2, but forces you to exhaust something to draw",
+          "Base card with Exhaust 2 — forces you to exhaust something to draw",
       },
       {
         id: "Snack Time II",
@@ -225,7 +226,7 @@ const uniqueCards: UniqueCard[] = [
         type: "skill",
         description: "[ Retain / Exhaust ] Heal 150% Draw 2",
         reasoning:
-          "Best option - Draw 2 with Retain, only skip if you have excess draw",
+          "Best option — Retain + Draw 2, only skip if you already have excess draw",
       },
       {
         id: "Snack Time III",
@@ -234,7 +235,7 @@ const uniqueCards: UniqueCard[] = [
         type: "skill",
         description:
           "[ Exhaust ] Choose up to 2 card(s) in hand to Exhaust, then Draw for each",
-        reasoning: "Flexible exhaust, scales with trash cards",
+        reasoning: "Very flexible exhaust, scales well with trash cards",
       },
       {
         id: "Snack Time IV",
@@ -242,9 +243,9 @@ const uniqueCards: UniqueCard[] = [
         cost: 0,
         type: "skill",
         description:
-          "[ Exhaust ] Choose up to 1 card(s) from Draw Pile to Exhaust, then Draw for each.",
+          "[ Exhaust ] Choose up to 1 card(s) from Draw Pile to Exhaust, then Draw for each",
         reasoning:
-          "Worse than II or III, but lets you choose specific cards from your draw pile before they become dead draws",
+          "Worse than II or III, but useful for grabbing specific cards from draw pile before they become dead draws",
       },
       {
         id: "Snack Time V",
@@ -253,7 +254,8 @@ const uniqueCards: UniqueCard[] = [
         type: "skill",
         description:
           "[ Exhaust ] Choose 2 card(s) in hand to Exhaust Choose 1 Void Card(s) to Draw",
-        reasoning: "Void tutor, net negative draw, niche void loops",
+        reasoning:
+          "Void tutor, net negative draw — only for very specific Void loop builds",
       },
     ],
     divineEpiphanies: [
@@ -297,33 +299,32 @@ const uniqueCards: UniqueCard[] = [
         type: "skill",
         description:
           "Choose 1 card(s) in hand, +100% Damage Amount, Shield gain and Healing for 1 turn",
-        reasoning: "Trades damage for shield/healing buffs you don't need",
+        reasoning: "Trades damage for shield/healing you usually don't need",
       },
       {
         id: "Dark Condensation III",
         tier: CardTier.S,
         cost: 1,
         type: "skill",
-        description: "For 1 turn, +50%  Damage Amount of  Void Attack Cards",
+        description: "For 1 turn, +50% Damage Amount of Void Attack Cards",
         reasoning:
-          "Buff all Void cards for the turn, though dupes only extend duration",
+          "Buffs all Void attacks for the turn — dupes just extend duration",
       },
       {
         id: "Dark Condensation IV",
         tier: CardTier.S,
         cost: 1,
         type: "skill",
-        description:
-          "Choose 1 Attack  card(s), +100%  Damage Amount until  used",
-        reasoning: "Flexible targeting across zones but lower multiplier",
+        description: "Choose 1 Attack card(s), +100% Damage Amount until used",
+        reasoning: "Flexible across zones but lower multiplier than I",
       },
       {
         id: "Dark Condensation V",
         tier: CardTier.SPlus,
         cost: 1,
         type: "upgrade",
-        description: "Choose 1 Attack  Card(s) in hand, +50%  Damage Amount",
-        reasoning: "Permanent but lowest multiplier and exhausts itself",
+        description: "Choose 1 Attack Card(s) in hand, +50% Damage Amount",
+        reasoning: "Permanent buff but lowest multiplier and exhausts itself",
       },
     ],
     divineEpiphanies: [
@@ -348,12 +349,13 @@ const uniqueCards: UniqueCard[] = [
     ],
   },
 ];
+
 const recommendedSaveData: SaveData[] = [
   {
     id: "deck-1",
     name: "Mei Lin's Support",
     shortDescription: "Strike Build",
-    description: ``,
+    description: "",
     faintMemoryNote: "140 Faint Memory Cost",
     cards: [
       "Strike of Darkness IV",
@@ -370,7 +372,7 @@ const recommendedSaveData: SaveData[] = [
     id: "deck-2",
     name: "Chizuru's Support",
     shortDescription: "Shadow of the Moon Build",
-    description: ``,
+    description: "",
     faintMemoryNote: "140 Faint Memory Cost",
     cards: [
       "Strike of Darkness V",
@@ -387,7 +389,7 @@ const recommendedSaveData: SaveData[] = [
     id: "deck-3",
     name: "Chizuru's Support",
     shortDescription: "Moonslash Build",
-    description: ``,
+    description: "",
     faintMemoryNote: "140 Faint Memory Cost",
     cards: [
       "Strike of Darkness IV",
@@ -404,7 +406,7 @@ const recommendedSaveData: SaveData[] = [
     id: "deck-4",
     name: "Renoa's Support",
     shortDescription: "",
-    description: ``,
+    description: "",
     faintMemoryNote: "140 Faint Memory Cost",
     cards: [
       "Strike of Darkness V",
@@ -421,7 +423,7 @@ const recommendedSaveData: SaveData[] = [
     id: "deck-5",
     name: "Kayron's Support",
     shortDescription: "",
-    description: ``,
+    description: "",
     faintMemoryNote: "140 Faint Memory Cost",
     cards: [
       "Strike of Darkness V",
@@ -480,27 +482,27 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
 const partnersGuide: PartnersGuide[] = [
   {
     id: "nyx",
-    description: ``,
+    description: "",
     tier: CardTier.SPlus,
   },
   {
     id: "yuri",
-    description: ``,
+    description: "",
     tier: CardTier.S,
   },
   {
     id: "arwen",
-    description: ``,
+    description: "",
     tier: CardTier.A,
   },
   {
     id: "alyssa",
-    description: ``,
+    description: "",
     tier: CardTier.A,
   },
   {
     id: "yvonne",
-    description: ``,
+    description: "",
     tier: CardTier.C,
   },
 ];
@@ -512,11 +514,20 @@ export const reiData: CharacterData = {
   rarity: 4,
 
   overview: `
-  
+Rei is a flexible support focused on enabling basic attack spam, 0-cost spam, or Void synergy depending on the team
+Her kit revolves around massive buffs to 1-cost (or ≤1-cost) cards, strong draw/exhaust cycling with Snack Time, and powerful buff support via Predator's Blade
   `.trim(),
-  strengths: [""],
 
-  weaknesses: [""],
+  strengths: [
+    "Excellent enabler for basic attack and 0-cost builds",
+    "Strong draw and cycling with Snack Time",
+    "Very flexible — supports many different DPS styles",
+  ],
+
+  weaknesses: [
+    "Relatively low personal damage",
+    "Some builds require specific partner synergy",
+  ],
 
   externalResources: [
     {
@@ -532,14 +543,6 @@ export const reiData: CharacterData = {
   ],
 
   credits: [
-    {
-      name: "",
-      contribution: "",
-    },
-    {
-      name: "",
-      contribution: "",
-    },
     {
       name: "Lucie",
       contribution: "Guide Author and Data",

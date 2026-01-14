@@ -9,7 +9,6 @@ import {
   MemoryFragmentSetRecommendation,
   UniqueCard,
   PartnersGuide,
-  CreditEntry,
 } from "@/types/character-guides";
 import {
   MemoryFragmentSet,
@@ -26,7 +25,7 @@ const commonCards: Card[] = [
     type: "upgrade",
     cost: 1,
     rarity: CardRarities.Unique,
-    description: "[Unique]  Increase max stack of  Reload by 1  1 Reload",
+    description: "[Unique] Increase max stack of Reload by 1   1 Reload",
   },
 ];
 
@@ -49,7 +48,7 @@ const uniqueCards: UniqueCard[] = [
         description:
           "[ Unique / Initiation ] Create 1 Ballista card(s). At the start of the turn, create 1 Ballista card(s), with a 50% chance to additionally create 1 more",
         reasoning:
-          "Probably the highest raw damage potential, but it suffers from heavy RNG making it inconsistent",
+          "Highest raw damage potential but suffers from heavy RNG, making it quite inconsistent",
       },
       {
         id: "Firing Preparation II",
@@ -57,9 +56,9 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "upgrade",
         description:
-          "[ Unique / Initiation ] Create 1 Piercing Ballista. At the start of the turn,  create 1 Piercing Ballista card(s)",
+          "[ Unique / Initiation ] Create 1 Piercing Ballista. At the start of the turn, create 1 Piercing Ballista card(s)",
         reasoning:
-          "Lowest damage among the Ballista epiphanies if enemy has no shield, but strong against shielded foes like Judas because of the Piercing damage",
+          "Lowest damage among Ballista Epiphanies against unshielded enemies, but very strong vs shielded targets like Judas thanks to piercing",
       },
       {
         id: "Firing Preparation III",
@@ -67,9 +66,9 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "upgrade",
         description:
-          "[ Unique / Initiation ] Create 1 Enhanced Ballista. At the start of the turn,  create 1 Enhanced Ballista card(s)",
+          "[ Unique / Initiation ] Create 1 Enhanced Ballista. At the start of the turn, create 1 Enhanced Ballista card(s)",
         reasoning:
-          "It have lower damage potential than other epiphanies, however the 30% Critical Chance makes damage more consistent",
+          "Lower damage ceiling than others, but the built-in 30% Critical Chance makes output much more consistent",
       },
       {
         id: "Firing Preparation IV",
@@ -77,9 +76,9 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "upgrade",
         description:
-          "[ Unique / Initiation ] Create 1 Giant Ballista.  At the start of the turn,  create 1 Giant Ballista  card(s)",
+          "[ Unique / Initiation ] Create 1 Giant Ballista. At the start of the turn, create 1 Giant Ballista card(s)",
         reasoning:
-          "Best overall; lower single-target damage but AoE is so strong it doesn't matter, mitigates targeting RNG without E2, always pick if unsure",
+          "Best overall choice — lower single-target but insane AoE, greatly reduces targeting RNG even without E2, always safe pick when unsure",
       },
       {
         id: "Firing Preparation V",
@@ -87,9 +86,9 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "upgrade",
         description:
-          "[ Unique / Initiation ] Create 1 Shelling Ballista.  At the start of the turn,  create 1 Shelling Ballista  card(s)",
+          "[ Unique / Initiation ] Create 1 Shelling Ballista. At the start of the turn, create 1 Shelling Ballista card(s)",
         reasoning:
-          "It makes Kowalski and Morale additive buffs stronger, her E2 makes it consistent",
+          "Makes Kowalski and Morale additive buffs much stronger, becomes very consistent with her E2",
       },
     ],
     divineEpiphanies: [
@@ -114,16 +113,16 @@ const uniqueCards: UniqueCard[] = [
     type: "skill",
     cost: 1,
     rarity: CardRarities.Rare,
-    description: "120% Shield  Draw 2 card(s) from other combatant",
+    description: "120% Shield   Draw 2 card(s) from other combatant",
     epiphanies: [
       {
         id: "Repose I",
         tier: CardTier.SPlus,
         cost: 0,
         type: "skill",
-        description: "Draw 2 other   Combatant's card(s)",
+        description: "Draw 2 other Combatant's card(s)",
         reasoning:
-          "Arguably the best Repose option and it gets even stronger with a Divine Epiphany that adds Draw 1 or 1 AP",
+          "Arguably the best Repose Epiphany — gets even stronger with Divine upgrades that add Draw 1 or 1 AP",
       },
       {
         id: "Repose II",
@@ -131,9 +130,9 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "skill",
         description:
-          "180% Shield  Draw 2 other  Combatant's card(s)  If that card is a Skill Card,  1 Reload",
+          "180% Shield   Draw 2 other Combatant's card(s)   If that card is a Skill Card, 1 Reload",
         reasoning:
-          "A weaker version of Repose III, it still has value since you draw and might get Reload, but the effect is much lower impact overall, and the other Repose options outperform it",
+          "Weaker version of Repose III — still has value since you draw and might get Reload, but overall impact is lower than other options",
       },
       {
         id: "Repose III",
@@ -141,9 +140,9 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "skill",
         description:
-          "180% Shield  Draw 2 other  Combatant's card(s)  Decrease Cost of 1 of those cards by 1 for 1 turn",
+          "180% Shield   Draw 2 other Combatant's card(s)   Decrease Cost of 1 of those cards by 1 for 1 turn",
         reasoning:
-          "A bit less consistent since it can break some builds, but the Divine upgrade that makes this 0 cost might make it the best option",
+          "Slightly less consistent (can break some builds), but becomes potentially the best with 0-cost Divine upgrade",
       },
       {
         id: "Repose IV",
@@ -151,9 +150,9 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "skill",
         description:
-          "180% Shield  1 Reload equal to  number of other  Combatant's skill card(s)  in hand",
+          "180% Shield   1 Reload equal to number of other Combatant's skill card(s) in hand",
         reasoning:
-          "Reload is already covered by the Pendant of Resolution card, so there's no real reason to pick this",
+          "Reload is already covered well by Pendant of Resolution — no real reason to pick this",
       },
       {
         id: "Repose V",
@@ -161,9 +160,9 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "skill",
         description:
-          "180% Shield  Discard all other  Combatant's card(s) in hand  1 Reload equal to that number",
+          "180% Shield   Discard all other Combatant's card(s) in hand   1 Reload equal to that number",
         reasoning:
-          "Hand discard is too punishing and the Reload payoff doesn't justify it",
+          "Hand discard is way too punishing — Reload payoff doesn't justify it",
       },
     ],
     divineEpiphanies: [
@@ -201,9 +200,8 @@ const uniqueCards: UniqueCard[] = [
         tier: CardTier.SPlus,
         cost: 1,
         type: "upgrade",
-        description: "When using a Skill Card,  1 Reload",
-        reasoning:
-          "Best overall option, it is just a direct upgrade of the base card",
+        description: "When using a Skill Card, 1 Reload",
+        reasoning: "Best overall — straight upgrade from base card",
       },
       {
         id: "Pendant of Resolution II",
@@ -211,18 +209,17 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "upgrade",
         description:
-          "[ Unique ] When another combatant uses Skill Card, 1 Reload  If 3 are used, at the start of the next turn, create 1 Micro Ballista card(s)",
+          "[ Unique ] When another combatant uses Skill Card, 1 Reload   If 3 are used, at the start of the next turn, create 1 Micro Ballista card(s)",
         reasoning:
-          "Gives some Reload from other Skill Cards, but the Micro Ballista have low damage scaling, not a strong pick compared to other Epiphanies",
+          "Gives some Reload from allies, but Micro Ballista has poor scaling — not strong compared to other Epiphanies",
       },
       {
         id: "Pendant of Resolution III",
         tier: CardTier.A,
         cost: 1,
         type: "skill",
-        description:
-          "[Exhaust 2] For 1 turn(s), when a  card is used,  1 Reload",
-        reasoning: "Provides consistent Reload but not particularly strong",
+        description: "[Exhaust 2] For 1 turn(s), when a card is used, 1 Reload",
+        reasoning: "Consistent Reload generation but not particularly powerful",
       },
       {
         id: "Pendant of Resolution IV",
@@ -230,9 +227,9 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "upgrade",
         description:
-          "When another combatant uses Skill Card, 1 Reload  50% Chance to gain additional 1 Reload",
+          "When another combatant uses Skill Card, 1 Reload   50% Chance to gain additional 1 Reload",
         reasoning:
-          "Unreliable due to RNG, but otherwise a straightforward base card upgrade that can provide extra Reload",
+          "RNG-dependent but otherwise a solid upgrade that can give nice extra Reload",
       },
       {
         id: "Pendant of Resolution V",
@@ -241,7 +238,7 @@ const uniqueCards: UniqueCard[] = [
         type: "skill",
         description: "[ Retain / Retrieve 4 ] Reload 2",
         reasoning:
-          "Best Pendant if paired with a -1 cost Divine Epiphany; otherwise it's a bit expensive. Excellent for Mei Lin, as it provides 8 Passion stacks",
+          "Best Pendant if paired with -1 cost Divine; otherwise a bit expensive. Extremely strong for Mei Lin thanks to 8 Passion stacks",
       },
     ],
     divineEpiphanies: [
@@ -267,7 +264,7 @@ const uniqueCards: UniqueCard[] = [
     cost: 1,
     rarity: CardRarities.Legendary,
     description:
-      "Choose 1 Ballista card in hand, +100% Damage amount until activated  Draw 1",
+      "Choose 1 Ballista card in hand, +100% Damage amount until activated   Draw 1",
     epiphanies: [
       {
         id: "Sir Kowalski I",
@@ -275,9 +272,9 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "skill",
         description:
-          "Choose 1 Ballista card in hand, +150% Damage amount until activated.  Draw 2",
+          "Choose 1 Ballista card in hand, +150% Damage amount until activated. Draw 2",
         reasoning:
-          "Having more draw is always good, and it also buffs the ballista by Additive damage",
+          "More draw is always great and it buffs Ballista with strong additive damage",
       },
       {
         id: "Sir Kowalski II",
@@ -285,18 +282,18 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "skill",
         description:
-          "Draw 1 Increase Damage Amount of Ballista by 30% for 1 turn",
+          "Draw 1   Increase Damage Amount of Ballista by 30% for 1 turn",
         reasoning:
-          "The 30% multiplicative Ballista boost is less valuable since Veronica already has a lot of multiplicative damage from Reload",
+          "30% multiplicative Ballista boost is less valuable since Veronica already has tons of multi from Reload",
       },
       {
         id: "Sir Kowalski III",
         tier: CardTier.SPlus,
         cost: 1,
         type: "skill",
-        description: "Draw 2 When drawing a Skill card, create 1 Ballista",
+        description: "Draw 2   When drawing a Skill card, create 1 Ballista",
         reasoning:
-          "Basically a Repose card and can or not create an extra ballista",
+          "Basically a Repose card that can sometimes generate extra Ballista",
       },
       {
         id: "Sir Kowalski IV",
@@ -306,7 +303,7 @@ const uniqueCards: UniqueCard[] = [
         description:
           "+250% Damage Amount of 1 random Ballista card in hand, Exhaust after activation",
         reasoning:
-          "Provides the highest damage boost, triggers mid-turn and counts as a normal targetting attack, activating Passion Weakness if the enemy has it",
+          "Highest single Ballista damage boost, triggers mid-turn, counts as normal attack — good for activating Passion Weakness",
       },
       {
         id: "Sir Kowalski V",
@@ -314,9 +311,9 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "skill",
         description:
-          "Select and Exhaust 1 Ballista in hand Create 2 Ballista, decrease Damage Amount of those cards by 25% until activated",
+          "Select and Exhaust 1 Ballista in hand   Create 2 Ballista, decrease Damage Amount of those cards by 25% until activated",
         reasoning:
-          "Honestly questionable, but if paired with Pendant of Resolution II, you can trade the Micro Ballista for 2 stronger version of it",
+          "Questionable normally, but strong synergy with Pendant of Resolution II — trade Micro Ballista for 2 stronger versions",
       },
     ],
     divineEpiphanies: [
@@ -346,8 +343,7 @@ const recommendedSaveData: SaveData[] = [
   {
     id: "deck-1",
     name: "Draw Support",
-    shortDescription: "",
-    description: ``,
+    description: "",
     faintMemoryNote: "140 Faint Memory Cost",
     cards: [
       "Firing Preparation IV",
@@ -363,8 +359,8 @@ const recommendedSaveData: SaveData[] = [
   {
     id: "deck-2",
     name: "Passion Stacking",
-    shortDescription: "",
-    description: `This deck is Mei Lin's nichest build, it's a high draw deck that uses the Pendant of Resolution V to provide insane passion stacks`,
+    description:
+      "Mei Lin's niche high-draw passion stacker — uses Pendant of Resolution V for insane passion generation",
     faintMemoryNote: "140 Faint Memory Cost",
     cards: [
       "Firing Preparation IV",
@@ -380,8 +376,7 @@ const recommendedSaveData: SaveData[] = [
   {
     id: "deck-3",
     name: "High DPS",
-    shortDescription: "",
-    description: ``,
+    description: "",
     faintMemoryNote: "140 Faint Memory Cost",
     cards: [
       "Firing Preparation V",
@@ -397,8 +392,7 @@ const recommendedSaveData: SaveData[] = [
   {
     id: "deck-4",
     name: "Ballista Gen",
-    shortDescription: "",
-    description: ``,
+    description: "",
     faintMemoryNote: "140 Faint Memory Cost",
     cards: [
       "Firing Preparation I",
@@ -427,7 +421,6 @@ const gearsData = {
     "Fragment of the Empty Void",
     "Rocket-Adorned Cape",
     "Brainwave-Blocking Helmet",
-
     "Shield of the Watcher",
     "Wings of Freedom",
   ],
@@ -435,7 +428,6 @@ const gearsData = {
     "Sphere of Randomness",
     "Superconductive Protein",
     "Source of the Forbidden",
-
     "Emblem of an Exceptional Entity",
     "Amorphous Cube",
   ],
@@ -473,32 +465,32 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
 const partnersGuide: PartnersGuide[] = [
   {
     id: "marin",
-    description: ``,
+    description: "",
     tier: CardTier.SPlus,
   },
   {
     id: "rosaria",
-    description: ``,
+    description: "",
     tier: CardTier.SPlus,
   },
   {
     id: "solia",
-    description: ``,
+    description: "",
     tier: CardTier.S,
   },
   {
     id: "nakia",
-    description: ``,
+    description: "",
     tier: CardTier.S,
   },
   {
     id: "daisy",
-    description: ``,
+    description: "",
     tier: CardTier.C,
   },
   {
     id: "tina",
-    description: ``,
+    description: "",
     tier: CardTier.Bad,
   },
 ];
@@ -510,19 +502,20 @@ export const veronicaData: CharacterData = {
   rarity: 5,
 
   overview: `
-  Hybrid DPS/Support character who demands minimal AP investment after her core upgrade cards. She deals damage through Ballistas that automatically trigger at end of turn with zero cost. 
-  Her support shines via cheap, high-impact card draw cards, and she can power spike by stacking the Reload buff to massively amplify Ballista damage.
+Veronica is a hybrid DPS/Support character that needs almost no AP after setting up her core upgrades
+She deals damage through Ballistas that trigger automatically at end of turn for 0 cost
+Her support comes from cheap, high-impact draw and she can spike massively by stacking Reload to amplify Ballista damage
   `.trim(),
 
   strengths: [
-    "Insane Card Draw support",
-    "Passively deals ST and AoE damage",
-    "Solo DPS in Chaos",
-    "Heavy Deck thinning",
-    "Easy to play",
+    "Insane card draw support",
+    "Passive strong single-target + AoE damage",
+    "Can solo DPS in Chaos",
+    "Heavy deck thinning",
+    "Very easy to play",
   ],
 
-  weaknesses: ["Ballista Epiphanies are RNG without E2"],
+  weaknesses: ["Ballista targeting is quite RNG-dependent without E2"],
 
   externalResources: [
     {

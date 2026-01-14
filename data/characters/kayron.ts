@@ -9,7 +9,6 @@ import {
   MemoryFragmentSetRecommendation,
   UniqueCard,
   PartnersGuide,
-  CreditEntry,
 } from "@/types/character-guides";
 import {
   MemoryFragmentSet,
@@ -55,7 +54,8 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description: "360% Damage Create 3 Futility Card(s)",
-        reasoning: "Fast ramp and high base damage works well for burst builds",
+        reasoning:
+          "Fast ramp and high base damage, works really well for burst builds",
       },
       {
         id: "Echo of Futility II",
@@ -65,7 +65,7 @@ const uniqueCards: UniqueCard[] = [
         description:
           "240% Damage Create 2 Futility Card(s) +20% Damage Amount for each Exhausted Futility",
         reasoning:
-          "Bad scaling, not worth using compared to Echo of Futility V and needs ~12 Futility to beat Echo of Futility I",
+          "Bad scaling, not worth it compared to Echo of Futility V, needs ~12 Futility to even beat Echo I",
       },
       {
         id: "Echo of Futility III",
@@ -74,7 +74,8 @@ const uniqueCards: UniqueCard[] = [
         type: "attack",
         description:
           "240% Damage Create 2 Futility Card(s) Apply Ephemeral on that card",
-        reasoning: "Saves AP helps with rotations but adds little damage",
+        reasoning:
+          "Saves AP and helps with rotations but adds very little damage",
       },
       {
         id: "Echo of Futility IV",
@@ -83,7 +84,7 @@ const uniqueCards: UniqueCard[] = [
         type: "attack",
         description:
           "50% Damage +150% Damage Amount for each X Create X+1 Futility Card(s)",
-        reasoning: "Low value scales only with AP ratio, not worth the cost",
+        reasoning: "Low value, scales only with AP ratio, not worth the cost",
       },
       {
         id: "Echo of Futility V",
@@ -93,7 +94,7 @@ const uniqueCards: UniqueCard[] = [
         description:
           "30% Damage Create 2 Futility Card(s) +30% Damage Amount for each Futility created during this battle",
         reasoning:
-          "Very high scaling and good AP efficiency, strong over longer fights",
+          "Insane scaling, excellent AP efficiency, becomes extremely strong in longer fights",
       },
     ],
     divineEpiphanies: [
@@ -134,7 +135,7 @@ const uniqueCards: UniqueCard[] = [
         type: "attack",
         description:
           "450% Damage to all enemies When a card is Exhausted, decrease Cost of this card by 1 for 1 turn",
-        reasoning: "Good, usable for first rotations without E1",
+        reasoning: "Solid option, usable for first rotations even without E1",
       },
       {
         id: "Brand of Annihilation II",
@@ -143,7 +144,8 @@ const uniqueCards: UniqueCard[] = [
         type: "attack",
         description:
           "300% Damage x 2 to a random enemy When a card is Exhausted, decrease Cost of this card by 1 for 1 turn",
-        reasoning: "High damage in single target fights, mainly bosses",
+        reasoning:
+          "Very high damage in single target fights, especially good against bosses",
       },
       {
         id: "Brand of Annihilation III",
@@ -153,7 +155,7 @@ const uniqueCards: UniqueCard[] = [
         description:
           "500% Damage to all enemies Decrease Cost for each Exhausted Futility",
         reasoning:
-          "Becomes 0 cost for the whole battle after ramp, high base damage, easy to use",
+          "Becomes 0 cost for the whole battle after ramp, very high base damage, extremely easy to use",
       },
       {
         id: "Brand of Annihilation IV",
@@ -163,7 +165,7 @@ const uniqueCards: UniqueCard[] = [
         description:
           "200% Damage to all enemies +40% Damage Amount for each card Exhausted this turn",
         reasoning:
-          "Only good for one turn burst, damage higher only if exhausting more than ~8 cards, still costs 1 ap, damage resets next round",
+          "Only good for one-turn burst, needs to exhaust ~8+ cards to be worth it, damage resets next round",
       },
       {
         id: "Brand of Annihilation V",
@@ -172,7 +174,7 @@ const uniqueCards: UniqueCard[] = [
         type: "attack",
         description:
           "300% Damage to all enemies If any card was Exhausted this turn, 3 Agony to all enemies",
-        reasoning: "Restart the run",
+        reasoning: "Just restart the run",
       },
     ],
     divineEpiphanies: [
@@ -205,7 +207,8 @@ const uniqueCards: UniqueCard[] = [
         cost: 2,
         type: "attack",
         description: "360% Damage Activate 2 Futility Card(s) from hand",
-        reasoning: "AP save to dump Futility, loses too much long term scaling",
+        reasoning:
+          "Saves AP to dump Futility but loses too much long-term scaling",
       },
       {
         id: "Black Hole II",
@@ -223,7 +226,7 @@ const uniqueCards: UniqueCard[] = [
         type: "attack",
         description:
           "60% Damage to a random enemy Add 1 Hit for each Exhausted Futility (max 5 times)",
-        reasoning: "No reason to pick",
+        reasoning: "No reason to pick this",
       },
       {
         id: "Black Hole IV",
@@ -233,7 +236,7 @@ const uniqueCards: UniqueCard[] = [
         description:
           "300% Damage Add 1 Hit for each 5 Exhausted Futility (max 2 times)",
         reasoning:
-          "Damage only pulls ahead at specific exhaust counts, sacrifices scaling for short burst",
+          "Only pulls ahead at very specific exhaust counts, sacrifices scaling for short burst",
       },
       {
         id: "Black Hole V",
@@ -243,7 +246,7 @@ const uniqueCards: UniqueCard[] = [
         description:
           "When Futility is Exhausted, 100% Fixed Damage to a random enemy",
         reasoning:
-          "Fallback option when Black Hole II is unavailable, fixed damage is limited, only works if futility is fully converted every turn",
+          "Decent fallback when Black Hole II is not available, fixed damage is limited, needs full Futility conversion every turn to shine",
       },
     ],
     divineEpiphanies: [
@@ -278,7 +281,8 @@ const uniqueCards: UniqueCard[] = [
         type: "upgrade",
         description:
           "[ Unique ] When Futility is created, change those cards into a 1-cost Attack Card with 120% Damage and Heal effects",
-        reasoning: "Damage + sustain, good for long extended fights",
+        reasoning:
+          "Great damage + sustain, very strong for long extended fights",
       },
       {
         id: "Oath of Vanity II",
@@ -287,7 +291,7 @@ const uniqueCards: UniqueCard[] = [
         type: "upgrade",
         description:
           "[ Unique / Initiation ] When Futility is created, change those cards into a 1-cost Attack Card with 80% Damage and Heal effects",
-        reasoning: "Used mainly for initiation without Manifest Ego 3",
+        reasoning: "Mainly used for initiation without Manifest Ego 3",
       },
       {
         id: "Oath of Vanity III",
@@ -296,7 +300,7 @@ const uniqueCards: UniqueCard[] = [
         type: "upgrade",
         description:
           "[ Unique ] When creating Futility, it changes to an Attack Card with 180% Damage, Cost 1",
-        reasoning: "Very high damage, pays off in long extended fights",
+        reasoning: "Very high damage output, pays off massively in long fights",
       },
       {
         id: "Oath of Vanity IV",
@@ -306,7 +310,7 @@ const uniqueCards: UniqueCard[] = [
         description:
           "[ Exhaust / Retain ] Exhaust all Futility Status Ailments, and Curse Cards in hand Draw for each",
         reasoning:
-          "Full deck access early, ramps every card for first turns, good for burst playstyle",
+          "Gives full deck access early, ramps every card for first turns, excellent for burst playstyle",
       },
       {
         id: "Oath of Vanity V",
@@ -315,7 +319,7 @@ const uniqueCards: UniqueCard[] = [
         type: "upgrade",
         description:
           "When 3 Futility Cards are Exhausted, 2 Agony to all enemies",
-        reasoning: "Restart the run",
+        reasoning: "Just restart the run",
       },
     ],
     divineEpiphanies: [
@@ -356,8 +360,7 @@ const recommendedSaveData: SaveData[] = [
   {
     id: "deck-1",
     name: "Standard Build",
-    shortDescription: "",
-    description: ``,
+    description: "",
     faintMemoryNote: "140 Faint Memory Cost",
     cards: [
       "Echo of Futility V",
@@ -373,8 +376,8 @@ const recommendedSaveData: SaveData[] = [
   {
     id: "deck-2",
     name: "Burst Build",
-    shortDescription: "",
-    description: `If you're running with Rei and multiple Snack Time III cards, you can trade one Oath of Vanity IV for one more Brand of Annihilation III`,
+    description:
+      "If you're running with Rei and multiple Snack Time III cards, you can trade one Oath of Vanity IV for one more Brand of Annihilation III",
     faintMemoryNote: "140 Faint Memory Cost",
     cards: [
       "Echo of Futility I",
@@ -390,8 +393,8 @@ const recommendedSaveData: SaveData[] = [
   {
     id: "deck-3",
     name: "One Turn Kill",
-    shortDescription: "",
-    description: `If you're running with Rei and multiple Snack Time III cards, you can trade one Oath of Vanity IV for one more Brand of Annihilation IV`,
+    description:
+      "If you're running with Rei and multiple Snack Time III cards, you can trade one Oath of Vanity IV for one more Brand of Annihilation IV",
     faintMemoryNote: "140 Faint Memory Cost",
     cards: [
       "Echo of Futility I",
@@ -465,35 +468,32 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
 const partnersGuide: PartnersGuide[] = [
   {
     id: "bria",
-    description: `[ Best in Slot / Signature ] 
-    Provides massive multiplicative damage scaling and strong utility. 
-    Her Ego Skill grants 25% additive card damage on first Futility generation, plus 10% multiplicative damage per card generated (up to 3x). 
-    Essential for maximizing Kayron's damage potential in extended fights.
-    `,
+    description: `[ Best in Slot / Signature ]
+    Provides massive multiplicative damage scaling and strong utility
+    Her Ego Skill grants 25% additive card damage on first Futility generation, plus 10% multiplicative damage per card generated (up to 3x)
+    Essential for maximizing Kayron's damage in extended fights`,
     tier: CardTier.SPlus,
   },
   {
     id: "eloise",
-    description: `Strong multiplicative damage boost: 20% passive card damage plus 24% multiplicative for 1 turn after exhausting cards. 
-    Excellent synergy with Kayron's Exhaust-heavy playstyle.
-    `,
+    description:
+      "Strong multiplicative damage boost: 20% passive card damage plus 24% multiplicative for 1 turn after exhausting cards\nExcellent synergy with Kayron's Exhaust-heavy playstyle",
     tier: CardTier.S,
   },
   {
     id: "zatera",
-    description: `Solid F2P option providing 16% ATK—a rare stat that scales well. 
-    However, Kayron benefits more from multiplicative card damage (which scales his innate effects).
-    `,
+    description:
+      "Solid F2P option providing 16% ATK — a rare stat that scales well\nHowever, Kayron prefers multiplicative card damage much more",
     tier: CardTier.A,
   },
   {
     id: "itsuku",
-    description: ``,
+    description: "",
     tier: CardTier.A,
   },
   {
     id: "anteia",
-    description: `Nyx would be a better choice`,
+    description: "Nyx would be a better choice",
     tier: CardTier.Bad,
   },
 ];
@@ -505,24 +505,24 @@ export const kayronData: CharacterData = {
   rarity: 5,
 
   overview: `
-  Kayron's expensive cards generate or consume Futility, a 1-cost Status Ailment that exhausts itself with no base effect. 
-  His Oath of Vanity Epiphanies define his Futility playstyle.
-  Upgrade Futility via Oath of Vanity to enable his kit, then reduce card costs through Epiphanies, Exhausts, and team synergy to maximize damage output.
+Kayron's expensive cards generate or consume Futility — a 1-cost Status Ailment that exhausts itself with no base effect
+His Oath of Vanity Epiphanies define the entire Futility playstyle
+Upgrade Futility via Oath of Vanity to enable the kit, then reduce card costs through Epiphanies, Exhausts, and team synergy to maximize damage output
   `.trim(),
 
   strengths: [
-    "Strong at just Manifest Ego 1",
-    "Very Versatile DPS",
-    "High ST and AoE damage",
-    "Solo DPS/Sustain in Chaos",
-    "Fast Basin/Simulation",
+    "Strong already at Manifest Ego 1",
+    "Very versatile DPS",
+    "High single target and AoE damage",
+    "Can solo DPS/sustain in Chaos",
+    "Fast Basin/Simulation clears",
   ],
 
   weaknesses: [
     "Requires Manifest Ego 1",
-    "Reliant on Bria for QoL",
-    "Very AP-reliant",
-    "Hard to play",
+    "Very reliant on Bria for QoL",
+    "Extremely AP-hungry",
+    "Hard to play optimally",
   ],
 
   externalResources: [
