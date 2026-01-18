@@ -859,7 +859,7 @@ export function RunTracker() {
           duplicationCount,
           conversionCount,
           totalPoints,
-        })
+        }),
       );
     }
   }, [
@@ -885,7 +885,7 @@ export function RunTracker() {
         hasDivineEpiphany: false,
         isRemoved: false,
         wasConverted: false,
-      }))
+      })),
     );
   };
 
@@ -970,8 +970,8 @@ export function RunTracker() {
               ...c,
               [isDivine ? "hasDivineEpiphany" : "hasNormalEpiphany"]: !current,
             }
-          : c
-      )
+          : c,
+      ),
     );
 
     const delta = isDivine
@@ -979,8 +979,8 @@ export function RunTracker() {
         ? 30
         : 20
       : card.cardType !== "starter"
-      ? 10
-      : 0;
+        ? 10
+        : 0;
 
     setTotalPoints((p) => p + (current ? -delta : delta));
     setSelectedCard(null);
@@ -1087,8 +1087,8 @@ export function RunTracker() {
 
     setDeck((prev) =>
       prev.map((c) =>
-        c.id === cardId ? { ...c, isRemoved: true, removalCost } : c
-      )
+        c.id === cardId ? { ...c, isRemoved: true, removalCost } : c,
+      ),
     );
     setRemovalCount(newCount);
     setTotalPoints((p) => p + removalCost);
@@ -1116,8 +1116,8 @@ export function RunTracker() {
               name: "Mutant Sample",
               image: DEFAULT_CARD_IMAGES.remove,
             }
-          : c
-      )
+          : c,
+      ),
     );
     setSelectedCard(null);
   };
@@ -1200,7 +1200,7 @@ export function RunTracker() {
   const renderCard = (card: DeckCard, isBase: boolean) => {
     const isSelected = selectedCard === card.id;
     const factionBorder = Object.entries(FACTION_BORDER_MAP).find(([, chars]) =>
-      chars.includes(character)
+      chars.includes(character),
     )?.[0];
 
     return (
