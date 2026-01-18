@@ -43,16 +43,16 @@ export default function GuidesLayout({
               <strong className="font-semibold text-yellow-300">
                 Work in Progress
               </strong>
+
               <p className="mt-1">
-                These character guides are still being actively developed. Some
-                information may be incomplete, outdated, inaccurate, or subject
-                to change without notice.
+                These character guides are still under active development. They
+                may be incomplete, outdated, or change at any time.
               </p>
 
               <p className="mt-3 text-yellow-200/90">
-                Want to help improve a specific character guide, add missing
-                info, or correct something? Feel free to DM or ping me on the
-                official Discord CZN server <strong>lilyium.box</strong> ♡
+                If you'd like to contribute, help with a specific character, or
+                suggest improvements, feel free to DM or mention me on the
+                official CZN Discord server <strong>lilyium.box</strong> ♡
               </p>
             </div>
           </div>
