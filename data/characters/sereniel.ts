@@ -52,7 +52,7 @@ const uniqueCards: UniqueCard[] = [
       {
         id: "Homing Laser I",
         tier: CardTier.S,
-        cost: 1,
+        cost: 0,
         type: "attack",
         description:
           "150% damage\nOn Ravage, Move to\nhand\nDestroy: Add 1 Hit(s)",
