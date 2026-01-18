@@ -8,7 +8,7 @@ export default function CalculatorPage() {
         <Tabs defaultValue="tracker" className="space-y-4 sm:space-y-6">
           <TabsList className="grid grid-cols-2 w-full max-w-xs mx-auto">
             <TabsTrigger value="tracker">Calculator</TabsTrigger>
-            <TabsTrigger value="helper">Math Helper</TabsTrigger>
+            <TabsTrigger value="helper">Faint Memory Rules</TabsTrigger>
           </TabsList>
           <TabsContent value="tracker" className="space-y-6">
             <RunTracker />
@@ -18,11 +18,10 @@ export default function CalculatorPage() {
             <div className="rounded-lg border border-border bg-card p-4 sm:p-6 space-y-6 sm:space-y-8">
               <div>
                 <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-purple-400">
-                  Point System Guide
+                  Faint Memory Guide
                 </h2>
                 <p className="text-xs sm:text-sm text-muted-foreground mb-4 sm:mb-6">
-                  Understanding the math behind deck building and Faint Memory
-                  calculations
+                  Understanding the rules behind the deck building system
                 </p>
               </div>
 
@@ -73,13 +72,13 @@ export default function CalculatorPage() {
                     </div>
                     <ul className="text-sm text-muted-foreground space-y-1 ml-4">
                       <li>
-                        • Neutral cards:{" "}
+                        • Neutral Cards:{" "}
                         <span className="text-purple-400 font-mono">
                           +30 points
                         </span>
                       </li>
                       <li>
-                        • Other card types:{" "}
+                        • Other Card Types:{" "}
                         <span className="text-purple-400 font-mono">
                           +20 points
                         </span>
@@ -94,7 +93,7 @@ export default function CalculatorPage() {
                     </div>
                     <ul className="text-sm text-muted-foreground space-y-1 ml-4">
                       <li>
-                        • All cards except starters:{" "}
+                        • All Cards except Starters:{" "}
                         <span className="text-purple-400 font-mono">
                           +10 points
                         </span>

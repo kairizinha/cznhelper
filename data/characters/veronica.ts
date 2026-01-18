@@ -343,7 +343,8 @@ const recommendedSaveData: SaveData[] = [
   {
     id: "deck-1",
     name: "Draw Support",
-    description: "",
+    shortDescription: "General Support",
+    description: ``,
     faintMemoryNote: "140 Faint Memory Cost",
     cards: [
       "Firing Preparation IV",
@@ -359,14 +360,15 @@ const recommendedSaveData: SaveData[] = [
   {
     id: "deck-2",
     name: "Passion Stacking",
-    description:
-      "Mei Lin's niche high-draw passion stacker — uses Pendant of Resolution V for insane passion generation",
+    shortDescription: "Mei Lin's Support",
+    description: `Niche high-draw passion stacker — uses Pendant of Resolution V for insane passion generation.
+    Requires a 0-cost Divine Epiphany on Pendant of Resolution V, otherwise it's too expensive.`,
     faintMemoryNote: "140 Faint Memory Cost",
     cards: [
       "Firing Preparation IV",
       "Repose I",
       "Repose I",
-      "Pendant of Resolution V",
+      "Repose I",
       "Pendant of Resolution V",
       "Pendant of Resolution V",
       "Sir Kowalski III",
@@ -375,8 +377,9 @@ const recommendedSaveData: SaveData[] = [
   },
   {
     id: "deck-3",
-    name: "High DPS",
-    description: "",
+    name: "DPS Build",
+    shortDescription: "",
+    description: ``,
     faintMemoryNote: "140 Faint Memory Cost",
     cards: [
       "Firing Preparation V",
@@ -392,7 +395,9 @@ const recommendedSaveData: SaveData[] = [
   {
     id: "deck-4",
     name: "Ballista Gen",
-    description: "",
+    shortDescription: "Niche Build",
+    description: `Generates normal and micro Ballistas, then trades them for 2 stronger versions with Kowalski V (RNG-dependent).
+    Just a fun build!`,
     faintMemoryNote: "140 Faint Memory Cost",
     cards: [
       "Firing Preparation I",
@@ -413,6 +418,15 @@ const gearsData = {
     "Intellect of Discord",
     "Foggy Crystal Ball",
     "W-52 Dopamine Injector",
+    "The Flower of Life",
+    "The Fading Flower of Life",
+    "Lepidola's Whip",
+    "Violet Butterfly's Whip",
+    "Shell Bug Horn",
+    "Dagger That Tricked the Shadow",
+    "Dull Bone Blade",
+    "Singing Sword",
+    "Trumpet of Revelation",
     "Second Method",
     "RFS-17",
     "Obsidian Sword",
@@ -421,6 +435,8 @@ const gearsData = {
     "Fragment of the Empty Void",
     "Rocket-Adorned Cape",
     "Brainwave-Blocking Helmet",
+    "Mask of Flames",
+    "Fairy King's Crown",
     "Shield of the Watcher",
     "Wings of Freedom",
   ],
@@ -428,12 +444,23 @@ const gearsData = {
     "Sphere of Randomness",
     "Superconductive Protein",
     "Source of the Forbidden",
+    "Pulsating Egg",
+    "Verdant Shackles",
+    "Clover of the Forest",
+    "The Golden Rule",
     "Emblem of an Exceptional Entity",
     "Amorphous Cube",
   ],
 };
 
-const recommendedSources = ["Laboratory 0", "City of Mist"];
+const recommendedSources = [
+  "Laboratory 0",
+  "City of Mist",
+  "Swamp of Judgment",
+  "The Blue Pot",
+  "Twin Star's Shadow",
+  "The Foretold Ruin",
+];
 
 const memoryFragmentSets: MemoryFragmentSetRecommendation = {
   bestInSlot: [
@@ -453,7 +480,8 @@ const memoryFragmentSets: MemoryFragmentSetRecommendation = {
   alternative: [
     {
       id: "spark-of-passion",
-      description: "",
+      description:
+        "Low impact for Veronica due to her Reload stacks providing massive multiplicative Ballista damage buffs. This set's buff is also multiplicative, so it doesn't stack well.",
     },
     {
       id: "executioners-tool",

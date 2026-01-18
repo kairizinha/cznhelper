@@ -339,15 +339,7 @@ const uniqueCards: UniqueCard[] = [
 const recommendedSaveData: SaveData[] = [
   {
     id: "deck-1",
-    name: "Great Rift",
-    shortDescription: "Seasonal Save Data",
-    description: ``,
-    faintMemoryNote: "140 Faint Memory Cost",
-    cards: [],
-  },
-  {
-    id: "deck-2",
-    name: "Full Quest",
+    name: "Quest",
     shortDescription: "",
     description: ``,
     faintMemoryNote: "140 Faint Memory Cost",
@@ -385,7 +377,6 @@ const gearsData = {
     "Fragment of the Empty Void",
     "Wings of Freedom",
     "Mask of Flames",
-    // Utility
     "Rocket-Adorned Cape",
     "Psionic Combat Suit",
     "Brainwave-Blocking Helmet",
@@ -399,7 +390,6 @@ const gearsData = {
     "Amorphous Cube",
     "The Golden Rule",
     "Flower of Dead Souls",
-    // Utility
     "Sphere of Randomness",
     "Superconductive Protein",
     "Multifaceted Parallel Universe Nexus",

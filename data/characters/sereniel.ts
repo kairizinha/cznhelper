@@ -340,6 +340,7 @@ const gearsData = {
     "Mutant Predator Spike",
     "Tentacles of Chaos",
     "Shell Bug Horn",
+    "The Flower of Life",
     "Twin Swords of Great and Lesser Evil",
     "Dagger That Tricked the Shadow",
     "The Fading Flower of Life",

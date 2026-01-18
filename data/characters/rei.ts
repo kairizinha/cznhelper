@@ -60,7 +60,7 @@ const uniqueCards: UniqueCard[] = [
     epiphanies: [
       {
         id: "Strike of Darkness I",
-        tier: CardTier.SPlus,
+        tier: CardTier.S,
         cost: 1,
         type: "attack",
         description:
@@ -79,7 +79,7 @@ const uniqueCards: UniqueCard[] = [
       },
       {
         id: "Strike of Darkness III",
-        tier: CardTier.C,
+        tier: CardTier.Bad,
         cost: 1,
         type: "attack",
         description:
@@ -157,7 +157,7 @@ const uniqueCards: UniqueCard[] = [
       },
       {
         id: "Resonating Darkness III",
-        tier: CardTier.B,
+        tier: CardTier.C,
         cost: 1,
         type: "upgrade",
         description:
@@ -294,7 +294,7 @@ const uniqueCards: UniqueCard[] = [
       },
       {
         id: "Dark Condensation II",
-        tier: CardTier.B,
+        tier: CardTier.C,
         cost: 1,
         type: "skill",
         description:
@@ -353,6 +353,15 @@ const uniqueCards: UniqueCard[] = [
 const recommendedSaveData: SaveData[] = [
   {
     id: "deck-1",
+    name: "Standard Draw",
+    shortDescription: "General Build",
+    description:
+      "Feel free to slot any Epiphanies you need. This preset only covers her as a draw support unit.",
+    faintMemoryNote: "140 Faint Memory Cost",
+    cards: ["Snack Time II", "Snack Time II", "Snack Time II", "Snack Time II"],
+  },
+  {
+    id: "deck-2",
     name: "Mei Lin's Support",
     shortDescription: "Strike Build",
     description: "",
@@ -369,7 +378,7 @@ const recommendedSaveData: SaveData[] = [
     ],
   },
   {
-    id: "deck-2",
+    id: "deck-3",
     name: "Chizuru's Support",
     shortDescription: "Shadow of the Moon Build",
     description: "",
@@ -386,7 +395,7 @@ const recommendedSaveData: SaveData[] = [
     ],
   },
   {
-    id: "deck-3",
+    id: "deck-4",
     name: "Chizuru's Support",
     shortDescription: "Moonslash Build",
     description: "",
@@ -403,7 +412,7 @@ const recommendedSaveData: SaveData[] = [
     ],
   },
   {
-    id: "deck-4",
+    id: "deck-5",
     name: "Renoa's Support",
     shortDescription: "",
     description: "",
@@ -420,7 +429,7 @@ const recommendedSaveData: SaveData[] = [
     ],
   },
   {
-    id: "deck-5",
+    id: "deck-6",
     name: "Kayron's Support",
     shortDescription: "",
     description: "",
