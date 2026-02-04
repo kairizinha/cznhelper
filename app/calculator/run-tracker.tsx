@@ -836,20 +836,32 @@ export function RunTracker() {
     }
   }, [character, tier, nightmareMode, deck, actionHistory, totalPoints]);
 
+  // Inside the useEffect that calculates totalPoints
   useEffect(() => {
     const cardPoints = deck.reduce(
       (sum, card) => sum + getCardPointValue(card),
       0,
     );
+
     const activeDups = deck.filter(
       (c) => c.isDuplicated && !c.isRemoved && !c.wasConverted,
     ).length;
     const dupPoints = Math.max(0, activeDups - 2) * 40;
-    const removedStarters = deck.filter(
-      (c) =>
-        (c.isRemoved || c.wasConverted) && c.isStartingCard && !c.isDuplicated,
-    ).length;
-    const removalPoints = removedStarters * 20;
+
+    const removedValuableStarters = deck.filter((card) => {
+      if (
+        !card.isStartingCard ||
+        card.isDuplicated ||
+        (!card.isRemoved && !card.wasConverted)
+      ) {
+        return false;
+      }
+      const pos = parseInt(card.id);
+      return !isNaN(pos) && pos >= 1 && pos <= 4;
+    }).length;
+
+    const removalPoints = removedValuableStarters * 20;
+
     setTotalPoints(cardPoints + dupPoints + removalPoints);
   }, [deck]);
   const initializePlaceholderDeck = () => {
