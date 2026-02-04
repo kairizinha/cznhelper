@@ -470,7 +470,12 @@ export const lucas: CharacterData = {
   role: CharacterRole.SubDPS,
   rarity: 4,
 
-  overview: ``.trim(),
+  overview: `
+  dsadsa
+  dasdsa
+  dsa
+  `.trim(),
+
   strengths: [
     "Solid All-Rounder in damage and support",
     "Incredibly versatile Ballistas provide frequent Status Ailments",

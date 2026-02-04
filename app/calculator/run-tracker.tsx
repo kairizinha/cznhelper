@@ -769,7 +769,6 @@ interface DeckCard {
   isMutantSample?: boolean;
   isDuplicated?: boolean;
   isAdded?: boolean;
-  hasRefinement?: boolean;
   grade?: "normal" | "rare" | "legendary";
 }
 interface Action {
@@ -780,8 +779,7 @@ interface Action {
     | "convert"
     | "remove"
     | "add"
-    | "mutant"
-    | "refinement";
+    | "mutant";
   cardId: string;
   previousDeck?: DeckCard[];
 }
@@ -923,8 +921,6 @@ export function RunTracker() {
     if (card.hasDivineEpiphany) {
       points += 20;
     }
-    // Refinement (new)
-    if (card.hasRefinement) points += 10;
     return points;
   };
   const getActiveDuplicatesCount = () => {
@@ -976,21 +972,7 @@ export function RunTracker() {
     setDeck((prev) => [...prev, newCard]);
     setSelectedCard(null);
   };
-  const applyRefinement = (cardId: string) => {
-    const card = deck.find((c) => c.id === cardId);
-    if (!card || card.isRemoved || card.hasRefinement) return;
-    recordAction({
-      type: "refinement",
-      cardId,
-      previousDeck: [...deck],
-    });
 
-    setDeck((prev) =>
-      prev.map((c) => (c.id === cardId ? { ...c, hasRefinement: true } : c)),
-    );
-
-    setSelectedCard(null);
-  };
   const convertCard = (cardId: string) => {
     if (getRemovalsCount() >= 5) return; // Max 5 removals
     const card = deck.find((c) => c.id === cardId);
@@ -1245,7 +1227,6 @@ export function RunTracker() {
                       !isNaN(cardPosition) &&
                       (cardPosition <= 3 || cardPosition === 8);
                     const isForbidden = card.cardType === "forbidden";
-                    const hasRefinement = card.hasRefinement || false;
 
                     return (
                       <div className="space-y-6 py-5">
@@ -1268,7 +1249,7 @@ export function RunTracker() {
                                 border-purple-500/30 hover:border-purple-400/60 hover:bg-purple-950/20 hover:shadow-purple-500/10
                                 ${
                                   card.hasNormalEpiphany
-                                    ? "bg-red-950/30 border-red-500/40 text-red-300 hover:bg-red-950/40"
+                                    ? "bg-red-950/30 border-red-500/40 text-red-400 hover:bg-red-950/40"
                                     : ""
                                 }
                               `}
@@ -1332,29 +1313,6 @@ export function RunTracker() {
                                   (copy)
                                 </span>
                               )}
-                            </Button>
-
-                            {/* Refinement */}
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              disabled={hasRefinement}
-                              onClick={() => {
-                                applyRefinement(card.id);
-                                setSelectedCard(null);
-                              }}
-                              className={`
-                              h-11 text-sm font-medium justify-center transition-all duration-200
-                              ${
-                                hasRefinement
-                                  ? "bg-emerald-950/30 border-emerald-700/40 text-emerald-300 cursor-not-allowed"
-                                  : "border-purple-500/30 hover:border-emerald-400/60 hover:bg-emerald-950/20 hover:shadow-emerald-500/10"
-                              }
-                            `}
-                            >
-                              {hasRefinement
-                                ? "Refinement Applied"
-                                : "Apply Refinement"}
                             </Button>
 
                             {/* Convert */}
@@ -1622,7 +1580,7 @@ export function RunTracker() {
               </Popover>
             </div>
             <div className="space-y-3">
-              <div className="flex justify-between text-sm">
+              <div className="flex justify-between text-base">
                 <span className="text-muted-foreground">Points Used</span>
                 <span
                   className={`font-bold text-lg ${
@@ -1647,6 +1605,39 @@ export function RunTracker() {
                   Over cap by {totalPoints - limit} points
                 </p>
               )}
+            </div>
+            <div className="flex justify-between items-center text-sm mt-2">
+              <div className="flex gap-4">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-base text-muted-foreground">
+                    Removed
+                  </span>
+                  <span
+                    className={`font-semibold px-2 py-0.5 rounded-full text-sm ${
+                      getRemovalsCount() >= 5
+                        ? "bg-red-500/20 text-red-400 border border-red-500/40"
+                        : "bg-secondary text-secondary-foreground"
+                    }`}
+                  >
+                    {getRemovalsCount()}/5
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-1.5">
+                  <span className="text-base text-muted-foreground">
+                    Duplicated
+                  </span>
+                  <span
+                    className={`font-semibold px-2 py-0.5 rounded-full text-sm ${
+                      getActiveDuplicatesCount() >= 4
+                        ? "bg-red-500/20 text-red-400 border border-red-500/40"
+                        : "bg-secondary text-secondary-foreground"
+                    }`}
+                  >
+                    {getActiveDuplicatesCount()}/4
+                  </span>
+                </div>
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -1807,9 +1798,9 @@ export function RunTracker() {
                               grade: "legendary",
                               label: "Legendary",
                               points: 80,
-                              color: "red-600/40",
-                              hover: "red-700/25",
-                              textColor: "red-300",
+                              color: "purple-600/40",
+                              hover: "purple-700/25",
+                              textColor: "purple-400",
                             },
                           ].map((item) => (
                             <Button
