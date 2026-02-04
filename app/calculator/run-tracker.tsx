@@ -690,6 +690,33 @@ const CHARACTER_CARDS: Record<
       { name: "Finisher Round", image: "/images/character/luke/unique4.png" },
     ],
   },
+  nine: {
+    portrait: "/images/characters/nineportrait.webp",
+    starter: [
+      { name: "Slash", image: "/images/character/nine/starter1.webp" },
+      { name: "Slash", image: "/images/character/nine/starter2.webp" },
+      {
+        name: "Back-Edge Parry",
+        image: "/images/character/nine/starter3.webp",
+      },
+      { name: "Hew", image: "/images/character/nine/starter4.webp" },
+    ],
+    unique: [
+      {
+        name: "Experienced Strike",
+        image: "/images/character/nine/unique1.webp",
+      },
+      {
+        name: "Fatal Strike",
+        image: "/images/character/nine/unique2.webp",
+      },
+      {
+        name: "Counterblade",
+        image: "/images/character/nine/unique3.webp",
+      },
+      { name: "Fighting Spirit", image: "/images/character/nine/unique4.webp" },
+    ],
+  },
 };
 const DEFAULT_CARD_IMAGES = {
   neutral: "/images/card/neutral.png",
@@ -723,8 +750,9 @@ const FACTION_BORDER_MAP: Record<string, string[]> = {
     "amir",
     "luke",
     "hugo",
-    "yuki"
-    ],
+    "yuki",
+    "nine",
+  ],
   "/images/card/void-border.png": [
     "tressa",
     "rin",
