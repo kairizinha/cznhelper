@@ -715,6 +715,7 @@ const TIER_LIMITS: Record<number, number> = {
   13: 150,
   14: 160,
   15: 170,
+  16: 180,
 };
 // prettier-ignore
 const FACTION_BORDER_MAP: Record<string, string[]> = {
@@ -1445,14 +1446,15 @@ export function RunTracker() {
                   </div>
                 </div>
                 {/* Tier Buttons */}
-                <div className="grid grid-cols-4 sm:grid-cols-7 gap-2">
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map((t) => (
-                    <Button
-                      key={t}
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setTier(t)}
-                      className={`
+                <div className="grid grid-cols-4 sm:grid-cols-8 gap-2">
+                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map(
+                    (t) => (
+                      <Button
+                        key={t}
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setTier(t)}
+                        className={`
                       group relative overflow-hidden font-medium transition-colors duration-150
                       ${
                         tier === t
@@ -1460,26 +1462,27 @@ export function RunTracker() {
                           : "hover:border-purple-400"
                       }
                       `}
-                    >
-                      <div className="pointer-events-none absolute inset-0">
-                        <div
-                          className="
+                      >
+                        <div className="pointer-events-none absolute inset-0">
+                          <div
+                            className="
                           absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent
                           -translate-x-[150%] skew-x-12
                           transition-transform duration-0 group-hover:duration-1000
                           group-hover:translate-x-[120%] ease-out
                         "
-                        />
-                      </div>
-                      {tier === t && <div className="" />}
-                      <span className="relative z-10">{t}</span>
-                    </Button>
-                  ))}
+                          />
+                        </div>
+                        {tier === t && <div className="" />}
+                        <span className="relative z-10">{t}</span>
+                      </Button>
+                    ),
+                  )}
                 </div>
               </div>
             </div>
             <div className="space-y-2">
-              <Label>Character</Label>
+              <Label className="text-base">Character</Label>
               <Popover open={open} onOpenChange={setOpen}>
                 <PopoverTrigger asChild>
                   <Button
