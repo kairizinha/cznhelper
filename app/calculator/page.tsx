@@ -6,10 +6,10 @@ export default function CalculatorPage() {
     <div className="min-h-screen">
       <main className="container mx-auto">
         <Tabs defaultValue="tracker" className="space-y-4 sm:space-y-6">
-          <TabsList className="grid grid-cols-2 w-full max-w-xs mx-auto">
+          {/* <TabsList className="grid grid-cols-2 w-full max-w-xs mx-auto">
             <TabsTrigger value="tracker">Calculator</TabsTrigger>
             <TabsTrigger value="helper">Faint Memory Rules</TabsTrigger>
-          </TabsList>
+          </TabsList> */}
           <TabsContent value="tracker" className="space-y-6">
             <RunTracker />
           </TabsContent>
