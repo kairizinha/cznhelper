@@ -526,7 +526,7 @@ const partnersGuide: PartnersGuide[] = [
 export const veronicaData: CharacterData = {
   attribute: Attributes.Passion,
   job: CharacterClass.Ranger,
-  role: CharacterRole.Support,
+  role: CharacterRole.SubDPS,
   rarity: 5,
 
   overview: `

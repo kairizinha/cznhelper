@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useEffect, useCallback } from "react";
 import {
   Card,
@@ -47,9 +46,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-
 type CardEntry = { name: string; image?: string };
-
 const CHARACTER_CARDS: Record<
   string,
   { portrait?: string; starter: CardEntry[]; unique: CardEntry[] }
@@ -694,7 +691,6 @@ const CHARACTER_CARDS: Record<
     ],
   },
 };
-
 const DEFAULT_CARD_IMAGES = {
   neutral: "/images/card/neutral.png",
   monster: "/images/card/monster.png",
@@ -703,7 +699,6 @@ const DEFAULT_CARD_IMAGES = {
   placeholder: "/images/card/placeholder.png",
   remove: "/images/card/remove.png",
 } as const;
-
 const TIER_LIMITS: Record<number, number> = {
   1: 30,
   2: 40,
@@ -721,13 +716,12 @@ const TIER_LIMITS: Record<number, number> = {
   14: 160,
   15: 170,
 };
-
 // prettier-ignore
 const FACTION_BORDER_MAP: Record<string, string[]> = {
   "/images/card/order-border.png": [
     "amir",
-    "luke", 
-    "hugo", 
+    "luke",
+    "hugo",
     "yuki"
     ],
   "/images/card/void-border.png": [
@@ -744,6 +738,7 @@ const FACTION_BORDER_MAP: Record<string, string[]> = {
     "orlea",
     "cassius",
     "sereniel",
+    "narja",
   ],
   "/images/card/passion-border.png": [
     "selena",
@@ -754,15 +749,13 @@ const FACTION_BORDER_MAP: Record<string, string[]> = {
     "owen",
   ],
   "/images/card/justice-border.png": [
-    "magna", 
-    "mika", 
-    "beryl", 
+    "magna",
+    "mika",
+    "beryl",
     "haru"
   ],
 };
-
 type CardType = "neutral" | "monster" | "forbidden" | "starter";
-
 interface DeckCard {
   id: string;
   name: string;
@@ -776,10 +769,9 @@ interface DeckCard {
   isMutantSample?: boolean;
   isDuplicated?: boolean;
   isAdded?: boolean;
-  duplicationCost?: number;
-  removalCost?: number;
+  hasRefinement?: boolean;
+  grade?: "normal" | "rare" | "legendary";
 }
-
 interface Action {
   type:
     | "epiphany"
@@ -788,21 +780,16 @@ interface Action {
     | "convert"
     | "remove"
     | "add"
-    | "mutant";
+    | "mutant"
+    | "refinement";
   cardId: string;
   previousDeck?: DeckCard[];
-  previousPoints?: number;
-  previousRemovalCount?: number;
-  previousDuplicationCount?: number;
-  previousConversionCount?: number;
 }
-
 const formatCharacterName = (key: string): string =>
   key
     .split(/[-_ ]+/)
     .map((part) => (part ? part[0].toUpperCase() + part.slice(1) : ""))
     .join(" ");
-
 export function RunTracker() {
   const [character, setCharacter] = useState<string>("none");
   const [tier, setTier] = useState(1);
@@ -811,17 +798,11 @@ export function RunTracker() {
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
   const [showAddCard, setShowAddCard] = useState(false);
   const [open, setOpen] = useState(false);
-
-  const [removalCount, setRemovalCount] = useState(0);
-  const [duplicationCount, setDuplicationCount] = useState(0);
-  const [conversionCount, setConversionCount] = useState(0);
   const [totalPoints, setTotalPoints] = useState(0);
   const [actionHistory, setActionHistory] = useState<Action[]>([]);
-
   const limit = TIER_LIMITS[tier] + (nightmareMode ? 10 : 0);
   const percentage = (totalPoints / limit) * 100;
 
-  // Load from sessionStorage
   useEffect(() => {
     const saved = sessionStorage.getItem("czn-run-tracker");
     if (saved) {
@@ -832,9 +813,6 @@ export function RunTracker() {
         setNightmareMode(parsed.isNightmare ?? false);
         setDeck(parsed.deck ?? []);
         setActionHistory(parsed.actionHistory ?? []);
-        setRemovalCount(parsed.removalCount ?? 0);
-        setDuplicationCount(parsed.duplicationCount ?? 0);
-        setConversionCount(parsed.conversionCount ?? 0);
         setTotalPoints(parsed.totalPoints ?? 0);
       } catch (e) {
         console.error("Failed to load saved state", e);
@@ -844,7 +822,6 @@ export function RunTracker() {
     }
   }, []);
 
-  // Save to sessionStorage
   useEffect(() => {
     if (character !== "none" || deck.length > 0) {
       sessionStorage.setItem(
@@ -855,25 +832,28 @@ export function RunTracker() {
           isNightmare: nightmareMode,
           deck,
           actionHistory,
-          removalCount,
-          duplicationCount,
-          conversionCount,
           totalPoints,
         }),
       );
     }
-  }, [
-    character,
-    tier,
-    nightmareMode,
-    deck,
-    actionHistory,
-    removalCount,
-    duplicationCount,
-    conversionCount,
-    totalPoints,
-  ]);
+  }, [character, tier, nightmareMode, deck, actionHistory, totalPoints]);
 
+  useEffect(() => {
+    const cardPoints = deck.reduce(
+      (sum, card) => sum + getCardPointValue(card),
+      0,
+    );
+    const activeDups = deck.filter(
+      (c) => c.isDuplicated && !c.isRemoved && !c.wasConverted,
+    ).length;
+    const dupPoints = Math.max(0, activeDups - 2) * 40;
+    const removedStarters = deck.filter(
+      (c) =>
+        (c.isRemoved || c.wasConverted) && c.isStartingCard && !c.isDuplicated,
+    ).length;
+    const removalPoints = removedStarters * 20;
+    setTotalPoints(cardPoints + dupPoints + removalPoints);
+  }, [deck]);
   const initializePlaceholderDeck = () => {
     setDeck(
       Array.from({ length: 8 }, (_, i) => ({
@@ -888,17 +868,14 @@ export function RunTracker() {
       })),
     );
   };
-
   const handleCharacterChange = (value: string) => {
     setCharacter(value);
     if (value === "none") {
       initializePlaceholderDeck();
       return;
     }
-
     const data = CHARACTER_CARDS[value];
     if (!data) return;
-
     const newDeck: DeckCard[] = [
       ...data.starter.map((c, i) => ({
         id: String(i + 1),
@@ -923,46 +900,52 @@ export function RunTracker() {
         wasConverted: false,
       })),
     ];
-
     setDeck(newDeck);
   };
-
   const recordAction = (action: Action) => {
     setActionHistory((prev) => [...prev, action]);
   };
-
   const getCardPointValue = (card: DeckCard): number => {
-    if (card.isRemoved) return 0;
+    if (card.isRemoved || card.wasConverted) return 0;
     let points = 0;
-    if (card.cardType === "neutral") points += 20;
-    if (card.cardType === "monster") points += 80;
-    if (card.cardType === "forbidden") points += 20;
-
-    if (card.hasDivineEpiphany) {
-      points += card.cardType === "neutral" ? 30 : 20;
-    } else if (card.hasNormalEpiphany && card.cardType !== "starter") {
-      points += 10;
+    if (card.cardType === "starter") {
+      // 0 base
+    } else if (card.cardType === "neutral") {
+      points += 20;
+    } else if (card.cardType === "forbidden") {
+      points += 20;
+    } else if (card.cardType === "monster") {
+      if (card.grade === "normal") points += 20;
+      else if (card.grade === "rare") points += 50;
+      else if (card.grade === "legendary") points += 80;
+      else points += 80; // default legendary
     }
+    if (card.hasDivineEpiphany) {
+      points += 20;
+    }
+    // Refinement (new)
+    if (card.hasRefinement) points += 10;
     return points;
   };
-
+  const getActiveDuplicatesCount = () => {
+    return deck.filter((c) => c.isDuplicated && !c.isRemoved && !c.wasConverted)
+      .length;
+  };
+  const getRemovalsCount = () => {
+    return deck.filter((c) => c.isRemoved || c.wasConverted).length;
+  };
   const toggleEpiphany = (cardId: string, type: "normal" | "divine") => {
     const card = deck.find((c) => c.id === cardId);
     if (!card || card.isRemoved || card.cardType === "forbidden") return;
-
     const isDivine = type === "divine";
     const current = isDivine ? card.hasDivineEpiphany : card.hasNormalEpiphany;
     const opposite = isDivine ? card.hasNormalEpiphany : card.hasDivineEpiphany;
-
     if (current && opposite) return;
-
     recordAction({
       type: isDivine ? "divine" : "epiphany",
       cardId,
       previousDeck: [...deck],
-      previousPoints: totalPoints,
     });
-
     setDeck((prev) =>
       prev.map((c) =>
         c.id === cardId
@@ -973,49 +956,43 @@ export function RunTracker() {
           : c,
       ),
     );
-
-    const delta = isDivine
-      ? card.cardType === "neutral"
-        ? 30
-        : 20
-      : card.cardType !== "starter"
-        ? 10
-        : 0;
-
-    setTotalPoints((p) => p + (current ? -delta : delta));
     setSelectedCard(null);
   };
-
   const duplicateCard = (cardId: string) => {
+    if (getActiveDuplicatesCount() >= 4) return; // Max 4 duplicates
     const card = deck.find((c) => c.id === cardId);
     if (!card || card.isRemoved) return;
-
-    const cost = [0, 10, 30, 50, 70][duplicationCount] ?? 70;
-    const totalCost = cost + getCardPointValue(card);
-
     const newCard: DeckCard = {
       ...card,
       id: Date.now().toString(),
       isDuplicated: true,
-      duplicationCost: totalCost,
       isRemoved: false,
     };
-
     recordAction({
       type: "duplicate",
       cardId,
       previousDeck: [...deck],
-      previousPoints: totalPoints,
-      previousDuplicationCount: duplicationCount,
     });
-
     setDeck((prev) => [...prev, newCard]);
-    setDuplicationCount((c) => c + 1);
-    setTotalPoints((p) => p + totalCost);
     setSelectedCard(null);
   };
+  const applyRefinement = (cardId: string) => {
+    const card = deck.find((c) => c.id === cardId);
+    if (!card || card.isRemoved || card.hasRefinement) return;
+    recordAction({
+      type: "refinement",
+      cardId,
+      previousDeck: [...deck],
+    });
 
+    setDeck((prev) =>
+      prev.map((c) => (c.id === cardId ? { ...c, hasRefinement: true } : c)),
+    );
+
+    setSelectedCard(null);
+  };
   const convertCard = (cardId: string) => {
+    if (getRemovalsCount() >= 5) return; // Max 5 removals
     const card = deck.find((c) => c.id === cardId);
     if (
       !card ||
@@ -1024,21 +1001,12 @@ export function RunTracker() {
       card.cardType === "forbidden"
     )
       return;
-
-    let cost = 10;
-    if (card.cardType === "starter") cost += 20;
-    if (card.hasDivineEpiphany) cost += card.cardType === "neutral" ? 30 : 20;
-    else if (card.hasNormalEpiphany && card.cardType !== "starter") cost += 10;
-
     recordAction({
       type: "convert",
       cardId,
       previousDeck: [...deck],
-      previousPoints: totalPoints,
-      previousConversionCount: conversionCount,
     });
 
-    // Create the new neutral card
     const newNeutralCard: DeckCard = {
       ...card,
       id: `converted-${card.id}-${Date.now()}`,
@@ -1048,64 +1016,38 @@ export function RunTracker() {
       wasConverted: false,
       isStartingCard: false,
       isAdded: true,
+      hasNormalEpiphany: false,
+      hasDivineEpiphany: false,
     };
-
     setDeck((prev) => [
       ...prev.map((c) => (c.id === cardId ? { ...c, wasConverted: true } : c)),
       newNeutralCard,
     ]);
-
-    setConversionCount((c) => c + 1);
-    setTotalPoints((p) => p + cost);
     setSelectedCard(null);
   };
-
   const removeCard = (cardId: string) => {
+    if (getRemovalsCount() >= 5) return; // Max 5 removals
     const card = deck.find((c) => c.id === cardId);
     if (!card || card.isRemoved || card.cardType === "forbidden") return;
-
-    const newCount = removalCount + 1;
-    const scaleCost = [0, 10, 30, 50, 70][newCount - 1] ?? 70;
-    const starterTax =
-      (card.isStartingCard && !card.wasConverted) || card.hasNormalEpiphany
-        ? 20
-        : 0;
-    const cardPoints = getCardPointValue(card);
-
-    const removalCost =
-      card.cardType === "neutral" || card.cardType === "monster"
-        ? scaleCost + starterTax - cardPoints
-        : scaleCost + starterTax - cardPoints;
-
     recordAction({
       type: "remove",
       cardId,
       previousDeck: [...deck],
-      previousPoints: totalPoints,
-      previousRemovalCount: removalCount,
     });
-
     setDeck((prev) =>
-      prev.map((c) =>
-        c.id === cardId ? { ...c, isRemoved: true, removalCost } : c,
-      ),
+      prev.map((c) => (c.id === cardId ? { ...c, isRemoved: true } : c)),
     );
-    setRemovalCount(newCount);
-    setTotalPoints((p) => p + removalCost);
     setSelectedCard(null);
   };
-
   const convertToMutantSample = (cardId: string) => {
+    if (getRemovalsCount() >= 5) return; // Max 5 removals
     const card = deck.find((c) => c.id === cardId);
     if (!card || card.isRemoved || card.cardType === "forbidden") return;
-
     recordAction({
       type: "mutant",
       cardId,
       previousDeck: [...deck],
-      previousPoints: totalPoints,
     });
-
     setDeck((prev) =>
       prev.map((c) =>
         c.id === cardId
@@ -1121,8 +1063,7 @@ export function RunTracker() {
     );
     setSelectedCard(null);
   };
-
-  const addNewCard = (type: CardType) => {
+  const addNewCard = (type: CardType, grade?: DeckCard["grade"]) => {
     const names = {
       neutral: "Neutral Card",
       monster: "Monster Card",
@@ -1140,51 +1081,31 @@ export function RunTracker() {
       isRemoved: false,
       wasConverted: false,
       isAdded: true,
+      grade: type === "monster" ? grade : undefined,
     };
-
     recordAction({
       type: "add",
       cardId: newCard.id,
       previousDeck: [...deck],
-      previousPoints: totalPoints,
     });
-
     setDeck((prev) => [...prev, newCard]);
-    setTotalPoints((p) => p + getCardPointValue(newCard));
     setShowAddCard(false);
   };
-
   const resetDeck = () => {
     handleCharacterChange(character);
-    setRemovalCount(0);
-    setDuplicationCount(0);
-    setConversionCount(0);
     setTotalPoints(0);
     setActionHistory([]);
   };
-
   const undoLastAction = () => {
     if (actionHistory.length === 0) return;
     const last = actionHistory[actionHistory.length - 1];
-
     if (last.previousDeck) setDeck(last.previousDeck);
-    if (last.previousPoints !== undefined) setTotalPoints(last.previousPoints);
-    if (last.previousRemovalCount !== undefined)
-      setRemovalCount(last.previousRemovalCount);
-    if (last.previousDuplicationCount !== undefined)
-      setDuplicationCount(last.previousDuplicationCount);
-    if (last.previousConversionCount !== undefined)
-      setConversionCount(last.previousConversionCount);
-
     setActionHistory((prev) => prev.slice(0, -1));
     setSelectedCard(null);
   };
-
   const deleteCard = (cardId: string) => {
     setDeck((prev) => prev.filter((c) => c.id !== cardId));
   };
-
-  // Click outside to deselect
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (!selectedCard) return;
@@ -1196,13 +1117,11 @@ export function RunTracker() {
     document.addEventListener("click", handler);
     return () => document.removeEventListener("click", handler);
   }, [selectedCard]);
-
   const renderCard = (card: DeckCard, isBase: boolean) => {
     const isSelected = selectedCard === card.id;
     const factionBorder = Object.entries(FACTION_BORDER_MAP).find(([, chars]) =>
       chars.includes(character),
     )?.[0];
-
     return (
       <div
         key={card.id}
@@ -1235,7 +1154,6 @@ export function RunTracker() {
             No Image
           </div>
         )}
-
         {/* Faction / Type Borders */}
         {isBase && factionBorder && (
           <img
@@ -1256,16 +1174,20 @@ export function RunTracker() {
             className="z-10 scale-105 absolute left-0 top-0 bottom-0 w-auto h-full object-cover object-left pointer-events-none opacity-100"
           />
         )}
+        {card.cardType === "forbidden" && (
+          <img
+            src="/images/card/neutral-border.png"
+            className="z-10 scale-105 absolute left-0 top-0 bottom-0 w-auto h-full object-cover object-left pointer-events-none opacity-100"
+          />
+        )}
         {card.isDuplicated && (
           <img
             src="/images/card/deco_card_copy.png"
             className="z-10 scale-100 absolute right-0 top-0 bottom-0 w-auto h-full object-cover pointer-events-none opacity-100"
           />
         )}
-
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/40 p-2 flex flex-col justify-between">
           <div>
-            {/* <span className="font-bold text-sm pl-2">{card.name}</span> */}
             <div className="flex gap-1 mt-1 pl-2">
               {card.hasDivineEpiphany && (
                 <img
@@ -1284,22 +1206,33 @@ export function RunTracker() {
             </div>
           </div>
           <div className="text-right font-bold drop-shadow-md pr-1">
-            {card.duplicationCost ?? getCardPointValue(card)}
+            {getCardPointValue(card)}
           </div>
         </div>
-
         {isSelected && !card.isRemoved && !card.isMutantSample && (
           <div className="absolute inset-0 flex flex-col justify-center gap-1 p-2 z-30 bg-black/60 rounded-md">
             <Dialog
               open={!!selectedCard}
               onOpenChange={(open) => !open && setSelectedCard(null)}
             >
-              <DialogContent className="sm:max-w-xs bg-card/95 backdrop-blur-md border border-border/60">
-                <DialogHeader>
-                  <DialogTitle className="text-xl text-center font-semibold text-foreground">
+              <DialogContent className="sm:max-w-md bg-gradient-to-b from-card/95 to-card/80 backdrop-blur-lg border border-purple-500/20 shadow-2xl rounded-2xl">
+                <DialogHeader className="pb-3 border-b border-border/40">
+                  <DialogTitle className="text-2xl font-bold text-center bg-gradient-to-r from-purple-300 via-pink-300 to-cyan-300 bg-clip-text text-transparent">
                     {selectedCard &&
                       deck.find((c) => c.id === selectedCard)?.name}
                   </DialogTitle>
+
+                  <DialogDescription className="text-center text-sm mt-1.5 text-muted-foreground/90">
+                    Total{" "}
+                    <span className="font-semibold text-purple-300">
+                      +
+                      {getCardPointValue(
+                        deck.find((c) => c.id === selectedCard) ||
+                          ({ cardType: "starter" } as any),
+                      )}
+                    </span>{" "}
+                    points
+                  </DialogDescription>
                 </DialogHeader>
 
                 {selectedCard &&
@@ -1311,130 +1244,174 @@ export function RunTracker() {
                     const isProtectedBaseCard =
                       !isNaN(cardPosition) &&
                       (cardPosition <= 3 || cardPosition === 8);
-
                     const isForbidden = card.cardType === "forbidden";
+                    const hasRefinement = card.hasRefinement || false;
 
                     return (
-                      <div className="grid gap-3 py-4">
-                        {/* Forbidden Card Special Case */}
-                        {isForbidden && (
-                          <Button
-                            variant="outline"
-                            onClick={() => duplicateCard(card.id)}
-                            className="w-full justify-center gap-2 bg-card/80 border-border/50 hover:bg-purple-500/10 hover:border-purple-500/50 hover:translate-y-[-2px] transition-all"
-                          >
-                            <span className="text-sm font-medium">
-                              Duplicate Card
-                            </span>
-                          </Button>
-                        )}
-
-                        {/* Regular Card Actions */}
-                        {!isForbidden && (
-                          <>
-                            {/* Epiphany Buttons - Only if not protected base card */}
-                            {!isProtectedBaseCard && (
-                              <div className="grid grid-cols-2 gap-3">
-                                <Button
-                                  variant={
-                                    card.hasNormalEpiphany
-                                      ? "destructive"
-                                      : "outline"
-                                  }
-                                  disabled={card.hasDivineEpiphany}
-                                  onClick={() =>
-                                    toggleEpiphany(card.id, "normal")
-                                  }
-                                  className={`
-                            w-full justify-center transition-all
-                            ${
-                              card.hasNormalEpiphany
-                                ? "bg-red-500/20 border-red-500/50 text-white hover:bg-red-500/30"
-                                : "bg-card/80 border-border/50 hover:bg-purple-500/10 hover:border-purple-500/50 hover:translate-y-[-2px]"
-                            }
-                          `}
-                                >
-                                  <span className="text-sm font-medium">
-                                    {card.hasNormalEpiphany ? "Remove" : "Add"}{" "}
-                                    Epiphany
-                                  </span>
-                                </Button>
-
-                                <Button
-                                  variant={
-                                    card.hasDivineEpiphany
-                                      ? "destructive"
-                                      : "outline"
-                                  }
-                                  disabled={card.hasNormalEpiphany}
-                                  onClick={() =>
-                                    toggleEpiphany(card.id, "divine")
-                                  }
-                                  className={`
-                            w-full justify-center transition-all
-                            ${
-                              card.hasDivineEpiphany
-                                ? "bg-red-500/20 border-red-500/50 text-white hover:bg-red-500/30"
-                                : "bg-card/80 border-border/50 hover:bg-purple-500/10 hover:border-purple-500/50 hover:translate-y-[-2px]"
-                            }
-                          `}
-                                >
-                                  <span className="text-sm font-medium">
-                                    {card.hasDivineEpiphany ? "Remove" : "Add"}{" "}
-                                    Divine
-                                  </span>
-                                </Button>
-                              </div>
-                            )}
-
-                            {/* Standard Actions */}
-                            <div className="grid gap-3">
+                      <div className="space-y-6 py-5">
+                        {/* ── Epiphany Section ── */}
+                        {!isProtectedBaseCard && !isForbidden && (
+                          <div className="space-y-3">
+                            <h4 className="text-xs font-semibold uppercase tracking-wider text-purple-300/80 text-center">
+                              Epiphany
+                            </h4>
+                            <div className="grid grid-cols-2 gap-3">
                               <Button
                                 variant="outline"
-                                onClick={() => duplicateCard(card.id)}
-                                className="w-full justify-center gap-2 bg-card/80 border-border/50 hover:bg-purple-500/10 hover:border-purple-500/50 hover:translate-y-[-2px] transition-all"
+                                size="sm"
+                                disabled={card.hasDivineEpiphany}
+                                onClick={() =>
+                                  toggleEpiphany(card.id, "normal")
+                                }
+                                className={`
+                                h-11 text-sm font-medium transition-all duration-200
+                                border-purple-500/30 hover:border-purple-400/60 hover:bg-purple-950/20 hover:shadow-purple-500/10
+                                ${
+                                  card.hasNormalEpiphany
+                                    ? "bg-red-950/30 border-red-500/40 text-red-300 hover:bg-red-950/40"
+                                    : ""
+                                }
+                              `}
                               >
-                                <span className="text-sm font-medium">
-                                  Duplicate Card
-                                </span>
+                                {card.hasNormalEpiphany
+                                  ? "Remove"
+                                  : "Normal Epiphany"}
                               </Button>
 
                               <Button
                                 variant="outline"
-                                disabled={card.wasConverted}
-                                onClick={() => convertCard(card.id)}
-                                className="w-full justify-center gap-2 bg-card/80 border-border/50 disabled:opacity-50 hover:bg-purple-500/10 hover:border-purple-500/50 hover:translate-y-[-2px] transition-all disabled:hover:translate-y-0"
+                                size="sm"
+                                disabled={card.hasNormalEpiphany}
+                                onClick={() =>
+                                  toggleEpiphany(card.id, "divine")
+                                }
+                                className={`
+                                h-11 text-sm font-medium transition-all duration-200
+                                border-purple-500/30 hover:border-purple-400/60 hover:bg-purple-950/20 hover:shadow-purple-500/10
+                                ${
+                                  card.hasDivineEpiphany
+                                    ? "bg-indigo-950/40 border-indigo-400/50 text-red-400 hover:bg-indigo-950/50"
+                                    : ""
+                                }
+                              `}
                               >
-                                <span className="text-sm font-medium">
-                                  Convert to Neutral
-                                </span>
-                              </Button>
-
-                              <Button
-                                variant="outline"
-                                onClick={() => convertToMutantSample(card.id)}
-                                className="w-full justify-center gap-2 bg-card/80 border-border/50 hover:bg-purple-500/10 hover:border-purple-500/50 hover:translate-y-[-2px] transition-all"
-                              >
-                                <span className="text-sm font-medium">
-                                  To Mutant Sample
-                                </span>
-                              </Button>
-
-                              <Button
-                                variant="destructive"
-                                onClick={() => {
-                                  removeCard(card.id);
-                                  setSelectedCard(null);
-                                }}
-                                className="w-full justify-center bg-red-500/20 border-red-500/50 text-white hover:bg-red-500/30 hover:border-red-500/60 hover:translate-y-[-2px] transition-all"
-                              >
-                                <span className="text-sm font-medium">
-                                  Remove Card
-                                </span>
+                                {card.hasDivineEpiphany
+                                  ? "Remove"
+                                  : "Divine Epiphany"}
                               </Button>
                             </div>
-                          </>
+                          </div>
                         )}
+
+                        {/* ── Actions Section ── */}
+                        <div className="space-y-3">
+                          <h4 className="text-xs font-semibold uppercase tracking-wider text-purple-300/80 text-center">
+                            {isForbidden ? "Forbidden Actions" : "Card Actions"}
+                          </h4>
+
+                          <div className="grid gap-2.5">
+                            {/* Duplicate */}
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              disabled={getActiveDuplicatesCount() >= 4}
+                              title={
+                                getActiveDuplicatesCount() >= 4
+                                  ? "Maximum 4 duplicates reached"
+                                  : undefined
+                              }
+                              onClick={() => duplicateCard(card.id)}
+                              className={`
+                              h-11 text-sm font-medium justify-center transition-all duration-200
+                              border-purple-500/30 hover:border-purple-400/60 hover:bg-purple-950/20 hover:shadow-purple-500/10
+                            `}
+                            >
+                              Duplicate Card
+                              {card.isDuplicated && (
+                                <span className="ml-2 text-xs opacity-70">
+                                  (copy)
+                                </span>
+                              )}
+                            </Button>
+
+                            {/* Refinement */}
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              disabled={hasRefinement}
+                              onClick={() => {
+                                applyRefinement(card.id);
+                                setSelectedCard(null);
+                              }}
+                              className={`
+                              h-11 text-sm font-medium justify-center transition-all duration-200
+                              ${
+                                hasRefinement
+                                  ? "bg-emerald-950/30 border-emerald-700/40 text-emerald-300 cursor-not-allowed"
+                                  : "border-purple-500/30 hover:border-emerald-400/60 hover:bg-emerald-950/20 hover:shadow-emerald-500/10"
+                              }
+                            `}
+                            >
+                              {hasRefinement
+                                ? "Refinement Applied"
+                                : "Apply Refinement"}
+                            </Button>
+
+                            {/* Convert */}
+                            {!isForbidden && (
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                disabled={card.wasConverted}
+                                onClick={() => {
+                                  convertCard(card.id);
+                                  setSelectedCard(null);
+                                }}
+                                className={`
+                                h-11 text-sm font-medium justify-center transition-all duration-200
+                                border-purple-500/30 hover:border-purple-400/60 hover:bg-purple-950/20 hover:shadow-purple-500/10
+                                disabled:opacity-50 disabled:hover:bg-transparent disabled:cursor-not-allowed
+                              `}
+                              >
+                                Convert to Neutral Card
+                              </Button>
+                            )}
+
+                            {/* Mutant Sample */}
+                            {!isForbidden && (
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => {
+                                  convertToMutantSample(card.id);
+                                  setSelectedCard(null);
+                                }}
+                                className={`
+                                h-11 text-sm font-medium justify-center transition-all duration-200
+                                border-purple-500/30 hover:border-purple-400/60 hover:bg-purple-950/20 hover:shadow-purple-500/10
+                              `}
+                              >
+                                Convert to [Remove] Tag
+                              </Button>
+                            )}
+                            <Button
+                              variant="destructive"
+                              size="sm"
+                              onClick={() => {
+                                removeCard(card.id);
+                                setSelectedCard(null);
+                              }}
+                              className={`
+                              h-11 text-sm font-medium justify-center mt-1
+                              bg-gradient-to-r from-red-600/20 to-red-800/20 border-red-500/40 
+                              hover:from-red-600/40 hover:to-red-800/40 hover:shadow-red-500/20
+                              transition-all duration-200
+                            `}
+                            >
+                              Remove Card
+                            </Button>
+                          </div>
+                        </div>
                       </div>
                     );
                   })()}
@@ -1445,14 +1422,11 @@ export function RunTracker() {
       </div>
     );
   };
-
   const baseCards = deck.filter((c) => {
     const id = parseInt(c.id);
     return !isNaN(id) && id >= 1 && id <= 8 && !c.isDuplicated;
   });
-
   const addedCards = deck.filter((c) => c.isDuplicated || c.isAdded);
-
   return (
     <TooltipProvider>
       <div className="space-y-6 max-w-7xl mx-auto px-6">
@@ -1461,8 +1435,6 @@ export function RunTracker() {
             Save Data Helper
           </h2>
         </div>
-
-        {/* Run Configuration */}
         <Card className="border-border/60 bg-card/40 backdrop-blur-sm">
           <CardHeader>
             <CardTitle className="text-2xl font-bold bg-gradient-to-r from-sky-300 via-purple-300 to-pink-300 bg-clip-text text-transparent">
@@ -1477,7 +1449,6 @@ export function RunTracker() {
                   <Label className="text-base font-medium">
                     Faint Memory Tier
                   </Label>
-
                   <div className="flex items-center gap-4">
                     <Checkbox
                       id="nightmare"
@@ -1503,7 +1474,6 @@ export function RunTracker() {
                     </Tooltip>
                   </div>
                 </div>
-
                 {/* Tier Buttons */}
                 <div className="grid grid-cols-4 sm:grid-cols-7 gap-2">
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map((t) => (
@@ -1538,7 +1508,6 @@ export function RunTracker() {
                 </div>
               </div>
             </div>
-
             <div className="space-y-2">
               <Label>Character</Label>
               <Popover open={open} onOpenChange={setOpen}>
@@ -1571,7 +1540,6 @@ export function RunTracker() {
                           </span>
                         </>
                       ) : (
-                        // Fallback if portrait missing
                         <>
                           <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center text-white font-bold">
                             {formatCharacterName(character)[0]}
@@ -1583,7 +1551,6 @@ export function RunTracker() {
                     <ChevronsUpDown className="h-4 w-4 opacity-80 shrink-0" />
                   </Button>
                 </PopoverTrigger>
-
                 <PopoverContent
                   className="w-full p-0"
                   align="start"
@@ -1594,7 +1561,6 @@ export function RunTracker() {
                     <CommandList>
                       <CommandEmpty>No character found.</CommandEmpty>
                       <CommandGroup>
-                        {/* None Option */}
                         <CommandItem
                           value="none"
                           onSelect={() => {
@@ -1612,13 +1578,10 @@ export function RunTracker() {
                             <Check className="ml-auto h-5 w-5" />
                           )}
                         </CommandItem>
-
-                        {/* Character List with Portraits */}
                         {Object.keys(CHARACTER_CARDS)
                           .sort()
                           .map((key) => {
                             const portrait = CHARACTER_CARDS[key].portrait;
-
                             return (
                               <CommandItem
                                 key={key}
@@ -1658,7 +1621,6 @@ export function RunTracker() {
                 </PopoverContent>
               </Popover>
             </div>
-
             <div className="space-y-3">
               <div className="flex justify-between text-sm">
                 <span className="text-muted-foreground">Points Used</span>
@@ -1688,7 +1650,6 @@ export function RunTracker() {
             </div>
           </CardContent>
         </Card>
-
         {/* Cards Grid */}
         <div className="grid gap-4 md:grid-cols-2">
           <Card className="border-border/60 bg-card/40 backdrop-blur-sm">
@@ -1714,7 +1675,6 @@ export function RunTracker() {
                     <Undo className="h-4 w-4" />
                     Undo
                   </Button>
-
                   <Button
                     size="sm"
                     onClick={resetDeck}
@@ -1732,103 +1692,158 @@ export function RunTracker() {
                 </div>
               </div>
             </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <CardContent className="space-y-4">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 {baseCards.map((card) => renderCard(card, true))}
               </div>
             </CardContent>
           </Card>
           {/* Added Cards */}
           <Card className="border-border/60 bg-card/40 backdrop-blur-sm">
-            <CardHeader className="pb-4">
+            <CardHeader className="pb-4.5">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-xl font-semibold">
-                  Added Cards
-                </CardTitle>
+                <CardTitle className="text-xl">Added Cards</CardTitle>
                 <span className="text-sm text-muted-foreground">
-                  {addedCards.length} card{addedCards.length !== 0 ? "s" : ""}
+                  {addedCards.length} card{addedCards.length !== 1 ? "s" : ""}
                 </span>
               </div>
             </CardHeader>
 
             <CardContent className="space-y-4">
-              {addedCards.length === 0 ? (
-                <div className="flex flex-col items-center justify-center py-12 text-center">
-                  <div className="w-20 h-20 rounded-full bg-muted/50 flex items-center justify-center mb-4">
-                    <Plus className="h-10 w-10 text-muted-foreground" />
-                  </div>
-                </div>
-              ) : (
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                  {addedCards.map((card) => renderCard(card, false))}
-                </div>
-              )}
-
-              <Dialog open={showAddCard} onOpenChange={setShowAddCard}>
-                <DialogTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className="w-full h-12 text-base font-medium border-dashed border-2 hover:border-purple-400 hover:bg-accent/50 transition-all"
-                  >
-                    <Plus className="mr-2 h-5 w-5" />
-                    Add New Card
-                  </Button>
-                </DialogTrigger>
-
-                <DialogContent className="sm:max-w-md">
-                  <DialogHeader>
-                    <DialogTitle className="text-2xl text-center mb-2">
-                      Add a New Card
-                    </DialogTitle>
-                  </DialogHeader>
-
-                  <div className="grid gap-4 py-4">
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      className="h-20 flex flex-col gap-2 border-2 hover:border-purple-400 hover:bg-purple-500/10 transition-all"
-                      onClick={() => addNewCard("neutral")}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {addedCards.map((card) => renderCard(card, false))}
+                <Dialog open={showAddCard} onOpenChange={setShowAddCard}>
+                  <DialogTrigger asChild>
+                    <div
+                      className={`
+                      group relative aspect-[2/3] cursor-pointer rounded-xl overflow-hidden 
+                      transition-all hover:scale-102 bg-black/30 border-2 border-dashed border-purple-400/40 
+                      hover:border-purple-400/70 hover:bg-purple-950/10 flex items-center justify-center
+                    `}
                     >
-                      <div>
-                        <div className="font-semibold">Neutral Card</div>
-                        <div className="text-xs text-muted-foreground mt-1">
-                          +20
+                      <div className="flex flex-col items-center justify-center gap-3 text-muted-foreground group-hover:text-purple-300 transition-colors">
+                        <div className="w-16 h-16 rounded-full bg-muted/40 flex items-center justify-center border border-purple-400/30 group-hover:border-purple-400/60 group-hover:bg-purple-500/10 transition-all">
+                          <Plus className="h-8 w-8" />
                         </div>
                       </div>
-                    </Button>
+                    </div>
+                  </DialogTrigger>
 
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      className="h-20 flex flex-col gap-2 border-2 hover:border-red-400 hover:bg-red-500/10 transition-all"
-                      onClick={() => addNewCard("monster")}
-                    >
-                      <div>
-                        <div className="font-semibold">Monster Card</div>
-                        <div className="text-xs text-muted-foreground mt-1">
-                          +80
+                  <DialogContent className="sm:max-w-md bg-gradient-to-b from-card/95 to-card/80 backdrop-blur-lg border border-purple-500/20 shadow-2xl rounded-2xl">
+                    <DialogHeader className="pb-3 border-b border-border/40">
+                      <DialogTitle className="text-2xl font-bold text-center bg-gradient-to-r from-purple-300 via-pink-300 to-cyan-300 bg-clip-text text-transparent">
+                        Add a New Card
+                      </DialogTitle>
+                    </DialogHeader>
+
+                    <div className="space-y-6 py-5">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {/* Neutral */}
+                        <Button
+                          variant="outline"
+                          className={`
+                          h-28 flex flex-col items-center justify-center text-center transition-all duration-200
+                          hover:scale-[1.02]
+                        `}
+                          onClick={() => {
+                            addNewCard("neutral");
+                            setShowAddCard(false);
+                          }}
+                        >
+                          <div className="text-lg font-semibold text-white">
+                            Neutral Card
+                          </div>
+                          <div className="text-sm text-muted-foreground/90 mt-1.5">
+                            +20 points
+                          </div>
+                        </Button>
+
+                        {/* Forbidden */}
+                        <Button
+                          variant="outline"
+                          className={`
+                          h-28 flex flex-col items-center justify-center text-center transition-all duration-200
+                          hover:scale-[1.02]
+                        `}
+                          onClick={() => {
+                            addNewCard("forbidden");
+                            setShowAddCard(false);
+                          }}
+                        >
+                          <div className="text-lg font-semibold text-yellow-300">
+                            Forbidden Card
+                          </div>
+                          <div className="text-sm text-muted-foreground/90 mt-1.5">
+                            +20 points
+                          </div>
+                        </Button>
+                      </div>
+
+                      {/* Monster Cards */}
+                      <div className="space-y-4">
+                        <h4 className="text-xs font-semibold uppercase tracking-wider text-purple-300/80 text-center">
+                          Monster Cards
+                        </h4>
+
+                        <div className="grid grid-cols-3 gap-3">
+                          {[
+                            {
+                              grade: "normal",
+                              label: "Normal",
+                              points: 20,
+                              color: "white-500/30",
+                              hover: "white-600/20",
+                              textColor: "white-300",
+                            },
+                            {
+                              grade: "rare",
+                              label: "Rare",
+                              points: 50,
+                              color: "cyan-500/30",
+                              hover: "cyan-600/20",
+                              textColor: "cyan-300",
+                            },
+                            {
+                              grade: "legendary",
+                              label: "Legendary",
+                              points: 80,
+                              color: "red-600/40",
+                              hover: "red-700/25",
+                              textColor: "red-300",
+                            },
+                          ].map((item) => (
+                            <Button
+                              key={item.grade}
+                              variant="outline"
+                              className={`
+                              h-24 flex flex-col items-center justify-center text-center transition-all duration-200
+                              border-${item.color} 
+                              hover:border-opacity-70 hover:bg-${item.hover} hover:shadow-${item.textColor.replace("300", "500")}/10 hover:scale-[1.02]
+                            `}
+                              onClick={() => {
+                                addNewCard(
+                                  "monster",
+                                  item.grade as DeckCard["grade"],
+                                );
+                                setShowAddCard(false);
+                              }}
+                            >
+                              <div
+                                className={`font-semibold text-${item.textColor}`}
+                              >
+                                {item.label}
+                              </div>
+                              <div className="text-xs text-muted-foreground/90 mt-1.5">
+                                +{item.points} points
+                              </div>
+                            </Button>
+                          ))}
                         </div>
                       </div>
-                    </Button>
-
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      className="h-20 flex flex-col gap-2 border-2 hover:border-yellow-400 hover:bg-yellow-500/10 transition-all"
-                      onClick={() => addNewCard("forbidden")}
-                    >
-                      <div>
-                        <div className="font-semibold text-yellow-400">
-                          Forbidden Card
-                        </div>
-                        <div className="text-xs text-muted-foreground mt-1">
-                          +20
-                        </div>
-                      </div>
-                    </Button>
-                  </div>
-                </DialogContent>
-              </Dialog>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+              </div>
             </CardContent>
           </Card>
         </div>

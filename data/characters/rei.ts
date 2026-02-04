@@ -577,7 +577,7 @@ Her kit revolves around massive buffs to 1-cost (or ≤1-cost) cards, strong dra
     },
     {
       priority: 2,
-      relation: "or",
+      relation: "equal",
       stats: [
         MemoryFragmentSubstats.DefenseFlat,
         MemoryFragmentSubstats.Defense,

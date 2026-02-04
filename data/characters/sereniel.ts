@@ -136,7 +136,7 @@ const uniqueCards: UniqueCard[] = [
         cost: 1,
         type: "attack",
         description:
-          "120% Damage\n2 Instinct Weakness\n60% Damage Amount\nto Homing Laser for 1\nturn(s)",
+          "120% Damage 2 Instinct Weakness 60% Damage Amount to Homing Laser for 1 turn(s)",
         reasoning:
           "Instinct weakness is really strong, 25% multiplier for 2-turn uptime and easy to ravage anyone, extra 60% damage buff to laser is very valuable when recycling multiple times in a turn",
       },
