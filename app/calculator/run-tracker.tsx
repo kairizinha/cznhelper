@@ -809,9 +809,11 @@ interface Action {
     | "convert"
     | "remove"
     | "add"
-    | "mutant";
-  cardId: string;
+    | "mutant"
+    | "refinement";
+  cardId?: string;
   previousDeck?: DeckCard[];
+  previousRefinementCount?: number;
 }
 const formatCharacterName = (key: string): string =>
   key
@@ -1139,11 +1141,11 @@ export function RunTracker() {
     if (actionHistory.length === 0) return;
     const last = actionHistory[actionHistory.length - 1];
     if (last.previousDeck) setDeck(last.previousDeck);
+    if (last.type === "refinement") {
+      setRefinementCount(last.previousRefinementCount || 0);
+    }
     setActionHistory((prev) => prev.slice(0, -1));
     setSelectedCard(null);
-  };
-  const deleteCard = (cardId: string) => {
-    setDeck((prev) => prev.filter((c) => c.id !== cardId));
   };
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -1700,19 +1702,29 @@ export function RunTracker() {
                   <Button
                     size="sm"
                     variant="outline"
-                    onClick={() => setRefinementCount((prev) => prev + 1)}
+                    onClick={() => {
+                      setActionHistory((prev) => [
+                        ...prev,
+                        {
+                          type: "refinement",
+                          previousRefinementCount: refinementCount,
+                          previousDeck: [...deck],
+                        },
+                      ]);
+                      setRefinementCount((prev) => prev + 1);
+                    }}
                     className="
                     bg-card/80 border-purple-500/30 text-purple-300
                     hover:bg-purple-500/10 hover:border-purple-400
                     hover:translate-y-[-2px]
-                    transition-all px-3 py-1
-                    "
+                    transition-all
+                  "
                   >
-                    <Sparkles className="h-3.5 w-3.5 mr-1" />
+                    <Sparkles className="h-4 w-4 mr-1.5" />
                     Apply Refinement
                     {refinementCount > 0 && (
-                      <span className="ml-1.5 text-sm text-purple-300">
-                        +{refinementCount * 10}
+                      <span className="ml-2 text-xs text-purple-300">
+                        (+{refinementCount * 10})
                       </span>
                     )}
                   </Button>
