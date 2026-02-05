@@ -18,6 +18,7 @@ import {
   HelpCircle,
   ChevronsUpDown,
   Check,
+  Sparkles,
 } from "lucide-react";
 import {
   Tooltip,
@@ -509,8 +510,8 @@ const CHARACTER_CARDS: Record<
         image: "/images/character/orlea/starter1.png",
       },
       {
-        name: "Attack, My Minions",
-        image: "/images/character/orlea/starter2.png",
+        name: "Heaven’s Healing",
+        image: "/images/character/orlea/starter3.png",
       },
       {
         name: "Heaven’s Healing",
@@ -826,6 +827,7 @@ export function RunTracker() {
   const [showAddCard, setShowAddCard] = useState(false);
   const [open, setOpen] = useState(false);
   const [totalPoints, setTotalPoints] = useState(0);
+  const [refinementCount, setRefinementCount] = useState(0);
   const [actionHistory, setActionHistory] = useState<Action[]>([]);
   const limit = TIER_LIMITS[tier] + (nightmareMode ? 10 : 0);
   const percentage = (totalPoints / limit) * 100;
@@ -890,9 +892,10 @@ export function RunTracker() {
     }).length;
 
     const removalPoints = removedValuableStarters * 20;
+    const refinementPoints = refinementCount * 10;
 
-    setTotalPoints(cardPoints + dupPoints + removalPoints);
-  }, [deck]);
+    setTotalPoints(cardPoints + dupPoints + removalPoints + refinementPoints);
+  }, [deck, refinementCount]);
   const initializePlaceholderDeck = () => {
     setDeck(
       Array.from({ length: 8 }, (_, i) => ({
@@ -1030,6 +1033,18 @@ export function RunTracker() {
       previousDeck: [...deck],
     });
 
+    const applyRefinement = (cardId: string) => {
+      const card = deck.find((c) => c.id === cardId);
+      if (!card || card.isRemoved) return;
+      setDeck((prev) =>
+        prev.map(
+          (c) => (c.id === cardId ? { ...c, hasRefinement: true } : c), // optional: keep for UI
+        ),
+      );
+      setRefinementCount((prev) => prev + 1);
+      setSelectedCard(null);
+    };
+
     const newNeutralCard: DeckCard = {
       ...card,
       id: `converted-${card.id}-${Date.now()}`,
@@ -1118,6 +1133,7 @@ export function RunTracker() {
     handleCharacterChange(character);
     setTotalPoints(0);
     setActionHistory([]);
+    setRefinementCount(0);
   };
   const undoLastAction = () => {
     if (actionHistory.length === 0) return;
@@ -1679,6 +1695,27 @@ export function RunTracker() {
                   >
                     {getActiveDuplicatesCount()}/4
                   </span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => setRefinementCount((prev) => prev + 1)}
+                    className="
+                    bg-card/80 border-purple-500/30 text-purple-300
+                    hover:bg-purple-500/10 hover:border-purple-400
+                    hover:translate-y-[-2px]
+                    transition-all px-3 py-1
+                    "
+                  >
+                    <Sparkles className="h-3.5 w-3.5 mr-1" />
+                    Apply Refinement
+                    {refinementCount > 0 && (
+                      <span className="ml-1.5 text-sm text-purple-300">
+                        +{refinementCount * 10}
+                      </span>
+                    )}
+                  </Button>
                 </div>
               </div>
             </div>

@@ -7,6 +7,7 @@ export type Partner = {
 // prettier-ignore
 export const PartnersData: readonly Partner[] = [
   { id: "akad", name: "Akad", image: "/images/partners/akad.webp" },
+  { id: "alcea", name: "Alcea", image: "/images/partners/alcea.webp" },
   { id: "alyssa", name: "Alyssa", image: "/images/partners/alyssa.webp" },
   { id: "anteia", name: "Anteia", image: "/images/partners/anteia.webp" },
   { id: "arwen", name: "Arwen", image: "/images/partners/arwen.webp" },
@@ -18,6 +19,7 @@ export const PartnersData: readonly Partner[] = [
   { id: "eishlen", name: "Eishlen", image: "/images/partners/eishlen.webp" },
   { id: "eloise", name: "Eloise", image: "/images/partners/eloise.webp" },
   { id: "erica", name: "Erica", image: "/images/partners/erica.webp" },
+  { id: "gaya", name: "Gaya", image: "/images/partners/gaya.webp" },
   { id: "itsuku", name: "Itsuku", image: "/images/partners/itsuku.webp" },
   { id: "janet", name: "Janet", image: "/images/partners/janet.webp" },
   { id: "kiara", name: "Kiara", image: "/images/partners/kiara.webp" },
