@@ -213,7 +213,7 @@ const CHARACTER_CARDS: Record<
       { name: "Rapier", image: "/images/character/amir/starter1.png" },
       { name: "Rapier", image: "/images/character/amir/starter2.png" },
       { name: "Steel Barrier", image: "/images/character/amir/starter3.png" },
-      { name: "Hovering Metal", image: "/images/character/amir/starter4.png" },
+      { name: "Hovering Metal", image: "/images/character/amir/starter4.webm" },
     ],
     unique: [
       { name: "Metal Pierce", image: "/images/character/amir/unique1.png" },
@@ -1178,7 +1178,7 @@ export function RunTracker() {
           </div>
         )}
         {/* Faction / Type Borders */}
-        {isBase && factionBorder && (
+        {((isBase && factionBorder) || card.isDuplicated) && (
           <img
             src={factionBorder}
             alt="Faction border"
@@ -1206,7 +1206,7 @@ export function RunTracker() {
         {card.isDuplicated && (
           <img
             src="/images/card/deco_card_copy.png"
-            className="z-10 scale-100 absolute right-0 top-0 bottom-0 w-auto h-full object-cover pointer-events-none opacity-100"
+            className="z-10 scale-105 absolute right-0 top-0 bottom-0 w-auto h-full object-cover pointer-events-none opacity-100"
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/40 p-2 flex flex-col justify-between">
