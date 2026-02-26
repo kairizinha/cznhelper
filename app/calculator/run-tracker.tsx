@@ -48,47 +48,40 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 type CardEntry = { name: string; image?: string };
+
+// prettier-ignore
 const CHARACTER_CARDS: Record<
   string,
   { portrait?: string; starter: CardEntry[]; unique: CardEntry[] }
 > = {
-  rei: {
-    portrait: "images/characters/reiportrait.webp",
+  amir: {
+    portrait: "/images/characters/amirportrait.webp",
     starter: [
-      { name: "Dark Blade", image: "/images/character/rei/starter1.png" },
-      { name: "Dark Blade", image: "/images/character/rei/starter2.png" },
-      {
-        name: "Material Regeneration",
-        image: "/images/character/rei/starter3.png",
-      },
-      {
-        name: "Strike of Darkness",
-        image: "/images/character/rei/starter4.png",
-      },
+      { name: "Rapier", image: "/images/character/amir/starter1.png" },
+      { name: "Rapier", image: "/images/character/amir/starter2.png" },
+      { name: "Steel Barrier", image: "/images/character/amir/starter3.png" },
+      { name: "Hovering Metal", image: "/images/character/amir/starter4.png" },
     ],
     unique: [
-      {
-        name: "Resonating Darkness",
-        image: "/images/character/rei/unique1.png",
-      },
-      { name: "Snack Time", image: "/images/character/rei/unique2.png" },
-      { name: "Dark Condensation", image: "/images/character/rei/unique3.png" },
-      { name: "Predator’s Blade", image: "/images/character/rei/unique4.png" },
+      { name: "Metal Pierce", image: "/images/character/amir/unique1.png" },
+      { name: "Metal Extraction", image: "/images/character/amir/unique2.png" },
+      { name: "Full Metal Hurricane", image: "/images/character/amir/unique3.png" },
+      { name: "Iron Skin", image: "/images/character/amir/unique4.png" },
     ],
   },
-  owen: {
-    portrait: "images/characters/owenportrait.webp",
+  beryl: {
+    portrait: "/images/characters/berylportrait.webp",
     starter: [
-      { name: "Downward Cut", image: "/images/character/owen/starter1.png" },
-      { name: "Downward Cut", image: "/images/character/owen/starter2.png" },
-      { name: "Weapon Block", image: "/images/character/owen/starter3.png" },
-      { name: "Wind Charge", image: "/images/character/owen/starter4.png" },
+      { name: "Launcher", image: "/images/character/beryl/starter1.png" },
+      { name: "Charged Launcher", image: "/images/character/beryl/starter2.png" },
+      { name: "Barrier", image: "/images/character/beryl/starter3.png" },
+      { name: "Opening Found", image: "/images/character/beryl/starter4.png" },
     ],
     unique: [
-      { name: "Wind Slash", image: "/images/character/owen/unique1.png" },
-      { name: "Break Armor", image: "/images/character/owen/unique2.png" },
-      { name: "Wind Riding", image: "/images/character/owen/unique3.png" },
-      { name: "Gale Strike", image: "/images/character/owen/unique4.png" },
+      { name: "Charged Shot", image: "/images/character/beryl/unique1.png" },
+      { name: "Guilty Pleasure", image: "/images/character/beryl/unique2.png" },
+      { name: "Unlimited Firepower", image: "/images/character/beryl/unique3.png" },
+      { name: "Heavy Weapon Specialist", image: "/images/character/beryl/unique4.png" },
     ],
   },
   cassius: {
@@ -97,10 +90,7 @@ const CHARACTER_CARDS: Record<
       { name: "Cards", image: "/images/character/cassius/starter1.png" },
       { name: "Wild Card", image: "/images/character/cassius/starter2.png" },
       { name: "Mana Field", image: "/images/character/cassius/starter3.png" },
-      {
-        name: "Pop Eyed Popper",
-        image: "/images/character/cassius/starter4.png",
-      },
+      { name: "Pop Eyed Popper", image: "/images/character/cassius/starter4.png" },
     ],
     unique: [
       { name: "Devil Dice", image: "/images/character/cassius/unique1.png" },
@@ -109,253 +99,19 @@ const CHARACTER_CARDS: Record<
       { name: "Joker", image: "/images/character/cassius/unique4.png" },
     ],
   },
-  beryl: {
-    portrait: "/images/characters/berylportrait.webp",
+  chizuru: {
+    portrait: "/images/characters/chizuruportrait.webp",
     starter: [
-      { name: "Launcher", image: "/images/character/beryl/starter1.png" },
-      {
-        name: "Charged Launcher",
-        image: "/images/character/beryl/starter2.png",
-      },
-      { name: "Barrier", image: "/images/character/beryl/starter3.png" },
-      { name: "Opening Found", image: "/images/character/beryl/starter4.png" },
+      { name: "Moonslash", image: "/images/character/chizuru/starter1.png" },
+      { name: "Moonslash", image: "/images/character/chizuru/starter2.png" },
+      { name: "Spiritflame’s Ward", image: "/images/character/chizuru/starter3.png" },
+      { name: "Karmic Flames", image: "/images/character/chizuru/starter4.png" },
     ],
     unique: [
-      { name: "Charged Shot", image: "/images/character/beryl/unique1.png" },
-      { name: "Guilty Pleasure", image: "/images/character/beryl/unique2.png" },
-      {
-        name: "Unlimited Firepower",
-        image: "/images/character/beryl/unique3.png",
-      },
-      {
-        name: "Heavy Weapon Specialist",
-        image: "/images/character/beryl/unique4.png",
-      },
-    ],
-  },
-  mika: {
-    portrait: "images/characters/mikaportrait.webp",
-    starter: [
-      { name: "Water Arrow", image: "/images/character/mika/starter1.png" },
-      { name: "Water Barrier", image: "/images/character/mika/starter2.png" },
-      { name: "Water Barrier", image: "/images/character/mika/starter3.png" },
-      { name: "Source of Water", image: "/images/character/mika/starter4.png" },
-    ],
-    unique: [
-      {
-        name: "Blessing of Waves",
-        image: "/images/character/mika/unique1.png",
-      },
-      {
-        name: "Tactical Analysis",
-        image: "/images/character/mika/unique2.png",
-      },
-      { name: "Whirpool", image: "/images/character/mika/unique3.png" },
-      { name: "Deluge", image: "/images/character/mika/unique4.png" },
-    ],
-  },
-  maribell: {
-    portrait: "images/characters/maribellportrait.webp",
-    starter: [
-      {
-        name: "Shelter Kick",
-        image: "/images/character/maribell/starter1.png",
-      },
-      {
-        name: "Shelter Defense",
-        image: "/images/character/maribell/starter2.png",
-      },
-      {
-        name: "Shelter Hold",
-        image: "/images/character/maribell/starter3.png",
-      },
-      {
-        name: "Resolute Blitz",
-        image: "/images/character/maribell/starter4.png",
-      },
-    ],
-    unique: [
-      {
-        name: "Maribell Shelter MK.II",
-        image: "/images/character/maribell/unique1.png",
-      },
-      { name: "Wolve’s Dome", image: "/images/character/maribell/unique2.png" },
-      { name: "Oh... I See.", image: "/images/character/maribell/unique3.png" },
-      {
-        name: "Shelter Strike",
-        image: "/images/character/maribell/unique4.png",
-      },
-    ],
-  },
-  lucas: {
-    portrait: "images/characters/lucasportrait.webp",
-    starter: [
-      { name: "Machine Gun", image: "/images/character/lucas/starter1.png" },
-      { name: "Machine Gun", image: "/images/character/lucas/starter2.png" },
-      {
-        name: "Shielding Incendiary Bomb",
-        image: "/images/character/lucas/starter3.png",
-      },
-      {
-        name: "Extended Magazine",
-        image: "/images/character/lucas/starter4.png",
-      },
-    ],
-    unique: [
-      { name: "S.S.S", image: "/images/character/lucas/unique1.png" },
-      { name: "Flame Thrower", image: "/images/character/lucas/unique2.png" },
-      { name: "Flashbang", image: "/images/character/lucas/unique3.png" },
-      { name: "R.P.G-7", image: "/images/character/lucas/unique4.png" },
-    ],
-  },
-  amir: {
-    portrait: "/images/characters/amirportrait.webp",
-    starter: [
-      { name: "Rapier", image: "/images/character/amir/starter1.png" },
-      { name: "Rapier", image: "/images/character/amir/starter2.png" },
-      { name: "Steel Barrier", image: "/images/character/amir/starter3.png" },
-      { name: "Hovering Metal", image: "/images/character/amir/starter4.webm" },
-    ],
-    unique: [
-      { name: "Metal Pierce", image: "/images/character/amir/unique1.png" },
-      { name: "Metal Extraction", image: "/images/character/amir/unique2.png" },
-      {
-        name: "Full Metal Hurricane",
-        image: "/images/character/amir/unique3.png",
-      },
-      { name: "Iron Skin", image: "/images/character/amir/unique4.png" },
-    ],
-  },
-  tressa: {
-    portrait: "/images/characters/tressaportrait.webp",
-    starter: [
-      { name: "Dagger Throw", image: "/images/character/tressa/starter1.png" },
-      { name: "Dagger Throw", image: "/images/character/tressa/starter2.png" },
-      {
-        name: "Touch of Darkness",
-        image: "/images/character/tressa/starter3.png",
-      },
-      {
-        name: "Unseathe Dagger",
-        image: "/images/character/tressa/starter4.png",
-      },
-    ],
-    unique: [
-      { name: "Curse", image: "/images/character/tressa/unique1.png" },
-      { name: "Shadow Reload", image: "/images/character/tressa/unique2.png" },
-      { name: "Vital Attack", image: "/images/character/tressa/unique3.png" },
-      { name: "Cursed Gouge", image: "/images/character/tressa/unique4.png" },
-    ],
-  },
-  selena: {
-    portrait: "/images/characters/selenaportrait.webp",
-    starter: [
-      {
-        name: "Engagament Fire",
-        image: "/images/character/selena/starter1.png",
-      },
-      {
-        name: "Engagament Fire",
-        image: "/images/character/selena/starter2.png",
-      },
-      {
-        name: "Emergency Shielding",
-        image: "/images/character/selena/starter3.png",
-      },
-      {
-        name: "High-Power Scope",
-        image: "/images/character/selena/starter4.png",
-      },
-    ],
-    unique: [
-      { name: "Target Spotted", image: "/images/character/selena/unique1.png" },
-      { name: "Drone Bombing", image: "/images/character/selena/unique2.png" },
-      {
-        name: "Tactical Maneuver",
-        image: "/images/character/selena/unique3.png",
-      },
-      {
-        name: "Sniper’s Domain",
-        image: "/images/character/selena/unique4.png",
-      },
-    ],
-  },
-  nia: {
-    portrait: "/images/characters/niaportrait.webp",
-    starter: [
-      { name: "Stroke", image: "/images/character/nia/starter1.png" },
-      { name: "AMP Therapy", image: "/images/character/nia/starter2.png" },
-      { name: "AMP Therapy", image: "/images/character/nia/starter3.png" },
-      { name: "G Chord", image: "/images/character/nia/starter4.png" },
-    ],
-    unique: [
-      { name: "Mute Accent", image: "/images/character/nia/unique1.png" },
-      { name: "Soul Rip", image: "/images/character/nia/unique2.png" },
-      { name: "Adagio", image: "/images/character/nia/unique3.png" },
-      { name: "Nia’s Curiosity", image: "/images/character/nia/unique4.png" },
-    ],
-  },
-  kayron: {
-    portrait: "/images/characters/kayronportrait.webp",
-    starter: [
-      { name: "Elimination", image: "/images/character/kayron/starter1.png" },
-      { name: "Elimination", image: "/images/character/kayron/starter2.png" },
-      { name: "Sphere", image: "/images/character/kayron/starter3.png" },
-      {
-        name: "Echo of Futility",
-        image: "/images/character/kayron/starter4.png",
-      },
-    ],
-    unique: [
-      {
-        name: "Brand of Annihilation",
-        image: "/images/character/kayron/unique1.png",
-      },
-      { name: "Black Hole", image: "/images/character/kayron/unique2.png" },
-      { name: "Oath of Vanity", image: "/images/character/kayron/unique3.png" },
-      {
-        name: "Echoes of True Abyss",
-        image: "/images/character/kayron/unique4.png",
-      },
-    ],
-  },
-  narja: {
-    portrait: "/images/characters/narjaportrait.webp",
-    starter: [
-      {
-        name: "NA: Attack Response",
-        image: "/images/character/narja/starter1.webp",
-      },
-      {
-        name: "NA: Defense Response",
-        image: "/images/character/narja/starter2.webp",
-      },
-      {
-        name: "NA: Defense Response",
-        image: "/images/character/narja/starter3.webp",
-      },
-      {
-        name: "Shackles of Hunger",
-        image: "/images/character/narja/starter4.webp",
-      },
-    ],
-    unique: [
-      {
-        name: "Bottomless Hunger",
-        image: "/images/character/narja/unique1.webp",
-      },
-      {
-        name: "Voluntary Control",
-        image: "/images/character/narja/unique2.webp",
-      },
-      {
-        name: "Domain of Voracity",
-        image: "/images/character/narja/unique3.webp",
-      },
-      {
-        name: "Mealtime",
-        image: "/images/character/narja/unique4.webp",
-      },
+      { name: "Tsukuyomi", image: "/images/character/chizuru/unique1.png" },
+      { name: "Bound At Dusk", image: "/images/character/chizuru/unique2.png" },
+      { name: "Oni Hunt", image: "/images/character/chizuru/unique3.png" },
+      { name: "Shadow of the Moon", image: "/images/character/chizuru/unique4.png" },
     ],
   },
   haru: {
@@ -373,34 +129,13 @@ const CHARACTER_CARDS: Record<
       { name: "Lift Anchor", image: "/images/character/haru/unique4.png" },
     ],
   },
-  yuki: {
-    portrait: "/images/characters/yukiportrait.webp",
-    starter: [
-      { name: "Longsword Slash", image: "/images/character/yuki/starter1.png" },
-      { name: "Rapid Slash", image: "/images/character/yuki/starter2.png" },
-      { name: "Flowing Parry", image: "/images/character/yuki/starter3.png" },
-      {
-        name: "Prepare to Subdue",
-        image: "/images/character/yuki/starter4.png",
-      },
-    ],
-    unique: [
-      { name: "Flash Slash", image: "/images/character/yuki/unique1.png" },
-      { name: "Trickery Strike", image: "/images/character/yuki/unique2.png" },
-      { name: "Freezing Blade", image: "/images/character/yuki/unique3.png" },
-      { name: "Iceberg Cleave", image: "/images/character/yuki/unique4.png" },
-    ],
-  },
   hugo: {
     portrait: "/images/characters/hugoportrait.webp",
     starter: [
       { name: "Throw Dagger", image: "/images/character/hugo/starter1.png" },
       { name: "Throw Dagger", image: "/images/character/hugo/starter2.png" },
       { name: "Defense System", image: "/images/character/hugo/starter3.png" },
-      {
-        name: "Hunting Instincts",
-        image: "/images/character/hugo/starter4.png",
-      },
+      { name: "Hunting Instincts", image: "/images/character/hugo/starter4.png" },
     ],
     unique: [
       { name: "Fan of Daggers", image: "/images/character/hugo/unique1.png" },
@@ -409,160 +144,64 @@ const CHARACTER_CARDS: Record<
       { name: "Fixer’s Approach", image: "/images/character/hugo/unique4.png" },
     ],
   },
-  renoa: {
-    portrait: "/images/characters/renoaportrait.webp",
+  kayron: {
+    portrait: "/images/characters/kayronportrait.webp",
     starter: [
-      {
-        name: "Annihilation Shot",
-        image: "/images/character/renoa/starter1.png",
-      },
-      {
-        name: "Annihilation Shot",
-        image: "/images/character/renoa/starter2.png",
-      },
-      { name: "Black Veil", image: "/images/character/renoa/starter3.png" },
-      { name: "Echo of Sorrow", image: "/images/character/renoa/starter4.png" },
+      { name: "Elimination", image: "/images/character/kayron/starter1.png" },
+      { name: "Elimination", image: "/images/character/kayron/starter2.png" },
+      { name: "Sphere", image: "/images/character/kayron/starter3.png" },
+      { name: "Echo of Futility", image: "/images/character/kayron/starter4.png" },
     ],
     unique: [
-      {
-        name: "Instant Judgement",
-        image: "/images/character/renoa/unique1.png",
-      },
-      {
-        name: "Ballad of Pitch Black",
-        image: "/images/character/renoa/unique2.png",
-      },
-      {
-        name: "Flower of Devoured Fate",
-        image: "/images/character/renoa/unique3.png",
-      },
-      {
-        name: "Last-Ditch Assault",
-        image: "/images/character/renoa/unique4.png",
-      },
+      { name: "Brand of Annihilation", image: "/images/character/kayron/unique1.png" },
+      { name: "Black Hole", image: "/images/character/kayron/unique2.png" },
+      { name: "Oath of Vanity", image: "/images/character/kayron/unique3.png" },
+      { name: "Echoes of True Abyss", image: "/images/character/kayron/unique4.png" },
     ],
   },
-  veronica: {
-    portrait: "/images/characters/veronicaportrait.webp",
+  khalipe: {
+    portrait: "/images/characters/khalipeportrait.webp",
     starter: [
-      { name: "Rapid Fire", image: "/images/character/veronica/starter1.png" },
-      { name: "Rapid Fire", image: "/images/character/veronica/starter2.png" },
-      {
-        name: "Illusion of Golden Daffodils",
-        image: "/images/character/veronica/starter3.png",
-      },
-      {
-        name: "Firing Preparation",
-        image: "/images/character/veronica/starter4.png",
-      },
+      { name: "Lashing", image: "/images/character/khalipe/starter1.png" },
+      { name: "Upward Slash", image: "/images/character/khalipe/starter2.png" },
+      { name: "Tyr’s Vow", image: "/images/character/khalipe/starter3.png" },
+      { name: "Vulture Ejection", image: "/images/character/khalipe/starter4.png" },
     ],
     unique: [
-      { name: "Repose", image: "/images/character/veronica/unique1.png" },
-      {
-        name: "Pendant of Resolution",
-        image: "/images/character/veronica/unique2.png",
-      },
-      { name: "Sir Kowalski", image: "/images/character/veronica/unique3.png" },
-      {
-        name: "Bombardment Prep",
-        image: "/images/character/veronica/unique4.png",
-      },
+      { name: "Greatsword Aquila", image: "/images/character/khalipe/unique1.png" },
+      { name: "Overpower", image: "/images/character/khalipe/unique2.png" },
+      { name: "Rally", image: "/images/character/khalipe/unique3.png" },
+      { name: "Absolute Protection", image: "/images/character/khalipe/unique4.png" },
     ],
   },
-  "mei-lin": {
-    portrait: "/images/characters/meilinportrait.webp",
+  lucas: {
+    portrait: "images/characters/lucasportrait.webp",
     starter: [
-      { name: "Strike", image: "/images/character/mei-lin/starter1.png" },
-      { name: "Strike", image: "/images/character/mei-lin/starter2.png" },
-      {
-        name: "Flame Dragon Guardian",
-        image: "/images/character/mei-lin/starter3.png",
-      },
-      {
-        name: "Flame Dragon Jewel",
-        image: "/images/character/mei-lin/starter4.png",
-      },
+      { name: "Machine Gun", image: "/images/character/lucas/starter1.png" },
+      { name: "Machine Gun", image: "/images/character/lucas/starter2.png" },
+      { name: "Shielding Incendiary Bomb", image: "/images/character/lucas/starter3.png" },
+      { name: "Extended Magazine", image: "/images/character/lucas/starter4.png" },
     ],
     unique: [
-      {
-        name: "Rising Dragon Spire",
-        image: "/images/character/mei-lin/unique1.png",
-      },
-      {
-        name: "Unity of Attack and Defense",
-        image: "/images/character/mei-lin/unique2.png",
-      },
-      {
-        name: "Spirit of the Aroma",
-        image: "/images/character/mei-lin/unique3.png",
-      },
-      {
-        name: "Flame Dragon’s Sovereighty",
-        image: "/images/character/mei-lin/unique4.png",
-      },
+      { name: "S.S.S", image: "/images/character/lucas/unique1.png" },
+      { name: "Flame Thrower", image: "/images/character/lucas/unique2.png" },
+      { name: "Flashbang", image: "/images/character/lucas/unique3.png" },
+      { name: "R.P.G-7", image: "/images/character/lucas/unique4.png" },
     ],
   },
-  orlea: {
-    portrait: "/images/characters/orleaportrait.webp",
+  luke: {
+    portrait: "/images/characters/lukeportrait.webp",
     starter: [
-      {
-        name: "Attack, My Minions",
-        image: "/images/character/orlea/starter1.png",
-      },
-      {
-        name: "Heaven’s Healing",
-        image: "/images/character/orlea/starter3.png",
-      },
-      {
-        name: "Heaven’s Healing",
-        image: "/images/character/orlea/starter3.png",
-      },
-      { name: "Sacred Censer", image: "/images/character/orlea/starter4.png" },
+      { name: "Single Shot", image: "/images/character/luke/starter1.png" },
+      { name: "Single Shot", image: "/images/character/luke/starter2.png" },
+      { name: "Shadow Concealment", image: "/images/character/luke/starter3.png" },
+      { name: "Rapid Fire", image: "/images/character/luke/starter4.png" },
     ],
     unique: [
-      {
-        name: "Growth Acceleration",
-        image: "/images/character/orlea/unique1.png",
-      },
-      { name: "Annoying", image: "/images/character/orlea/unique2.png" },
-      {
-        name: "Growing Creature",
-        image: "/images/character/orlea/unique3.png",
-      },
-      { name: "Will of Light", image: "/images/character/orlea/unique4.png" },
-    ],
-  },
-  rin: {
-    portrait: "/images/characters/rinportrait.webp",
-    starter: [
-      {
-        name: "Dark Mist Sword: First Form",
-        image: "/images/character/rin/starter1.png",
-      },
-      {
-        name: "Dark Mist Sword: Third Form",
-        image: "/images/character/rin/starter2.png",
-      },
-      { name: "Protection", image: "/images/character/rin/starter3.png" },
-      { name: "Drawing Slash", image: "/images/character/rin/starter4.png" },
-    ],
-    unique: [
-      {
-        name: "Dark Mist Secret Art: Destruction",
-        image: "/images/character/rin/unique1.png",
-      },
-      {
-        name: "Dark Mist Secret Art: Annihilation",
-        image: "/images/character/rin/unique2.png",
-      },
-      {
-        name: "Dark Mist Inner Art",
-        image: "/images/character/rin/unique3.png",
-      },
-      {
-        name: "Dark Mist Secret Art: Black Dance",
-        image: "/images/character/rin/unique4.png",
-      },
+      { name: "Stealth Reload", image: "/images/character/luke/unique1.png" },
+      { name: "Seize the Opportunity", image: "/images/character/luke/unique2.png" },
+      { name: "Dance of the Demon", image: "/images/character/luke/unique3.png" },
+      { name: "Finisher Round", image: "/images/character/luke/unique4.png" },
     ],
   },
   magna: {
@@ -574,121 +213,85 @@ const CHARACTER_CARDS: Record<
       { name: "Ice Fragment", image: "/images/character/magna/starter4.png" },
     ],
     unique: [
-      {
-        name: "Glacial Iron Fist",
-        image: "/images/character/magna/unique1.png",
-      },
+      { name: "Glacial Iron Fist", image: "/images/character/magna/unique1.png" },
       { name: "Ice Wall", image: "/images/character/magna/unique2.png" },
       { name: "Frost Charge", image: "/images/character/magna/unique3.png" },
-      {
-        name: "Storm of Bitter Cold",
-        image: "/images/character/magna/unique4.png",
-      },
+      { name: "Storm of Bitter Cold", image: "/images/character/magna/unique4.png" },
     ],
   },
-  khalipe: {
-    portrait: "/images/characters/khalipeportrait.webp",
+  maribell: {
+    portrait: "images/characters/maribellportrait.webp",
     starter: [
-      { name: "Lashing", image: "/images/character/khalipe/starter1.png" },
-      { name: "Upward Slash", image: "/images/character/khalipe/starter2.png" },
-      { name: "Tyr’s Vow", image: "/images/character/khalipe/starter3.png" },
-      {
-        name: "Vulture Ejection",
-        image: "/images/character/khalipe/starter4.png",
-      },
+      { name: "Shelter Kick", image: "/images/character/maribell/starter1.png" },
+      { name: "Shelter Defense", image: "/images/character/maribell/starter2.png" },
+      { name: "Shelter Hold", image: "/images/character/maribell/starter3.png" },
+      { name: "Resolute Blitz", image: "/images/character/maribell/starter4.png" },
     ],
     unique: [
-      {
-        name: "Greatsword Aquila",
-        image: "/images/character/khalipe/unique1.png",
-      },
-      { name: "Overpower", image: "/images/character/khalipe/unique2.png" },
-      { name: "Rally", image: "/images/character/khalipe/unique3.png" },
-      {
-        name: "Absolute Protection",
-        image: "/images/character/khalipe/unique4.png",
-      },
+      { name: "Maribell Shelter MK.II", image: "/images/character/maribell/unique1.png" },
+      { name: "Wolve’s Dome", image: "/images/character/maribell/unique2.png" },
+      { name: "Oh... I See.", image: "/images/character/maribell/unique3.png" },
+      { name: "Shelter Strike", image: "/images/character/maribell/unique4.png" },
     ],
   },
-  sereniel: {
-    portrait: "/images/characters/serenielportrait.webp",
+  "mei-lin": {
+    portrait: "/images/characters/meilinportrait.webp",
     starter: [
-      { name: "Pulse Fire", image: "/images/character/sereniel/starter1.webp" },
-      { name: "Pulse Fire", image: "/images/character/sereniel/starter2.webp" },
-      {
-        name: "Magnetic Field",
-        image: "/images/character/sereniel/starter3.webp",
-      },
-      {
-        name: "Homing Laser",
-        image: "/images/character/sereniel/starter4.webp",
-      },
+      { name: "Strike", image: "/images/character/mei-lin/starter1.png" },
+      { name: "Strike", image: "/images/character/mei-lin/starter2.png" },
+      { name: "Flame Dragon Guardian", image: "/images/character/mei-lin/starter3.png" },
+      { name: "Flame Dragon Jewel", image: "/images/character/mei-lin/starter4.png" },
     ],
     unique: [
-      {
-        name: "Plasma Missile",
-        image: "/images/character/sereniel/unique1.webp",
-      },
-      {
-        name: "Shining Core",
-        image: "/images/character/sereniel/unique2.webp",
-      },
-      {
-        name: "Cobalt Light",
-        image: "/images/character/sereniel/unique3.webp",
-      },
-      {
-        name: "Pale Shooting Star",
-        image: "/images/character/sereniel/unique4.webp",
-      },
+      { name: "Rising Dragon Spire", image: "/images/character/mei-lin/unique1.png" },
+      { name: "Unity of Attack and Defense", image: "/images/character/mei-lin/unique2.png" },
+      { name: "Spirit of the Aroma", image: "/images/character/mei-lin/unique3.png" },
+      { name: "Flame Dragon’s Sovereighty", image: "/images/character/mei-lin/unique4.png" },
     ],
   },
-  chizuru: {
-    portrait: "/images/characters/chizuruportrait.webp",
+  mika: {
+    portrait: "images/characters/mikaportrait.webp",
     starter: [
-      { name: "Moonslash", image: "/images/character/chizuru/starter1.png" },
-      { name: "Moonslash", image: "/images/character/chizuru/starter2.png" },
-      {
-        name: "Spiritflame’s Ward",
-        image: "/images/character/chizuru/starter3.png",
-      },
-      {
-        name: "Karmic Flames",
-        image: "/images/character/chizuru/starter4.png",
-      },
+      { name: "Water Arrow", image: "/images/character/mika/starter1.png" },
+      { name: "Water Barrier", image: "/images/character/mika/starter2.png" },
+      { name: "Water Barrier", image: "/images/character/mika/starter3.png" },
+      { name: "Source of Water", image: "/images/character/mika/starter4.png" },
     ],
     unique: [
-      { name: "Tsukuyomi", image: "/images/character/chizuru/unique1.png" },
-      { name: "Bound At Dusk", image: "/images/character/chizuru/unique2.png" },
-      { name: "Oni Hunt", image: "/images/character/chizuru/unique3.png" },
-      {
-        name: "Shadow of the Moon",
-        image: "/images/character/chizuru/unique4.png",
-      },
+      { name: "Blessing of Waves", image: "/images/character/mika/unique1.png" },
+      { name: "Tactical Analysis", image: "/images/character/mika/unique2.png" },
+      { name: "Whirpool", image: "/images/character/mika/unique3.png" },
+      { name: "Deluge", image: "/images/character/mika/unique4.png" },
     ],
   },
-  luke: {
-    portrait: "/images/characters/lukeportrait.webp",
+  narja: {
+    portrait: "/images/characters/narjaportrait.webp",
     starter: [
-      { name: "Single Shot", image: "/images/character/luke/starter1.png" },
-      { name: "Single Shot", image: "/images/character/luke/starter2.png" },
-      {
-        name: "Shadow Concealment",
-        image: "/images/character/luke/starter3.png",
-      },
-      { name: "Rapid Fire", image: "/images/character/luke/starter4.png" },
+      { name: "NA: Attack Response", image: "/images/character/narja/starter1.webp" },
+      { name: "NA: Defense Response", image: "/images/character/narja/starter2.webp" },
+      { name: "NA: Defense Response", image: "/images/character/narja/starter3.webp" },
+      { name: "Shackles of Hunger", image: "/images/character/narja/starter4.webp" },
     ],
     unique: [
-      { name: "Stealth Reload", image: "/images/character/luke/unique1.png" },
-      {
-        name: "Seize the Opportunity",
-        image: "/images/character/luke/unique2.png",
-      },
-      {
-        name: "Dance of the Demon",
-        image: "/images/character/luke/unique3.png",
-      },
-      { name: "Finisher Round", image: "/images/character/luke/unique4.png" },
+      { name: "Bottomless Hunger", image: "/images/character/narja/unique1.webp" },
+      { name: "Voluntary Control", image: "/images/character/narja/unique2.webp" },
+      { name: "Domain of Voracity", image: "/images/character/narja/unique3.webp" },
+      { name: "Mealtime", image: "/images/character/narja/unique4.webp" },
+    ],
+  },
+  nia: {
+    portrait: "/images/characters/niaportrait.webp",
+    starter: [
+      { name: "Stroke", image: "/images/character/nia/starter1.png" },
+      { name: "AMP Therapy", image: "/images/character/nia/starter2.png" },
+      { name: "AMP Therapy", image: "/images/character/nia/starter3.png" },
+      { name: "G Chord", image: "/images/character/nia/starter4.png" },
+    ],
+    unique: [
+      { name: "Mute Accent", image: "/images/character/nia/unique1.png" },
+      { name: "Soul Rip", image: "/images/character/nia/unique2.png" },
+      { name: "Adagio", image: "/images/character/nia/unique3.png" },
+      { name: "Nia’s Curiosity", image: "/images/character/nia/unique4.png" },
     ],
   },
   nine: {
@@ -696,26 +299,179 @@ const CHARACTER_CARDS: Record<
     starter: [
       { name: "Slash", image: "/images/character/nine/starter1.webp" },
       { name: "Slash", image: "/images/character/nine/starter2.webp" },
-      {
-        name: "Back-Edge Parry",
-        image: "/images/character/nine/starter3.webp",
-      },
+      { name: "Back-Edge Parry", image: "/images/character/nine/starter3.webp" },
       { name: "Hew", image: "/images/character/nine/starter4.webp" },
     ],
     unique: [
-      {
-        name: "Experienced Strike",
-        image: "/images/character/nine/unique1.webp",
-      },
-      {
-        name: "Fatal Strike",
-        image: "/images/character/nine/unique2.webp",
-      },
-      {
-        name: "Counterblade",
-        image: "/images/character/nine/unique3.webp",
-      },
+      { name: "Experienced Strike", image: "/images/character/nine/unique1.webp" },
+      { name: "Fatal Strike", image: "/images/character/nine/unique2.webp" },
+      { name: "Counterblade", image: "/images/character/nine/unique3.webp" },
       { name: "Fighting Spirit", image: "/images/character/nine/unique4.webp" },
+    ],
+  },
+  orlea: {
+    portrait: "/images/characters/orleaportrait.webp",
+    starter: [
+      { name: "Attack, My Minions", image: "/images/character/orlea/starter1.png" },
+      { name: "Heaven’s Healing", image: "/images/character/orlea/starter3.png" },
+      { name: "Heaven’s Healing", image: "/images/character/orlea/starter3.png" },
+      { name: "Sacred Censer", image: "/images/character/orlea/starter4.png" },
+    ],
+    unique: [
+      { name: "Growth Acceleration", image: "/images/character/orlea/unique1.png" },
+      { name: "Annoying", image: "/images/character/orlea/unique2.png" },
+      { name: "Growing Creature", image: "/images/character/orlea/unique3.png" },
+      { name: "Will of Light", image: "/images/character/orlea/unique4.png" },
+    ],
+  },
+  owen: {
+    portrait: "images/characters/owenportrait.webp",
+    starter: [
+      { name: "Downward Cut", image: "/images/character/owen/starter1.png" },
+      { name: "Downward Cut", image: "/images/character/owen/starter2.png" },
+      { name: "Weapon Block", image: "/images/character/owen/starter3.png" },
+      { name: "Wind Charge", image: "/images/character/owen/starter4.png" },
+    ],
+    unique: [
+      { name: "Wind Slash", image: "/images/character/owen/unique1.png" },
+      { name: "Break Armor", image: "/images/character/owen/unique2.png" },
+      { name: "Wind Riding", image: "/images/character/owen/unique3.png" },
+      { name: "Gale Strike", image: "/images/character/owen/unique4.png" },
+    ],
+  },
+  rei: {
+    portrait: "images/characters/reiportrait.webp",
+    starter: [
+      { name: "Dark Blade", image: "/images/character/rei/starter1.png" },
+      { name: "Dark Blade", image: "/images/character/rei/starter2.png" },
+      { name: "Material Regeneration", image: "/images/character/rei/starter3.png" },
+      { name: "Strike of Darkness", image: "/images/character/rei/starter4.png" },
+    ],
+    unique: [
+      { name: "Resonating Darkness", image: "/images/character/rei/unique1.png" },
+      { name: "Snack Time", image: "/images/character/rei/unique2.png" },
+      { name: "Dark Condensation", image: "/images/character/rei/unique3.png" },
+      { name: "Predator’s Blade", image: "/images/character/rei/unique4.png" },
+    ],
+  },
+  renoa: {
+    portrait: "/images/characters/renoaportrait.webp",
+    starter: [
+      { name: "Annihilation Shot", image: "/images/character/renoa/starter1.png" },
+      { name: "Annihilation Shot", image: "/images/character/renoa/starter2.png" },
+      { name: "Black Veil", image: "/images/character/renoa/starter3.png" },
+      { name: "Echo of Sorrow", image: "/images/character/renoa/starter4.png" },
+    ],
+    unique: [
+      { name: "Instant Judgement", image: "/images/character/renoa/unique1.png" },
+      { name: "Ballad of Pitch Black", image: "/images/character/renoa/unique2.png" },
+      { name: "Flower of Devoured Fate", image: "/images/character/renoa/unique3.png" },
+      { name: "Last-Ditch Assault", image: "/images/character/renoa/unique4.png" },
+    ],
+  },
+  rin: {
+    portrait: "/images/characters/rinportrait.webp",
+    starter: [
+      { name: "Dark Mist Sword: First Form", image: "/images/character/rin/starter1.png" },
+      { name: "Dark Mist Sword: Third Form", image: "/images/character/rin/starter2.png" },
+      { name: "Protection", image: "/images/character/rin/starter3.png" },
+      { name: "Drawing Slash", image: "/images/character/rin/starter4.png" },
+    ],
+    unique: [
+      { name: "Dark Mist Secret Art: Destruction", image: "/images/character/rin/unique1.png" },
+      { name: "Dark Mist Secret Art: Annihilation", image: "/images/character/rin/unique2.png" },
+      { name: "Dark Mist Inner Art", image: "/images/character/rin/unique3.png" },
+      { name: "Dark Mist Secret Art: Black Dance", image: "/images/character/rin/unique4.png" },
+    ],
+  },
+  selena: {
+    portrait: "/images/characters/selenaportrait.webp",
+    starter: [
+      { name: "Engagament Fire", image: "/images/character/selena/starter1.png" },
+      { name: "Engagament Fire", image: "/images/character/selena/starter2.png" },
+      { name: "Emergency Shielding", image: "/images/character/selena/starter3.png" },
+      { name: "High-Power Scope", image: "/images/character/selena/starter4.png" },
+    ],
+    unique: [
+      { name: "Target Spotted", image: "/images/character/selena/unique1.png" },
+      { name: "Drone Bombing", image: "/images/character/selena/unique2.png" },
+      { name: "Tactical Maneuver", image: "/images/character/selena/unique3.png" },
+      { name: "Sniper’s Domain", image: "/images/character/selena/unique4.png" },
+    ],
+  },
+  sereniel: {
+    portrait: "/images/characters/serenielportrait.webp",
+    starter: [
+      { name: "Pulse Fire", image: "/images/character/sereniel/starter1.webp" },
+      { name: "Pulse Fire", image: "/images/character/sereniel/starter2.webp" },
+      { name: "Magnetic Field", image: "/images/character/sereniel/starter3.webp" },
+      { name: "Homing Laser", image: "/images/character/sereniel/starter4.webp" },
+    ],
+    unique: [
+      { name: "Plasma Missile", image: "/images/character/sereniel/unique1.webp" },
+      { name: "Shining Core", image: "/images/character/sereniel/unique2.webp" },
+      { name: "Cobalt Light", image: "/images/character/sereniel/unique3.webp" },
+      { name: "Pale Shooting Star", image: "/images/character/sereniel/unique4.webp" },
+    ],
+  },
+  tiphera: {
+    portrait: "/images/characters/tipheraportrait.webp",
+    starter: [
+      { name: "Matter Disintegration", image: "/images/character/tiphera/starter1.webp" },
+      { name: "Barrier Deployment", image: "/images/character/tiphera/starter2.webp" },
+      { name: "Barrier Deployment", image: "/images/character/tiphera/starter3.webp" },
+      { name: "Quantum Seed", image: "/images/character/tiphera/starter4.webp" },
+    ],
+    unique: [
+      { name: "Form Convergence", image: "/images/character/tiphera/unique1.webp" },
+      { name: "Creation and Destruction", image: "/images/character/tiphera/unique2.webp" },
+      { name: "Dual Creation", image: "/images/character/tiphera/unique3.webp" },
+      { name: "Event Horizon", image: "/images/character/tiphera/unique4.webp" },
+    ],
+  },
+  tressa: {
+    portrait: "/images/characters/tressaportrait.webp",
+    starter: [
+      { name: "Dagger Throw", image: "/images/character/tressa/starter1.png" },
+      { name: "Dagger Throw", image: "/images/character/tressa/starter2.png" },
+      { name: "Touch of Darkness", image: "/images/character/tressa/starter3.png" },
+      { name: "Unseathe Dagger", image: "/images/character/tressa/starter4.png" },
+    ],
+    unique: [
+      { name: "Curse", image: "/images/character/tressa/unique1.png" },
+      { name: "Shadow Reload", image: "/images/character/tressa/unique2.png" },
+      { name: "Vital Attack", image: "/images/character/tressa/unique3.png" },
+      { name: "Cursed Gouge", image: "/images/character/tressa/unique4.png" },
+    ],
+  },
+  veronica: {
+    portrait: "/images/characters/veronicaportrait.webp",
+    starter: [
+      { name: "Rapid Fire", image: "/images/character/veronica/starter1.png" },
+      { name: "Rapid Fire", image: "/images/character/veronica/starter2.png" },
+      { name: "Illusion of Golden Daffodils", image: "/images/character/veronica/starter3.png" },
+      { name: "Firing Preparation", image: "/images/character/veronica/starter4.png" },
+    ],
+    unique: [
+      { name: "Repose", image: "/images/character/veronica/unique1.png" },
+      { name: "Pendant of Resolution", image: "/images/character/veronica/unique2.png" },
+      { name: "Sir Kowalski", image: "/images/character/veronica/unique3.png" },
+      { name: "Bombardment Prep", image: "/images/character/veronica/unique4.png" },
+    ],
+  },
+  yuki: {
+    portrait: "/images/characters/yukiportrait.webp",
+    starter: [
+      { name: "Longsword Slash", image: "/images/character/yuki/starter1.png" },
+      { name: "Rapid Slash", image: "/images/character/yuki/starter2.png" },
+      { name: "Flowing Parry", image: "/images/character/yuki/starter3.png" },
+      { name: "Prepare to Subdue", image: "/images/character/yuki/starter4.png" },
+    ],
+    unique: [
+      { name: "Flash Slash", image: "/images/character/yuki/unique1.png" },
+      { name: "Trickery Strike", image: "/images/character/yuki/unique2.png" },
+      { name: "Freezing Blade", image: "/images/character/yuki/unique3.png" },
+      { name: "Iceberg Cleave", image: "/images/character/yuki/unique4.png" },
     ],
   },
 };
@@ -752,6 +508,7 @@ const FACTION_BORDER_MAP: Record<string, string[]> = {
     "luke",
     "hugo",
     "yuki",
+    "tiphera",
     "nine",
   ],
   "/images/card/void-border.png": [

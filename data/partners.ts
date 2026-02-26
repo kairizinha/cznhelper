@@ -38,6 +38,7 @@ export const PartnersData: readonly Partner[] = [
   { id: "scarlet", name: "Scarlet", image: "/images/partners/scarlet.webp" },
   { id: "serithea", name: "Serithea", image: "/images/partners/serithea.webp" },
   { id: "solia", name: "Solia", image: "/images/partners/solia.webp" },
+  { id: "tiana", name: "Tiana", image: "/images/partners/tiana.webp" },
   { id: "tina", name: "Tina", image: "/images/partners/tina.webp" },
   { id: "westmaccot", name: "Westmaccot", image: "/images/partners/westmaccot.webp" },
   { id: "wilhelmina", name: "Wilhelmina", image: "/images/partners/wilhelmina.webp" },
