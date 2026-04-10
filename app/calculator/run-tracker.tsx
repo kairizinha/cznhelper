@@ -56,7 +56,7 @@ const CHARACTER_CARDS: Record<
   { portrait?: string; starter: CardEntry[]; unique: CardEntry[] }
 > = {
   amir: {
-    portrait: "/images/characters/amirportrait.webp",
+    portrait: "/images/characters/amirface.webp",
     starter: [
       { name: "Rapier", image: "/images/character/amir/starter1.png" },
       { name: "Rapier", image: "/images/character/amir/starter2.png" },
@@ -74,7 +74,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   beryl: {
-    portrait: "/images/characters/berylportrait.webp",
+    portrait: "/images/characters/berylface.webp",
     starter: [
       { name: "Launcher", image: "/images/character/beryl/starter1.png" },
       {
@@ -98,7 +98,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   cassius: {
-    portrait: "images/characters/cassiusportrait.webp",
+    portrait: "images/characters/cassiusface.webp",
     starter: [
       { name: "Cards", image: "/images/character/cassius/starter1.png" },
       { name: "Wild Card", image: "/images/character/cassius/starter2.png" },
@@ -116,7 +116,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   chizuru: {
-    portrait: "/images/characters/chizuruportrait.webp",
+    portrait: "/images/characters/chizuruface.webp",
     starter: [
       { name: "Moonslash", image: "/images/character/chizuru/starter1.png" },
       { name: "Moonslash", image: "/images/character/chizuru/starter2.png" },
@@ -140,7 +140,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   diana: {
-    portrait: "/images/characters/dianaportrait.webp",
+    portrait: "/images/characters/dianaface.webp",
     starter: [
       {
         name: "Disruption Fire",
@@ -176,7 +176,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   haru: {
-    portrait: "/images/characters/haruportrait.webp",
+    portrait: "/images/characters/haruface.webp",
     starter: [
       { name: "Anchor", image: "/images/character/haru/starter1.png" },
       { name: "Power Anchor", image: "/images/character/haru/starter2.png" },
@@ -191,7 +191,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   hugo: {
-    portrait: "/images/characters/hugoportrait.webp",
+    portrait: "/images/characters/hugoface.webp",
     starter: [
       { name: "Throw Dagger", image: "/images/character/hugo/starter1.png" },
       { name: "Throw Dagger", image: "/images/character/hugo/starter2.png" },
@@ -209,7 +209,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   kayron: {
-    portrait: "/images/characters/kayronportrait.webp",
+    portrait: "/images/characters/kayronface.webp",
     starter: [
       { name: "Elimination", image: "/images/character/kayron/starter1.png" },
       { name: "Elimination", image: "/images/character/kayron/starter2.png" },
@@ -233,7 +233,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   khalipe: {
-    portrait: "/images/characters/khalipeportrait.webp",
+    portrait: "/images/characters/khalipeface.webp",
     starter: [
       { name: "Lashing", image: "/images/character/khalipe/starter1.png" },
       { name: "Upward Slash", image: "/images/character/khalipe/starter2.png" },
@@ -257,7 +257,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   lucas: {
-    portrait: "images/characters/lucasportrait.webp",
+    portrait: "images/characters/lucasface.webp",
     starter: [
       { name: "Machine Gun", image: "/images/character/lucas/starter1.png" },
       { name: "Machine Gun", image: "/images/character/lucas/starter2.png" },
@@ -278,7 +278,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   luke: {
-    portrait: "/images/characters/lukeportrait.webp",
+    portrait: "/images/characters/lukeface.webp",
     starter: [
       { name: "Single Shot", image: "/images/character/luke/starter1.png" },
       { name: "Single Shot", image: "/images/character/luke/starter2.png" },
@@ -302,7 +302,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   magna: {
-    portrait: "/images/characters/magnaportrait.webp",
+    portrait: "/images/characters/magnaface.webp",
     starter: [
       { name: "Frozen Fist", image: "/images/character/magna/starter1.png" },
       { name: "Frost Shield", image: "/images/character/magna/starter3.png" },
@@ -323,7 +323,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   maribell: {
-    portrait: "images/characters/maribellportrait.webp",
+    portrait: "images/characters/maribellface.webp",
     starter: [
       {
         name: "Shelter Kick",
@@ -356,7 +356,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   "mei-lin": {
-    portrait: "/images/characters/meilinportrait.webp",
+    portrait: "/images/characters/meilinface.webp",
     starter: [
       { name: "Strike", image: "/images/character/mei-lin/starter1.png" },
       { name: "Strike", image: "/images/character/mei-lin/starter2.png" },
@@ -389,7 +389,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   mika: {
-    portrait: "images/characters/mikaportrait.webp",
+    portrait: "images/characters/mikaface.webp",
     starter: [
       { name: "Water Arrow", image: "/images/character/mika/starter1.png" },
       { name: "Water Barrier", image: "/images/character/mika/starter2.png" },
@@ -410,7 +410,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   narja: {
-    portrait: "/images/characters/narjaportrait.webp",
+    portrait: "/images/characters/narjaface.webp",
     starter: [
       {
         name: "NA: Attack Response",
@@ -446,7 +446,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   nia: {
-    portrait: "/images/characters/niaportrait.webp",
+    portrait: "/images/characters/niaface.webp",
     starter: [
       { name: "Stroke", image: "/images/character/nia/starter1.png" },
       { name: "AMP Therapy", image: "/images/character/nia/starter2.png" },
@@ -461,7 +461,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   nine: {
-    portrait: "/images/characters/nineportrait.webp",
+    portrait: "/images/characters/nineface.webp",
     starter: [
       { name: "Slash", image: "/images/character/nine/starter1.webp" },
       { name: "Slash", image: "/images/character/nine/starter2.webp" },
@@ -482,7 +482,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   orlea: {
-    portrait: "/images/characters/orleaportrait.webp",
+    portrait: "/images/characters/orleaface.webp",
     starter: [
       {
         name: "Attack, My Minions",
@@ -512,7 +512,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   owen: {
-    portrait: "images/characters/owenportrait.webp",
+    portrait: "images/characters/owenface.webp",
     starter: [
       { name: "Downward Cut", image: "/images/character/owen/starter1.png" },
       { name: "Downward Cut", image: "/images/character/owen/starter2.png" },
@@ -527,7 +527,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   rei: {
-    portrait: "images/characters/reiportrait.webp",
+    portrait: "images/characters/reiface.webp",
     starter: [
       { name: "Dark Blade", image: "/images/character/rei/starter1.png" },
       { name: "Dark Blade", image: "/images/character/rei/starter2.png" },
@@ -551,7 +551,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   renoa: {
-    portrait: "/images/characters/renoaportrait.webp",
+    portrait: "/images/characters/renoaface.webp",
     starter: [
       {
         name: "Annihilation Shot",
@@ -584,7 +584,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   rin: {
-    portrait: "/images/characters/rinportrait.webp",
+    portrait: "/images/characters/rinface.webp",
     starter: [
       {
         name: "Dark Mist Sword: First Form",
@@ -617,7 +617,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   rita: {
-    portrait: "/images/characters/ritaportrait.webp",
+    portrait: "/images/characters/ritaface.webp",
     starter: [
       {
         name: "Time Acceleration",
@@ -650,7 +650,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   selena: {
-    portrait: "/images/characters/selenaportrait.webp",
+    portrait: "/images/characters/selenaface.webp",
     starter: [
       {
         name: "Engagament Fire",
@@ -683,7 +683,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   sereniel: {
-    portrait: "/images/characters/serenielportrait.webp",
+    portrait: "/images/characters/serenielface.webp",
     starter: [
       { name: "Pulse Fire", image: "/images/character/sereniel/starter1.webp" },
       { name: "Pulse Fire", image: "/images/character/sereniel/starter2.webp" },
@@ -716,7 +716,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   tiphera: {
-    portrait: "/images/characters/tipheraportrait.webp",
+    portrait: "/images/characters/tipheraface.webp",
     starter: [
       {
         name: "Matter Disintegration",
@@ -755,7 +755,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   tressa: {
-    portrait: "/images/characters/tressaportrait.webp",
+    portrait: "/images/characters/tressaface.webp",
     starter: [
       { name: "Dagger Throw", image: "/images/character/tressa/starter1.png" },
       { name: "Dagger Throw", image: "/images/character/tressa/starter2.png" },
@@ -776,7 +776,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   veronica: {
-    portrait: "/images/characters/veronicaportrait.webp",
+    portrait: "/images/characters/veronicaface.webp",
     starter: [
       { name: "Rapid Fire", image: "/images/character/veronica/starter1.png" },
       { name: "Rapid Fire", image: "/images/character/veronica/starter2.png" },
@@ -803,7 +803,7 @@ const CHARACTER_CARDS: Record<
     ],
   },
   yuki: {
-    portrait: "/images/characters/yukiportrait.webp",
+    portrait: "/images/characters/yukiface.webp",
     starter: [
       { name: "Longsword Slash", image: "/images/character/yuki/starter1.png" },
       { name: "Rapid Slash", image: "/images/character/yuki/starter2.png" },
