@@ -911,8 +911,6 @@ const FACTION_BORDER_MAP: Record<string, string[]> = {
     "cassius",
     "sereniel",
     "narja",
-    "diana",
-    "heidemarie"
   ],
   "/images/card/passion-border.png": [
     "selena",
@@ -921,13 +919,10 @@ const FACTION_BORDER_MAP: Record<string, string[]> = {
     "maribell",
     "veronica",
     "owen",
+    "diana",
+    "heidemarie",
   ],
-  "/images/card/justice-border.png": [
-    "magna",
-    "mika",
-    "beryl",
-    "haru"
-  ],
+  "/images/card/justice-border.png": ["magna", "mika", "beryl", "haru"],
 };
 type CardType = "neutral" | "monster" | "forbidden" | "starter";
 interface DeckCard {
