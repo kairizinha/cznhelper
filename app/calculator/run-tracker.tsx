@@ -802,6 +802,45 @@ const CHARACTER_CARDS: Record<
       },
     ],
   },
+  heidemarie: {
+    portrait: "/images/characters/hdmiface.webp",
+    starter: [
+      {
+        name: "Sword Flash",
+        image: "/images/character/heidemarie/starter1.webp",
+      },
+      {
+        name: "Sword Flash",
+        image: "/images/character/heidemarie/starter2.webp",
+      },
+      {
+        name: "Sword Barrier",
+        image: "/images/character/heidemarie/starter3.webp",
+      },
+      {
+        name: "Sword Rain",
+        image: "/images/character/heidemarie/starter4.webp",
+      },
+    ],
+    unique: [
+      {
+        name: "Hero to All",
+        image: "/images/character/heidemarie/unique1.webp",
+      },
+      {
+        name: "Thread of Light",
+        image: "/images/character/heidemarie/unique2.webp",
+      },
+      {
+        name: "Effulgent Expansion",
+        image: "/images/character/heidemarie/unique3.webp",
+      },
+      {
+        name: "Effulgent Compression",
+        image: "/images/character/heidemarie/unique4.webp",
+      },
+    ],
+  },
   yuki: {
     portrait: "/images/characters/yukiface.webp",
     starter: [
@@ -872,6 +911,8 @@ const FACTION_BORDER_MAP: Record<string, string[]> = {
     "cassius",
     "sereniel",
     "narja",
+    "diana",
+    "heidemarie"
   ],
   "/images/card/passion-border.png": [
     "selena",
